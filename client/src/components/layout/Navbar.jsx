@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
+import { withRouter, Link } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
+import { logoutUser } from "../../utils/auth";
 
-const Navbar = () => {
+const Navbar = withRouter(({ history }) => {
+    const { user, setUser } = useContext(UserContext);
+
+    const handleLogout = () => {
+        logoutUser();
+        setUser(null);
+        history.push("/login");
+    };
+
     return (
         <>
             <nav className="navbar navbar-expand-md navbar-dark">
-                <a className="navbar-brand nav-link" href="/">
-                    Zach Snoek
-                </a>
+                <Link to="/">
+                    <span className="navbar-brand nav-link">Zach Snoek</span>
+                </Link>
                 <button
                     className="navbar-toggler"
                     type="button"
@@ -19,27 +30,22 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse" id="collapsed">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <a className="nav-link" href="/portfolio">
-                                Porfolio
-                            </a>
+                            <Link className="nav-link" to="/portfolio">
+                                Portfolio
+                            </Link>
                         </li>
-                        {/* <li className="nav-item">
-                            <a className="nav-link" href="/blog">
-                                Blog
-                            </a>
-                        </li> */}
                         <li className="nav-item">
-                            <a className="nav-link" href="/contact">
+                            <Link className="nav-link" to="/contact">
                                 Contact
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                     <ul className="navbar-nav ml-auto d-flex flex-row">
                         <li className="nav-item">
                             <a
                                 href="https://www.linkedin.com/in/zach-snoek-5b327b179/"
-                                className="nav-link"
                                 target="__blank"
+                                className="nav-link"
                             >
                                 <span
                                     className="fab fa-linkedin"
@@ -47,11 +53,12 @@ const Navbar = () => {
                                 ></span>
                             </a>
                         </li>
+
                         <li className="nav-item">
                             <a
                                 href="https://www.github.com/zachsnoek"
-                                className="nav-link"
                                 target="__blank"
+                                className="nav-link"
                             >
                                 <span
                                     className="fa fa-github"
@@ -59,12 +66,25 @@ const Navbar = () => {
                                 ></span>
                             </a>
                         </li>
+
+                        {user?.authenticated && (
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/dashboard">
+                                    Dashboard
+                                </Link>
+                            </li>
+                        )}
+                        {user?.authenticated && (
+                            <li className="nav-item">
+                                <button onClick={handleLogout}>Logout</button>
+                            </li>
+                        )}
                     </ul>
                 </div>
             </nav>
             <hr />
         </>
     );
-};
+});
 
 export default Navbar;

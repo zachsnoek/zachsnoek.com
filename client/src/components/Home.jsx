@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { ASSETS } from "../utils/api";
 
 const Home = () => {
@@ -21,16 +22,16 @@ const Home = () => {
                         currently work for Faithlife Corporation.
                     </p>
                     <div className="d-flex flex-wrap justify-content-center justify-content-md-start">
-                        <a href="/portfolio">
+                        <Link to="/portfolio">
                             <button className="btn btn-lg btn-primary m-2">
                                 View Portfolio
                             </button>
-                        </a>
-                        <a href="/contact">
+                        </Link>
+                        <Link to="/contact">
                             <button className="btn btn-lg btn-outline-secondary m-2">
                                 Get In Touch
                             </button>
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

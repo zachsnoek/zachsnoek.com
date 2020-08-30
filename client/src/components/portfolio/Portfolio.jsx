@@ -8,15 +8,15 @@ const Portfolio = () => {
         loading: true,
     });
 
-    useEffect(() => {
-        getProjects();
-    }, []);
-
     const getProjects = async () => {
         const response = await fetch(`${API}/portfolio`);
         const data = await response.json();
         setState({ projects: data.data, loading: false });
     };
+
+    useEffect(() => {
+        getProjects();
+    }, []);
 
     return (
         <div className="portfolio">
