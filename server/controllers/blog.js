@@ -1,15 +1,20 @@
 const Post = require("../models/Post");
 const ErrorResponse = require("../utils/errorResponse");
 const asyncHandler = require("../middleware/asyncHandler");
+const showdown = require("showdown");
 const slugify = require("slugify");
 
+const converter = new showdown.Converter();
 const createSlug = (title) => slugify(title, { lower: true });
 
 // @desc    Create a new post
 // @route   POST /api/v1/blog
 // @access  Private
 module.exports.createPost = asyncHandler(async (req, res, next) => {
+    const html = converter.makeHtml(req.body.content);
+    req.body.content = html;
     req.body.slug = createSlug(req.body.title);
+
     const post = await Post.create(req.body);
 
     res.status(201).json({
