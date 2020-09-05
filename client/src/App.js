@@ -7,10 +7,15 @@ import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import Home from "./components/Home";
 import Portfolio from "./components/portfolio/Portfolio";
+// import Blog from "./components/blog/Blog";
+// import Post from "./components/blog/Post";
 import Contact from "./components/contact/Contact";
 import Dashboard from "./components/admin/Dashboard";
+import NewPost from "./components/admin/NewPost";
+import EditPost from "./components/admin/EditPost";
 import Login from "./components/auth/Login";
 import NotFound from "./components/NotFound";
+
 import "./App.scss";
 
 function App() {
@@ -19,7 +24,8 @@ function App() {
     useEffect(() => {
         const load = async () => {
             const userData = await loadUser();
-            if (userData) setUser({ authenticated: true });
+            if (userData)
+                setUser({ authenticated: true, token: localStorage.token });
         };
 
         if (localStorage.token) load();
@@ -33,12 +39,24 @@ function App() {
                     <Switch>
                         <Route exact path="/" component={Home} />
                         <Route exact path="/portfolio" component={Portfolio} />
+                        {/* <Route exact path="/blog" component={Blog} />
+                        <Route exact path="/blog/:id" component={Post} /> */}
                         <Route exact path="/contact" component={Contact} />
                         <Route exact path="/login" component={Login} />
                         <ProtectedRoute
                             exact
                             path="/dashboard"
                             component={Dashboard}
+                        />
+                        <ProtectedRoute
+                            exact
+                            path="/new-post"
+                            component={NewPost}
+                        />
+                        <ProtectedRoute
+                            exact
+                            path="/edit-post/:id"
+                            component={EditPost}
                         />
                         <Route exact path="*" component={NotFound} />
                     </Switch>
