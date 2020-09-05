@@ -23,7 +23,7 @@ module.exports.createPost = asyncHandler(async (req, res, next) => {
 // @route   GET /api/v1/blog
 // @access  Public
 module.exports.getPosts = asyncHandler(async (req, res, next) => {
-    const posts = await Post.find();
+    const posts = await Post.find().sort({ createdAt: -1 });
 
     res.status(200).json({
         success: true,
