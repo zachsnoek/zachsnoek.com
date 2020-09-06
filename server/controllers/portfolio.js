@@ -18,7 +18,7 @@ module.exports.createProject = asyncHandler(async (req, res, next) => {
 // @route   GET /api/v1/portfolio
 // @access  Public
 module.exports.getProjects = asyncHandler(async (req, res, next) => {
-    const projects = await Project.find();
+    const projects = await Project.find().sort({ position: 1 });
 
     res.status(200).json({
         success: true,
