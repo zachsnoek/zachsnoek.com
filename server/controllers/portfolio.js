@@ -6,7 +6,7 @@ const asyncHandler = require("../middleware/asyncHandler");
 // @route   POST /api/v1/portfolio
 // @access  Private
 module.exports.createProject = asyncHandler(async (req, res, next) => {
-    const position = Project.estimatedDocumentCount() + 1;
+    const position = (await Project.countDocuments({})) + 1;
     const project = await Project.create({
         ...req.body,
         position,
