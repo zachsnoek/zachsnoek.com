@@ -23,7 +23,7 @@ const projectSchema = new mongoose.Schema({
     },
     github: {
         type: String,
-        required: [true, "GitHub is required."],
+        required: false,
     },
     website: {
         type: String,
