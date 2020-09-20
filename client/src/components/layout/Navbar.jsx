@@ -2,9 +2,12 @@ import React, { useContext } from "react";
 import { withRouter, Link } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 import { logoutUser } from "../../utils/auth";
+import { setTitle } from "../../utils/title";
 
 const Navbar = withRouter(({ history }) => {
     const { user, setUser } = useContext(UserContext);
+
+    setTitle(history.location);
 
     const handleLogout = () => {
         logoutUser();
