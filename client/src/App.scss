@@ -13,7 +13,8 @@ $card: rgb(47, 47, 56);
 $transparent: rgba(0, 0, 0, 0);
 $placeholder: rgb(120, 120, 141);
 
-$theme-colors: ("primary": $primary,
+$theme-colors: (
+    "primary": $primary,
     "secondary": $secondary,
     "info": $info,
 );
@@ -27,10 +28,7 @@ $transition-duration: 0.2s;
 
 /* FONTS */
 
-$serif: Georgia,
-Times,
-Times New Roman,
-serif;
+$serif: Georgia, Times, Times New Roman, serif;
 
 /* GLOBALS */
 
