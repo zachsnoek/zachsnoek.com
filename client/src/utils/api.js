@@ -4,7 +4,8 @@ const BASE_URL = "https://api.zachsnoek.com",
     API = `${BASE_URL}/api/v1`,
     ASSETS = `${BASE_URL}/assets`,
     PORTFOLIO_IMGS = `${ASSETS}/img/portfolio`,
-    BLOG = `${API}/blog`;
+    BLOG = `${API}/blog`,
+    PORTFOLIO = `${API}/portfolio`;
 
 const createOptions = (method, body) => {
     const headers = new Headers();
@@ -46,6 +47,25 @@ export const updatePost = (id, formData) => {
 
 export const deletePost = (id) => {
     return fetch(`${BLOG}/${id}`, createOptions("DELETE"));
+};
+
+export const getProjects = () => fetch(PORTFOLIO);
+
+export const createProject = (formData) =>
+    fetch(PORTFOLIO, createOptions("POST", JSON.stringify(formData)));
+
+export const updateProject = (id, project) => {
+    return fetch(
+        `${PORTFOLIO}/${id}`,
+        createOptions("PUT", JSON.stringify(project))
+    );
+};
+
+export const deleteProject = (id, project) => {
+    return fetch(
+        `${PORTFOLIO}/${id}`,
+        createOptions("DELETE", JSON.stringify(project))
+    );
 };
 
 export { API, ASSETS, PORTFOLIO_IMGS };
