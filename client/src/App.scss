@@ -54,7 +54,10 @@ h1 {
     letter-spacing: 2px;
 }
 
-a {
+a,
+a:hover,
+a:visited {
+    color: inherit;
     text-decoration: none;
 }
 

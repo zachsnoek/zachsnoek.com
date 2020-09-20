@@ -29,20 +29,16 @@ const Navbar = withRouter(({ history }) => {
                 </button>
                 <div className="collapse navbar-collapse" id="collapsed">
                     <ul className="navbar-nav">
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/portfolio">
-                                Portfolio
-                            </Link>
+                        <li className="nav-item nav-link">
+                            <Link to="/portfolio">Portfolio</Link>
                         </li>
                         {/* <li className="nav-item">
                             <Link className="nav-link" to="/blog">
                                 Blog
                             </Link>
                         </li> */}
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/contact">
-                                Contact
-                            </Link>
+                        <li className="nav-item nav-link">
+                            <Link to="/contact">Contact</Link>
                         </li>
                     </ul>
                     <ul className="navbar-nav ml-auto d-flex flex-row">
