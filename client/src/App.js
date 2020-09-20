@@ -13,6 +13,8 @@ import Contact from "./components/contact/Contact";
 import Dashboard from "./components/admin/Dashboard";
 import NewPost from "./components/admin/NewPost";
 import EditPost from "./components/admin/EditPost";
+import PortfolioManager from "./components/admin/PortfolioManager";
+import NewProject from "./components/admin/NewProject";
 import Login from "./components/auth/Login";
 import NotFound from "./components/NotFound";
 
@@ -57,6 +59,16 @@ function App() {
                             exact
                             path="/edit-post/:id"
                             component={EditPost}
+                        />
+                        <ProtectedRoute
+                            exact
+                            path="/portfolio-manager"
+                            component={PortfolioManager}
+                        />
+                        <ProtectedRoute
+                            exact
+                            path="/new-project"
+                            component={NewProject}
                         />
                         <Route exact path="*" component={NotFound} />
                     </Switch>

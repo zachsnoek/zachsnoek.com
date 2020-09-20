@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { API } from "../../utils/api";
 import Project from "./Project";
+import { getProjects } from "../../utils/api";
 
 const Portfolio = () => {
     const [{ projects, loading }, setState] = useState({
@@ -8,14 +8,14 @@ const Portfolio = () => {
         loading: true,
     });
 
-    const getProjects = async () => {
-        const response = await fetch(`${API}/portfolio`);
+    const loadProjects = async () => {
+        const response = await getProjects();
         const data = await response.json();
         setState({ projects: data.data, loading: false });
     };
 
     useEffect(() => {
-        getProjects();
+        loadProjects();
     }, []);
 
     return (

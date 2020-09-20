@@ -5,7 +5,12 @@ const Dashboard = () => {
     return (
         <>
             <div>Admin Dashboard</div>
-            <Link to="/new-post">New Blog Post</Link>
+            <div>
+                <Link to="/new-post">New Blog Post</Link>
+            </div>
+            <div>
+                <Link to="/portfolio-manager">Manage Portfolio</Link>
+            </div>
         </>
     );
 };
