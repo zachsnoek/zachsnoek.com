@@ -4,12 +4,16 @@ import { Link } from "react-router-dom";
 const Dashboard = () => {
     return (
         <>
-            <div>Admin Dashboard</div>
+            <h1>Admin Dashboard</h1>
             <div>
-                <Link to="/new-post">New Blog Post</Link>
+                <button className="btn btn-lg btn-primary">
+                    <Link to="/new-post">New Blog Post</Link>
+                </button>
             </div>
             <div>
-                <Link to="/portfolio-manager">Manage Portfolio</Link>
+                <button className="btn btn-lg btn-primary">
+                    <Link to="/portfolio-manager">Manage Portfolio</Link>
+                </button>
             </div>
         </>
     );
