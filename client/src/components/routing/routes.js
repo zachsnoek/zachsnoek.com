@@ -15,6 +15,7 @@ import NewPost from "../admin/NewPost";
 import EditPost from "../admin/EditPost";
 import PortfolioManager from "../admin/PortfolioManager";
 import NewProject from "../admin/NewProject";
+import EditProject from "../admin/EditProject";
 
 const protectedRoute = true;
 
@@ -30,5 +31,6 @@ export default [
     { path: "/edit-post/:id", component: EditPost, protectedRoute },
     { path: "/portfolio-manager", component: PortfolioManager, protectedRoute },
     { path: "/new-project", component: NewProject, protectedRoute },
+    { path: "/edit-project/:id", component: EditProject, protectedRoute },
     { path: "*", component: NotFound },
 ];

@@ -49,6 +49,10 @@ export const deletePost = (id) => {
     return fetch(`${BLOG}/${id}`, createOptions("DELETE"));
 };
 
+export const getProject = (id) => {
+    return fetch(`${PORTFOLIO}/${id}`);
+};
+
 export const getProjects = () => fetch(PORTFOLIO);
 
 export const createProject = (formData) =>
