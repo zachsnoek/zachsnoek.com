@@ -22,8 +22,8 @@ const hidden = true;
 export default [
     { path: "/", component: Home },
     { path: "/portfolio", component: Portfolio },
-    { path: "/blog", component: Blog, hidden },
-    { path: "/blog/:id", component: Post, hidden },
+    { path: "/blog", component: Blog },
+    { path: "/blog/:id", component: Post },
     { path: "/contact", component: Contact },
     { path: "/login", component: Login },
     { path: "/dashboard", component: Dashboard, protectedRoute },

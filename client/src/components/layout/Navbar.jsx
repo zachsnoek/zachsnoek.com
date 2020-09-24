@@ -35,11 +35,9 @@ const Navbar = withRouter(({ history }) => {
                         <li className="nav-item nav-link">
                             <Link to="/portfolio">Portfolio</Link>
                         </li>
-                        {/* <li className="nav-item">
-                            <Link className="nav-link" to="/blog">
-                                Blog
-                            </Link>
-                        </li> */}
+                        <li className="nav-item nav-link">
+                            <Link to="/blog">Blog</Link>
+                        </li>
                         <li className="nav-item nav-link">
                             <Link to="/contact">Contact</Link>
                         </li>
