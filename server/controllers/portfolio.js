@@ -30,6 +30,27 @@ module.exports.getProjects = asyncHandler(async (req, res, next) => {
     });
 });
 
+// @desc    Get a project
+// @route   GET /api/v1/project/:id
+// @access  Public
+module.exports.getProject = asyncHandler(async (req, res, next) => {
+    const project = await Project.findById(req.params.id);
+
+    if (!project) {
+        return next(
+            new ErrorResponse(
+                `No project exists with an ID of ${req.params.id}.`
+            ),
+            404
+        );
+    }
+
+    res.status(200).json({
+        success: true,
+        data: project,
+    });
+});
+
 // @desc    Update a project
 // @route   PUT /api/v1/portfolio/:id
 // @access  Private
