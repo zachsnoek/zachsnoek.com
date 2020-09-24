@@ -17,7 +17,6 @@ import PortfolioManager from "../admin/PortfolioManager";
 import NewProject from "../admin/NewProject";
 
 const protectedRoute = true;
-const hidden = true;
 
 export default [
     { path: "/", component: Home },
