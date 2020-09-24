@@ -42,7 +42,7 @@ const EditProject = withRouter(({ match, history }) => {
                 formTitle={"Edit Project"}
                 submitButtonText={"Save Project"}
                 onSubmit={onSubmit}
-                post={project}
+                project={project}
             />
         )
     );

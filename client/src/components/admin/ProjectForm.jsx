@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { TagsInput } from "./TagsInput";
 
-const ProjectForm = ({ formTitle, submitButtonText, onSubmit, post }) => {
+const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
     const [formData, setFormData] = useState({
-        title: post ? post.title : "",
-        description: post ? post.description : "",
-        image: post ? post.image : "",
-        github: post ? post.github : "",
-        website: post ? post.website : "",
+        title: project ? project.title : "",
+        description: project ? project.description : "",
+        image: project ? project.image : "",
+        github: project ? project.github : "",
+        website: project ? project.website : "",
     });
 
-    const [tags, setTags] = useState(post ? post.tags : []);
+    const [tags, setTags] = useState(project ? project.tags : []);
 
     const { title, description, image, github, website } = formData;
 
