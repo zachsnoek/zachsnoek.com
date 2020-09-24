@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getPosts } from "../../utils/api";
 import Preview from "./Preview";
+import CenterContainer from "../layout/CenterContainer";
 
 const Blog = () => {
     const [posts, setPosts] = useState(null);
@@ -24,23 +25,27 @@ const Blog = () => {
                 <span>Blog</span>
             </div>
 
-            {!loading && posts.length
-                ? posts.map(
-                      ({ _id, title, description, content, createdAt }) => {
-                          return (
-                              <Preview
-                                  id={_id}
-                                  title={title}
-                                  description={description}
-                                  content={content}
-                                  createdAt={createdAt}
-                                  key={_id}
-                                  loadPosts={loadPosts}
-                              />
-                          );
-                      }
-                  )
-                : null}
+            {!loading &&
+                posts.length > 0 &&
+                posts.map(({ _id, title, description, content, createdAt }) => {
+                    return (
+                        <Preview
+                            id={_id}
+                            title={title}
+                            description={description}
+                            content={content}
+                            createdAt={createdAt}
+                            key={_id}
+                            loadPosts={loadPosts}
+                        />
+                    );
+                })}
+
+            {!loading && posts.length === 0 && (
+                <CenterContainer>
+                    There are no posts to display.
+                </CenterContainer>
+            )}
         </div>
     );
 };
