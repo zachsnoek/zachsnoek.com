@@ -27,10 +27,7 @@ const Post = ({ match, history }) => {
         !loading && (
             <div className="blog-post row">
                 <div className="col-12 col-md-10 col-lg-8 ml-auto mr-auto">
-                    <div className="header">
-                        <span>{post.title}</span>
-                    </div>
-
+                    <h1>{post.title}</h1>
                     <div className="blog-date">
                         <span className="badge badge-info">
                             {formatDate(post.createdAt)}
