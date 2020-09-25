@@ -2,7 +2,7 @@
 import Home from "../Home";
 import Portfolio from "../portfolio/Portfolio";
 import Blog from "../blog/Blog";
-import Post from "../blog/Post";
+import PostPage from "../blog/PostPage";
 import Contact from "../contact/Contact";
 import NotFound from "../NotFound";
 
@@ -23,7 +23,7 @@ export default [
     { path: "/", component: Home },
     { path: "/portfolio", component: Portfolio },
     { path: "/blog", component: Blog },
-    { path: "/blog/:id", component: Post },
+    { path: "/blog/:id", component: PostPage },
     { path: "/contact", component: Contact },
     { path: "/login", component: Login },
     { path: "/dashboard", component: Dashboard, protectedRoute },
