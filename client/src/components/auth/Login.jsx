@@ -1,10 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { loginUser } from "../../utils/auth";
-import { UserContext } from "../../context/UserContext";
+import { useUserContext } from "../../context/useUserContext";
 
 const Login = ({ history }) => {
-    const { user, setUser } = useContext(UserContext);
+    const { user, setUser } = useUserContext();
 
     const [formData, setFormData] = useState({
         email: "",

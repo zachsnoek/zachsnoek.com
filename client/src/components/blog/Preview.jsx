@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link, withRouter } from "react-router-dom";
-import { UserContext } from "../../context/UserContext";
+import { useUserContext } from "../../context/useUserContext";
 import { deletePost } from "../../utils/api";
 import { formatDate } from "../../utils/date";
 
 const Preview = withRouter(
     ({ id, title, description, createdAt, loadPosts, history }) => {
-        const { user } = useContext(UserContext);
+        const { user } = useUserContext();
 
         const handleDeletePost = async () => {
             const response = await deletePost(id);

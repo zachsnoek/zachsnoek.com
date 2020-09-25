@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import { withRouter, Link } from "react-router-dom";
-import { UserContext } from "../../context/UserContext";
+import { useUserContext } from "../../context/useUserContext";
 import { logoutUser } from "../../utils/auth";
 import { setTitle } from "../../utils/title";
 
 const Navbar = withRouter(({ history }) => {
-    const { user, setUser } = useContext(UserContext);
+    const { user, setUser } = useUserContext();
 
     setTitle(history.location);
 
