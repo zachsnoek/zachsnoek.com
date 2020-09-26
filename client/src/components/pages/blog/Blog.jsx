@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getPosts } from "../../../utils/api";
 import Preview from "./Preview";
-import { CenterContainer } from "../../shared/";
+import { CenterContainer, LoadingSpinner } from "../../shared/";
 
 const Blog = () => {
     const [posts, setPosts] = useState(null);
@@ -24,6 +24,8 @@ const Blog = () => {
             <div className="header d-flex justify-content-center">
                 <span>Blog</span>
             </div>
+
+            {loading && <LoadingSpinner />}
 
             {!loading &&
                 posts.length > 0 &&
