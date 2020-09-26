@@ -19,6 +19,12 @@ const errorHandler = (err, req, res, next) => {
         error = new ErrorResponse(message, 400);
     }
 
+    if (err.code === "E11000") {
+        const message =
+            "A field that is supposed to be unique already has the value entered.";
+        error = new ErrorResponse(message, 400);
+    }
+
     // Mongoose validation error
     if (err.name === "ValidationError") {
         const message = Object.values(err.errors).map((val) => val.message);
