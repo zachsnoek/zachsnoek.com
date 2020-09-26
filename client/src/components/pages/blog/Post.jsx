@@ -1,6 +1,6 @@
 import React from "react";
 import parse from "html-react-parser";
-import { formatDate } from "../../utils/date";
+import { formatDate } from "../../../utils/date";
 
 const Post = ({ title, date, content }) => {
     return (

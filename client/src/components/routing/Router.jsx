@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import ProtectedRoute from "./ProtectedRoute";
+import { ProtectedRoute } from "./ProtectedRoute";
 import Navbar from "../layout/Navbar";
 import Footer from "../layout/Footer";
-import routes from "./routes";
+import { routes } from "./routes";
 
-const Router = () => {
+export const Router = () => {
     return (
         <BrowserRouter>
             <Navbar />
@@ -34,5 +34,3 @@ const Router = () => {
         </BrowserRouter>
     );
 };
-
-export default Router;

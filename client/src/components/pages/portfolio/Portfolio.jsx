@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Project from "./Project";
-import { getProjects } from "../../utils/api";
+import { getProjects } from "../../../utils/api";
 
 const Portfolio = () => {
     const [{ projects, loading }, setState] = useState({

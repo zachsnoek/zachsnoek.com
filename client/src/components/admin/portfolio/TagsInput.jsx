@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Tags from "../portfolio/Tags";
+import { Tags } from "../../pages/portfolio/";
 
-export const TagsInput = ({ tags, setTags }) => {
+const TagsInput = ({ tags, setTags }) => {
     const [tag, setTag] = useState("");
 
     const addTag = () => {
@@ -28,3 +28,5 @@ export const TagsInput = ({ tags, setTags }) => {
         </div>
     );
 };
+
+export default TagsInput;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TagsInput } from "./TagsInput";
+import TagsInput from "./TagsInput";
 
 const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
     const [formData, setFormData] = useState({

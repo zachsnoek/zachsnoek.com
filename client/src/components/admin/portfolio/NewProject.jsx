@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { createProject } from "../../utils/api";
+import { createProject } from "../../../utils/api";
 import ProjectForm from "./ProjectForm";
 
 const NewProject = withRouter(({ history }) => {

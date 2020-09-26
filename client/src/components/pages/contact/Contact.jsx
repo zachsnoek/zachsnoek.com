@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { API } from "../../utils/api";
+import { API } from "../../../utils/api";
 
 const Contact = () => {
     const [emailSent, setEmailSent] = useState(null);

@@ -1,25 +1,25 @@
-// Main components
-import Home from "../Home";
-import Portfolio from "../portfolio/Portfolio";
-import Blog from "../blog/Blog";
-import PostPage from "../blog/PostPage";
-import Contact from "../contact/Contact";
-import NotFound from "../NotFound";
+// Page components
+import { Home } from "../pages/";
+import { Portfolio } from "../pages/";
+import { Blog } from "../pages/";
+import { PostPage } from "../pages/";
+import { Contact } from "../pages/";
+import { NotFound } from "../pages/";
 
 // Auth components
-import Login from "../auth/Login";
+import { Login } from "../auth/";
 
 // Admin components
-import Dashboard from "../admin/Dashboard";
-import NewPost from "../admin/NewPost";
-import EditPost from "../admin/EditPost";
-import PortfolioManager from "../admin/PortfolioManager";
-import NewProject from "../admin/NewProject";
-import EditProject from "../admin/EditProject";
+import { Dashboard } from "../admin/";
+import { NewPost } from "../admin/";
+import { EditPost } from "../admin/";
+import { PortfolioManager } from "../admin/";
+import { NewProject } from "../admin/";
+import { EditProject } from "../admin/";
 
 const protectedRoute = true;
 
-export default [
+export const routes = [
     { path: "/", component: Home },
     { path: "/portfolio", component: Portfolio },
     { path: "/blog", component: Blog },

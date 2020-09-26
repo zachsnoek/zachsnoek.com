@@ -1,5 +1,5 @@
 import React from "react";
-import CenterContainer from "./layout/CenterContainer";
+import { CenterContainer } from "../shared";
 
 const NotFound = () => {
     return (

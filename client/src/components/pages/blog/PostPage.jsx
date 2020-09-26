@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Post from "./Post";
-import { getPost } from "../../utils/api";
+import { getPost } from "../../../utils/api";
 
 const PostPage = ({ match, history }) => {
     const [post, setPost] = useState(null);

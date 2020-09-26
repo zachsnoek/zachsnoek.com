@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Router from "./components/routing/Router";
+import { Router } from "./components/routing/";
 import { UserContext } from "./context/UserContext";
 import { loadUser } from "./utils/auth";
 

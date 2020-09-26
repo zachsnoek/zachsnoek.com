@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { createPost } from "../../utils/api";
+import { createPost } from "../../../utils/api";
 import PostForm from "./PostForm";
 
 const NewPost = withRouter(({ history }) => {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { getPosts } from "../../utils/api";
+import { getPosts } from "../../../utils/api";
 import Preview from "./Preview";
-import CenterContainer from "../layout/CenterContainer";
+import { CenterContainer } from "../../shared/";
 
 const Blog = () => {
     const [posts, setPosts] = useState(null);
