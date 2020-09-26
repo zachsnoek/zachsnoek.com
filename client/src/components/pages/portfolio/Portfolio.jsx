@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Project from "./Project";
+import { LoadingSpinner } from "../../shared";
 import { getProjects } from "../../../utils/api";
 
 const Portfolio = () => {
@@ -25,11 +26,14 @@ const Portfolio = () => {
             </div>
 
             <div className="row" id="grid">
-                {loading
-                    ? null
-                    : projects.map((project) => (
-                          <Project {...project} key={project._id} />
-                      ))}
+                {/* Assume that there will be at least one project */}
+                {loading ? (
+                    <LoadingSpinner />
+                ) : (
+                    projects.map((project) => (
+                        <Project {...project} key={project._id} />
+                    ))
+                )}
             </div>
         </div>
     );
