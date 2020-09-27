@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { CenterContainer, LoadingSpinner } from "../../shared/";
-import { API } from "../../../utils/api";
+import { contact } from "../../../utils/api";
 import "./styles.scss";
 
 const Contact = () => {
@@ -22,19 +22,11 @@ const Contact = () => {
         e.preventDefault();
         setLoading(true);
 
-        const response = await fetch(`${API}/contact`, {
-            method: "POST",
-            mode: "cors",
-            cache: "no-cache",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            referrerPolicy: "no-referrer",
-            body: JSON.stringify(formData),
-        });
-
+        const response = await contact(formData);
         setLoading(false);
 
+        // data.data = the message to display to the user
+        // data.success = whether the request was successful or not
         const data = await response.json();
         setEmailSent({ ...data });
     }

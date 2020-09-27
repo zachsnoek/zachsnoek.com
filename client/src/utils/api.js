@@ -78,4 +78,11 @@ export const deleteProject = (id, project) => {
     );
 };
 
+export const contact = (formData) => {
+    return fetch(
+        `${API}/contact`,
+        createOptions("POST", JSON.stringify(formData))
+    );
+};
+
 export { API, ASSETS, PORTFOLIO_IMGS };
