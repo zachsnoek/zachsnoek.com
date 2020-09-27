@@ -10,25 +10,22 @@ export const Router = () => {
         <BrowserRouter>
             <Navbar />
             <Switch>
-                {routes.map((route, index) =>
-                    !route.hidden ? (
+                {routes.map((route, index) => {
+                    const props = {
+                        key: index,
+                        exact: true,
+                        path: route.path,
+                        component: route.component,
+                    };
+
+                    return !route.hidden ? (
                         route.protectedRoute ? (
-                            <ProtectedRoute
-                                key={index}
-                                exact
-                                path={route.path}
-                                component={route.component}
-                            />
+                            <ProtectedRoute {...props} />
                         ) : (
-                            <Route
-                                key={index}
-                                exact
-                                path={route.path}
-                                component={route.component}
-                            />
+                            <Route {...props} />
                         )
-                    ) : null
-                )}
+                    ) : null;
+                })}
             </Switch>
             <Footer />
         </BrowserRouter>
