@@ -21,7 +21,7 @@ const EditPost = withRouter(({ match, history }) => {
 
     useEffect(() => {
         const loadPost = async () => {
-            const response = await getPost(match.params.id);
+            const response = await getPost(match.params.slug);
 
             if (response.ok) {
                 const data = await response.json();
@@ -36,7 +36,7 @@ const EditPost = withRouter(({ match, history }) => {
         };
 
         loadPost();
-    }, [match.params.id]);
+    }, [match.params.slug]);
 
     return (
         !loading && (

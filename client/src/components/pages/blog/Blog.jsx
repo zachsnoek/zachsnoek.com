@@ -29,19 +29,22 @@ const Blog = () => {
 
             {!loading &&
                 posts.length > 0 &&
-                posts.map(({ _id, title, description, content, createdAt }) => {
-                    return (
-                        <Preview
-                            id={_id}
-                            title={title}
-                            description={description}
-                            content={content}
-                            createdAt={createdAt}
-                            key={_id}
-                            loadPosts={loadPosts}
-                        />
-                    );
-                })}
+                posts.map(
+                    ({ _id, slug, title, description, content, createdAt }) => {
+                        return (
+                            <Preview
+                                id={_id}
+                                slug={slug}
+                                title={title}
+                                description={description}
+                                content={content}
+                                createdAt={createdAt}
+                                key={_id}
+                                loadPosts={loadPosts}
+                            />
+                        );
+                    }
+                )}
 
             {!loading && posts.length === 0 && (
                 <CenterContainer>

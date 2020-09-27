@@ -5,7 +5,7 @@ import { deletePost } from "../../../utils/api";
 import { formatDate } from "../../../utils/date";
 
 const Preview = withRouter(
-    ({ id, title, description, createdAt, loadPosts, history }) => {
+    ({ id, slug, title, description, createdAt, loadPosts, history }) => {
         const { user } = useUserContext();
 
         const handleDeletePost = async () => {
@@ -20,7 +20,7 @@ const Preview = withRouter(
         };
 
         const editPost = () => {
-            history.push(`/edit-post/${id}`);
+            history.push(`/edit-post/${slug}/${id}`);
         };
 
         return (
@@ -32,7 +32,7 @@ const Preview = withRouter(
                     </>
                 )}
 
-                <Link className="card" to={`/blog/${id}`}>
+                <Link className="card" to={`/blog/${slug}`}>
                     <div className="card-header d-flex align-items-center justify-content-between">
                         <span className="card-title">{title}</span>
                         <span className="badge badge-info">

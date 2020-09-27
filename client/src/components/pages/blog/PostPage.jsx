@@ -8,7 +8,7 @@ const PostPage = ({ match, history }) => {
 
     useEffect(() => {
         const loadPost = async () => {
-            const response = await getPost(match.params.id);
+            const response = await getPost(match.params.slug);
             const data = await response.json();
 
             if (!response.ok) {
@@ -20,7 +20,7 @@ const PostPage = ({ match, history }) => {
         };
 
         loadPost();
-    }, [match.params.id, history]);
+    }, [match.params.slug, history]);
 
     return (
         !loading && (
