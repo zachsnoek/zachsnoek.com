@@ -12,7 +12,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
+      
+      - name: Install Dependencies
+        working-directory: client
+        run: yarn
+      
       - name: Lint
         working-directory: client
         run: yarn lint
