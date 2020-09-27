@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { CenterContainer, LoadingSpinner } from "../../shared/";
 import { API } from "../../../utils/api";
 import "./styles.scss";
 
 const Contact = () => {
+    const [loading, setLoading] = useState(false);
     const [emailSent, setEmailSent] = useState(null);
     const [formData, setFormData] = useState({
         name: "",
@@ -18,6 +20,7 @@ const Contact = () => {
 
     async function handleSubmit(e) {
         e.preventDefault();
+        setLoading(true);
 
         const response = await fetch(`${API}/contact`, {
             method: "POST",
@@ -30,8 +33,10 @@ const Contact = () => {
             body: JSON.stringify(formData),
         });
 
+        setLoading(false);
+
         const data = await response.json();
-        setEmailSent(data.data);
+        setEmailSent({ ...data });
     }
 
     return (
@@ -40,9 +45,11 @@ const Contact = () => {
                 <span>Contact</span>
             </div>
 
-            {emailSent ? (
-                <p>{emailSent}</p>
-            ) : (
+            {loading && <LoadingSpinner />}
+
+            {emailSent && <CenterContainer>{emailSent.data}</CenterContainer>}
+
+            {!loading && !emailSent && (
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <div className="row d-flex justify-content-center">
                         <div className="col">
