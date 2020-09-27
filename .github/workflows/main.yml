@@ -14,9 +14,9 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Lint
-        run: |
-          cd client,
-          yarn lint
+        working-directory: client
+        run: yarn lint
           
       - name: Build
+        working-directory: client
         run: yarn build
