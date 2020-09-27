@@ -32,14 +32,15 @@ module.exports.getPosts = asyncHandler(async (req, res, next) => {
 });
 
 // @desc    Get a post
-// @route   GET /api/v1/blog/:id
+// @route   GET /api/v1/blog/:slug
 // @access  Public
 module.exports.getPost = asyncHandler(async (req, res, next) => {
-    const post = await Post.findById(req.params.id);
+    const { slug } = req.params;
+    const post = await Post.findOne({ slug });
 
     if (!post) {
         return next(
-            new ErrorResponse(`No post exists with an ID of ${req.params.id}.`),
+            new ErrorResponse(`No post exists with a slug of ${slug}.`),
             404
         );
     }
