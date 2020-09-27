@@ -1,0 +1,29 @@
+/* COLORS */
+
+$primary: rgb(152, 200, 255);
+$secondary: rgb(165, 173, 247);
+$info: rgb(176, 176, 197);
+
+$background: rgb(39, 39, 46);
+$text: rgb(255, 255, 255);
+$text-hover: $primary;
+$shadow: rgba(18, 18, 20, 0.2);
+$divider: rgba(185, 185, 255, 0.25);
+$card: rgb(47, 47, 56);
+$transparent: rgba(0, 0, 0, 0);
+$placeholder: rgb(120, 120, 141);
+
+$theme-colors: (
+    "primary": $primary,
+    "secondary": $secondary,
+    "info": $info,
+);
+
+/* CONSTANTS */
+
+$border-radius: 8px;
+$transition-duration: 0.2s;
+
+/* FONTS */
+
+$serif: Georgia, Times, Times New Roman, serif;

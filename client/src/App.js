@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Router } from "./components/routing/";
 import { UserContext } from "./context/UserContext";
 import { loadUser } from "./utils/auth";
-
-import "./App.scss";
+import "./styles/globals.scss";
 
 function App() {
     const [user, setUser] = useState(null);

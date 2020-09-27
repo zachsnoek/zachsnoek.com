@@ -1,0 +1,10 @@
+@import "../../../styles/variables.scss";
+
+.home {
+    min-height: 66vh;
+
+    .profile-pic {
+        width: 100%;
+        border-radius: $border-radius;
+    }
+}

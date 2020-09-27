@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { API } from "../../../utils/api";
+import "./styles.scss";
 
 const Contact = () => {
     const [emailSent, setEmailSent] = useState(null);

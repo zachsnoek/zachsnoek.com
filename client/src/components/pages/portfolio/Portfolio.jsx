@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Project from "./Project";
 import { LoadingSpinner } from "../../shared";
 import { getProjects } from "../../../utils/api";
+import "./styles.scss";
 
 const Portfolio = () => {
     const [{ projects, loading }, setState] = useState({

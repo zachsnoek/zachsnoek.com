@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getPosts } from "../../../utils/api";
 import Preview from "./Preview";
 import { CenterContainer, LoadingSpinner } from "../../shared/";
+import "./styles.scss";
 
 const Blog = () => {
     const [posts, setPosts] = useState(null);
