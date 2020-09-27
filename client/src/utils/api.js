@@ -1,5 +1,6 @@
 import { makeHTML } from "./markdown";
 
+// eslint-disable-next-line
 const { REACT_APP_DEV_API } = process.env;
 
 const BASE_URL = REACT_APP_DEV_API
