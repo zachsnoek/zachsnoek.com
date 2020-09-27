@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Router } from "./components/routing/";
-import { UserContext } from "./context/UserContext";
+import { UserProvider } from "./context/UserContext";
 import { loadUser } from "./utils/auth";
 import "./styles/globals.scss";
 
@@ -19,9 +19,9 @@ function App() {
 
     return (
         <div className="container">
-            <UserContext.Provider value={{ user, setUser }}>
+            <UserProvider value={{ user, setUser }}>
                 <Router />
-            </UserContext.Provider>
+            </UserProvider>
         </div>
     );
 }
