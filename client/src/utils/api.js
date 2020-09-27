@@ -1,7 +1,12 @@
 import { makeHTML } from "./markdown";
 
-const BASE_URL = "https://api.zachsnoek.com",
-    API = `${BASE_URL}/api/v1`,
+const { REACT_APP_DEV_API } = process.env;
+
+const BASE_URL = REACT_APP_DEV_API
+    ? REACT_APP_DEV_API
+    : "https://api.zachsnoek.com";
+
+const API = `${BASE_URL}/api/v1`,
     ASSETS = `${BASE_URL}/assets`,
     PORTFOLIO_IMGS = `${ASSETS}/img/portfolio`,
     BLOG = `${API}/blog`,
