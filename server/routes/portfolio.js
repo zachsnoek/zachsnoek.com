@@ -8,9 +8,11 @@ const {
 const { protect, authorize } = require("../middleware/auth");
 const router = require("express").Router();
 
+const multer = require("../config/multer");
+
 router.get("/", getProjects);
 router.get("/:id", getProject);
-router.post("/", protect, authorize("admin"), createProject);
+router.post("/", protect, authorize("admin"), multer, createProject);
 router.put("/:id", protect, authorize("admin"), updateProject);
 router.delete("/:id", protect, authorize("admin"), deleteProject);
 

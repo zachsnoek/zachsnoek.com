@@ -9,7 +9,13 @@ const app = express();
 
 // Configure Express
 app.set("view engine", "ejs");
-app.use(express.urlencoded({ extended: false }));
+app.use(express.json({ limit: "10mb" }));
+app.use(
+    express.urlencoded({
+        extended: false,
+        limit: "10mb",
+    })
+);
 app.use(express.static("public"));
 app.use(cors());
 

@@ -6,6 +6,10 @@ const asyncHandler = require("../middleware/asyncHandler");
 // @route   POST /api/v1/portfolio
 // @access  Private
 module.exports.createProject = asyncHandler(async (req, res, next) => {
+    req.body.image = `assets/img/portfolio/${req.file.filename}`;
+
+    // TODO: Remove duplicate and empty tags
+
     const position = (await Project.countDocuments({})) + 1;
     const project = await Project.create({
         ...req.body,
