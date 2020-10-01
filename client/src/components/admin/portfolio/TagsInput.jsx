@@ -21,6 +21,7 @@ const TagsInput = ({ tags, setTags }) => {
                 type="text"
                 autoComplete="off"
             />
+            {/* TODO: Disable button if input is empty */}
             <button type="button" onClick={addTag}>
                 +
             </button>

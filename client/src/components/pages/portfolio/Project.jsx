@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Tags from "./Tags";
 import Links from "./Links";
-import { PORTFOLIO_IMGS } from "../../../utils/api";
+import { BASE_URL } from "../../../utils/api";
 
 const Project = ({ title, description, image, github, website, tags }) => {
     return (
@@ -12,7 +12,7 @@ const Project = ({ title, description, image, github, website, tags }) => {
                     <span className="card-title">{title}</span>
                 </div>
                 <img
-                    src={`${PORTFOLIO_IMGS}/${image}`}
+                    src={`${BASE_URL}/${image}`}
                     alt="A screenshot of a portfolio project."
                 />
                 <div className="card-body">{description}</div>

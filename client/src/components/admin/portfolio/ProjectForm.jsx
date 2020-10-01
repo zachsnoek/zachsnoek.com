@@ -1,21 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import TagsInput from "./TagsInput";
 
 const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
     const [formData, setFormData] = useState({
         title: project ? project.title : "",
         description: project ? project.description : "",
-        image: project ? project.image : "",
         github: project ? project.github : "",
         website: project ? project.website : "",
     });
-
+    const { title, description, github, website } = formData;
     const [tags, setTags] = useState(project ? project.tags : []);
-
-    const { title, description, image, github, website } = formData;
+    const fileInput = useRef(null);
 
     function handleChange(e) {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        if (e.target.name === "image") {
+            setFormData({ ...formData, image: fileInput.current.files[0] });
+        } else {
+            setFormData({ ...formData, [e.target.name]: e.target.value });
+        }
     }
 
     const handleSubmit = (e) => {
@@ -62,21 +64,7 @@ const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="image">Image</label>
-                            <input
-                                id="image"
-                                name="image"
-                                value={image}
-                                onChange={(e) => handleChange(e)}
-                                className="form-control"
-                                type="text"
-                                required
-                                autoComplete="off"
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <label htmlFor="github">GitHub Repo Name</label>
+                            <label htmlFor="github">GitHub Repository</label>
                             <input
                                 id="github"
                                 name="github"
@@ -100,6 +88,24 @@ const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
                                 autoComplete="off"
                             />
                         </div>
+
+                        <label htmlFor="image">Image</label>
+
+                        {project?.image ? (
+                            <div>{project.image}</div>
+                        ) : (
+                            <div className="form-group">
+                                <input
+                                    id="image"
+                                    name="image"
+                                    type="file"
+                                    onChange={(e) => handleChange(e)}
+                                    required
+                                    ref={fileInput}
+                                    style={{ display: "block" }}
+                                />
+                            </div>
+                        )}
 
                         <TagsInput tags={tags} setTags={setTags} />
                     </div>

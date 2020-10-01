@@ -61,8 +61,16 @@ export const getProject = (id) => {
 
 export const getProjects = () => fetch(PORTFOLIO);
 
-export const createProject = (formData) =>
-    fetch(PORTFOLIO, createOptions("POST", JSON.stringify(formData)));
+export const createProject = (formData) => {
+    const headers = new Headers();
+    headers.append("Authorization", `Bearer ${localStorage.token}`);
+
+    return fetch(PORTFOLIO, {
+        method: "POST",
+        headers: headers,
+        body: formData,
+    });
+};
 
 export const updateProject = (id, project) => {
     return fetch(
@@ -85,4 +93,4 @@ export const contact = (formData) => {
     );
 };
 
-export { API, ASSETS, PORTFOLIO_IMGS };
+export { BASE_URL, API, ASSETS, PORTFOLIO_IMGS };
