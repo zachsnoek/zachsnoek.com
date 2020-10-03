@@ -9,6 +9,8 @@ const TagsInput = ({ tags, setTags }) => {
         setTag("");
     };
 
+    const resetTags = () => setTags([]);
+
     return (
         <div className="form-group">
             <label htmlFor="tag">Tags</label>
@@ -21,6 +23,7 @@ const TagsInput = ({ tags, setTags }) => {
                 type="text"
                 autoComplete="off"
             />
+
             <button
                 type="button"
                 onClick={addTag}
@@ -28,6 +31,13 @@ const TagsInput = ({ tags, setTags }) => {
             >
                 +
             </button>
+
+            {tags.length > 0 && (
+                <button type="button" onClick={resetTags}>
+                    Reset tags
+                </button>
+            )}
+
             <Tags tags={tags} />
         </div>
     );
