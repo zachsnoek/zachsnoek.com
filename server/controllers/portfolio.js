@@ -1,6 +1,7 @@
 const Project = require("../models/Project");
 const ErrorResponse = require("../utils/errorResponse");
 const asyncHandler = require("../middleware/asyncHandler");
+const deleteImage = require("../config/multer").deleteImage;
 
 // @desc    Create a new project
 // @route   POST /api/v1/portfolio
@@ -99,6 +100,10 @@ module.exports.deleteProject = asyncHandler(async (req, res, next) => {
         );
     }
 
+    const { image } = project;
+    const filename = image.split("/").slice(-1);
+
+    await deleteImage(filename);
     await project.remove();
 
     res.status(200).json({

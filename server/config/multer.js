@@ -30,12 +30,6 @@ function checkFileType(file, cb) {
     cb(new ErrorResponse("Unsupported file type.", 400));
 }
 
-module.exports.deleteImage = async (filename) => {
-    await fs.unlink(`${UPLOAD_DIR}/${filename}`, (err) => {
-        if (err) throw err;
-    });
-};
-
 module.exports = multer({
     storage: storage,
     limits: {
@@ -45,3 +39,9 @@ module.exports = multer({
         checkFileType(file, cb);
     },
 }).single(INPUT_NAME);
+
+module.exports.deleteImage = async (filename) => {
+    await fs.unlink(`${UPLOAD_DIR}/${filename}`, (err) => {
+        if (err) throw err;
+    });
+};
