@@ -13,10 +13,10 @@ const API = `${BASE_URL}/api/v1`,
     BLOG = `${API}/blog`,
     PORTFOLIO = `${API}/portfolio`;
 
-const createOptions = (method, body) => {
+const createOptions = (method, body, contentType = "application/json") => {
     const headers = new Headers();
-    headers.append("Content-Type", "application/json");
     headers.append("Authorization", `Bearer ${localStorage.token}`);
+    contentType && headers.append("Content-Type", contentType);
 
     return {
         method,
@@ -62,14 +62,7 @@ export const getProject = (id) => {
 export const getProjects = () => fetch(PORTFOLIO);
 
 export const createProject = (formData) => {
-    const headers = new Headers();
-    headers.append("Authorization", `Bearer ${localStorage.token}`);
-
-    return fetch(PORTFOLIO, {
-        method: "POST",
-        headers: headers,
-        body: formData,
-    });
+    return fetch(PORTFOLIO, createOptions("POST", formData, null));
 };
 
 export const updateProject = (id, project) => {
