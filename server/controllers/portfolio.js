@@ -8,7 +8,8 @@ const asyncHandler = require("../middleware/asyncHandler");
 module.exports.createProject = asyncHandler(async (req, res, next) => {
     req.body.image = `assets/img/portfolio/${req.file.filename}`;
 
-    // TODO: Remove duplicate and empty tags
+    const filteredTags = req.body.tags.filter((tag) => tag.length > 0);
+    req.body.tags = [...new Set(filteredTags)];
 
     const position = (await Project.countDocuments({})) + 1;
     const project = await Project.create({
