@@ -3,14 +3,21 @@ const ErrorResponse = require("../utils/errorResponse");
 const asyncHandler = require("../middleware/asyncHandler");
 const deleteImage = require("../config/multer").deleteImage;
 
+const portfolioImagePath = "assets/img/portfolio";
+const createImagePath = (filename) => `${portfolioImagePath}/${filename}`;
+
+// Returns an array of non-empty unique strings
+const filterTags = (tags) => {
+    const filteredTags = tags.filter((tag) => tag.length > 0);
+    return [...new Set(filteredTags)];
+};
+
 // @desc    Create a new project
 // @route   POST /api/v1/portfolio
 // @access  Private
 module.exports.createProject = asyncHandler(async (req, res, next) => {
-    req.body.image = `assets/img/portfolio/${req.file.filename}`;
-
-    const filteredTags = req.body.tags.filter((tag) => tag.length > 0);
-    req.body.tags = [...new Set(filteredTags)];
+    req.body.image = createImagePath(req.file.filename);
+    req.body.tags = filterTags(req.body.tags);
 
     const position = (await Project.countDocuments({})) + 1;
     const project = await Project.create({
@@ -68,6 +75,18 @@ module.exports.updateProject = asyncHandler(async (req, res, next) => {
             new ErrorResponse(`No project with ID of ${req.params.id}`),
             404
         );
+    }
+
+    if (req.file) {
+        req.body.image = createImagePath(req.file.filename);
+        const { image } = project;
+        const filename = image.split("/").slice(-1);
+        await deleteImage(filename);
+    }
+
+    const { tags } = req.body;
+    if (tags) {
+        req.body.tags = filterTags(tags);
     }
 
     const updatedProject = await Project.findByIdAndUpdate(
