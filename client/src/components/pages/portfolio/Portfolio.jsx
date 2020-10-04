@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Project from "./Project";
 import { LoadingSpinner } from "../../shared";
 import { getProjects } from "../../../utils/api";
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import "./styles.scss";
 
 const Portfolio = () => {
@@ -26,14 +27,24 @@ const Portfolio = () => {
                 <span>Portfolio</span>
             </div>
 
-            <div className="row" id="grid">
+            <div>
                 {/* Assume that there will be at least one project */}
                 {loading ? (
                     <LoadingSpinner />
                 ) : (
-                    projects.map((project) => (
-                        <Project {...project} key={project._id} />
-                    ))
+                    <ResponsiveMasonry
+                        columnsCountBreakPoints={{
+                            0: 1,
+                            600: 2,
+                            900: 3,
+                        }}
+                    >
+                        <Masonry gutter="1.5rem" className="masonry">
+                            {projects.map((project) => (
+                                <Project {...project} key={project._id} />
+                            ))}
+                        </Masonry>
+                    </ResponsiveMasonry>
                 )}
             </div>
         </div>
