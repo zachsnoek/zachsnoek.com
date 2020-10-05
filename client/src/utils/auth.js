@@ -14,8 +14,8 @@ export const loadUser = async () => {
     return response.ok ? data.data : null;
 };
 
-export const loginUser = async (formData) => {
-    const response = await fetch(`${API}/auth/login`, {
+export const loginUser = (formData) => {
+    return fetch(`${API}/auth/login`, {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
@@ -25,10 +25,6 @@ export const loginUser = async (formData) => {
         referrerPolicy: "no-referrer",
         body: JSON.stringify(formData),
     });
-
-    const data = await response.json();
-
-    return response.ok ? data.token : null;
 };
 
 export const logoutUser = () => {

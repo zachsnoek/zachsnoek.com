@@ -20,15 +20,18 @@ const Login = ({ history }) => {
     async function handleSubmit(e) {
         e.preventDefault();
 
-        const token = await loginUser(formData);
+        const response = await loginUser(formData);
+        const data = await response.json();
 
-        if (token) {
-            localStorage.setItem("token", token);
-            setUser({ authenticated: true });
-            history.push("/");
-        } else {
+        if (!response.ok) {
+            // TODO: handle error
+            console.error(data.error);
             localStorage.clear("token");
             setUser(null);
+        } else {
+            localStorage.setItem("token", data.token);
+            setUser({ authenticated: true });
+            history.push("/");
         }
     }
 
