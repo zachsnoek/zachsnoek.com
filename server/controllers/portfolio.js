@@ -52,9 +52,9 @@ module.exports.getProject = asyncHandler(async (req, res, next) => {
     if (!project) {
         return next(
             new ErrorResponse(
-                `No project exists with an ID of ${req.params.id}.`
-            ),
-            404
+                `No project exists with an ID of ${req.params.id}.`,
+                404
+            )
         );
     }
 
@@ -72,8 +72,10 @@ module.exports.updateProject = asyncHandler(async (req, res, next) => {
 
     if (!project) {
         return next(
-            new ErrorResponse(`No project with ID of ${req.params.id}`),
-            404
+            new ErrorResponse(
+                `No project exists with an ID of ${req.params.id}.`,
+                404
+            )
         );
     }
 
@@ -113,7 +115,7 @@ module.exports.deleteProject = asyncHandler(async (req, res, next) => {
     if (!project) {
         return next(
             new ErrorResponse(
-                `The project with ID ${req.params.id} does not exist.`,
+                `No project exists with an ID of ${req.params.id}.`,
                 404
             )
         );

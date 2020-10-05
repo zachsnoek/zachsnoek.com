@@ -19,12 +19,12 @@ module.exports.contact = asyncHandler(async (req, res, next) => {
                 "Your email has been sent! I will respond as soon as possible.",
         });
     } catch (err) {
-        console.log(err);
+        console.error(err);
 
         res.status(500).json({
             success: false,
-            data:
-                "There was an issue sending your email. I've been notified and will look into the issue.",
+            error:
+                "Oops! There was an error sending your email. Try this link instead.",
         });
     }
 });

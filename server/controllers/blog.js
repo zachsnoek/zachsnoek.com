@@ -40,8 +40,7 @@ module.exports.getPost = asyncHandler(async (req, res, next) => {
 
     if (!post) {
         return next(
-            new ErrorResponse(`No post exists with a slug of ${slug}.`),
-            404
+            new ErrorResponse(`No post exists with a slug of ${slug}.`, 404)
         );
     }
 
@@ -59,8 +58,10 @@ module.exports.updatePost = asyncHandler(async (req, res, next) => {
 
     if (!post) {
         return next(
-            new ErrorResponse(`No post with ID of ${req.params.id}`),
-            404
+            new ErrorResponse(
+                `No post exists with a slug of ${req.params.id}.`,
+                404
+            )
         );
     }
 
@@ -88,7 +89,7 @@ module.exports.deletePost = asyncHandler(async (req, res, next) => {
     if (!post) {
         return next(
             new ErrorResponse(
-                `No post exists with an ID of ${req.params.id}.`,
+                `No post exists with a slug of ${req.params.id}.`,
                 404
             )
         );
