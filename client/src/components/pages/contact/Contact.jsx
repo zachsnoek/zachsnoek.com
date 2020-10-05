@@ -23,12 +23,10 @@ const Contact = () => {
         setLoading(true);
 
         const response = await contact(formData);
-        setLoading(false);
-
-        // data.data = the message to display to the user
-        // data.success = whether the request was successful or not
         const data = await response.json();
-        setEmailSent({ ...data });
+
+        setEmailSent({ message: response.ok ? data.data : data.error });
+        setLoading(false);
     }
 
     return (
@@ -39,7 +37,9 @@ const Contact = () => {
 
             {loading && <LoadingSpinner />}
 
-            {emailSent && <CenterContainer>{emailSent.data}</CenterContainer>}
+            {emailSent && (
+                <CenterContainer>{emailSent.message}</CenterContainer>
+            )}
 
             {!loading && !emailSent && (
                 <form onSubmit={(e) => handleSubmit(e)}>
