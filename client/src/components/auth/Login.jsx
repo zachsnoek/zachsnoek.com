@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import { loginUser } from "../../utils/auth";
-import { useUserContext } from "../../context/useUserContext";
+import { loginUser } from "utils/auth";
+import { useUserContext } from "context/useUserContext";
 
 const Login = ({ history }) => {
     const { user, setUser } = useUserContext();

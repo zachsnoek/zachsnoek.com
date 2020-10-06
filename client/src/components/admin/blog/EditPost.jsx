@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
-import { getPost, updatePost } from "../../../utils/api";
-import { makeMD } from "../../../utils/markdown";
+import { getPost, updatePost } from "utils/api";
+import { makeMD } from "utils/markdown";
 import PostForm from "./PostForm";
 
 const EditPost = withRouter(({ match, history }) => {

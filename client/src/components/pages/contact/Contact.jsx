@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { CenterContainer, LoadingSpinner } from "../../shared/";
-import { contact } from "../../../utils/api";
+import { CenterContainer, LoadingSpinner } from "components/shared";
+import { contact } from "utils/api";
 import "./styles.scss";
 
 const Contact = () => {

@@ -1,5 +1,5 @@
 import React from "react";
-import CenterContainer from "../CenterContainer/CenterContainer";
+import { CenterContainer } from "components/shared";
 import "./styles.css";
 
 const LoadingSpinner = () => {

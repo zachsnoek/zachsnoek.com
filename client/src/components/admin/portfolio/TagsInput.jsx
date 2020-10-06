@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Tags } from "../../pages/portfolio/";
+import { Tags } from "components/pages";
 
 const TagsInput = ({ tags, setTags }) => {
     const [tag, setTag] = useState("");
