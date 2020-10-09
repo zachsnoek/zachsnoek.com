@@ -9,7 +9,10 @@ const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
         website: project ? project.website : "",
     });
     const { title, description, github, website } = formData;
+
     const [tags, setTags] = useState(project ? project.tags : []);
+    const [isPickingNewImage, setIsPickingNewImage] = useState(false);
+
     const fileInput = useRef(null);
 
     function handleChange(e) {
@@ -91,15 +94,32 @@ const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
 
                         <label htmlFor="image">Image</label>
 
-                        {project?.image ? (
-                            <div>{project.image}</div>
-                        ) : (
+                        {project?.image && <div>{project.image}</div>}
+
+                        {project?.image && !isPickingNewImage && (
+                            <>
+                                <button
+                                    type="button"
+                                    className="btn btn-primary btn-md"
+                                    onClick={() => setIsPickingNewImage(true)}
+                                >
+                                    {"Choose new image"}
+                                </button>
+                            </>
+                        )}
+
+                        {(!project?.image || isPickingNewImage) && (
                             <div className="form-group">
                                 <input
                                     id="image"
                                     name="image"
                                     type="file"
-                                    onChange={(e) => handleChange(e)}
+                                    onChange={(e) => {
+                                        handleChange(e);
+                                        if (isPickingNewImage) {
+                                            setIsPickingNewImage(false);
+                                        }
+                                    }}
                                     required
                                     ref={fileInput}
                                     style={{ display: "block" }}
@@ -124,6 +144,26 @@ const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
             </form>
         </div>
     );
+};
+
+export const createFormData = ({
+    title,
+    description,
+    image,
+    github,
+    website,
+    tags,
+}) => {
+    const formData = new FormData();
+
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("github", github);
+    formData.append("website", website);
+    image && formData.append("image", image);
+    tags.forEach((tag) => formData.append("tags[]", tag));
+
+    return formData;
 };
 
 export default ProjectForm;

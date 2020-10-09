@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import { getProject, updateProject } from "utils/api";
-import ProjectForm from "./ProjectForm";
+import ProjectForm, { createFormData } from "./ProjectForm";
 
 const EditProject = withRouter(({ match, history }) => {
     const [project, setProject] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    async function onSubmit(formData) {
+    async function onSubmit(form) {
+        const formData = createFormData(form);
         const response = await updateProject(match.params.id, formData);
 
         if (response.ok) {

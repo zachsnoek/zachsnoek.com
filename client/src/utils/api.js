@@ -65,11 +65,8 @@ export const createProject = (formData) => {
     return fetch(PORTFOLIO, createOptions("POST", formData, null));
 };
 
-export const updateProject = (id, project) => {
-    return fetch(
-        `${PORTFOLIO}/${id}`,
-        createOptions("PUT", JSON.stringify(project))
-    );
+export const updateProject = (id, formData) => {
+    return fetch(`${PORTFOLIO}/${id}`, createOptions("PUT", formData, null));
 };
 
 export const deleteProject = (id, project) => {

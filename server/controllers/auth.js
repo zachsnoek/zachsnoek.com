@@ -20,23 +20,24 @@ module.exports.registerUser = asyncHandler(async (req, res, next) => {
 // @access  Public
 module.exports.login = asyncHandler(async (req, res, next) => {
     const { email, password } = req.body;
+    const errorMessage = "Invalid email address or password.";
 
     if (!email || !password) {
-        return next(new ErrorResponse("Invalid credentials.", 400));
+        return next(new ErrorResponse(errorMessage, 400));
     }
 
     // Check that user exists
     const user = await User.findOne({ email }).select("+password");
 
     if (!user) {
-        return next(new ErrorResponse("Invalid credentials.", 401));
+        return next(new ErrorResponse(errorMessage, 400));
     }
 
     // Check if password matches
     const isMatch = await user.matchPassword(password);
 
     if (!isMatch) {
-        return next(new ErrorResponse("Invalid credentials.", 401));
+        return next(new ErrorResponse(errorMessage, 400));
     }
 
     sendTokenResponse(user, 200, res);
