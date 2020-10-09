@@ -90,9 +90,7 @@ const Login = ({ history }) => {
 
                 <Row className="center-contents">
                     <Col className="center-contents">
-                        <Button size="lg"
-                            type="submit"
-                        >
+                        <Button size="lg" type="submit">
                             Login
                         </Button>
                     </Col>

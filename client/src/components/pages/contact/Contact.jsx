@@ -110,9 +110,7 @@ const Contact = () => {
 
                     <Row className="center-contents">
                         <Col className="center-contents">
-                            <Button size="lg"
-                                type="submit"
-                            >
+                            <Button size="lg" type="submit">
                                 Send Message
                             </Button>
                         </Col>

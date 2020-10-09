@@ -79,11 +79,7 @@ const Navbar = withRouter(({ history }) => {
                         )}
                         {user?.authenticated && (
                             <li className="nav-item">
-                                <Button
-                                    onClick={handleLogout}
-                                >
-                                    Logout
-                                </Button>
+                                <Button onClick={handleLogout}>Logout</Button>
                             </li>
                         )}
                     </ul>

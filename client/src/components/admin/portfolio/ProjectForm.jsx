@@ -101,7 +101,8 @@ const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
 
                         {project?.image && !isPickingNewImage && (
                             <>
-                                <Button size="md"
+                                <Button
+                                    size="md"
                                     onClick={() => setIsPickingNewImage(true)}
                                 >
                                     {"Choose new image"}
@@ -134,9 +135,7 @@ const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
 
                 <Row className="center-contents">
                     <Col className="center-contents">
-                        <Button size="lg"
-                            type="submit"
-                        >
+                        <Button size="lg" type="submit">
                             {submitButtonText}
                         </Button>
                     </Col>
