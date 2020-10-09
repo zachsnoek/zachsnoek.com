@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import TagsInput from "./TagsInput";
+import Button from "react-bootstrap/Button";
 
 const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
     const [formData, setFormData] = useState({
@@ -100,13 +101,11 @@ const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
 
                         {project?.image && !isPickingNewImage && (
                             <>
-                                <button
-                                    type="button"
-                                    className="btn btn-primary btn-md"
+                                <Button size="md"
                                     onClick={() => setIsPickingNewImage(true)}
                                 >
                                     {"Choose new image"}
-                                </button>
+                                </Button>
                             </>
                         )}
 
@@ -135,12 +134,11 @@ const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
 
                 <Row className="center-contents">
                     <Col className="center-contents">
-                        <button
-                            className="btn btn-lg btn-primary"
+                        <Button size="lg"
                             type="submit"
                         >
                             {submitButtonText}
-                        </button>
+                        </Button>
                     </Col>
                 </Row>
             </form>

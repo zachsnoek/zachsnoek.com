@@ -89,12 +89,11 @@ const Login = ({ history }) => {
 
                 <Row className="center-contents">
                     <Col className="center-contents">
-                        <button
-                            className="btn btn-lg btn-primary"
+                        <Button size="lg"
                             type="submit"
                         >
                             Login
-                        </button>
+                        </Button>
                     </Col>
                 </Row>
             </form>

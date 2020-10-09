@@ -5,6 +5,7 @@ import { makeHTML } from "utils/markdown";
 import "easymde/dist/easymde.min.css";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 
 const PostForm = ({ formTitle, submitButtonText, onSubmit, post }) => {
     const [showPreview, setShowPreview] = useState(false);
@@ -35,13 +36,12 @@ const PostForm = ({ formTitle, submitButtonText, onSubmit, post }) => {
                 <>
                     <Row className="center-contents">
                         <Col className="center-contents">
-                            <button
-                                className="btn btn-lg btn-primary"
-                                type="button"
+                            <Button
+                                size="lg"
                                 onClick={() => setShowPreview(false)}
                             >
                                 Continue Editing
-                            </button>
+                            </Button>
                         </Col>
                     </Row>
 
@@ -105,24 +105,20 @@ const PostForm = ({ formTitle, submitButtonText, onSubmit, post }) => {
 
                     <Row className="center-contents">
                         <Col className="center-contents">
-                            <button
-                                className="btn btn-lg btn-primary"
-                                type="button"
+                            <Button
+                                size="lg"
                                 onClick={() => setShowPreview(true)}
                             >
                                 Preview
-                            </button>
+                            </Button>
                         </Col>
                     </Row>
 
                     <Row className="center-contents">
                         <Col className="center-contents">
-                            <button
-                                className="btn btn-lg btn-primary"
-                                type="submit"
-                            >
+                            <Button size="lg" type="submit">
                                 {submitButtonText}
-                            </button>
+                            </Button>
                         </Col>
                     </Row>
                 </form>

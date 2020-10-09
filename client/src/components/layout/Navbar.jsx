@@ -3,6 +3,7 @@ import { withRouter, Link } from "react-router-dom";
 import { useUserContext } from "context/useUserContext";
 import { logoutUser } from "utils/auth";
 import { setTitle } from "utils/title";
+import Button from "react-bootstrap/Button";
 
 const Navbar = withRouter(({ history }) => {
     const { user, setUser } = useUserContext();
@@ -78,7 +79,11 @@ const Navbar = withRouter(({ history }) => {
                         )}
                         {user?.authenticated && (
                             <li className="nav-item">
-                                <button className="btn btn-primary" onClick={handleLogout}>Logout</button>
+                                <Button
+                                    onClick={handleLogout}
+                                >
+                                    Logout
+                                </Button>
                             </li>
                         )}
                     </ul>

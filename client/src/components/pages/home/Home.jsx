@@ -4,6 +4,7 @@ import { ASSETS } from "utils/api";
 import "./styles.scss";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 
 const Home = () => {
     return (
@@ -26,14 +27,14 @@ const Home = () => {
                     </p>
                     <div className="center-contents flex-wrap justify-content-md-start">
                         <Link to="/portfolio">
-                            <button className="btn btn-lg btn-primary m-2">
+                            <Button size="lg" className="m-2">
                                 View Portfolio
-                            </button>
+                            </Button>
                         </Link>
                         <Link to="/contact">
-                            <button className="btn btn-lg btn-outline-secondary m-2">
+                            <Button size="lg" variant="outline-secondary" className="m-2">
                                 Get In Touch
-                            </button>
+                            </Button>
                         </Link>
                     </div>
                 </div>

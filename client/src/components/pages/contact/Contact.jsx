@@ -4,6 +4,7 @@ import { contact } from "utils/api";
 import "./styles.scss";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 
 const Contact = () => {
     const [loading, setLoading] = useState(false);
@@ -109,12 +110,11 @@ const Contact = () => {
 
                     <Row className="center-contents">
                         <Col className="center-contents">
-                            <button
-                                className="btn btn-lg btn-primary"
+                            <Button size="lg"
                                 type="submit"
                             >
                                 Send Message
-                            </button>
+                            </Button>
                         </Col>
                     </Row>
                 </form>
