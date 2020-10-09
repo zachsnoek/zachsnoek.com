@@ -1,46 +1,135 @@
 @import "styles/variables.scss";
 @import "~bootstrap/scss/bootstrap.scss";
 
-.container,
-.container-fluid {
-    padding-top: 2rem;
-    padding-bottom: 6rem;
-    position: relative !important;
-    min-height: 100vh;
-}
-
 body {
     background-color: $background;
     color: $text;
-}
 
-h1 {
-    font-family: $serif;
-    font-size: 2rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
+    .container,
+    .container-fluid {
+        padding-top: 2rem;
+        padding-bottom: 6rem;
+        position: relative !important;
+        min-height: 100vh;
+    }
 
-a,
-a:hover,
-a:visited {
-    color: inherit;
-    text-decoration: none;
-}
+    h1 {
+        font-family: $serif;
+        font-size: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
 
-.header,
-.big-header,
-p {
-    margin-bottom: 2rem;
-}
+    a,
+    a:hover,
+    a:visited {
+        color: inherit;
+        text-decoration: none;
+    }
 
-.header {
-    margin-top: 2rem;
+    .header {
+        margin-top: 2rem;
 
-    span {
-        @extend h1;
-        font-size: 1.5rem;
-        margin-bottom: 0;
+        span {
+            @extend h1;
+            font-size: 1.5rem;
+            margin-bottom: 0;
+        }
+    }
+
+    .header,
+    .big-header,
+    p {
+        margin-bottom: 2rem;
+    }
+
+    .big-header {
+        span {
+            font-size: 3rem;
+            display: inline-block;
+            font-weight: bold;
+        }
+    }
+
+    hr {
+        border-color: $divider;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .drop-cap {
+        float: left;
+        font-family: $serif;
+        font-size: 4rem;
+        margin-right: 0.75rem;
+        margin-bottom: -1.5rem;
+        margin-top: -0.75rem;
+    }
+
+    .btn-link {
+        transition: $transition-duration;
+        border-radius: $border-radius;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        color: $text;
+    }
+
+    .btn-link:hover {
+        text-decoration: none;
+        color: $text-hover;
+        background-color: $shadow;
+    }
+
+    .btn-link.disabled {
+        color: $info !important;
+    }
+
+    .card,
+    .btn,
+    .badge {
+        border-radius: $border-radius;
+    }
+
+    .badge {
+        padding: 0.4rem 0.6rem 0.35rem 0.6rem;
+        cursor: default;
+    }
+
+    .card {
+        background-color: $card;
+        margin-bottom: 2rem;
+        border: none;
+
+        .card-header {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+
+            .card-title {
+                @extend h5;
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    .form-control,
+    .form-control:focus {
+        border-radius: $border-radius;
+        background-color: $card;
+        border: none;
+        color: $text !important;
+        transition-property: background-color;
+    }
+
+    .form-control::placeholder {
+        color: $placeholder;
+    }
+
+    .form-control:focus {
+        background-color: $shadow;
+    }
+
+    textarea {
+        resize: none;
     }
 }
 
@@ -78,93 +167,4 @@ p {
     .nav-item {
         margin: 0 0.25rem;
     }
-}
-
-.big-header {
-    span {
-        font-size: 3rem;
-        display: inline-block;
-        font-weight: bold;
-    }
-}
-
-hr {
-    border-color: $divider;
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.drop-cap {
-    float: left;
-    font-family: $serif;
-    font-size: 4rem;
-    margin-right: 0.75rem;
-    margin-bottom: -1.5rem;
-    margin-top: -0.75rem;
-}
-
-.btn-link {
-    transition: $transition-duration;
-    border-radius: $border-radius;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-    color: $text;
-}
-
-.btn-link:hover {
-    text-decoration: none;
-    color: $text-hover;
-    background-color: $shadow;
-}
-
-.btn-link.disabled {
-    color: $info !important;
-}
-
-.card,
-.btn,
-.badge {
-    border-radius: $border-radius;
-}
-
-.badge {
-    padding: 0.4rem 0.6rem 0.35rem 0.6rem;
-    cursor: default;
-}
-
-.card {
-    background-color: $card;
-    margin-bottom: 2rem;
-    border: none;
-
-    .card-header {
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-
-        .card-title {
-            @extend h5;
-            margin-bottom: 0;
-        }
-    }
-}
-
-.form-control,
-.form-control:focus {
-    border-radius: $border-radius;
-    background-color: $card;
-    border: none;
-    color: $text !important;
-    transition-property: background-color;
-}
-
-.form-control::placeholder {
-    color: $placeholder;
-}
-
-.form-control:focus {
-    background-color: $shadow;
-}
-
-textarea {
-    resize: none;
 }
