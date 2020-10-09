@@ -32,7 +32,7 @@ const Contact = () => {
     }
 
     return (
-        <div className="contact">
+        <div className="contact form">
             <div className="header center-contents">
                 <span>Contact</span>
             </div>
@@ -107,7 +107,7 @@ const Contact = () => {
                         </Col>
                     </Row>
 
-                    <Row className="center-contents mt-4">
+                    <Row className="center-contents">
                         <Col className="center-contents">
                             <button
                                 className="btn btn-lg btn-primary"

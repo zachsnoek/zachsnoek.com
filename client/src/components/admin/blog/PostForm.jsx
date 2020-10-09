@@ -26,14 +26,14 @@ const PostForm = ({ formTitle, submitButtonText, onSubmit, post }) => {
     };
 
     return (
-        <div className="contact">
+        <div className="post-form form">
             <div className="header center-contents">
                 <span>{formTitle}</span>
             </div>
 
             {showPreview ? (
                 <>
-                    <Row className="center-contents mt-4">
+                    <Row className="center-contents">
                         <Col className="center-contents">
                             <button
                                 className="btn btn-lg btn-primary"
@@ -103,7 +103,7 @@ const PostForm = ({ formTitle, submitButtonText, onSubmit, post }) => {
                         </Col>
                     </Row>
 
-                    <Row className="center-contents mt-4">
+                    <Row className="center-contents">
                         <Col className="center-contents">
                             <button
                                 className="btn btn-lg btn-primary"
@@ -115,7 +115,7 @@ const PostForm = ({ formTitle, submitButtonText, onSubmit, post }) => {
                         </Col>
                     </Row>
 
-                    <Row className="center-contents mt-4">
+                    <Row className="center-contents">
                         <Col className="center-contents">
                             <button
                                 className="btn btn-lg btn-primary"
