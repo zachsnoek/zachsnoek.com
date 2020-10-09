@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { CenterContainer, LoadingSpinner } from "components/shared";
 import { contact } from "utils/api";
 import "./styles.scss";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 const Contact = () => {
     const [loading, setLoading] = useState(false);
@@ -43,10 +45,10 @@ const Contact = () => {
 
             {!loading && !emailSent && (
                 <form onSubmit={(e) => handleSubmit(e)}>
-                    <div className="row d-flex justify-content-center">
-                        <div className="col">
-                            <div className="row">
-                                <div className="col">
+                    <Row className="d-flex justify-content-center">
+                        <Col>
+                            <Row>
+                                <Col>
                                     <div className="form-group">
                                         <label htmlFor="name">Name</label>
                                         <input
@@ -62,10 +64,10 @@ const Contact = () => {
                                             autoComplete="off"
                                         />
                                     </div>
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="col">
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
                                     <div className="form-group">
                                         <label htmlFor="email">
                                             Email address
@@ -82,13 +84,13 @@ const Contact = () => {
                                             autoComplete="off"
                                         />
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
 
-                    <div className="row d-flex justify-content-center">
-                        <div className="col">
+                    <Row className="d-flex justify-content-center">
+                        <Col>
                             <div className="form-group">
                                 <label htmlFor="message">Message</label>
                                 <textarea
@@ -102,19 +104,19 @@ const Contact = () => {
                                     required
                                 ></textarea>
                             </div>
-                        </div>
-                    </div>
+                        </Col>
+                    </Row>
 
-                    <div className="row d-flex justify-content-center mt-4">
-                        <div className="col d-flex justify-content-center">
+                    <Row className="d-flex justify-content-center mt-4">
+                        <Col className="d-flex justify-content-center">
                             <button
                                 className="btn btn-lg btn-primary"
                                 type="submit"
                             >
                                 Send Message
                             </button>
-                        </div>
-                    </div>
+                        </Col>
+                    </Row>
                 </form>
             )}
         </div>

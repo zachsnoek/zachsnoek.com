@@ -1,4 +1,6 @@
 import React, { useState, useRef } from "react";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 import TagsInput from "./TagsInput";
 
 const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
@@ -35,8 +37,8 @@ const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
             </div>
 
             <form onSubmit={(e) => handleSubmit(e)}>
-                <div className="row d-flex justify-content-center">
-                    <div className="col">
+                <Row className="d-flex justify-content-center">
+                    <Col>
                         <div className="form-group">
                             <label htmlFor="title">Title</label>
                             <input
@@ -128,19 +130,19 @@ const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
                         )}
 
                         <TagsInput tags={tags} setTags={setTags} />
-                    </div>
-                </div>
+                    </Col>
+                </Row>
 
-                <div className="row d-flex justify-content-center mt-4">
-                    <div className="col d-flex justify-content-center">
+                <Row className="d-flex justify-content-center mt-4">
+                    <Col className="d-flex justify-content-center">
                         <button
                             className="btn btn-lg btn-primary"
                             type="submit"
                         >
                             {submitButtonText}
                         </button>
-                    </div>
-                </div>
+                    </Col>
+                </Row>
             </form>
         </div>
     );

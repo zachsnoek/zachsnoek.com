@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { loginUser } from "utils/auth";
 import { useUserContext } from "context/useUserContext";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 const Login = ({ history }) => {
     const { user, setUser } = useUserContext();
@@ -43,10 +45,10 @@ const Login = ({ history }) => {
                 <span>Login</span>
             </div>
             <form onSubmit={(e) => handleSubmit(e)}>
-                <div className="row d-flex justify-content-center">
-                    <div className="col">
-                        <div className="row">
-                            <div className="col">
+                <Row className="d-flex justify-content-center">
+                    <Col>
+                        <Row>
+                            <Col>
                                 <div className="form-group">
                                     <label htmlFor="email">Email address</label>
                                     <input
@@ -61,10 +63,10 @@ const Login = ({ history }) => {
                                         autoComplete="off"
                                     />
                                 </div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col">
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
                                 <div className="form-group">
                                     <label htmlFor="password">Password</label>
                                     <input
@@ -80,21 +82,21 @@ const Login = ({ history }) => {
                                         autoComplete="off"
                                     />
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                            </Col>
+                        </Row>
+                    </Col>
+                </Row>
 
-                <div className="row d-flex justify-content-center mt-4">
-                    <div className="col d-flex justify-content-center">
+                <Row className="d-flex justify-content-center mt-4">
+                    <Col className="d-flex justify-content-center">
                         <button
                             className="btn btn-lg btn-primary"
                             type="submit"
                         >
                             Login
                         </button>
-                    </div>
-                </div>
+                    </Col>
+                </Row>
             </form>
         </div>
     );

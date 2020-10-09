@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import Tags from "./Tags";
 import Links from "./Links";
 import { BASE_URL } from "utils/api";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 const Project = ({ title, description, image, github, website, tags }) => {
     return (
@@ -16,14 +18,14 @@ const Project = ({ title, description, image, github, website, tags }) => {
             />
             <div className="card-body">{description}</div>
             <div className="card-footer">
-                <div className="row">
-                    <div className="col">
+                <Row>
+                    <Col>
                         <Tags tags={tags} />
-                    </div>
-                    <div className="col-auto">
+                    </Col>
+                    <Col xs="auto">
                         <Links github={github} website={website} />
-                    </div>
-                </div>
+                    </Col>
+                </Row>
             </div>
         </div>
     );

@@ -2,18 +2,20 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { ASSETS } from "utils/api";
 import "./styles.scss";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 const Home = () => {
     return (
-        <div className="home row d-flex justify-content-center">
-            <div className="col-4 col-lg-3 align-items-center d-none d-md-flex">
+        <Row className="home d-flex justify-content-center">
+            <Col xs={4} lg={3} className="align-items-center d-none d-md-flex">
                 <img
                     src={`${ASSETS}/img/zach-home.jpg`}
                     className="profile-pic"
                     alt="Zach standing."
                 />
-            </div>
-            <div className="col-12 col-md-8 col-lg-7 d-flex align-items-center">
+            </Col>
+            <Col xs={12} md={8} lg={7} className="d-flex align-items-center">
                 <div className="ml-md-5">
                     <div className="big-header d-flex justify-content-center justify-content-md-start">
                         <span>Hi, I'm Zach!</span>
@@ -35,8 +37,8 @@ const Home = () => {
                         </Link>
                     </div>
                 </div>
-            </div>
-        </div>
+            </Col>
+        </Row>
     );
 };
 
