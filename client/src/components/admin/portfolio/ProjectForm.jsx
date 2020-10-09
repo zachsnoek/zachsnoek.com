@@ -32,12 +32,12 @@ const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
 
     return (
         <div className="contact">
-            <div className="header d-flex justify-content-center">
+            <div className="header center-contents">
                 <span>{formTitle}</span>
             </div>
 
             <form onSubmit={(e) => handleSubmit(e)}>
-                <Row className="d-flex justify-content-center">
+                <Row className="center-contents">
                     <Col>
                         <div className="form-group">
                             <label htmlFor="title">Title</label>
@@ -133,8 +133,8 @@ const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
                     </Col>
                 </Row>
 
-                <Row className="d-flex justify-content-center mt-4">
-                    <Col className="d-flex justify-content-center">
+                <Row className="center-contents mt-4">
+                    <Col className="center-contents">
                         <button
                             className="btn btn-lg btn-primary"
                             type="submit"

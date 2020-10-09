@@ -7,24 +7,24 @@ import Col from "react-bootstrap/Col";
 
 const Home = () => {
     return (
-        <Row className="home d-flex justify-content-center">
-            <Col xs={4} lg={3} className="align-items-center d-none d-md-flex">
+        <Row className="home center-contents">
+            <Col xs={4} lg={3} className="d-none d-md-flex align-items-center">
                 <img
                     src={`${ASSETS}/img/zach-home.jpg`}
                     className="profile-pic"
                     alt="Zach standing."
                 />
             </Col>
-            <Col xs={12} md={8} lg={7} className="d-flex align-items-center">
+            <Col xs={12} md={8} lg={7} className="center-contents">
                 <div className="ml-md-5">
-                    <div className="big-header d-flex justify-content-center justify-content-md-start">
+                    <div className="big-header center-contents justify-content-md-start">
                         <span>Hi, I'm Zach!</span>
                     </div>
                     <p>
                         I'm a software developer based in Bellingham, WA. I
                         currently work for Faithlife Corporation.
                     </p>
-                    <div className="d-flex flex-wrap justify-content-center justify-content-md-start">
+                    <div className="center-contents flex-wrap justify-content-md-start">
                         <Link to="/portfolio">
                             <button className="btn btn-lg btn-primary m-2">
                                 View Portfolio

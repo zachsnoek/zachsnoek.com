@@ -35,7 +35,7 @@ const Preview = withRouter(
 
                 <Link to={`/blog/${slug}`}>
                     <Card>
-                        <Card.Header className="d-flex align-items-center justify-content-between">
+                        <Card.Header className="center-contents justify-content-between">
                             <Card.Title>{title}</Card.Title>
                             <span className="badge badge-info">
                                 {formatDate(createdAt)}

@@ -5,6 +5,12 @@ body {
     background-color: $background;
     color: $text;
 
+    .center-contents {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+    }
+
     .container,
     .container-fluid {
         padding-top: 2rem;

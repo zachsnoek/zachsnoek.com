@@ -22,7 +22,7 @@ const Blog = () => {
 
     return (
         <div className="blog">
-            <div className="header d-flex justify-content-center">
+            <div className="header center-contents">
                 <span>Blog</span>
             </div>
 
