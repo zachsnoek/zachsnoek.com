@@ -1,3 +1,41 @@
+@import "styles/globals.scss";
+
+.navbar.navbar-dark {
+    padding: 0;
+
+    .navbar-brand {
+        @extend h1;
+        margin: 0;
+        margin-right: 2rem !important;
+        transition-duration: $transition-duration;
+    }
+
+    .navbar-brand:hover {
+        color: $info !important;
+        background-color: unset !important;
+    }
+
+    .na .navbar-toggler {
+        border: none;
+    }
+
+    .nav-link,
+    .navbar-toggler {
+        @extend .btn-link;
+    }
+
+    .nav-link:hover,
+    .navbar-toggler:hover {
+        text-decoration: none;
+        color: $text-hover;
+        background-color: $shadow;
+    }
+
+    .nav-item {
+        margin: 0 0.25rem;
+    }
+}
+
 footer {
     position: absolute !important;
     bottom: 0;
