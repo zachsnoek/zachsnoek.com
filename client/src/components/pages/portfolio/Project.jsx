@@ -5,19 +5,20 @@ import Links from "./Links";
 import { BASE_URL } from "utils/api";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Card from "react-bootstrap/Card";
 
 const Project = ({ title, description, image, github, website, tags }) => {
     return (
-        <div className="card">
-            <div className="card-header">
-                <span className="card-title">{title}</span>
-            </div>
+        <Card>
+            <Card.Header>
+                <Card.Title>{title}</Card.Title>
+            </Card.Header>
             <img
                 src={`${BASE_URL}/${image}`}
                 alt="A screenshot of a portfolio project."
             />
-            <div className="card-body">{description}</div>
-            <div className="card-footer">
+            <Card.Body>{description}</Card.Body>
+            <Card.Footer>
                 <Row>
                     <Col>
                         <Tags tags={tags} />
@@ -26,8 +27,8 @@ const Project = ({ title, description, image, github, website, tags }) => {
                         <Links github={github} website={website} />
                     </Col>
                 </Row>
-            </div>
-        </div>
+            </Card.Footer>
+        </Card>
     );
 };
 
