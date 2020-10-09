@@ -5,6 +5,7 @@ import "./styles.scss";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 const Contact = () => {
     const [loading, setLoading] = useState(false);
@@ -45,46 +46,44 @@ const Contact = () => {
             )}
 
             {!loading && !emailSent && (
-                <form onSubmit={(e) => handleSubmit(e)}>
+                <Form onSubmit={(e) => handleSubmit(e)}>
                     <Row className="center-contents">
                         <Col>
                             <Row>
                                 <Col>
-                                    <div className="form-group">
+                                    <Form.Group>
                                         <label htmlFor="name">Name</label>
-                                        <input
+                                        <Form.Control
                                             id="name"
                                             name="name"
                                             value={name}
                                             onChange={(e) => handleChange(e)}
-                                            className="form-control"
                                             type="text"
                                             placeholder="Your name"
                                             required
                                             autoFocus
                                             autoComplete="off"
                                         />
-                                    </div>
+                                    </Form.Group>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col>
-                                    <div className="form-group">
+                                    <Form.Group>
                                         <label htmlFor="email">
                                             Email address
                                         </label>
-                                        <input
+                                        <Form.Control
                                             id="email"
                                             name="fromEmail"
                                             value={fromEmail}
                                             onChange={(e) => handleChange(e)}
-                                            className="form-control"
                                             type="email"
                                             placeholder="Your email"
                                             required
                                             autoComplete="off"
                                         />
-                                    </div>
+                                    </Form.Group>
                                 </Col>
                             </Row>
                         </Col>
@@ -92,19 +91,19 @@ const Contact = () => {
 
                     <Row className="center-contents">
                         <Col>
-                            <div className="form-group">
+                            <Form.Group>
                                 <label htmlFor="message">Message</label>
-                                <textarea
+                                <Form.Control
+                                    as="textarea"
                                     id="message"
                                     name="message"
                                     value={message}
                                     onChange={(e) => handleChange(e)}
-                                    className="form-control"
                                     placeholder="Your message"
                                     rows="8"
                                     required
-                                ></textarea>
-                            </div>
+                                />
+                            </Form.Group>
                         </Col>
                     </Row>
 
@@ -115,7 +114,7 @@ const Contact = () => {
                             </Button>
                         </Col>
                     </Row>
-                </form>
+                </Form>
             )}
         </div>
     );

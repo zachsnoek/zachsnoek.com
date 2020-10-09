@@ -6,6 +6,7 @@ import "easymde/dist/easymde.min.css";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 const PostForm = ({ formTitle, submitButtonText, onSubmit, post }) => {
     const [showPreview, setShowPreview] = useState(false);
@@ -52,43 +53,41 @@ const PostForm = ({ formTitle, submitButtonText, onSubmit, post }) => {
                     />
                 </>
             ) : (
-                <form onSubmit={(e) => handleSubmit(e)}>
+                <Form onSubmit={(e) => handleSubmit(e)}>
                     <Row className="center-contents">
                         <Col>
-                            <div className="form-group">
+                            <Form.Group>
                                 <label htmlFor="title">Title</label>
-                                <input
+                                <Form.Control
                                     id="title"
                                     name="title"
                                     value={title}
                                     onChange={(e) => handleChange(e)}
-                                    className="form-control"
                                     type="text"
                                     required
                                     autoFocus
                                     autoComplete="off"
                                 />
-                            </div>
+                            </Form.Group>
 
-                            <div className="form-group">
+                            <Form.Group>
                                 <label htmlFor="description">Description</label>
-                                <input
+                                <Form.Control
                                     id="description"
                                     name="description"
                                     value={description}
                                     onChange={(e) => handleChange(e)}
-                                    className="form-control"
                                     type="text"
                                     required
                                     autoComplete="off"
                                 />
-                            </div>
+                            </Form.Group>
                         </Col>
                     </Row>
 
                     <Row className="center-contents">
                         <Col>
-                            <div className="form-group">
+                            <Form.Group>
                                 <label htmlFor="content">Content</label>
                                 <SimpleMDE
                                     value={content}
@@ -99,7 +98,7 @@ const PostForm = ({ formTitle, submitButtonText, onSubmit, post }) => {
                                         })
                                     }
                                 />
-                            </div>
+                            </Form.Group>
                         </Col>
                     </Row>
 
@@ -121,7 +120,7 @@ const PostForm = ({ formTitle, submitButtonText, onSubmit, post }) => {
                             </Button>
                         </Col>
                     </Row>
-                </form>
+                </Form>
             )}
         </div>
     );

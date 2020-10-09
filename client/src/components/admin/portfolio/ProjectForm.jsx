@@ -3,6 +3,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import TagsInput from "./TagsInput";
 import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
     const [formData, setFormData] = useState({
@@ -37,63 +38,59 @@ const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
                 <span>{formTitle}</span>
             </div>
 
-            <form onSubmit={(e) => handleSubmit(e)}>
+            <Form onSubmit={(e) => handleSubmit(e)}>
                 <Row className="center-contents">
                     <Col>
-                        <div className="form-group">
+                        <Form.Group>
                             <label htmlFor="title">Title</label>
-                            <input
+                            <Form.Control
                                 id="title"
                                 name="title"
                                 value={title}
                                 onChange={(e) => handleChange(e)}
-                                className="form-control"
                                 type="text"
                                 required
                                 autoFocus
                                 autoComplete="off"
                             />
-                        </div>
+                        </Form.Group>
 
-                        <div className="form-group">
+                        <Form.Group>
                             <label htmlFor="description">Description</label>
-                            <input
+                            <Form.Control
                                 id="description"
                                 name="description"
                                 value={description}
                                 onChange={(e) => handleChange(e)}
-                                className="form-control"
                                 type="text"
                                 required
                                 autoComplete="off"
                             />
-                        </div>
+                        </Form.Group>
 
-                        <div className="form-group">
+                        <Form.Group>
                             <label htmlFor="github">GitHub Repository</label>
-                            <input
+                            <Form.Control
                                 id="github"
                                 name="github"
                                 value={github}
                                 onChange={(e) => handleChange(e)}
-                                className="form-control"
                                 type="text"
                                 autoComplete="off"
                             />
-                        </div>
+                        </Form.Group>
 
-                        <div className="form-group">
+                        <Form.Group>
                             <label htmlFor="website">Website</label>
-                            <input
+                            <Form.Control
                                 id="website"
                                 name="website"
                                 value={website}
                                 onChange={(e) => handleChange(e)}
-                                className="form-control"
                                 type="text"
                                 autoComplete="off"
                             />
-                        </div>
+                        </Form.Group>
 
                         <label htmlFor="image">Image</label>
 
@@ -111,7 +108,7 @@ const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
                         )}
 
                         {(!project?.image || isPickingNewImage) && (
-                            <div className="form-group">
+                            <Form.Group>
                                 <input
                                     id="image"
                                     name="image"
@@ -126,7 +123,7 @@ const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
                                     ref={fileInput}
                                     style={{ display: "block" }}
                                 />
-                            </div>
+                            </Form.Group>
                         )}
 
                         <TagsInput tags={tags} setTags={setTags} />
@@ -140,7 +137,7 @@ const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
                         </Button>
                     </Col>
                 </Row>
-            </form>
+            </Form>
         </div>
     );
 };

@@ -5,6 +5,7 @@ import { useUserContext } from "context/useUserContext";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 const Login = ({ history }) => {
     const { user, setUser } = useUserContext();
@@ -45,44 +46,42 @@ const Login = ({ history }) => {
             <div className="header center-contents">
                 <span>Login</span>
             </div>
-            <form onSubmit={(e) => handleSubmit(e)}>
+            <Form onSubmit={(e) => handleSubmit(e)}>
                 <Row className="center-contents">
                     <Col>
                         <Row>
                             <Col>
-                                <div className="form-group">
+                                <Form.Group>
                                     <label htmlFor="email">Email address</label>
-                                    <input
+                                    <Form.Control
                                         id="email"
                                         name="email"
                                         value={email}
                                         onChange={(e) => handleChange(e)}
-                                        className="form-control"
                                         type="email"
                                         placeholder="Your email"
                                         required
                                         autoComplete="off"
                                     />
-                                </div>
+                                </Form.Group>
                             </Col>
                         </Row>
                         <Row>
                             <Col>
-                                <div className="form-group">
+                                <Form.Group>
                                     <label htmlFor="password">Password</label>
-                                    <input
+                                    <Form.Control
                                         id="password"
                                         name="password"
                                         value={password}
                                         onChange={(e) => handleChange(e)}
-                                        className="form-control"
                                         type="password"
                                         placeholder="Your password"
                                         required
                                         autoFocus
                                         autoComplete="off"
                                     />
-                                </div>
+                                </Form.Group>
                             </Col>
                         </Row>
                     </Col>
@@ -95,7 +94,7 @@ const Login = ({ history }) => {
                         </Button>
                     </Col>
                 </Row>
-            </form>
+            </Form>
         </div>
     );
 };
