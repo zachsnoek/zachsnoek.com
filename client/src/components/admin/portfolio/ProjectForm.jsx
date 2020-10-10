@@ -4,6 +4,7 @@ import Row from "react-bootstrap/Row";
 import TagsInput from "./TagsInput";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { BasicFormGroup } from "components/shared";
 
 const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
     const [formData, setFormData] = useState({
@@ -41,56 +42,33 @@ const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
             <Form onSubmit={(e) => handleSubmit(e)}>
                 <Row className="center-contents">
                     <Col>
-                        <Form.Group>
-                            <Form.Label htmlFor="title">Title</Form.Label>
-                            <Form.Control
-                                id="title"
-                                name="title"
-                                value={title}
-                                onChange={(e) => handleChange(e)}
-                                type="text"
-                                required
-                                autoFocus
-                                autoComplete="off"
-                            />
-                        </Form.Group>
-
-                        <Form.Group>
-                            <Form.Label htmlFor="description">Description</Form.Label>
-                            <Form.Control
-                                id="description"
-                                name="description"
-                                value={description}
-                                onChange={(e) => handleChange(e)}
-                                type="text"
-                                required
-                                autoComplete="off"
-                            />
-                        </Form.Group>
-
-                        <Form.Group>
-                            <Form.Label htmlFor="github">GitHub Repository</Form.Label>
-                            <Form.Control
-                                id="github"
-                                name="github"
-                                value={github}
-                                onChange={(e) => handleChange(e)}
-                                type="text"
-                                autoComplete="off"
-                            />
-                        </Form.Group>
-
-                        <Form.Group>
-                            <Form.Label htmlFor="website">Website</Form.Label>
-                            <Form.Control
-                                id="website"
-                                name="website"
-                                value={website}
-                                onChange={(e) => handleChange(e)}
-                                type="text"
-                                autoComplete="off"
-                            />
-                        </Form.Group>
+                        <BasicFormGroup
+                            name="title"
+                            label="Title"
+                            value={title}
+                            onChange={(e) => handleChange(e)}
+                            autoFocus
+                        />
+                        <BasicFormGroup
+                            name="description"
+                            label="Description"
+                            value={description}
+                            onChange={(e) => handleChange(e)}
+                        />
+                        <BasicFormGroup
+                            name="github"
+                            label="GitHub Repository"
+                            value={github}
+                            onChange={(e) => handleChange(e)}
+                            optional
+                        />
+                        <BasicFormGroup
+                            name="website"
+                            label="Website"
+                            value={website}
+                            onChange={(e) => handleChange(e)}
+                            optional
+                        />
 
                         <Form.Label htmlFor="image">Image</Form.Label>
 

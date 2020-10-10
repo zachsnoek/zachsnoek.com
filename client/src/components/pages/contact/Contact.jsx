@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { CenterContainer, LoadingSpinner } from "components/shared";
+import {
+    BasicFormGroup,
+    CenterContainer,
+    LoadingSpinner,
+} from "components/shared";
 import { contact } from "utils/api";
 import "./styles.scss";
 import Row from "react-bootstrap/Row";
@@ -51,39 +55,26 @@ const Contact = () => {
                         <Col>
                             <Row>
                                 <Col>
-                                    <Form.Group>
-                                        <Form.Label htmlFor="name">Name</Form.Label>
-                                        <Form.Control
-                                            id="name"
-                                            name="name"
-                                            value={name}
-                                            onChange={(e) => handleChange(e)}
-                                            type="text"
-                                            placeholder="Your name"
-                                            required
-                                            autoFocus
-                                            autoComplete="off"
-                                        />
-                                    </Form.Group>
+                                    <BasicFormGroup
+                                        name="name"
+                                        label="Name"
+                                        value={name}
+                                        onChange={(e) => handleChange(e)}
+                                        placeholder="Your name"
+                                        autoFocus
+                                    />
                                 </Col>
                             </Row>
                             <Row>
                                 <Col>
-                                    <Form.Group>
-                                        <Form.Label htmlFor="email">
-                                            Email address
-                                        </Form.Label>
-                                        <Form.Control
-                                            id="email"
-                                            name="fromEmail"
-                                            value={fromEmail}
-                                            onChange={(e) => handleChange(e)}
-                                            type="email"
-                                            placeholder="Your email"
-                                            required
-                                            autoComplete="off"
-                                        />
-                                    </Form.Group>
+                                    <BasicFormGroup
+                                        name="fromEmail"
+                                        label="Email address"
+                                        value={fromEmail}
+                                        onChange={(e) => handleChange(e)}
+                                        placeholder="Your email"
+                                        type="email"
+                                    />
                                 </Col>
                             </Row>
                         </Col>
@@ -91,19 +82,15 @@ const Contact = () => {
 
                     <Row className="center-contents">
                         <Col>
-                            <Form.Group>
-                                <Form.Label htmlFor="message">Message</Form.Label>
-                                <Form.Control
-                                    as="textarea"
-                                    id="message"
-                                    name="message"
-                                    value={message}
-                                    onChange={(e) => handleChange(e)}
-                                    placeholder="Your message"
-                                    rows="8"
-                                    required
-                                />
-                            </Form.Group>
+                            <BasicFormGroup
+                                as="textarea"
+                                name="message"
+                                label="Message"
+                                value={message}
+                                onChange={(e) => handleChange(e)}
+                                placeholder="Your message"
+                                rows={8}
+                            />
                         </Col>
                     </Row>
 

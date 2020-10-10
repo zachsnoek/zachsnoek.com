@@ -6,6 +6,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { BasicFormGroup } from "components/shared";
 
 const Login = ({ history }) => {
     const { user, setUser } = useUserContext();
@@ -51,37 +52,25 @@ const Login = ({ history }) => {
                     <Col>
                         <Row>
                             <Col>
-                                <Form.Group>
-                                    <Form.Label htmlFor="email">Email address</Form.Label>
-                                    <Form.Control
-                                        id="email"
-                                        name="email"
-                                        value={email}
-                                        onChange={(e) => handleChange(e)}
-                                        type="email"
-                                        placeholder="Your email"
-                                        required
-                                        autoComplete="off"
-                                    />
-                                </Form.Group>
+                                <BasicFormGroup
+                                    name="email"
+                                    label="Email address"
+                                    value={email}
+                                    onChange={(e) => handleChange(e)}
+                                    type="email"
+                                    autoFocus
+                                />
                             </Col>
                         </Row>
                         <Row>
                             <Col>
-                                <Form.Group>
-                                    <Form.Label htmlFor="password">Password</Form.Label>
-                                    <Form.Control
-                                        id="password"
-                                        name="password"
-                                        value={password}
-                                        onChange={(e) => handleChange(e)}
-                                        type="password"
-                                        placeholder="Your password"
-                                        required
-                                        autoFocus
-                                        autoComplete="off"
-                                    />
-                                </Form.Group>
+                                <BasicFormGroup
+                                    name="password"
+                                    label="Password"
+                                    value={password}
+                                    onChange={(e) => handleChange(e)}
+                                    type="password"
+                                />
                             </Col>
                         </Row>
                     </Col>
