@@ -42,7 +42,7 @@ const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
                 <Row className="center-contents">
                     <Col>
                         <Form.Group>
-                            <label htmlFor="title">Title</label>
+                            <Form.Label htmlFor="title">Title</Form.Label>
                             <Form.Control
                                 id="title"
                                 name="title"
@@ -56,7 +56,7 @@ const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
                         </Form.Group>
 
                         <Form.Group>
-                            <label htmlFor="description">Description</label>
+                            <Form.Label htmlFor="description">Description</Form.Label>
                             <Form.Control
                                 id="description"
                                 name="description"
@@ -69,7 +69,7 @@ const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
                         </Form.Group>
 
                         <Form.Group>
-                            <label htmlFor="github">GitHub Repository</label>
+                            <Form.Label htmlFor="github">GitHub Repository</Form.Label>
                             <Form.Control
                                 id="github"
                                 name="github"
@@ -81,7 +81,7 @@ const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
                         </Form.Group>
 
                         <Form.Group>
-                            <label htmlFor="website">Website</label>
+                            <Form.Label htmlFor="website">Website</Form.Label>
                             <Form.Control
                                 id="website"
                                 name="website"
@@ -92,7 +92,7 @@ const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
                             />
                         </Form.Group>
 
-                        <label htmlFor="image">Image</label>
+                        <Form.Label htmlFor="image">Image</Form.Label>
 
                         {project?.image && <div>{project.image}</div>}
 

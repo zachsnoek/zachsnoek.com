@@ -52,7 +52,7 @@ const Login = ({ history }) => {
                         <Row>
                             <Col>
                                 <Form.Group>
-                                    <label htmlFor="email">Email address</label>
+                                    <Form.Label htmlFor="email">Email address</Form.Label>
                                     <Form.Control
                                         id="email"
                                         name="email"
@@ -69,7 +69,7 @@ const Login = ({ history }) => {
                         <Row>
                             <Col>
                                 <Form.Group>
-                                    <label htmlFor="password">Password</label>
+                                    <Form.Label htmlFor="password">Password</Form.Label>
                                     <Form.Control
                                         id="password"
                                         name="password"

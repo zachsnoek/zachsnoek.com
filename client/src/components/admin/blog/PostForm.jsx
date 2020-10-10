@@ -57,7 +57,7 @@ const PostForm = ({ formTitle, submitButtonText, onSubmit, post }) => {
                     <Row className="center-contents">
                         <Col>
                             <Form.Group>
-                                <label htmlFor="title">Title</label>
+                                <Form.Label htmlFor="title">Title</Form.Label>
                                 <Form.Control
                                     id="title"
                                     name="title"
@@ -71,7 +71,7 @@ const PostForm = ({ formTitle, submitButtonText, onSubmit, post }) => {
                             </Form.Group>
 
                             <Form.Group>
-                                <label htmlFor="description">Description</label>
+                                <Form.Label htmlFor="description">Description</Form.Label>
                                 <Form.Control
                                     id="description"
                                     name="description"
@@ -88,7 +88,7 @@ const PostForm = ({ formTitle, submitButtonText, onSubmit, post }) => {
                     <Row className="center-contents">
                         <Col>
                             <Form.Group>
-                                <label htmlFor="content">Content</label>
+                                <Form.Label htmlFor="content">Content</Form.Label>
                                 <SimpleMDE
                                     value={content}
                                     onChange={(value) =>

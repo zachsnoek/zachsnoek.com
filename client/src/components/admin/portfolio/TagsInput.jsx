@@ -14,7 +14,7 @@ const TagsInput = ({ tags, setTags }) => {
 
     return (
         <Form.Group>
-            <label htmlFor="tag">Tags</label>
+            <Form.Label htmlFor="tag">Tags</Form.Label>
             <Form.Control
                 id="tag"
                 name="tag"

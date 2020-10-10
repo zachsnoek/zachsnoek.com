@@ -52,7 +52,7 @@ const Contact = () => {
                             <Row>
                                 <Col>
                                     <Form.Group>
-                                        <label htmlFor="name">Name</label>
+                                        <Form.Label htmlFor="name">Name</Form.Label>
                                         <Form.Control
                                             id="name"
                                             name="name"
@@ -70,9 +70,9 @@ const Contact = () => {
                             <Row>
                                 <Col>
                                     <Form.Group>
-                                        <label htmlFor="email">
+                                        <Form.Label htmlFor="email">
                                             Email address
-                                        </label>
+                                        </Form.Label>
                                         <Form.Control
                                             id="email"
                                             name="fromEmail"
@@ -92,7 +92,7 @@ const Contact = () => {
                     <Row className="center-contents">
                         <Col>
                             <Form.Group>
-                                <label htmlFor="message">Message</label>
+                                <Form.Label htmlFor="message">Message</Form.Label>
                                 <Form.Control
                                     as="textarea"
                                     id="message"
