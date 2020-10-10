@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { ProtectedRoute } from "./ProtectedRoute";
-import Navbar from "../layout/Navbar";
-import Footer from "../layout/Footer";
+import Navbar from "components/layout/Navbar";
+import Footer from "components/layout/Footer";
 import { routes } from "./routes";
 
 export const Router = () => {

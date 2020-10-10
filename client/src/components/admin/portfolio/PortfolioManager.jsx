@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getProjects, updateProject, deleteProject } from "../../../utils/api";
+import { getProjects, updateProject, deleteProject } from "utils/api";
 import ProjectControls from "./ProjectControls";
 
 const PortfolioManager = () => {

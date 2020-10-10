@@ -1,21 +1,25 @@
 // Page components
-import { Home } from "../pages/";
-import { Portfolio } from "../pages/";
-import { Blog } from "../pages/";
-import { PostPage } from "../pages/";
-import { Contact } from "../pages/";
-import { NotFound } from "../pages/";
+import {
+    Home,
+    Portfolio,
+    Blog,
+    PostPage,
+    Contact,
+    NotFound,
+} from "components/pages";
 
 // Auth components
-import { Login } from "../auth/";
+import { Login } from "components/auth";
 
 // Admin components
-import { Dashboard } from "../admin/";
-import { NewPost } from "../admin/";
-import { EditPost } from "../admin/";
-import { PortfolioManager } from "../admin/";
-import { NewProject } from "../admin/";
-import { EditProject } from "../admin/";
+import {
+    Dashboard,
+    NewPost,
+    EditPost,
+    PortfolioManager,
+    NewProject,
+    EditProject,
+} from "components/admin";
 
 const protectedRoute = true;
 

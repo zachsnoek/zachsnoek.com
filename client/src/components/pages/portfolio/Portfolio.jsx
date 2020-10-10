@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Project from "./Project";
-import { LoadingSpinner } from "../../shared";
-import { getProjects } from "../../../utils/api";
+import { LoadingSpinner } from "components/shared";
+import { getProjects } from "utils/api";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import "./styles.scss";
 

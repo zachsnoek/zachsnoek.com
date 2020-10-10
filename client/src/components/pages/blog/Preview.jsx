@@ -1,8 +1,8 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-import { useUserContext } from "../../../context/useUserContext";
-import { deletePost } from "../../../utils/api";
-import { formatDate } from "../../../utils/date";
+import { useUserContext } from "context/useUserContext";
+import { deletePost } from "utils/api";
+import { formatDate } from "utils/date";
 
 const Preview = withRouter(
     ({ id, slug, title, description, createdAt, loadPosts, history }) => {

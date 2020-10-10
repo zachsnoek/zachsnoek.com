@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ASSETS } from "../../../utils/api";
+import { ASSETS } from "utils/api";
 import "./styles.scss";
 
 const Home = () => {

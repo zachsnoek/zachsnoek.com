@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
-import { getProject, updateProject } from "../../../utils/api";
+import { getProject, updateProject } from "utils/api";
 import ProjectForm, { createFormData } from "./ProjectForm";
 
 const EditProject = withRouter(({ match, history }) => {

@@ -1,8 +1,8 @@
 import React from "react";
 import { withRouter, Link } from "react-router-dom";
-import { useUserContext } from "../../context/useUserContext";
-import { logoutUser } from "../../utils/auth";
-import { setTitle } from "../../utils/title";
+import { useUserContext } from "context/useUserContext";
+import { logoutUser } from "utils/auth";
+import { setTitle } from "utils/title";
 
 const Navbar = withRouter(({ history }) => {
     const { user, setUser } = useUserContext();

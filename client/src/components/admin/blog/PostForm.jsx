@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SimpleMDE from "react-simplemde-editor";
-import { Post } from "../../pages/";
-import { makeHTML } from "../../../utils/markdown";
+import { Post } from "components/pages";
+import { makeHTML } from "utils/markdown";
 import "easymde/dist/easymde.min.css";
 
 const PostForm = ({ formTitle, submitButtonText, onSubmit, post }) => {

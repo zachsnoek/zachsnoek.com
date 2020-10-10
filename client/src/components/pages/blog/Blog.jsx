@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { getPosts } from "../../../utils/api";
+import { getPosts } from "utils/api";
 import Preview from "./Preview";
-import { CenterContainer, LoadingSpinner } from "../../shared/";
+import { CenterContainer, LoadingSpinner } from "components/shared";
 import "./styles.scss";
 
 const Blog = () => {

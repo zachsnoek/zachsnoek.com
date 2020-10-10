@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Tags from "./Tags";
 import Links from "./Links";
-import { BASE_URL } from "../../../utils/api";
+import { BASE_URL } from "utils/api";
 
 const Project = ({ title, description, image, github, website, tags }) => {
     return (

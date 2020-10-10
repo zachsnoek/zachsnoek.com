@@ -1,4 +1,4 @@
-import { routes } from "../components/routing/routes";
+import { routes } from "components/routing/routes";
 
 const titlePrefix = "Zach Snoek";
 

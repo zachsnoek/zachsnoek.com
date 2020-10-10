@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Router } from "./components/routing/";
-import { UserProvider } from "./context/UserContext";
-import { loadUser } from "./utils/auth";
-import "./styles/globals.scss";
+import { Router } from "components/routing";
+import { UserProvider } from "context/UserContext";
+import { loadUser } from "utils/auth";
+import "styles/globals.scss";
 
 function App() {
     const [user, setUser] = useState(null);
