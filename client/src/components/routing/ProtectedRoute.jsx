@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Route, Redirect } from "react-router-dom";
 import { useUserContext } from "context/useUserContext";
 
@@ -22,4 +23,8 @@ export const ProtectedRoute = ({
             }
         />
     );
+};
+
+ProtectedRoute.propTypes = {
+    component: PropTypes.func.isRequired,
 };

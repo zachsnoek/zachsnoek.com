@@ -14,7 +14,7 @@ const Tags = ({ tags }) => {
 };
 
 Tags.propTypes = {
-    tags: PropTypes.array.isRequired,
+    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default Tags;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getProjects, updateProject, deleteProject } from "utils/api";
+import { getProjects, updateProjectPosition, deleteProject } from "utils/api";
 import ProjectControls from "./ProjectControls";
 
 const PortfolioManager = () => {
@@ -16,7 +16,7 @@ const PortfolioManager = () => {
 
     const updatePosition = (id, position) => {
         const updatedProjects = projects.map((project) =>
-            project._id === id ? { ...project, _id: id, position } : project
+            project._id === id ? { ...project, position } : project
         );
 
         setProjects(updatedProjects);
@@ -24,10 +24,14 @@ const PortfolioManager = () => {
 
     const updatePositions = () => {
         setLoading(true);
-        projects.forEach(
-            async (project) => await updateProject(project._id, project)
+
+        const updatePromises = projects.map((project) =>
+            updateProjectPosition(project._id, project)
         );
-        loadProjects();
+
+        Promise.all(updatePromises).then(() => {
+            loadProjects();
+        });
     };
 
     const handleDelete = async (id) => {
@@ -46,12 +50,12 @@ const PortfolioManager = () => {
             <Link to="new-project">New Project</Link>
             <button onClick={updatePositions}>Update Positions</button>
             {!loading &&
-                projects.map((project, index) => (
+                projects.map((project) => (
                     <ProjectControls
                         project={project}
                         numProjects={projects.length}
                         updatePosition={updatePosition}
-                        key={index}
+                        key={project._id}
                         onDelete={(id) => handleDelete(id)}
                     />
                 ))}

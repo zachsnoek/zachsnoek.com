@@ -69,6 +69,13 @@ export const updateProject = (id, formData) => {
     return fetch(`${PORTFOLIO}/${id}`, createOptions("PUT", formData, null));
 };
 
+export const updateProjectPosition = (id, project) => {
+    return fetch(
+        `${PORTFOLIO}/${id}`,
+        createOptions("PUT", JSON.stringify(project))
+    );
+};
+
 export const deleteProject = (id, project) => {
     return fetch(
         `${PORTFOLIO}/${id}`,

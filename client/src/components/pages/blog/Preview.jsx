@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link, withRouter } from "react-router-dom";
 import { useUserContext } from "context/useUserContext";
 import { deletePost } from "utils/api";
@@ -47,4 +48,14 @@ const Preview = withRouter(
         );
     }
 );
+
+Preview.propTypes = {
+    id: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    createdAt: PropTypes.string.isRequired,
+    loadPosts: PropTypes.func.isRequired,
+};
+
 export default Preview;

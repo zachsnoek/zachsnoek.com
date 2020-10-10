@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import parse from "html-react-parser";
 import { formatDate } from "utils/date";
 import "./styles.scss";
@@ -16,6 +17,12 @@ const Post = ({ title, date, content }) => {
             </div>
         </div>
     );
+};
+
+Post.propTypes = {
+    title: PropTypes.string.isRequired,
+    date: PropTypes.number.isRequired,
+    content: PropTypes.string.isRequired,
 };
 
 export default Post;

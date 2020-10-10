@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import SimpleMDE from "react-simplemde-editor";
 import { Post } from "components/pages";
 import { makeHTML } from "utils/markdown";
@@ -127,6 +128,13 @@ const PostForm = ({ formTitle, submitButtonText, onSubmit, post }) => {
             )}
         </div>
     );
+};
+
+PostForm.propTypes = {
+    formTitle: PropTypes.string.isRequired,
+    submitButtonText: PropTypes.string.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+    post: PropTypes.object,
 };
 
 export default PostForm;

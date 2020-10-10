@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 const PositionSelect = ({ _id, numOptions, position, updatePosition }) => {
     const [value, setValue] = useState(position);
@@ -13,8 +14,9 @@ const PositionSelect = ({ _id, numOptions, position, updatePosition }) => {
     }
 
     const handleChange = (e) => {
-        setValue(e.target.value);
-        updatePosition(_id, e.target.value);
+        const newPosition = Number(e.target.value);
+        setValue(newPosition);
+        updatePosition(_id, newPosition);
     };
 
     return (
@@ -22,6 +24,13 @@ const PositionSelect = ({ _id, numOptions, position, updatePosition }) => {
             {options}
         </select>
     );
+};
+
+PositionSelect.propTypes = {
+    _id: PropTypes.string.isRequired,
+    numOptions: PropTypes.number.isRequired,
+    position: PropTypes.number.isRequired,
+    updatePosition: PropTypes.func.isRequired,
 };
 
 export default PositionSelect;

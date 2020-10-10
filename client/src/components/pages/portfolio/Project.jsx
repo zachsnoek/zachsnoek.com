@@ -35,7 +35,7 @@ Project.propTypes = {
     image: PropTypes.string.isRequired,
     github: PropTypes.string,
     website: PropTypes.string,
-    tags: PropTypes.array.isRequired,
+    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default Project;

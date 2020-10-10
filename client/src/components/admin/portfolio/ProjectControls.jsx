@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import PositionSelect from "./PositionSelect";
 
@@ -23,6 +24,13 @@ const ProjectControls = ({
             />
         </>
     );
+};
+
+ProjectControls.propTypes = {
+    numProjects: PropTypes.number.isRequired,
+    project: PropTypes.object.isRequired,
+    updatePosition: PropTypes.func.isRequired,
+    onDelete: PropTypes.func.isRequired,
 };
 
 export default ProjectControls;
