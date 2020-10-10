@@ -21,7 +21,7 @@ const Post = ({ title, date, content }) => {
 
 Post.propTypes = {
     title: PropTypes.string.isRequired,
-    date: PropTypes.number.isRequired,
+    date: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
 };
 

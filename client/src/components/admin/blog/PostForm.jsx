@@ -46,7 +46,7 @@ const PostForm = ({ formTitle, submitButtonText, onSubmit, post }) => {
 
                     <Post
                         title={title}
-                        date={Date.now()}
+                        date={new Date().toUTCString()}
                         content={makeHTML({ content })}
                     />
                 </>
