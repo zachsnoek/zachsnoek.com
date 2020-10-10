@@ -1,6 +1,6 @@
 import React from "react";
 
-const CenterContainer = ({ children, ...props }) => {
+const CenterContainer = ({ style, ...props }) => {
     return (
         <div
             style={{
@@ -9,11 +9,10 @@ const CenterContainer = ({ children, ...props }) => {
                 left: "50%",
                 transform: "translate(-50%, -50%)",
                 textAlign: "center",
+                ...style,
             }}
             {...props}
-        >
-            {children}
-        </div>
+        />
     );
 };
 
