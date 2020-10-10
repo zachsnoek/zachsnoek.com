@@ -3,10 +3,10 @@ import TagsInput from "./TagsInput";
 
 const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
     const [formData, setFormData] = useState({
-        title: project ? project.title : "",
-        description: project ? project.description : "",
-        github: project ? project.github : "",
-        website: project ? project.website : "",
+        title: project?.title ?? "",
+        description: project?.description ?? "",
+        github: project?.github ?? "",
+        website: project?.website ?? "",
     });
     const { title, description, github, website } = formData;
 
@@ -16,11 +16,9 @@ const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
     const fileInput = useRef(null);
 
     function handleChange(e) {
-        if (e.target.name === "image") {
-            setFormData({ ...formData, image: fileInput.current.files[0] });
-        } else {
-            setFormData({ ...formData, [e.target.name]: e.target.value });
-        }
+        e.target.name === "image"
+            ? setFormData({ ...formData, image: fileInput.current.files[0] })
+            : setFormData({ ...formData, [e.target.name]: e.target.value });
     }
 
     const handleSubmit = (e) => {

@@ -8,9 +8,9 @@ import "easymde/dist/easymde.min.css";
 const PostForm = ({ formTitle, submitButtonText, onSubmit, post }) => {
     const [showPreview, setShowPreview] = useState(false);
     const [formData, setFormData] = useState({
-        title: post ? post.title : "",
-        description: post ? post.description : "",
-        content: post ? post.content : "",
+        title: post?.title ?? "",
+        description: post?.description ?? "",
+        content: post?.content ?? "",
     });
 
     const { title, description, content } = formData;
