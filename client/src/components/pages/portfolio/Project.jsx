@@ -3,29 +3,30 @@ import PropTypes from "prop-types";
 import Tags from "./Tags";
 import Links from "./Links";
 import { BASE_URL } from "utils/api";
+import { Row, Col, Card } from "components/shared";
 
 const Project = ({ title, description, image, github, website, tags }) => {
     return (
-        <div className="card">
-            <div className="card-header">
-                <span className="card-title">{title}</span>
-            </div>
+        <Card>
+            <Card.Header>
+                <Card.Title>{title}</Card.Title>
+            </Card.Header>
             <img
                 src={`${BASE_URL}/${image}`}
                 alt="A screenshot of a portfolio project."
             />
-            <div className="card-body">{description}</div>
-            <div className="card-footer">
-                <div className="row">
-                    <div className="col">
+            <Card.Body>{description}</Card.Body>
+            <Card.Footer>
+                <Row>
+                    <Col>
                         <Tags tags={tags} />
-                    </div>
-                    <div className="col-auto">
+                    </Col>
+                    <Col xs="auto">
                         <Links github={github} website={website} />
-                    </div>
-                </div>
-            </div>
-        </div>
+                    </Col>
+                </Row>
+            </Card.Footer>
+        </Card>
     );
 };
 

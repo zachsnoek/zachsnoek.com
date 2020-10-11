@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
+import { Row, Col, Form, BasicFormGroup, Button } from "components/shared";
 import { loginUser } from "utils/auth";
 import { useUserContext } from "context/useUserContext";
 
@@ -38,64 +39,47 @@ const Login = ({ history }) => {
     if (user?.authenticated) return <Redirect to="/" />;
 
     return (
-        <div className="contact">
-            <div className="header d-flex justify-content-center">
+        <div className="login form">
+            <div className="header center-contents">
                 <span>Login</span>
             </div>
-            <form onSubmit={(e) => handleSubmit(e)}>
-                <div className="row d-flex justify-content-center">
-                    <div className="col">
-                        <div className="row">
-                            <div className="col">
-                                <div className="form-group">
-                                    <label htmlFor="email">Email address</label>
-                                    <input
-                                        id="email"
-                                        name="email"
-                                        value={email}
-                                        onChange={(e) => handleChange(e)}
-                                        className="form-control"
-                                        type="email"
-                                        placeholder="Your email"
-                                        required
-                                        autoComplete="off"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col">
-                                <div className="form-group">
-                                    <label htmlFor="password">Password</label>
-                                    <input
-                                        id="password"
-                                        name="password"
-                                        value={password}
-                                        onChange={(e) => handleChange(e)}
-                                        className="form-control"
-                                        type="password"
-                                        placeholder="Your password"
-                                        required
-                                        autoFocus
-                                        autoComplete="off"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <Form onSubmit={(e) => handleSubmit(e)}>
+                <Row className="center-contents">
+                    <Col>
+                        <Row>
+                            <Col>
+                                <BasicFormGroup
+                                    name="email"
+                                    label="Email address"
+                                    value={email}
+                                    onChange={(e) => handleChange(e)}
+                                    type="email"
+                                    autoFocus
+                                />
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <BasicFormGroup
+                                    name="password"
+                                    label="Password"
+                                    value={password}
+                                    onChange={(e) => handleChange(e)}
+                                    type="password"
+                                />
+                            </Col>
+                        </Row>
+                    </Col>
+                </Row>
 
-                <div className="row d-flex justify-content-center mt-4">
-                    <div className="col d-flex justify-content-center">
-                        <button
-                            className="btn btn-lg btn-primary"
-                            type="submit"
-                        >
+                <Row className="center-contents">
+                    <Col className="center-contents">
+                        <Button size="lg" type="submit">
                             Login
-                        </button>
-                    </div>
-                </div>
-            </form>
+                        </Button>
+                    </Col>
+                </Row>
+            </Form>
         </div>
     );
 };

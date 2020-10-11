@@ -4,6 +4,7 @@ import SimpleMDE from "react-simplemde-editor";
 import { Post } from "components/pages";
 import { makeHTML } from "utils/markdown";
 import "easymde/dist/easymde.min.css";
+import { Row, Col, Form, BasicFormGroup, Button } from "components/shared";
 
 const PostForm = ({ formTitle, submitButtonText, onSubmit, post }) => {
     const [showPreview, setShowPreview] = useState(false);
@@ -25,24 +26,23 @@ const PostForm = ({ formTitle, submitButtonText, onSubmit, post }) => {
     };
 
     return (
-        <div className="contact">
-            <div className="header d-flex justify-content-center">
+        <div className="post-form form">
+            <div className="header center-contents">
                 <span>{formTitle}</span>
             </div>
 
             {showPreview ? (
                 <>
-                    <div className="row d-flex justify-content-center mt-4">
-                        <div className="col d-flex justify-content-center">
-                            <button
-                                className="btn btn-lg btn-primary"
-                                type="button"
+                    <Row className="center-contents">
+                        <Col className="center-contents">
+                            <Button
+                                size="lg"
                                 onClick={() => setShowPreview(false)}
                             >
                                 Continue Editing
-                            </button>
-                        </div>
-                    </div>
+                            </Button>
+                        </Col>
+                    </Row>
 
                     <Post
                         title={title}
@@ -51,44 +51,31 @@ const PostForm = ({ formTitle, submitButtonText, onSubmit, post }) => {
                     />
                 </>
             ) : (
-                <form onSubmit={(e) => handleSubmit(e)}>
-                    <div className="row d-flex justify-content-center">
-                        <div className="col">
-                            <div className="form-group">
-                                <label htmlFor="title">Title</label>
-                                <input
-                                    id="title"
-                                    name="title"
-                                    value={title}
-                                    onChange={(e) => handleChange(e)}
-                                    className="form-control"
-                                    type="text"
-                                    required
-                                    autoFocus
-                                    autoComplete="off"
-                                />
-                            </div>
+                <Form onSubmit={(e) => handleSubmit(e)}>
+                    <Row className="center-contents">
+                        <Col>
+                            <BasicFormGroup
+                                name="title"
+                                label="Title"
+                                value={title}
+                                onChange={(e) => handleChange(e)}
+                                autoFocus
+                            />
+                            <BasicFormGroup
+                                name="description"
+                                label="Description"
+                                value={description}
+                                onChange={(e) => handleChange(e)}
+                            />
+                        </Col>
+                    </Row>
 
-                            <div className="form-group">
-                                <label htmlFor="description">Description</label>
-                                <input
-                                    id="description"
-                                    name="description"
-                                    value={description}
-                                    onChange={(e) => handleChange(e)}
-                                    className="form-control"
-                                    type="text"
-                                    required
-                                    autoComplete="off"
-                                />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="row d-flex justify-content-center">
-                        <div className="col">
-                            <div className="form-group">
-                                <label htmlFor="content">Content</label>
+                    <Row className="center-contents">
+                        <Col>
+                            <Form.Group>
+                                <Form.Label htmlFor="content">
+                                    Content
+                                </Form.Label>
                                 <SimpleMDE
                                     value={content}
                                     onChange={(value) =>
@@ -98,33 +85,29 @@ const PostForm = ({ formTitle, submitButtonText, onSubmit, post }) => {
                                         })
                                     }
                                 />
-                            </div>
-                        </div>
-                    </div>
+                            </Form.Group>
+                        </Col>
+                    </Row>
 
-                    <div className="row d-flex justify-content-center mt-4">
-                        <div className="col d-flex justify-content-center">
-                            <button
-                                className="btn btn-lg btn-primary"
-                                type="button"
+                    <Row className="center-contents">
+                        <Col className="center-contents">
+                            <Button
+                                size="lg"
                                 onClick={() => setShowPreview(true)}
                             >
                                 Preview
-                            </button>
-                        </div>
-                    </div>
+                            </Button>
+                        </Col>
+                    </Row>
 
-                    <div className="row d-flex justify-content-center mt-4">
-                        <div className="col d-flex justify-content-center">
-                            <button
-                                className="btn btn-lg btn-primary"
-                                type="submit"
-                            >
+                    <Row className="center-contents">
+                        <Col className="center-contents">
+                            <Button size="lg" type="submit">
                                 {submitButtonText}
-                            </button>
-                        </div>
-                    </div>
-                </form>
+                            </Button>
+                        </Col>
+                    </Row>
+                </Form>
             )}
         </div>
     );

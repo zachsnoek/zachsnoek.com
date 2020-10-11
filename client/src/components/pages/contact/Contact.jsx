@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { CenterContainer, LoadingSpinner } from "components/shared";
+import {
+    Row,
+    Col,
+    Form,
+    BasicFormGroup,
+    Button,
+    CenterContainer,
+    LoadingSpinner,
+} from "components/shared";
 import { contact } from "utils/api";
 import "./styles.scss";
 
@@ -30,8 +38,8 @@ const Contact = () => {
     }
 
     return (
-        <div className="contact">
-            <div className="header d-flex justify-content-center">
+        <div className="contact form">
+            <div className="header center-contents">
                 <span>Contact</span>
             </div>
 
@@ -42,80 +50,58 @@ const Contact = () => {
             )}
 
             {!loading && !emailSent && (
-                <form onSubmit={(e) => handleSubmit(e)}>
-                    <div className="row d-flex justify-content-center">
-                        <div className="col">
-                            <div className="row">
-                                <div className="col">
-                                    <div className="form-group">
-                                        <label htmlFor="name">Name</label>
-                                        <input
-                                            id="name"
-                                            name="name"
-                                            value={name}
-                                            onChange={(e) => handleChange(e)}
-                                            className="form-control"
-                                            type="text"
-                                            placeholder="Your name"
-                                            required
-                                            autoFocus
-                                            autoComplete="off"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="col">
-                                    <div className="form-group">
-                                        <label htmlFor="email">
-                                            Email address
-                                        </label>
-                                        <input
-                                            id="email"
-                                            name="fromEmail"
-                                            value={fromEmail}
-                                            onChange={(e) => handleChange(e)}
-                                            className="form-control"
-                                            type="email"
-                                            placeholder="Your email"
-                                            required
-                                            autoComplete="off"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <Form onSubmit={(e) => handleSubmit(e)}>
+                    <Row className="center-contents">
+                        <Col>
+                            <Row>
+                                <Col>
+                                    <BasicFormGroup
+                                        name="name"
+                                        label="Name"
+                                        value={name}
+                                        onChange={(e) => handleChange(e)}
+                                        placeholder="Your name"
+                                        autoFocus
+                                    />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <BasicFormGroup
+                                        name="fromEmail"
+                                        label="Email address"
+                                        value={fromEmail}
+                                        onChange={(e) => handleChange(e)}
+                                        placeholder="Your email"
+                                        type="email"
+                                    />
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
 
-                    <div className="row d-flex justify-content-center">
-                        <div className="col">
-                            <div className="form-group">
-                                <label htmlFor="message">Message</label>
-                                <textarea
-                                    id="message"
-                                    name="message"
-                                    value={message}
-                                    onChange={(e) => handleChange(e)}
-                                    className="form-control"
-                                    placeholder="Your message"
-                                    rows="8"
-                                    required
-                                ></textarea>
-                            </div>
-                        </div>
-                    </div>
+                    <Row className="center-contents">
+                        <Col>
+                            <BasicFormGroup
+                                as="textarea"
+                                name="message"
+                                label="Message"
+                                value={message}
+                                onChange={(e) => handleChange(e)}
+                                placeholder="Your message"
+                                rows={8}
+                            />
+                        </Col>
+                    </Row>
 
-                    <div className="row d-flex justify-content-center mt-4">
-                        <div className="col d-flex justify-content-center">
-                            <button
-                                className="btn btn-lg btn-primary"
-                                type="submit"
-                            >
+                    <Row className="center-contents">
+                        <Col className="center-contents">
+                            <Button size="lg" type="submit">
                                 Send Message
-                            </button>
-                        </div>
-                    </div>
-                </form>
+                            </Button>
+                        </Col>
+                    </Row>
+                </Form>
             )}
         </div>
     );

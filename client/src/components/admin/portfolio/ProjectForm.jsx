@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { Row, Col, Form, BasicFormGroup, Button } from "components/shared";
 import TagsInput from "./TagsInput";
 
 const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
@@ -27,87 +28,59 @@ const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
     };
 
     return (
-        <div className="contact">
-            <div className="header d-flex justify-content-center">
+        <div className="project-form form">
+            <div className="header center-contents">
                 <span>{formTitle}</span>
             </div>
 
-            <form onSubmit={(e) => handleSubmit(e)}>
-                <div className="row d-flex justify-content-center">
-                    <div className="col">
-                        <div className="form-group">
-                            <label htmlFor="title">Title</label>
-                            <input
-                                id="title"
-                                name="title"
-                                value={title}
-                                onChange={(e) => handleChange(e)}
-                                className="form-control"
-                                type="text"
-                                required
-                                autoFocus
-                                autoComplete="off"
-                            />
-                        </div>
+            <Form onSubmit={(e) => handleSubmit(e)}>
+                <Row className="center-contents">
+                    <Col>
+                        <BasicFormGroup
+                            name="title"
+                            label="Title"
+                            value={title}
+                            onChange={(e) => handleChange(e)}
+                            autoFocus
+                        />
+                        <BasicFormGroup
+                            name="description"
+                            label="Description"
+                            value={description}
+                            onChange={(e) => handleChange(e)}
+                        />
+                        <BasicFormGroup
+                            name="github"
+                            label="GitHub Repository"
+                            value={github}
+                            onChange={(e) => handleChange(e)}
+                            optional
+                        />
+                        <BasicFormGroup
+                            name="website"
+                            label="Website"
+                            value={website}
+                            onChange={(e) => handleChange(e)}
+                            optional
+                        />
 
-                        <div className="form-group">
-                            <label htmlFor="description">Description</label>
-                            <input
-                                id="description"
-                                name="description"
-                                value={description}
-                                onChange={(e) => handleChange(e)}
-                                className="form-control"
-                                type="text"
-                                required
-                                autoComplete="off"
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <label htmlFor="github">GitHub Repository</label>
-                            <input
-                                id="github"
-                                name="github"
-                                value={github}
-                                onChange={(e) => handleChange(e)}
-                                className="form-control"
-                                type="text"
-                                autoComplete="off"
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <label htmlFor="website">Website</label>
-                            <input
-                                id="website"
-                                name="website"
-                                value={website}
-                                onChange={(e) => handleChange(e)}
-                                className="form-control"
-                                type="text"
-                                autoComplete="off"
-                            />
-                        </div>
-
-                        <label htmlFor="image">Image</label>
+                        <Form.Label htmlFor="image">Image</Form.Label>
 
                         {project?.image && <div>{project.image}</div>}
 
                         {project?.image && !isPickingNewImage && (
                             <>
-                                <button
-                                    type="button"
-                                    className="btn btn-primary btn-md"
+                                <Button
+                                    size="md"
                                     onClick={() => setIsPickingNewImage(true)}
                                 >
                                     {"Choose new image"}
-                                </button>
+                                </Button>
                             </>
                         )}
 
                         {(!project?.image || isPickingNewImage) && (
-                            <div className="form-group">
+                            <Form.Group>
                                 <input
                                     id="image"
                                     name="image"
@@ -122,24 +95,21 @@ const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
                                     ref={fileInput}
                                     style={{ display: "block" }}
                                 />
-                            </div>
+                            </Form.Group>
                         )}
 
                         <TagsInput tags={tags} setTags={setTags} />
-                    </div>
-                </div>
+                    </Col>
+                </Row>
 
-                <div className="row d-flex justify-content-center mt-4">
-                    <div className="col d-flex justify-content-center">
-                        <button
-                            className="btn btn-lg btn-primary"
-                            type="submit"
-                        >
+                <Row className="center-contents">
+                    <Col className="center-contents">
+                        <Button size="lg" type="submit">
                             {submitButtonText}
-                        </button>
-                    </div>
-                </div>
-            </form>
+                        </Button>
+                    </Col>
+                </Row>
+            </Form>
         </div>
     );
 };

@@ -23,7 +23,7 @@ const Portfolio = () => {
 
     return (
         <div className="portfolio">
-            <div className="header d-flex justify-content-center">
+            <div className="header center-contents">
                 <span>Portfolio</span>
             </div>
 

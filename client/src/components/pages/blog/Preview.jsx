@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link, withRouter } from "react-router-dom";
+import { Card } from "components/shared";
 import { useUserContext } from "context/useUserContext";
 import { deletePost } from "utils/api";
 import { formatDate } from "utils/date";
@@ -33,16 +34,18 @@ const Preview = withRouter(
                     </>
                 )}
 
-                <Link className="card" to={`/blog/${slug}`}>
-                    <div className="card-header d-flex align-items-center justify-content-between">
-                        <span className="card-title">{title}</span>
-                        <span className="badge badge-info">
-                            {formatDate(createdAt)}
-                        </span>
-                    </div>
-                    <div className="card-body">
-                        <span>{description}</span>
-                    </div>
+                <Link to={`/blog/${slug}`}>
+                    <Card>
+                        <Card.Header className="center-contents justify-content-between">
+                            <Card.Title>{title}</Card.Title>
+                            <span className="badge badge-info">
+                                {formatDate(createdAt)}
+                            </span>
+                        </Card.Header>
+                        <Card.Body>
+                            <span>{description}</span>
+                        </Card.Body>
+                    </Card>
                 </Link>
             </>
         );

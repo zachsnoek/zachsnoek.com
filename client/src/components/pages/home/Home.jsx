@@ -2,41 +2,46 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { ASSETS } from "utils/api";
 import "./styles.scss";
+import { Row, Col, Button } from "components/shared";
 
 const Home = () => {
     return (
-        <div className="home row d-flex justify-content-center">
-            <div className="col-4 col-lg-3 align-items-center d-none d-md-flex">
+        <Row className="home center-contents">
+            <Col xs={4} lg={3} className="d-none d-md-flex align-items-center">
                 <img
                     src={`${ASSETS}/img/zach-home.jpg`}
                     className="profile-pic"
                     alt="Zach standing."
                 />
-            </div>
-            <div className="col-12 col-md-8 col-lg-7 d-flex align-items-center">
+            </Col>
+            <Col xs={12} md={8} lg={7} className="center-contents">
                 <div className="ml-md-5">
-                    <div className="big-header d-flex justify-content-center justify-content-md-start">
+                    <div className="big-header center-contents justify-content-md-start">
                         <span>Hi, I'm Zach!</span>
                     </div>
                     <p>
                         I'm a software developer based in Bellingham, WA. I
                         currently work for Faithlife Corporation.
                     </p>
-                    <div className="d-flex flex-wrap justify-content-center justify-content-md-start">
+                    <div className="center-contents flex-wrap justify-content-md-start">
                         <Link to="/portfolio">
-                            <button className="btn btn-lg btn-primary m-2">
+                            <Button size="lg" className="m-2">
                                 View Portfolio
-                            </button>
+                            </Button>
                         </Link>
                         <Link to="/contact">
-                            <button className="btn btn-lg btn-outline-secondary m-2">
+                            <Button
+                                size="lg"
+                                variant="outline-secondary"
+                                className="m-2"
+                            >
                                 Get In Touch
-                            </button>
+                            </Button>
                         </Link>
                     </div>
                 </div>
-            </div>
-        </div>
+            </Col>
+        </Row>
     );
 };
 

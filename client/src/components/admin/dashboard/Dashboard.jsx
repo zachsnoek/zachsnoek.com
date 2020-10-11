@@ -1,21 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Button } from "components/shared";
 
 const Dashboard = () => {
     return (
-        <>
+        <div className="form">
             <h1>Admin Dashboard</h1>
             <div>
-                <button className="btn btn-lg btn-primary">
-                    <Link to="/new-post">New Blog Post</Link>
-                </button>
+                <Link to="/new-post">
+                    <Button size="lg">New Blog Post</Button>
+                </Link>
             </div>
             <div>
-                <button className="btn btn-lg btn-primary">
-                    <Link to="/portfolio-manager">Manage Portfolio</Link>
-                </button>
+                <Link to="/portfolio-manager">
+                    <Button size="lg">Manage Portfolio</Button>
+                </Link>
             </div>
-        </>
+        </div>
     );
 };
 

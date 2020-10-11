@@ -3,6 +3,7 @@ import { Router } from "components/routing";
 import { UserProvider } from "context/UserContext";
 import { loadUser } from "utils/auth";
 import "styles/globals.scss";
+import { Container } from "components/shared";
 
 function App() {
     const [user, setUser] = useState(null);
@@ -18,11 +19,11 @@ function App() {
     }, []);
 
     return (
-        <div className="container">
+        <Container>
             <UserProvider value={{ user, setUser }}>
                 <Router />
             </UserProvider>
-        </div>
+        </Container>
     );
 }
 
