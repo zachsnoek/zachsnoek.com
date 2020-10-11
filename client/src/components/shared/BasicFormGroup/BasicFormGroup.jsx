@@ -1,18 +1,15 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Form from "react-bootstrap/Form";
 
 const BasicFormGroup = ({
-    as,
-    name,
     label,
-    value,
-    onChange,
+    name,
+    as,
     type,
-    placeholder,
     optional,
-    autoFocus,
-    autoComplete,
-    rows,
+    children,
+    ...props
 }) => {
     return (
         <Form.Group>
@@ -21,17 +18,22 @@ const BasicFormGroup = ({
                 as={as || "input"}
                 id={name}
                 name={name}
-                value={value}
-                onChange={onChange}
                 type={type || "text"}
-                placeholder={placeholder}
                 required={!optional}
-                autoFocus={autoFocus}
-                autoComplete={!autoComplete ? "off" : ""}
-                rows={rows}
+                {...props}
             />
+            {children}
         </Form.Group>
     );
+};
+
+BasicFormGroup.propTypes = {
+    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    as: PropTypes.string,
+    type: PropTypes.string,
+    optional: PropTypes.bool,
+    children: PropTypes.array,
 };
 
 export default BasicFormGroup;
