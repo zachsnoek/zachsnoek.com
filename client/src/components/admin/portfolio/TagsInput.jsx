@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Tags } from "components/pages";
-import Form from "react-bootstrap/Form";
+import { BasicFormGroup } from "components/shared";
 
 const TagsInput = ({ tags, setTags }) => {
     const [tag, setTag] = useState("");
@@ -13,17 +13,12 @@ const TagsInput = ({ tags, setTags }) => {
     const resetTags = () => setTags([]);
 
     return (
-        <Form.Group>
-            <Form.Label htmlFor="tag">Tags</Form.Label>
-            <Form.Control
-                id="tag"
-                name="tag"
-                value={tag}
-                onChange={(e) => setTag(e.target.value)}
-                type="text"
-                autoComplete="off"
-            />
-
+        <BasicFormGroup
+            label="Tags"
+            name="tag"
+            value={tag}
+            onChange={(e) => setTag(e.target.value)}
+        >
             <button
                 type="button"
                 onClick={addTag}
@@ -39,7 +34,7 @@ const TagsInput = ({ tags, setTags }) => {
             )}
 
             <Tags tags={tags} />
-        </Form.Group>
+        </BasicFormGroup>
     );
 };
 
