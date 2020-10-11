@@ -3,7 +3,7 @@ import { Router } from "components/routing";
 import { UserProvider } from "context/UserContext";
 import { loadUser } from "utils/auth";
 import "styles/globals.scss";
-import Container from "react-bootstrap/Container";
+import { Container } from "components/shared";
 
 function App() {
     const [user, setUser] = useState(null);

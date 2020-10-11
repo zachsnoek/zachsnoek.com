@@ -1,9 +1,9 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
+import { Card } from "components/shared";
 import { useUserContext } from "context/useUserContext";
 import { deletePost } from "utils/api";
 import { formatDate } from "utils/date";
-import Card from "react-bootstrap/Card";
 
 const Preview = withRouter(
     ({ id, slug, title, description, createdAt, loadPosts, history }) => {

@@ -2,8 +2,7 @@ import React from "react";
 import parse from "html-react-parser";
 import { formatDate } from "utils/date";
 import "./styles.scss";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { Row, Col } from "components/shared";
 
 const Post = ({ title, date, content }) => {
     return (

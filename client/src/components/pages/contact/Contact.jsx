@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import {
+    Row,
+    Col,
+    Form,
     BasicFormGroup,
+    Button,
     CenterContainer,
     LoadingSpinner,
 } from "components/shared";
 import { contact } from "utils/api";
 import "./styles.scss";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
 
 const Contact = () => {
     const [loading, setLoading] = useState(false);

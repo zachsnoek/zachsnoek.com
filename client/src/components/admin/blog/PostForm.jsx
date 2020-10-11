@@ -3,11 +3,7 @@ import SimpleMDE from "react-simplemde-editor";
 import { Post } from "components/pages";
 import { makeHTML } from "utils/markdown";
 import "easymde/dist/easymde.min.css";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import { BasicFormGroup } from "components/shared";
+import { Row, Col, Form, BasicFormGroup, Button } from "components/shared";
 
 const PostForm = ({ formTitle, submitButtonText, onSubmit, post }) => {
     const [showPreview, setShowPreview] = useState(false);

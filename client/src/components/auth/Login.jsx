@@ -1,12 +1,8 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
+import { Row, Col, Form, BasicFormGroup, Button } from "components/shared";
 import { loginUser } from "utils/auth";
 import { useUserContext } from "context/useUserContext";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import { BasicFormGroup } from "components/shared";
 
 const Login = ({ history }) => {
     const { user, setUser } = useUserContext();

@@ -1,10 +1,6 @@
 import React, { useState, useRef } from "react";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
+import { Row, Col, Form, BasicFormGroup, Button } from "components/shared";
 import TagsInput from "./TagsInput";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import { BasicFormGroup } from "components/shared";
 
 const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
     const [formData, setFormData] = useState({

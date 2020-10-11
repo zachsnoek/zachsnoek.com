@@ -2,9 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { ASSETS } from "utils/api";
 import "./styles.scss";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
+import { Row, Col, Button } from "components/shared";
 
 const Home = () => {
     return (
