@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link, withRouter } from "react-router-dom";
+import { PostControls } from "components/admin";
 import { Card } from "components/shared";
 import { useUserContext } from "context/useUserContext";
 import { deletePost } from "utils/api";
@@ -21,17 +22,17 @@ const Preview = withRouter(
             }
         };
 
-        const editPost = () => {
+        const handleEditPost = () => {
             history.push(`/edit-post/${slug}/${id}`);
         };
 
         return (
             <>
                 {user?.authenticated && (
-                    <>
-                        <button onClick={handleDeletePost}>Delete</button>
-                        <button onClick={editPost}>Edit</button>
-                    </>
+                    <PostControls
+                        onDeletePost={handleDeletePost}
+                        onEditPost={handleEditPost}
+                    />
                 )}
 
                 <Link to={`/blog/${slug}`}>
