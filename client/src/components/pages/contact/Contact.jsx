@@ -4,6 +4,7 @@ import {
     Col,
     Form,
     BasicFormGroup,
+    PageHeader,
     Button,
     CenterContainer,
     LoadingSpinner,
@@ -39,9 +40,7 @@ const Contact = () => {
 
     return (
         <div className="contact form">
-            <div className="header center-contents">
-                <span>Contact</span>
-            </div>
+            <PageHeader text="Contact" />
 
             {loading && <LoadingSpinner />}
 

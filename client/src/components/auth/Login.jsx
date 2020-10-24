@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import { Row, Col, Form, BasicFormGroup, Button } from "components/shared";
+import {
+    Row,
+    Col,
+    Form,
+    BasicFormGroup,
+    PageHeader,
+    Button,
+} from "components/shared";
 import { loginUser } from "utils/auth";
 import { useUserContext } from "context/useUserContext";
 
@@ -40,9 +47,8 @@ const Login = ({ history }) => {
 
     return (
         <div className="login form">
-            <div className="header center-contents">
-                <span>Login</span>
-            </div>
+            <PageHeader text="Login" />
+
             <Form onSubmit={(e) => handleSubmit(e)}>
                 <Row className="center-contents">
                     <Col>

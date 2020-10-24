@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Project from "./Project";
-import { LoadingSpinner } from "components/shared";
+import { PageHeader, LoadingSpinner } from "components/shared";
 import { getProjects } from "utils/api";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import "./styles.scss";
@@ -23,9 +23,7 @@ const Portfolio = () => {
 
     return (
         <div className="portfolio">
-            <div className="header center-contents">
-                <span>Portfolio</span>
-            </div>
+            <PageHeader text="Portfolio" />
 
             <div>
                 {/* Assume that there will be at least one project */}

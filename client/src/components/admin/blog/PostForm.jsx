@@ -4,7 +4,14 @@ import SimpleMDE from "react-simplemde-editor";
 import { Post } from "components/pages";
 import { makeHTML } from "utils/markdown";
 import "easymde/dist/easymde.min.css";
-import { Row, Col, Form, BasicFormGroup, Button } from "components/shared";
+import {
+    Row,
+    Col,
+    Form,
+    BasicFormGroup,
+    PageHeader,
+    Button,
+} from "components/shared";
 
 const PostForm = ({ formTitle, submitButtonText, onSubmit, post }) => {
     const [showPreview, setShowPreview] = useState(false);
@@ -27,9 +34,7 @@ const PostForm = ({ formTitle, submitButtonText, onSubmit, post }) => {
 
     return (
         <div className="post-form form">
-            <div className="header center-contents">
-                <span>{formTitle}</span>
-            </div>
+            <PageHeader text={formTitle} />
 
             {showPreview ? (
                 <>

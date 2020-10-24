@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getProjects, updateProjectPosition, deleteProject } from "utils/api";
 import ProjectControls from "./ProjectControls";
+import { PageHeader } from "components/shared";
+import { getProjects, updateProjectPosition, deleteProject } from "utils/api";
 
 const PortfolioManager = () => {
     const [projects, setProjects] = useState(null);
@@ -45,8 +46,9 @@ const PortfolioManager = () => {
     }, []);
 
     return (
-        <>
-            <div>Portfolio Manager</div>
+        <div>
+            <PageHeader text="Portfolio Manager" />
+
             <Link to="new-project">New Project</Link>
             <button onClick={updatePositions}>Update Positions</button>
             {!loading &&
@@ -59,7 +61,7 @@ const PortfolioManager = () => {
                         onDelete={(id) => handleDelete(id)}
                     />
                 ))}
-        </>
+        </div>
     );
 };
 

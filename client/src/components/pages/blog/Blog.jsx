@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getPosts } from "utils/api";
 import Preview from "./Preview";
-import { CenterContainer, LoadingSpinner } from "components/shared";
+import { CenterContainer, PageHeader, LoadingSpinner } from "components/shared";
 import "./styles.scss";
 
 const Blog = () => {
@@ -22,9 +22,7 @@ const Blog = () => {
 
     return (
         <div className="blog">
-            <div className="header center-contents">
-                <span>Blog</span>
-            </div>
+            <PageHeader text="Blog" />
 
             {loading && <LoadingSpinner />}
 

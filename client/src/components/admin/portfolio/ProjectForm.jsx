@@ -1,5 +1,12 @@
 import React, { useState, useRef } from "react";
-import { Row, Col, Form, BasicFormGroup, Button } from "components/shared";
+import {
+    Row,
+    Col,
+    Form,
+    BasicFormGroup,
+    PageHeader,
+    Button,
+} from "components/shared";
 import TagsInput from "./TagsInput";
 
 const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
@@ -29,9 +36,7 @@ const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
 
     return (
         <div className="project-form form">
-            <div className="header center-contents">
-                <span>{formTitle}</span>
-            </div>
+            <PageHeader text={formTitle} />
 
             <Form onSubmit={(e) => handleSubmit(e)}>
                 <Row className="center-contents">

@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Button } from "components/shared";
+import { PageHeader, Button } from "components/shared";
 
 const Dashboard = () => {
     return (
         <div className="form">
-            <h1>Admin Dashboard</h1>
+            <PageHeader text="Dashboard" />
             <div>
                 <Link to="/new-post">
                     <Button size="lg">New Blog Post</Button>
