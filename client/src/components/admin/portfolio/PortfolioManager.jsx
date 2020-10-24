@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ProjectControls from "./ProjectControls";
-import { PageHeader } from "components/shared";
+import { PageHeader, Button } from "components/shared";
 import { getProjects, updateProjectPosition, deleteProject } from "utils/api";
 
 const PortfolioManager = () => {
@@ -49,8 +49,18 @@ const PortfolioManager = () => {
         <div>
             <PageHeader text="Portfolio Manager" />
 
-            <Link to="new-project">New Project</Link>
-            <button onClick={updatePositions}>Update Positions</button>
+            <Link to="new-project">
+                <Button size="lg">New Project</Button>
+            </Link>
+
+            <Button
+                size="sm"
+                variant="outline-secondary"
+                onClick={updatePositions}
+            >
+                Update Positions
+            </Button>
+
             {!loading &&
                 projects.map((project) => (
                     <ProjectControls

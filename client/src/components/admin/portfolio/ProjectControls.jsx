@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { Button } from "components/shared";
 import PositionSelect from "./PositionSelect";
 
 const ProjectControls = ({
@@ -10,19 +11,23 @@ const ProjectControls = ({
     onDelete,
 }) => {
     return (
-        <>
+        <div>
             <div>{project.title}</div>
-            <button>
+
+            <Button variant="warning">
                 <Link to={`/edit-project/${project._id}`}>Edit</Link>
-            </button>
-            <button onClick={() => onDelete(project._id)}>Delete</button>
+            </Button>
+            <Button variant="danger" onClick={() => onDelete(project._id)}>
+                Delete
+            </Button>
+
             <PositionSelect
                 _id={project._id}
                 position={project.position}
                 numOptions={numProjects}
                 updatePosition={updatePosition}
             />
-        </>
+        </div>
     );
 };
 
