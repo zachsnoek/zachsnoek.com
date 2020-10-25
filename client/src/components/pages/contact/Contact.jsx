@@ -5,7 +5,7 @@ import {
     Form,
     BasicFormGroup,
     PageHeader,
-    Button,
+    CenterButton,
     CenterContainer,
     LoadingSpinner,
 } from "components/shared";
@@ -52,35 +52,22 @@ const Contact = () => {
                 <Form onSubmit={(e) => handleSubmit(e)}>
                     <Row className="center-contents">
                         <Col>
-                            <Row>
-                                <Col>
-                                    <BasicFormGroup
-                                        name="name"
-                                        label="Name"
-                                        value={name}
-                                        onChange={(e) => handleChange(e)}
-                                        placeholder="Your name"
-                                        autoFocus
-                                    />
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <BasicFormGroup
-                                        name="fromEmail"
-                                        label="Email address"
-                                        value={fromEmail}
-                                        onChange={(e) => handleChange(e)}
-                                        placeholder="Your email"
-                                        type="email"
-                                    />
-                                </Col>
-                            </Row>
-                        </Col>
-                    </Row>
-
-                    <Row className="center-contents">
-                        <Col>
+                            <BasicFormGroup
+                                name="name"
+                                label="Name"
+                                value={name}
+                                onChange={(e) => handleChange(e)}
+                                placeholder="Your name"
+                                autoFocus
+                            />
+                            <BasicFormGroup
+                                name="fromEmail"
+                                label="Email address"
+                                value={fromEmail}
+                                onChange={(e) => handleChange(e)}
+                                placeholder="Your email"
+                                type="email"
+                            />
                             <BasicFormGroup
                                 as="textarea"
                                 name="message"
@@ -90,14 +77,9 @@ const Contact = () => {
                                 placeholder="Your message"
                                 rows={8}
                             />
-                        </Col>
-                    </Row>
-
-                    <Row className="center-contents">
-                        <Col className="center-contents">
-                            <Button size="lg" type="submit">
+                            <CenterButton size="lg" type="submit">
                                 Send Message
-                            </Button>
+                            </CenterButton>
                         </Col>
                     </Row>
                 </Form>
