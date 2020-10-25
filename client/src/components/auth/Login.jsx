@@ -6,7 +6,7 @@ import {
     Form,
     BasicFormGroup,
     PageHeader,
-    Button,
+    CenterButton,
 } from "components/shared";
 import { loginUser } from "utils/auth";
 import { useUserContext } from "context/useUserContext";
@@ -46,43 +46,31 @@ const Login = ({ history }) => {
     if (user?.authenticated) return <Redirect to="/" />;
 
     return (
-        <div className="login form">
+        <div className="form">
             <PageHeader text="Login" />
 
             <Form onSubmit={(e) => handleSubmit(e)}>
                 <Row className="center-contents">
                     <Col>
-                        <Row>
-                            <Col>
-                                <BasicFormGroup
-                                    name="email"
-                                    label="Email address"
-                                    value={email}
-                                    onChange={(e) => handleChange(e)}
-                                    type="email"
-                                    autoFocus
-                                />
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <BasicFormGroup
-                                    name="password"
-                                    label="Password"
-                                    value={password}
-                                    onChange={(e) => handleChange(e)}
-                                    type="password"
-                                />
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
+                        <BasicFormGroup
+                            name="email"
+                            label="Email address"
+                            value={email}
+                            onChange={(e) => handleChange(e)}
+                            type="email"
+                            autoFocus
+                        />
+                        <BasicFormGroup
+                            name="password"
+                            label="Password"
+                            value={password}
+                            onChange={(e) => handleChange(e)}
+                            type="password"
+                        />
 
-                <Row className="center-contents">
-                    <Col className="center-contents">
-                        <Button size="lg" type="submit">
+                        <CenterButton size="lg" type="submit">
                             Login
-                        </Button>
+                        </CenterButton>
                     </Col>
                 </Row>
             </Form>
