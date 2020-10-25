@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Tags } from "components/shared";
-import { BasicFormGroup } from "components/shared";
+import { BasicFormGroup, Tags, Button } from "components/shared";
 
 const TagsInput = ({ tags, setTags }) => {
     const [tag, setTag] = useState("");
@@ -20,18 +19,25 @@ const TagsInput = ({ tags, setTags }) => {
             onChange={(e) => setTag(e.target.value)}
             optional
         >
-            <button
+            <Button
                 type="button"
+                size="sm"
+                className="mr-1"
                 onClick={addTag}
                 disabled={tag ? false : true}
             >
-                +
-            </button>
+                + Add Tag
+            </Button>
 
             {tags.length > 0 && (
-                <button type="button" onClick={resetTags}>
+                <Button
+                    type="button"
+                    variant="danger"
+                    size="sm"
+                    onClick={resetTags}
+                >
                     Reset tags
-                </button>
+                </Button>
             )}
 
             <Tags tags={tags} />
