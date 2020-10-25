@@ -10,6 +10,7 @@ import {
     Form,
     BasicFormGroup,
     PageHeader,
+    CenterButton,
     Button,
 } from "components/shared";
 
@@ -38,16 +39,13 @@ const PostForm = ({ formTitle, submitButtonText, onSubmit, post }) => {
 
             {showPreview ? (
                 <>
-                    <Row className="center-contents">
-                        <Col className="center-contents">
-                            <Button
-                                size="lg"
-                                onClick={() => setShowPreview(false)}
-                            >
-                                Continue Editing
-                            </Button>
-                        </Col>
-                    </Row>
+                    <CenterButton
+                        style={{ marginTop: "0", marginBottom: ".5rem" }}
+                        size="lg"
+                        onClick={() => setShowPreview(false)}
+                    >
+                        Continue Editing
+                    </CenterButton>
 
                     <Post
                         title={title}
@@ -72,11 +70,7 @@ const PostForm = ({ formTitle, submitButtonText, onSubmit, post }) => {
                                 value={description}
                                 onChange={(e) => handleChange(e)}
                             />
-                        </Col>
-                    </Row>
 
-                    <Row className="center-contents">
-                        <Col>
                             <Form.Group>
                                 <Form.Label htmlFor="content">
                                     Content
@@ -91,25 +85,20 @@ const PostForm = ({ formTitle, submitButtonText, onSubmit, post }) => {
                                     }
                                 />
                             </Form.Group>
-                        </Col>
-                    </Row>
 
-                    <Row className="center-contents">
-                        <Col className="center-contents">
-                            <Button
-                                size="lg"
-                                onClick={() => setShowPreview(true)}
-                            >
-                                Preview
-                            </Button>
-                        </Col>
-                    </Row>
-
-                    <Row className="center-contents">
-                        <Col className="center-contents">
-                            <Button size="lg" type="submit">
-                                {submitButtonText}
-                            </Button>
+                            <div style={{ textAlign: "center" }}>
+                                <Button
+                                    className="mr-2"
+                                    size="lg"
+                                    variant="outline-secondary"
+                                    onClick={() => setShowPreview(true)}
+                                >
+                                    Preview
+                                </Button>
+                                <Button size="lg" type="submit">
+                                    {submitButtonText}
+                                </Button>
+                            </div>
                         </Col>
                     </Row>
                 </Form>
