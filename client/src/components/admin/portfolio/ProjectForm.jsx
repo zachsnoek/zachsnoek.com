@@ -5,6 +5,7 @@ import {
     Form,
     BasicFormGroup,
     PageHeader,
+    CenterButton,
     Button,
 } from "components/shared";
 import TagsInput from "./TagsInput";
@@ -104,14 +105,10 @@ const ProjectForm = ({ formTitle, submitButtonText, onSubmit, project }) => {
                         )}
 
                         <TagsInput tags={tags} setTags={setTags} />
-                    </Col>
-                </Row>
 
-                <Row className="center-contents">
-                    <Col className="center-contents">
-                        <Button size="lg" type="submit">
+                        <CenterButton size="lg" type="submit">
                             {submitButtonText}
-                        </Button>
+                        </CenterButton>
                     </Col>
                 </Row>
             </Form>
