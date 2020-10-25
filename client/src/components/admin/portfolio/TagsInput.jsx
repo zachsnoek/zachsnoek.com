@@ -18,6 +18,7 @@ const TagsInput = ({ tags, setTags }) => {
             name="tag"
             value={tag}
             onChange={(e) => setTag(e.target.value)}
+            optional
         >
             <button
                 type="button"
