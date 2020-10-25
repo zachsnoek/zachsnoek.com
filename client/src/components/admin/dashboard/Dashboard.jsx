@@ -4,16 +4,19 @@ import { PageHeader, Button } from "components/shared";
 
 const Dashboard = () => {
     return (
-        <div className="form">
+        <div>
             <PageHeader text="Dashboard" />
-            <div>
+
+            <div style={{ textAlign: "center" }}>
                 <Link to="/new-post">
-                    <Button size="lg">New Blog Post</Button>
+                    <Button className="mr-2" size="lg">
+                        New Blog Post
+                    </Button>
                 </Link>
-            </div>
-            <div>
                 <Link to="/portfolio-manager">
-                    <Button size="lg">Manage Portfolio</Button>
+                    <Button variant="secondary" size="lg">
+                        Manage Portfolio
+                    </Button>
                 </Link>
             </div>
         </div>
