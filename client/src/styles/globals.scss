@@ -98,6 +98,19 @@ body {
         border-radius: $border-radius;
     }
 
+    .badge-list {
+        list-style-type: none;
+        padding-inline-start: 0;
+        margin-bottom: 0;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        .badge {
+            margin: 0.25rem 0.25rem 0.25rem 0;
+        }
+    }
+
     .badge {
         padding: 0.4rem 0.6rem 0.35rem 0.6rem;
         cursor: default;

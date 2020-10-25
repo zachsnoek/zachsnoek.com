@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Tags } from "components/pages";
+import { Tags } from "components/shared";
 import { BasicFormGroup } from "components/shared";
 
 const TagsInput = ({ tags, setTags }) => {
