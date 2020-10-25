@@ -10,7 +10,6 @@ import {
     LoadingSpinner,
 } from "components/shared";
 import { contact } from "utils/api";
-import "./styles.scss";
 
 const Contact = () => {
     const [loading, setLoading] = useState(false);
@@ -39,7 +38,7 @@ const Contact = () => {
     }
 
     return (
-        <div className="contact form">
+        <div className="form">
             <PageHeader text="Contact" />
 
             {loading && <LoadingSpinner />}
