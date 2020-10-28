@@ -72,7 +72,7 @@ const Navbar = withRouter(({ history }) => {
                             </li>
                         </ul>
                         {user?.authenticated && (
-                            <ul className="navbar-nav d-flex flex-row">
+                            <ul className="navbar-nav d-flex flex-row mt-1">
                                 <li className="nav-item">
                                     <Link to="/dashboard">
                                         <Button>Dashboard</Button>
