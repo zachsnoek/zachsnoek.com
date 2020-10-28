@@ -43,51 +43,52 @@ const Navbar = withRouter(({ history }) => {
                             <Link to="/contact">Contact</Link>
                         </li>
                     </ul>
-                    <ul className="navbar-nav ml-auto d-flex flex-row">
-                        <li className="nav-item">
-                            <a
-                                href="https://www.linkedin.com/in/zach-snoek-5b327b179/"
-                                target="__blank"
-                                className="nav-link"
-                            >
-                                <span
-                                    className="fab fa-linkedin"
-                                    aria-hidden="true"
-                                ></span>
-                            </a>
-                        </li>
-
-                        <li className="nav-item">
-                            <a
-                                href="https://www.github.com/zachsnoek"
-                                target="__blank"
-                                className="nav-link"
-                            >
-                                <span
-                                    className="fa fa-github"
-                                    aria-hidden="true"
-                                ></span>
-                            </a>
-                        </li>
-
-                        {user?.authenticated && (
+                    <div className="navbar-nav ml-auto d-flex flex-column">
+                        <ul className="navbar-nav d-flex flex-row align-items-lg-end">
                             <li className="nav-item">
-                                <Link to="/dashboard">
-                                    <Button>Dashboard</Button>
-                                </Link>
-                            </li>
-                        )}
-                        {user?.authenticated && (
-                            <li className="nav-item">
-                                <Button
-                                    variant="outline-secondary"
-                                    onClick={handleLogout}
+                                <a
+                                    href="https://www.linkedin.com/in/zach-snoek-5b327b179/"
+                                    target="__blank"
+                                    className="nav-link"
                                 >
-                                    Logout
-                                </Button>
+                                    <span
+                                        className="fab fa-linkedin"
+                                        aria-hidden="true"
+                                    ></span>
+                                </a>
                             </li>
+
+                            <li className="nav-item">
+                                <a
+                                    href="https://www.github.com/zachsnoek"
+                                    target="__blank"
+                                    className="nav-link"
+                                >
+                                    <span
+                                        className="fa fa-github"
+                                        aria-hidden="true"
+                                    ></span>
+                                </a>
+                            </li>
+                        </ul>
+                        {user?.authenticated && (
+                            <ul className="navbar-nav d-flex flex-row">
+                                <li className="nav-item">
+                                    <Link to="/dashboard">
+                                        <Button>Dashboard</Button>
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Button
+                                        variant="outline-secondary"
+                                        onClick={handleLogout}
+                                    >
+                                        Logout
+                                    </Button>
+                                </li>
+                            </ul>
                         )}
-                    </ul>
+                    </div>
                 </div>
             </nav>
             <hr />
