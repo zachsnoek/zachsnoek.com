@@ -18,7 +18,7 @@ const Navbar = withRouter(({ history }) => {
 
     return (
         <>
-            <nav className="navbar navbar-expand-md navbar-dark">
+            <nav className="navbar navbar-expand-lg navbar-dark">
                 <Link to="/">
                     <span className="navbar-brand nav-link">Zach Snoek</span>
                 </Link>
@@ -72,14 +72,16 @@ const Navbar = withRouter(({ history }) => {
 
                         {user?.authenticated && (
                             <li className="nav-item">
-                                <Link className="nav-link" to="/dashboard">
+                                <Link to="/dashboard">
+                                    <Button>
                                     Dashboard
+                                    </Button>
                                 </Link>
                             </li>
                         )}
                         {user?.authenticated && (
                             <li className="nav-item">
-                                <Button onClick={handleLogout}>Logout</Button>
+                                <Button variant="outline-secondary" onClick={handleLogout}>Logout</Button>
                             </li>
                         )}
                     </ul>
