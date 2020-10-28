@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { Button } from "components/shared";
+import { Button, Card } from "components/shared";
 import PositionSelect from "./PositionSelect";
 
 const ProjectControls = ({
@@ -11,23 +11,29 @@ const ProjectControls = ({
     onDelete,
 }) => {
     return (
-        <div>
-            <div>{project.title}</div>
+        <Card>
+            <Card.Header>
+                <div className="d-flex justify-content-between align-items-center">
+                <Card.Title>{project.title}</Card.Title>
+                    <div>
+                    <Button variant="warning">
+                    <Link to={`/edit-project/${project._id}`}>Edit</Link>
+                </Button>
+                <Button variant="danger" onClick={() => onDelete(project._id)}>
+                    Delete
+                </Button>
 
-            <Button variant="warning">
-                <Link to={`/edit-project/${project._id}`}>Edit</Link>
-            </Button>
-            <Button variant="danger" onClick={() => onDelete(project._id)}>
-                Delete
-            </Button>
-
-            <PositionSelect
-                _id={project._id}
-                position={project.position}
-                numOptions={numProjects}
-                updatePosition={updatePosition}
-            />
-        </div>
+                <PositionSelect
+                    _id={project._id}
+                    position={project.position}
+                    numOptions={numProjects}
+                    updatePosition={updatePosition}
+                />
+                    </div>
+                </div>
+            </Card.Header>
+            <Card.Body>{project.description}</Card.Body>
+        </Card>
     );
 };
 
