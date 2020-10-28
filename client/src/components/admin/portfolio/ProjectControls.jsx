@@ -15,21 +15,26 @@ const ProjectControls = ({
         <Card>
             <Card.Header>
                 <div className="d-flex justify-content-between align-items-center">
-                <Card.Title>{project.title}</Card.Title>
+                    <Card.Title>{project.title}</Card.Title>
                     <div className="project-controls">
-                    <Button variant="outline-secondary">
-                    <Link to={`/edit-project/${project._id}`}>Edit</Link>
-                </Button>
-                <Button variant="outline-danger" onClick={() => onDelete(project._id)}>
-                    Delete
-                </Button>
+                        <Button variant="outline-secondary">
+                            <Link to={`/edit-project/${project._id}`}>
+                                Edit
+                            </Link>
+                        </Button>
+                        <Button
+                            variant="outline-danger"
+                            onClick={() => onDelete(project._id)}
+                        >
+                            Delete
+                        </Button>
 
-                <PositionSelect
-                    _id={project._id}
-                    position={project.position}
-                    numOptions={numProjects}
-                    updatePosition={updatePosition}
-                />
+                        <PositionSelect
+                            _id={project._id}
+                            position={project.position}
+                            numOptions={numProjects}
+                            updatePosition={updatePosition}
+                        />
                     </div>
                 </div>
             </Card.Header>

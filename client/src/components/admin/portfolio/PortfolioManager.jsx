@@ -49,17 +49,19 @@ const PortfolioManager = () => {
         <div>
             <PageHeader text="Portfolio Manager" />
 
-            <Link to="new-project">
-                <Button size="lg">New Project</Button>
-            </Link>
+            <div className="mb-4 d-flex justify-content-between align-items-end">
+                <Link to="new-project">
+                    <Button size="lg">New Project</Button>
+                </Link>
 
-            <Button
-                size="sm"
-                variant="outline-secondary"
-                onClick={updatePositions}
-            >
-                Update Positions
-            </Button>
+                <Button
+                    size="sm"
+                    variant="outline-secondary"
+                    onClick={updatePositions}
+                >
+                    Update Positions
+                </Button>
+            </div>
 
             {!loading &&
                 projects.map((project) => (
