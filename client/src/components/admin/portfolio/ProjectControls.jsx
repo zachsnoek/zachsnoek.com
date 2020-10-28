@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Button, Card } from "components/shared";
 import PositionSelect from "./PositionSelect";
+import "./styles.scss";
 
 const ProjectControls = ({
     numProjects,
@@ -15,11 +16,11 @@ const ProjectControls = ({
             <Card.Header>
                 <div className="d-flex justify-content-between align-items-center">
                 <Card.Title>{project.title}</Card.Title>
-                    <div>
-                    <Button variant="warning">
+                    <div className="project-controls">
+                    <Button variant="outline-secondary">
                     <Link to={`/edit-project/${project._id}`}>Edit</Link>
                 </Button>
-                <Button variant="danger" onClick={() => onDelete(project._id)}>
+                <Button variant="outline-danger" onClick={() => onDelete(project._id)}>
                     Delete
                 </Button>
 
