@@ -6,7 +6,7 @@ const Links = ({ github, website }) => {
     const btnDisabled = `${btnNormal} disabled`;
 
     return (
-        <ul className="project-links">
+        <ul className="badge-list">
             <li>
                 <a
                     href={

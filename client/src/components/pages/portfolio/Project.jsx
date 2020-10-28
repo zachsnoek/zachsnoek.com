@@ -1,9 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Tags from "./Tags";
 import Links from "./Links";
 import { BASE_URL } from "utils/api";
-import { Row, Col, Card } from "components/shared";
+import { Row, Col, Card, Tags } from "components/shared";
 
 const Project = ({ title, description, image, github, website, tags }) => {
     return (
