@@ -44,8 +44,8 @@ const Navbar = withRouter(({ history }) => {
                         </li>
                     </ul>
                     <div className="navbar-nav ml-auto d-flex flex-column">
-                        <ul className="navbar-nav d-flex flex-row align-items-lg-end">
-                            <li className="nav-item">
+                        <ul className="navbar-nav d-flex flex-row">
+                            <li className="nav-item ml-lg-auto">
                                 <a
                                     href="https://www.linkedin.com/in/zach-snoek-5b327b179/"
                                     target="__blank"
