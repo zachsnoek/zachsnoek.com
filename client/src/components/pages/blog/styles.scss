@@ -1,15 +1,15 @@
 @import "styles/variables.scss";
 
 .blog {
-    a.card {
+    a .card {
         color: unset;
         text-decoration: unset;
         border: $transparent solid 1px;
         transition: $transition-duration;
     }
 
-    a.card:hover,
-    a.card:active {
+    a .card:hover,
+    a .card:active {
         border-color: $secondary;
     }
 
