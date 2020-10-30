@@ -29,9 +29,7 @@ const Home = () => {
                     </p>
                     <div className="center-contents flex-wrap justify-content-md-start">
                         <Link to="/portfolio">
-                            <Button size="lg" className="m-2">
-                                View Portfolio
-                            </Button>
+                            <Button size="lg">View Portfolio</Button>
                         </Link>
                         <Link to="/contact">
                             <Button
