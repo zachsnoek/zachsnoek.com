@@ -75,7 +75,9 @@ const Navbar = withRouter(({ history }) => {
                             <ul className="navbar-nav d-flex flex-row mt-1">
                                 <li className="nav-item">
                                     <Link to="/dashboard">
-                                        <Button>Dashboard</Button>
+                                        <Button variant="outline-primary">
+                                            Dashboard
+                                        </Button>
                                     </Link>
                                 </li>
                                 <li className="nav-item">
