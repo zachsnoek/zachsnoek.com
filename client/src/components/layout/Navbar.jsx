@@ -18,7 +18,7 @@ const Navbar = withRouter(({ history }) => {
 
     return (
         <>
-            <nav className="navbar navbar-expand-md navbar-dark">
+            <nav className="navbar navbar-expand-lg navbar-dark">
                 <Link to="/">
                     <span className="navbar-brand nav-link">Zach Snoek</span>
                 </Link>
@@ -43,46 +43,54 @@ const Navbar = withRouter(({ history }) => {
                             <Link to="/contact">Contact</Link>
                         </li>
                     </ul>
-                    <ul className="navbar-nav ml-auto d-flex flex-row">
-                        <li className="nav-item">
-                            <a
-                                href="https://www.linkedin.com/in/zach-snoek-5b327b179/"
-                                target="__blank"
-                                className="nav-link"
-                            >
-                                <span
-                                    className="fab fa-linkedin"
-                                    aria-hidden="true"
-                                ></span>
-                            </a>
-                        </li>
-
-                        <li className="nav-item">
-                            <a
-                                href="https://www.github.com/zachsnoek"
-                                target="__blank"
-                                className="nav-link"
-                            >
-                                <span
-                                    className="fa fa-github"
-                                    aria-hidden="true"
-                                ></span>
-                            </a>
-                        </li>
-
-                        {user?.authenticated && (
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/dashboard">
-                                    Dashboard
-                                </Link>
+                    <div className="navbar-nav ml-auto d-flex flex-column">
+                        <ul className="navbar-nav d-flex flex-row">
+                            <li className="nav-item ml-lg-auto">
+                                <a
+                                    href="https://www.linkedin.com/in/zach-snoek-5b327b179/"
+                                    target="__blank"
+                                    className="nav-link"
+                                >
+                                    <span
+                                        className="fab fa-linkedin"
+                                        aria-hidden="true"
+                                    ></span>
+                                </a>
                             </li>
-                        )}
-                        {user?.authenticated && (
+
                             <li className="nav-item">
-                                <Button onClick={handleLogout}>Logout</Button>
+                                <a
+                                    href="https://www.github.com/zachsnoek"
+                                    target="__blank"
+                                    className="nav-link"
+                                >
+                                    <span
+                                        className="fa fa-github"
+                                        aria-hidden="true"
+                                    ></span>
+                                </a>
                             </li>
+                        </ul>
+                        {user?.authenticated && (
+                            <ul className="navbar-nav d-flex flex-row mt-1">
+                                <li className="nav-item">
+                                    <Link to="/dashboard">
+                                        <Button variant="outline-primary">
+                                            Dashboard
+                                        </Button>
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Button
+                                        variant="outline-secondary"
+                                        onClick={handleLogout}
+                                    >
+                                        Logout
+                                    </Button>
+                                </li>
+                            </ul>
                         )}
-                    </ul>
+                    </div>
                 </div>
             </nav>
             <hr />
