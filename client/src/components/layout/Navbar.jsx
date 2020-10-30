@@ -32,9 +32,11 @@ const Navbar = withRouter(({ history }) => {
                         />
                     </div>
                 )}
+
                 <Link to="/">
                     <span className="navbar-brand nav-link">Zach Snoek</span>
                 </Link>
+
                 <button
                     className="navbar-toggler"
                     type="button"
@@ -44,7 +46,10 @@ const Navbar = withRouter(({ history }) => {
                 >
                     <span className="fas fa-bars"></span>
                 </button>
-                <div className="collapse navbar-collapse" id="collapsed">
+                <div
+                    className="collapse navbar-collapse mt-3 mt-lg-0"
+                    id="collapsed"
+                >
                     <ul className="navbar-nav">
                         <li className="nav-item nav-link">
                             <Link to="/portfolio">Portfolio</Link>
