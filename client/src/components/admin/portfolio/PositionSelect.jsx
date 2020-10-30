@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { Form } from "react-bootstrap";
 
 const PositionSelect = ({ _id, numOptions, position, updatePosition }) => {
     const [value, setValue] = useState(position);
@@ -20,9 +21,9 @@ const PositionSelect = ({ _id, numOptions, position, updatePosition }) => {
     };
 
     return (
-        <select value={value} onChange={handleChange}>
+        <Form.Control as="select" value={value} onChange={handleChange}>
             {options}
-        </select>
+        </Form.Control>
     );
 };
 

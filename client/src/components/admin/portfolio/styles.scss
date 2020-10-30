@@ -1,0 +1,7 @@
+.project-controls {
+    > :not(:last-child) {
+        margin-right: 0.5rem;
+    }
+    display: flex;
+    flex-direction: row;
+}

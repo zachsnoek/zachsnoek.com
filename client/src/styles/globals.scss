@@ -141,6 +141,12 @@ body {
         transition-property: background-color;
     }
 
+    .card {
+        .form-control {
+            background-color: $shadow;
+        }
+    }
+
     .form-control::placeholder {
         color: $placeholder;
     }
