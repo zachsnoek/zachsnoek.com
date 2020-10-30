@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ASSETS } from "utils/api";
-import "./styles.scss";
 import { Row, Col, Button } from "components/shared";
+
+import "./styles.scss";
 
 const Home = () => {
     return (
@@ -10,7 +11,7 @@ const Home = () => {
             <Col
                 xs={4}
                 lg={3}
-                className="d-none d-md-flex align-items-center profile-pic-container"
+                className="d-md-flex align-items-center profile-pic-container"
             >
                 <img
                     src={`${ASSETS}/img/zach-home-circle.png`}
@@ -23,7 +24,7 @@ const Home = () => {
                     <div className="big-header center-contents justify-content-md-start">
                         <span>Hi, I'm Zach!</span>
                     </div>
-                    <p>
+                    <p className="text-center text-md-left">
                         I'm a software developer based in Bellingham, WA. I
                         currently work for Faithlife Corporation.
                     </p>
