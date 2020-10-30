@@ -7,9 +7,13 @@ import { Row, Col, Button } from "components/shared";
 const Home = () => {
     return (
         <Row className="home center-contents">
-            <Col xs={4} lg={3} className="d-none d-md-flex align-items-center">
+            <Col
+                xs={4}
+                lg={3}
+                className="d-none d-md-flex align-items-center profile-pic-container"
+            >
                 <img
-                    src={`${ASSETS}/img/zach-home.jpg`}
+                    src={`${ASSETS}/img/zach-home-circle.png`}
                     className="profile-pic"
                     alt="Zach standing."
                 />

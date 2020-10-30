@@ -4,9 +4,13 @@ import { useUserContext } from "context/useUserContext";
 import { logoutUser } from "utils/auth";
 import { setTitle } from "utils/title";
 import { Button } from "components/shared";
+import { ASSETS } from "utils/api";
+
+import "./styles.scss";
 
 const Navbar = withRouter(({ history }) => {
     const { user, setUser } = useUserContext();
+    const isHomePage = history.location.pathname === "/";
 
     setTitle(history.location);
 
@@ -19,6 +23,15 @@ const Navbar = withRouter(({ history }) => {
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-dark">
+                {!isHomePage && (
+                    <div>
+                        <img
+                            src={`${ASSETS}/img/zach-home-circle.png`}
+                            alt=""
+                            style={{ height: "60px", marginRight: ".5rem" }}
+                        />
+                    </div>
+                )}
                 <Link to="/">
                     <span className="navbar-brand nav-link">Zach Snoek</span>
                 </Link>
