@@ -25,7 +25,8 @@
     }
 
     .nav-link:hover,
-    .navbar-toggler:hover {
+    .navbar-toggler:hover,
+    .nav-link-active {
         text-decoration: none;
         color: $text-hover;
         background-color: $shadow;
