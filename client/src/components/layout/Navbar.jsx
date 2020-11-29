@@ -1,16 +1,16 @@
 import React from "react";
-import { withRouter, Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import { Button } from "components/shared";
 import { useUserContext } from "context/useUserContext";
+import { ASSETS } from "utils/api";
 import { logoutUser } from "utils/auth";
 import { setTitle } from "utils/title";
-import { Button } from "components/shared";
-import { ASSETS } from "utils/api";
-
 import "./styles.scss";
 
 const Navbar = withRouter(({ history }) => {
     const { user, setUser } = useUserContext();
-    const isHomePage = history.location.pathname === "/";
+    const currentPath = history.location.pathname;
+    const isHomePage = currentPath === "/";
 
     setTitle(history.location);
 
@@ -23,15 +23,21 @@ const Navbar = withRouter(({ history }) => {
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-dark">
-                {!isHomePage && (
-                    <div>
-                        <img
-                            src={`${ASSETS}/img/zach-home-circle.png`}
-                            alt=""
-                            style={{ height: "60px", marginRight: ".5rem" }}
-                        />
-                    </div>
-                )}
+                <div
+                    className="navbar-icon"
+                    style={{
+                        opacity: isHomePage ? 0 : 1,
+                    }}
+                >
+                    <img
+                        src={`${ASSETS}/img/zach-home-circle.png`}
+                        alt=""
+                        style={{
+                            height: isHomePage ? 0 : "3rem",
+                            marginRight: isHomePage ? 0 : ".75rem",
+                        }}
+                    />
+                </div>
 
                 <Link to="/">
                     <span className="navbar-brand nav-link">Zach Snoek</span>
@@ -51,15 +57,21 @@ const Navbar = withRouter(({ history }) => {
                     id="collapsed"
                 >
                     <ul className="navbar-nav">
-                        <li className="nav-item nav-link">
-                            <Link to="/portfolio">Portfolio</Link>
-                        </li>
-                        <li className="nav-item nav-link">
-                            <Link to="/blog">Blog</Link>
-                        </li>
-                        <li className="nav-item nav-link">
-                            <Link to="/contact">Contact</Link>
-                        </li>
+                        <NavLink
+                            to="/portfolio"
+                            title="Portfolio"
+                            isActive={currentPath === "/portfolio"}
+                        />
+                        <NavLink
+                            to="/blog"
+                            title="Blog"
+                            isActive={currentPath === "/blog"}
+                        />
+                        <NavLink
+                            to="/contact"
+                            title="Contact"
+                            isActive={currentPath === "/contact"}
+                        />
                     </ul>
                     <div className="navbar-nav ml-auto d-flex flex-column">
                         <ul className="navbar-nav d-flex flex-row">
@@ -115,5 +127,11 @@ const Navbar = withRouter(({ history }) => {
         </>
     );
 });
+
+const NavLink = ({ to, title, isActive }) => (
+    <li className={`nav-item nav-link ${isActive ? "nav-link-active" : ""}`}>
+        <Link to={to}>{title}</Link>
+    </li>
+);
 
 export default Navbar;

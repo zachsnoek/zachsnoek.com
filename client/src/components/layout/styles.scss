@@ -25,14 +25,25 @@
     }
 
     .nav-link:hover,
-    .navbar-toggler:hover {
+    .navbar-toggler:hover,
+    .nav-link-active {
         text-decoration: none;
         color: $text-hover;
         background-color: $shadow;
     }
 
+    .nav-link-active {
+        color: $text-hover !important;
+    }
+
     .nav-item {
         margin: 0 0.25rem;
+    }
+
+    .navbar-icon,
+    .navbar-icon img {
+        transition-duration: $transition-duration;
+        transition-timing-function: ease-in-out;
     }
 }
 
