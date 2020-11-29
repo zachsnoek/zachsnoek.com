@@ -22,15 +22,21 @@ const Navbar = withRouter(({ history }) => {
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-dark">
-                {!isHomePage && (
-                    <div>
-                        <img
-                            src={`${ASSETS}/img/zach-home-circle.png`}
-                            alt=""
-                            style={{ height: "60px", marginRight: ".5rem" }}
-                        />
-                    </div>
-                )}
+                <div
+                    className="navbar-icon"
+                    style={{
+                        opacity: isHomePage ? 0 : 1,
+                    }}
+                >
+                    <img
+                        src={`${ASSETS}/img/zach-home-circle.png`}
+                        alt=""
+                        style={{
+                            height: isHomePage ? 0 : "3rem",
+                            marginRight: isHomePage ? 0 : ".75rem",
+                        }}
+                    />
+                </div>
 
                 <Link to="/">
                     <span className="navbar-brand nav-link">Zach Snoek</span>

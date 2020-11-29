@@ -38,6 +38,12 @@
     .nav-item {
         margin: 0 0.25rem;
     }
+
+    .navbar-icon,
+    .navbar-icon img {
+        transition-duration: $transition-duration;
+        transition-timing-function: ease-in-out;
+    }
 }
 
 footer {
