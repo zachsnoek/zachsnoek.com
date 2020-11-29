@@ -1,11 +1,10 @@
-import React from "react";
-import { withRouter, Link } from "react-router-dom";
+import { Button } from "components/shared";
 import { useUserContext } from "context/useUserContext";
+import React from "react";
+import { Link, useHistory, withRouter } from "react-router-dom";
+import { ASSETS } from "utils/api";
 import { logoutUser } from "utils/auth";
 import { setTitle } from "utils/title";
-import { Button } from "components/shared";
-import { ASSETS } from "utils/api";
-
 import "./styles.scss";
 
 const Navbar = withRouter(({ history }) => {
@@ -51,15 +50,9 @@ const Navbar = withRouter(({ history }) => {
                     id="collapsed"
                 >
                     <ul className="navbar-nav">
-                        <li className="nav-item nav-link">
-                            <Link to="/portfolio">Portfolio</Link>
-                        </li>
-                        <li className="nav-item nav-link">
-                            <Link to="/blog">Blog</Link>
-                        </li>
-                        <li className="nav-item nav-link">
-                            <Link to="/contact">Contact</Link>
-                        </li>
+                        <NavLink to="/portfolio" title="Portfolio" />
+                        <NavLink to="/blog" title="Blog" />
+                        <NavLink to="/contact" title="Contact" />
                     </ul>
                     <div className="navbar-nav ml-auto d-flex flex-column">
                         <ul className="navbar-nav d-flex flex-row">
@@ -115,5 +108,18 @@ const Navbar = withRouter(({ history }) => {
         </>
     );
 });
+
+const NavLink = ({ to, title }) => {
+    const history = useHistory();
+    return (
+        <li
+            className={`nav-item nav-link ${
+                history.location.pathname === to ? "nav-link-active" : ""
+            }`}
+        >
+            <Link to={to}>{title}</Link>
+        </li>
+    );
+};
 
 export default Navbar;
