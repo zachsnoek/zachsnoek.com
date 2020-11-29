@@ -25,14 +25,11 @@
     }
 
     .nav-link:hover,
-    .navbar-toggler:hover {
-        text-decoration: none;
-        color: $text-hover;
-        background-color: $shadow;
-    }
-
+    .navbar-toggler:hover,
     .nav-link-active {
+        text-decoration: none;
         color: $text-hover !important;
+        background-color: $shadow;
     }
 
     .nav-item {
