@@ -1,7 +1,7 @@
+import React from "react";
+import { Link, withRouter } from "react-router-dom";
 import { Button } from "components/shared";
 import { useUserContext } from "context/useUserContext";
-import React from "react";
-import { Link, useHistory, withRouter } from "react-router-dom";
 import { ASSETS } from "utils/api";
 import { logoutUser } from "utils/auth";
 import { setTitle } from "utils/title";
@@ -9,7 +9,8 @@ import "./styles.scss";
 
 const Navbar = withRouter(({ history }) => {
     const { user, setUser } = useUserContext();
-    const isHomePage = history.location.pathname === "/";
+    const currentPath = history.location.pathname;
+    const isHomePage = currentPath === "/";
 
     setTitle(history.location);
 
@@ -56,9 +57,21 @@ const Navbar = withRouter(({ history }) => {
                     id="collapsed"
                 >
                     <ul className="navbar-nav">
-                        <NavLink to="/portfolio" title="Portfolio" />
-                        <NavLink to="/blog" title="Blog" />
-                        <NavLink to="/contact" title="Contact" />
+                        <NavLink
+                            to="/portfolio"
+                            title="Portfolio"
+                            isActive={currentPath === "/portfolio"}
+                        />
+                        <NavLink
+                            to="/blog"
+                            title="Blog"
+                            isActive={currentPath === "/blog"}
+                        />
+                        <NavLink
+                            to="/contact"
+                            title="Contact"
+                            isActive={currentPath === "/contact"}
+                        />
                     </ul>
                     <div className="navbar-nav ml-auto d-flex flex-column">
                         <ul className="navbar-nav d-flex flex-row">
@@ -115,17 +128,10 @@ const Navbar = withRouter(({ history }) => {
     );
 });
 
-const NavLink = ({ to, title }) => {
-    const history = useHistory();
-    return (
-        <li
-            className={`nav-item nav-link ${
-                history.location.pathname === to ? "nav-link-active" : ""
-            }`}
-        >
-            <Link to={to}>{title}</Link>
-        </li>
-    );
-};
+const NavLink = ({ to, title, isActive }) => (
+    <li className={`nav-item nav-link ${isActive ? "nav-link-active" : ""}`}>
+        <Link to={to}>{title}</Link>
+    </li>
+);
 
 export default Navbar;
