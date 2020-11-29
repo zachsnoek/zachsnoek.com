@@ -31,6 +31,10 @@
         background-color: $shadow;
     }
 
+    .nav-link-active {
+        color: $text-hover !important;
+    }
+
     .nav-item {
         margin: 0 0.25rem;
     }
