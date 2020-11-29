@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getPosts } from "utils/api";
 import Preview from "./Preview";
-import { CenterContainer, PageHeader, LoadingSpinner } from "components/shared";
+import { PageHeader, LoadingSpinner } from "components/shared";
 import "./styles.scss";
 
 const Blog = () => {
@@ -46,9 +46,9 @@ const Blog = () => {
                 )}
 
             {!loading && posts.length === 0 && (
-                <CenterContainer>
+                <div style={{ textAlign: "center" }}>
                     There are no posts to display.
-                </CenterContainer>
+                </div>
             )}
         </div>
     );

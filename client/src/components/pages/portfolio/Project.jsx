@@ -10,10 +10,12 @@ const Project = ({ title, description, image, github, website, tags }) => {
             <Card.Header>
                 <Card.Title>{title}</Card.Title>
             </Card.Header>
-            <img
-                src={`${BASE_URL}/${image}`}
-                alt="A screenshot of a portfolio project."
-            />
+            <div style={{ margin: ".5rem .5rem 0 .5rem" }}>
+                <img
+                    src={`${BASE_URL}/${image}`}
+                    alt="A screenshot of a portfolio project."
+                />
+            </div>
             <Card.Body>{description}</Card.Body>
             <Card.Footer>
                 <Row>

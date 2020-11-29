@@ -3,6 +3,7 @@
 $primary: rgb(152, 200, 255);
 $secondary: rgb(165, 173, 247);
 $info: rgb(176, 176, 197);
+$danger: rgb(245, 109, 120);
 
 $background: rgb(39, 39, 46);
 $text: rgb(255, 255, 255);
@@ -17,6 +18,7 @@ $theme-colors: (
     "primary": $primary,
     "secondary": $secondary,
     "info": $info,
+    "danger": $danger,
 );
 
 /* CONSTANTS */
