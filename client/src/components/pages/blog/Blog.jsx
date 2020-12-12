@@ -47,7 +47,12 @@ const Blog = () => {
 
             {!loading && posts.length === 0 && (
                 <div style={{ textAlign: "center" }}>
-                    There are no posts to display.
+                    I'm not currently writing on this blog, but check out some
+                    of my posts at{" "}
+                    <a className="blog-link" href="https://dev.to/zachsnoek">
+                        DEV Community
+                    </a>
+                    !
                 </div>
             )}
         </div>

@@ -21,6 +21,10 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
+
+    .blog-link {
+        color: $secondary;
+    }
 }
 
 .blog-post {
