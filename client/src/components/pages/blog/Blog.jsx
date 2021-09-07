@@ -47,10 +47,9 @@ const Blog = () => {
 
             {!loading && posts.length === 0 && (
                 <div style={{ textAlign: "center" }}>
-                    I'm not currently writing on this blog, but check out some
-                    of my posts at{" "}
-                    <a className="blog-link" href="https://dev.to/zachsnoek">
-                        DEV Community
+                    Check out my posts at{" "}
+                    <a className="blog-link" href="https://blog.zachsnoek.com">
+                        blog.zachsnoek.com
                     </a>
                     !
                 </div>
