@@ -67,11 +67,6 @@ const Navbar = withRouter(({ history }) => {
                             title="Blog"
                             isActive={currentPath === "/blog"}
                         />
-                        <NavLink
-                            to="/contact"
-                            title="Contact"
-                            isActive={currentPath === "/contact"}
-                        />
                     </ul>
                     <div className="navbar-nav ml-auto d-flex flex-column">
                         <ul className="navbar-nav d-flex flex-row">

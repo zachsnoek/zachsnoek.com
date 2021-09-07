@@ -28,7 +28,6 @@ export const routes = [
     { path: "/portfolio", component: Portfolio },
     { path: "/blog", component: Blog },
     { path: "/blog/:slug", component: PostPage },
-    { path: "/contact", component: Contact },
     { path: "/login", component: Login },
     { path: "/dashboard", component: Dashboard, protectedRoute },
     { path: "/new-post", component: NewPost, protectedRoute },
