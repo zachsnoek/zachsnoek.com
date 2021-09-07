@@ -1,12 +1,5 @@
 // Page components
-import {
-    Home,
-    Portfolio,
-    Blog,
-    PostPage,
-    Contact,
-    NotFound,
-} from "components/pages";
+import { Home, Portfolio, Blog, PostPage, NotFound } from "components/pages";
 
 // Auth components
 import { Login } from "components/auth";
