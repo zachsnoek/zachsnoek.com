@@ -1,0 +1,117 @@
+---
+title: When to use logical OR vs. nullish coalescing in JavaScript
+date: '2022-04-15'
+description:
+categories:
+    - software engineering
+tags:
+    - javascript
+    - web development
+coverImagePath: /foo.jpg
+---
+
+## Introduction
+
+It’s common to use the logical OR operator (`||`) to specify a default value:
+
+```js
+function createSong(title, artist) {
+    return {
+        title: title || '(Untitled)',
+        artist: artist || '(Unknown)',
+    };
+}
+```
+
+[ES2020](https://github.com/tc39/proposal-nullish-coalescing) adds the nullish coalescing operator (`??`) which can also be used to create default values:
+
+```js
+function createSong(title, artist) {
+    return {
+        title: title ?? '(Untitled)',
+        artist: artist ?? '(Unknown)',
+    };
+}
+```
+
+If you called both versions of `createSong` and specified the empty string for `title` and `artist`, would the result be the same?
+
+On the surface, it might seem like we’d get the same result––but that’s not quite the case. In this post, I want to briefly discuss the difference between the two operators and when you would use each.
+
+## The difference between `||` and `??`
+
+The logical OR operator returns the left operand if it’s [truthy](https://blog.zachsnoek.com/what-are-truthy-and-falsy-in-javascript) and the right operand otherwise:
+
+```js
+console.log(true || false); // true
+console.log(false || true); // true
+
+console.log('foo' || null); // "foo"
+console.log(undefined || 0); // 0
+```
+
+This can be useful for creating default values, but it can have unexpected results if you use a [falsy](https://blog.zachsnoek.com/what-are-truthy-and-falsy-in-javascript) left operand that should be considered valid:
+
+```js
+const foo = 0; // 0 is our intended value and is falsy
+
+const bar = foo || 100;
+
+console.log(bar); // 100
+```
+
+This is where the nullish coalescing operating can help us out. The nullish coalescing operator is similar to the logical OR, but is more strict: it returns the right operand only if the left is `null` or `undefined`:
+
+```js
+console.log(null ?? true); // true
+console.log(undefined ?? true); // true
+```
+
+The other falsy values will be returned if they’re used as the left operand:
+
+```js
+console.log(0 ?? true); // 0
+console.log('' ?? true); // ''
+```
+
+We can make our previous example work as intended by using the nullish coalescing operator instead:
+
+```js
+const foo = 0;
+
+const bar = foo ?? 100;
+
+console.log(bar); // 0
+```
+
+## When to use each
+
+When creating default values, you should only use the logical OR operator when you want all falsy left operands to be considered invalid. For example, if you want to set a default when the left operand is the empty string, use the logical OR.
+
+Use the nullish coalescing operator to make it clear that the left operand should only be `null` or `undefined` if it’s not truthy. In addition, use it when using [optional chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining):
+
+```js
+function createSong(title, artist) {
+    return {
+        title: title ?? '(Untitled)',
+        artist: artist ?? '(Unknown)',
+    };
+}
+
+const song = createSong('Dancing Queen', 'ABBA');
+
+const releaseDate = song?.releaseDate ?? '(unknown)';
+
+console.log(`${song.title} was released on ${releaseDate}`); // "Dancing Queen was released on (unknown)"
+```
+
+## Further reading
+
+-   [MDN | Logical OR (||)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_OR)
+-   [MDN | Nullish coalescing operator (??)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator)
+-   [MDN | Optional chaining (?.)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining)
+-   [TC39 | Nullish Coalescing for JavaScript](https://github.com/tc39/proposal-nullish-coalescing)
+
+## Let’s connect
+
+If you’re interested in more articles like this, [subscribe to my newsletter](https://mailchi.mp/2df4b6d5458f/signup-page) and connect with me on [LinkedIn](https://www.linkedin.com/in/zach-snoek-5b327b179/) and [Twitter](https://twitter.com/zach_snoek)!
