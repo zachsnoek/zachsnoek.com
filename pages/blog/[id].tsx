@@ -101,6 +101,7 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
 
 export const getStaticPaths: GetStaticPaths = () => {
     const paths = getAllPostIds();
+
     return {
         paths,
         fallback: false,
