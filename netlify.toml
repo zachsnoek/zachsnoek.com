@@ -4,3 +4,6 @@
 
 [context.beta]
   environment = { NODE_VERSION = "16.13.2" }
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
