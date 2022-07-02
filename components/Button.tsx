@@ -32,7 +32,7 @@ const ButtonBase = styled.button<{
     padding: var(--padding);
     border-radius: var(--borderRadius);
 
-    &:hover {
+    &:hover:not(:disabled) {
         cursor: pointer;
     }
 `;
@@ -61,16 +61,17 @@ const variants = {
     outline: OutlineButton,
 };
 
-interface ButtonProps extends React.ComponentPropsWithRef<'button'> {
+type ButtonProps = Omit<React.ComponentPropsWithRef<'button'>, 'style'> & {
     size?: 'small' | 'medium' | 'large';
     variant?: 'fill' | 'outline';
-}
+};
 
 export const Button = ({
     variant = 'fill',
     size = 'medium',
     className,
     children,
+    ...rest
 }: ButtonProps) => {
     const ButtonVariant = variants[variant];
     if (!ButtonVariant) {
@@ -83,7 +84,12 @@ export const Button = ({
     }
 
     return (
-        <ButtonVariant size={size} style={buttonStyles} className={className}>
+        <ButtonVariant
+            size={size}
+            style={buttonStyles}
+            className={className}
+            {...rest}
+        >
             {children}
         </ButtonVariant>
     );

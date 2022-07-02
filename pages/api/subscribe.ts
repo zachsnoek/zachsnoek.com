@@ -40,7 +40,6 @@ export default async function handler(
 
     try {
         // https://mailchimp.com/developer/marketing/api/lists/batch-subscribe-or-unsubscribe/
-        // TODO: merge fields
         const subscribeResponse = await mailchimp.lists.batchListMembers(
             process.env.MAILCHIMP_LIST_ID,
             {

@@ -6,34 +6,46 @@ import { Spacer } from './Spacer';
 import { Input } from './Input';
 
 export function MailingListSignupForm() {
-    const [emailAddress, setEmailAddress] = useState('');
-    const [messageType, setMessageType] = useState<
-        'none' | 'success' | 'error'
-    >('none');
+    const [state, setState] = useState<{
+        input: string;
+        isLoading: boolean;
+        result: 'error' | 'success' | null;
+    }>({
+        input: '',
+        isLoading: false,
+        result: null,
+    });
+
+    const { input, isLoading, result } = state;
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        if (!emailAddress) {
+        const normalizedEmailAddress = input.toLowerCase().trim();
+        if (!normalizedEmailAddress) {
             return;
         }
 
-        const normalizedEmailAddress = emailAddress.toLowerCase();
+        setState((x) => ({ ...x, isLoading: true }));
 
-        // TODO
         const response = await fetch('/api/subscribe', {
             method: 'POST',
             body: JSON.stringify({ emailAddress: normalizedEmailAddress }),
         });
 
         const data: SubscribeResponse = await response.json();
+
         if (data.error.code === 'ServerError') {
-            setMessageType('error');
+            setState((x) => ({ ...x, result: 'error' }));
         } else {
-            setMessageType('success');
-            setEmailAddress('');
+            setState((x) => ({ ...x, result: 'success', input: '' }));
         }
+
+        setState((x) => ({ ...x, isLoading: false }));
     };
+
+    const isSuccess = result === 'success';
+    const isError = result === 'error';
 
     return (
         <section>
@@ -43,26 +55,50 @@ export function MailingListSignupForm() {
                 Sign up for my mailing list to get the latest blog posts and
                 content from me. Unsubscribe anytime.
             </p>
-            <Spacer size={4} />
+            <Spacer size={5} />
             <Form onSubmit={handleSubmit}>
                 {/* TODO: VisuallyHidden styles for this label */}
                 {/* <label htmlFor="mailing-list-email">Email:</label> */}
                 <MailingListInput
                     id="mailing-list-email"
                     type="email"
-                    value={emailAddress}
-                    onChange={(e) => setEmailAddress(e.target.value)}
+                    value={input}
+                    onChange={(e) =>
+                        setState((x) => ({ ...x, input: e.target.value }))
+                    }
                     placeholder="Email address"
                 />
-                <Button type="submit">Subscribe</Button>
+                <Button type="submit" disabled={!input.length || isLoading}>
+                    Subscribe
+                </Button>
             </Form>
-            {/* TODO: Link to MailChimp-hosted sign up page */}
-            {messageType !== 'none' &&
-                (messageType === 'success' ? (
-                    <div>Success!</div>
-                ) : (
-                    <div>There was an error.</div>
-                ))}
+            {result && (
+                <>
+                    <Spacer size={5} />
+                    <div>
+                        {isSuccess && (
+                            <p>
+                                You&apos;ve been subscribed; thanks for signing
+                                up!
+                            </p>
+                        )}
+                        {isError && (
+                            <p>
+                                Oops! There was an error. You can sign up using
+                                the form{' '}
+                                <FallbackLink
+                                    href="https://z7k.io/newsletter"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    here
+                                </FallbackLink>{' '}
+                                instead.
+                            </p>
+                        )}
+                    </div>
+                </>
+            )}
         </section>
     );
 }
@@ -82,4 +118,8 @@ const MailingListInput = styled(Input)`
         flex-shrink: 1;
         width: 0; /* allow input to get below its minimum content size */
     }
+`;
+
+const FallbackLink = styled.a`
+    color: var(--color-primary);
 `;
