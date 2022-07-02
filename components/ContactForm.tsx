@@ -18,7 +18,12 @@ export function ContactForm() {
     };
 
     return (
-        <Form name="Contact Form" method="POST" data-netlify="true">
+        <Form
+            name="Contact Form"
+            action="/contact/success"
+            method="POST"
+            data-netlify="true"
+        >
             <input type="hidden" name="form-name" value="Contact Form" />
             <FormGroup>
                 <label htmlFor="name">Name</label>
