@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { Icon } from './Icon';
 import { UnstyledButton } from './UnstyledButton';
 import { toKebabCase } from '../lib/toKebabCase';
-import { useCurrentUrl } from '../hooks/useCurrentUrl';
 import React from 'react';
 
 const H2 = styled.h2`
@@ -49,13 +48,20 @@ const LinkButton = styled(UnstyledButton)`
 `;
 
 function CopyHeaderIdButton({ id }: { id: string }) {
-    const url = useCurrentUrl();
-    const headerUrl = [url, id].join('#');
+    const hash = `#${id}`;
 
     return (
         <LinkButton
             onClick={() => {
-                globalThis.navigator.clipboard.writeText(headerUrl);
+                if (globalThis.history.pushState) {
+                    history.pushState(null, null, hash);
+                } else {
+                    globalThis.location.hash = hash;
+                }
+
+                globalThis.navigator.clipboard.writeText(
+                    globalThis.location.href
+                );
             }}
         >
             <Icon id="link" />
