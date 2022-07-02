@@ -19,7 +19,7 @@ export const PostPreviewList = ({ posts }: Props) => {
     const postPreviews = rest.reduce(
         (allPosts, currentPost) => [
             ...allPosts,
-            <Spacer key={currentPost.id + '-spacer'} size={7} />,
+            <Spacer key={currentPost.id + '-spacer'} size={5} />,
             <PostPreview key={currentPost.id} post={currentPost} />,
         ],
         [<PostPreview key={first.id} post={first} />]

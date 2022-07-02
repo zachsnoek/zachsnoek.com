@@ -95,7 +95,7 @@ function getRawStringFromChildren(children: React.ReactNode) {
         } else if (x.$$typeof === Symbol.for('react.element')) {
             return x.props.children;
         } else {
-            throw new Error();
+            throw new Error(`Unknown child: ${JSON.stringify(x)}`);
         }
     });
 

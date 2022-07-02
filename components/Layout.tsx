@@ -27,6 +27,7 @@ function Layout({ title, head, children }: LayoutProps) {
                     <main id="main-content-zs">{children}</main>
                     <Break />
                     <MailingListSignupForm />
+                    <Spacer size={4} />
                     <Footer />
                 </MaxWidthContainer>
             </div>

@@ -7,6 +7,7 @@ import { getAllPosts, Post } from '../lib/posts';
 import { Spacer } from '../components/Spacer';
 import { Break } from '../components/Break';
 import { PostPreviewList } from '../components/PostPreviewList';
+import styled from 'styled-components';
 
 type Props = {
     recentPosts: Post[];
@@ -15,12 +16,12 @@ type Props = {
 export default function Home({ recentPosts }: Props) {
     return (
         <CustomLayout>
-            <h1>
+            <Header>
                 Hey, I&apos;m <Accent text="Zach!" />
                 <br />
                 I&apos;m a <Accent text="software engineer" /> from Washington,
                 USA.
-            </h1>
+            </Header>
             <Spacer size={4} />
             <section>
                 <p>
@@ -40,6 +41,10 @@ export default function Home({ recentPosts }: Props) {
         </CustomLayout>
     );
 }
+
+const Header = styled.h1`
+    line-height: 1.2;
+`;
 
 export const getStaticProps: GetStaticProps<Props> = () => {
     const recentPosts = getAllPosts({
