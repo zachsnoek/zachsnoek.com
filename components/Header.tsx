@@ -11,12 +11,12 @@ import { UnstyledButton } from './UnstyledButton';
 
 export function Header() {
     const router = useRouter();
-    const isHomePage = router.route === '/';
+    const isBlogPost = router.route === '/blog/[id]';
 
     const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
     return (
-        <Wrapper isSticky={isHomePage}>
+        <Wrapper isSticky={isBlogPost}>
             <Container>
                 <Logo />
                 <DesktopMenu>
@@ -58,7 +58,7 @@ const Wrapper = styled.header<{ isSticky: boolean }>`
     background-color: var(--color-background);
 
     ${(p) =>
-        !p.isSticky &&
+        p.isSticky &&
         ` 
         position: sticky;
         top: 0;
