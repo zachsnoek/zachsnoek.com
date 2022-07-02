@@ -35,7 +35,7 @@ export function MailingListSignupForm() {
 
         const data: SubscribeResponse = await response.json();
 
-        if (data.error.code === 'ServerError') {
+        if (data?.error?.code === 'ServerError') {
             setState((x) => ({ ...x, result: 'error' }));
         } else {
             setState((x) => ({ ...x, result: 'success', input: '' }));
