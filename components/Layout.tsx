@@ -6,6 +6,7 @@ import { SITE_TITLE } from '../constants';
 import { Break } from './Break';
 import { Spacer } from './Spacer';
 import { MaxWidthContainer } from './MaxWidthContainer';
+import Script from 'next/script';
 
 interface LayoutProps {
     title?: string;
@@ -31,6 +32,11 @@ function Layout({ title, head, children }: LayoutProps) {
                     <Footer />
                 </MaxWidthContainer>
             </div>
+            <Script
+                data-goatcounter="https://beta-zachsnoek.goatcounter.com/count"
+                async
+                src="//gc.zgo.at/count.js"
+            />
         </>
     );
 }
