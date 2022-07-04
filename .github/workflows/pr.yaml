@@ -1,0 +1,16 @@
+name: PR
+
+# on: [pull_request]
+on: [push]
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/lint
+  # build:
+  #   name: Build
+  #   runs-on: ubuntu-latest
+  #   needs: lint
