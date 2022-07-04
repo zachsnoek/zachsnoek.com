@@ -31,4 +31,4 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
       - name: Live URL
-        run: echo ${{ steps.publish.outputs.NETLIFY_OUTPUT }} ${{ steps.publish.outputs.NETLIFY_URL }} ${{ steps.publish.outputs.NETLIFY_LIVE_URL }}
+        run: echo ${{ steps.publish.outputs.NETLIFY_LIVE_URL }}
