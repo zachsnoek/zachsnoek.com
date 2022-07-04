@@ -9,5 +9,7 @@ runs:
         node-version: '16'
     - name: Format
       run: npm run format
+      shell: bash
     - name: Lint
       run: npm run lint
+      shell: bash
