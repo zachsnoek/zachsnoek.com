@@ -23,9 +23,12 @@ jobs:
         run: yarn && yarn build
         shell: bash
       - name: Publish
+        id: publish
         uses: netlify/actions/cli@master
         with:
-          args: deploy --build # https://stackoverflow.com/questions/71688092/how-to-get-the-title-of-a-pull-request-with-github-actions
+          args: deploy --build # https://github.com/netlify/netlify-plugin-nextjs#deploying
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      - name: Live URL
+        run: echo ${{ steps.publish.outputs.NETLIFY_OUTPUT }} ${{ steps.publish.outputs.NETLIFY_URL }} ${{ steps.publish.outputs.NETLIFY_LIVE_URL }}
