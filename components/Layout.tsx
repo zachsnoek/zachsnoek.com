@@ -32,11 +32,6 @@ function Layout({ title, head, children }: LayoutProps) {
                     <Footer />
                 </MaxWidthContainer>
             </div>
-            <Script
-                data-goatcounter="https://beta-zachsnoek.goatcounter.com/count"
-                async
-                src="//gc.zgo.at/count.js"
-            />
         </>
     );
 }
