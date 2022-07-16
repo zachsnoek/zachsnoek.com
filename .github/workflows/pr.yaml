@@ -32,6 +32,9 @@ jobs:
       - name: url
         run: echo '${{ steps.publish.outputs.NETLIFY_LIVE_URL }}'
         shell: bash
+      - name: url 2
+        run: echo ${{ steps.publish.outputs.NETLIFY_LIVE_URL }}
+        shell: bash
       - name: Comment on PR
         uses: actions/github-script@v6
         with:
