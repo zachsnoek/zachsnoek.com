@@ -6,17 +6,17 @@ on:
       - '*'
 
 jobs:
-  # lint:
-  #   name: Lint
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - uses: ./.github/actions/install-dependencies
-  #     - uses: ./.github/actions/lint
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/install-dependencies
+      - uses: ./.github/actions/lint
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    # needs: lint
+    needs: lint
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/install-dependencies
@@ -34,7 +34,7 @@ jobs:
         with:
           script: |
             const { PREVIEW_URL } = process.env
-            console.log(process.env)
+
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
