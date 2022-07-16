@@ -29,12 +29,15 @@ jobs:
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      - name: url
+        run: echo '${{ steps.publish.outputs.NETLIFY_LIVE_URL }}'
+        shell: bash
       - name: Comment on PR
         uses: actions/github-script@v6
         with:
           script: |
             const { PREVIEW_URL } = process.env
-
+            console.log(process.env)
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
