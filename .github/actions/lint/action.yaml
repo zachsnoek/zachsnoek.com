@@ -3,13 +3,7 @@ name: Lint
 runs:
   using: 'composite'
   steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-      with:
-        node-version: '16'
-    - name: Install dependencies
-      run: npm install --global yarn && yarn
-      shell: bash
+    # - uses: actions/checkout@v3
     - name: Format
       run: npm run format:check
       shell: bash

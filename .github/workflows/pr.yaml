@@ -4,31 +4,39 @@ name: PR
 on: [push]
 
 jobs:
-  # lint:
-  #   name: Lint
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - uses: ./.github/actions/lint
-  build:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/lint
+  deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    # needs: lint
+    needs: lint
     steps:
       - uses: actions/checkout@v3
       - name: Install dependencies
-        run: npm install --global yarn && yarn
-        shell: bash
+        uses: ./.github/actions/install-dependencies
       - name: Build
         run: yarn && yarn build
         shell: bash
-      - name: Publish
-        id: publish
-        uses: netlify/actions/cli@master
-        with:
-          args: deploy --build # https://github.com/netlify/netlify-plugin-nextjs#deploying
-        env:
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-      - name: Live URL
-        run: echo ${{ steps.publish.outputs.NETLIFY_LIVE_URL }}
+      # - name: Publish deploy preview
+      #   id: publish
+      #   uses: netlify/actions/cli@master
+      #   with:
+      #     args: deploy --build # https://github.com/netlify/netlify-plugin-nextjs#deploying
+      #   env:
+      #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+
+      # - name: Comment on PR
+      #   uses: actions/github-script@v6
+      #   with:
+      #     script: |
+      #       github.rest.issues.createComment({
+      #         issue_number: context.issue.number,
+      #         owner: context.repo.owner,
+      #         repo: context.repo.repo,
+      #         body: '🚀 PR deploy preview is live: ${{ steps.publish.outputs.NETLIFY_LIVE_URL }}'
+      #       })
