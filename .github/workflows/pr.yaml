@@ -9,7 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: ./.github/actions/lint
+      - name: Install dependencies
+        uses: ./.github/actions/install-dependencies
+      - name: Lint
+        uses: ./.github/actions/lint
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
