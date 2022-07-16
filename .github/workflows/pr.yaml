@@ -29,12 +29,6 @@ jobs:
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-      - name: output
-        run: echo ${{ steps.publish.outputs.NETLIFY_OUTPUT }}
-        shell: bash
-      - name: url
-        run: echo ${{ steps.publish.outputs.NETLIFY_URL }}
-        shell: bash
       - name: Comment on PR
         uses: actions/github-script@v6
         with:
@@ -48,4 +42,4 @@ jobs:
               body: `🚀 PR preview is live: ${PREVIEW_URL}`
             })
         env:
-          PREVIEW_URL: '${{ steps.publish.outputs.NETLIFY_LIVE_URL }}'
+          PREVIEW_URL: '${{ steps.publish.outputs.NETLIFY_URL }}'
