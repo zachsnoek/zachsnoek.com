@@ -10,7 +10,7 @@ type Props = {
 
 export default function Blog({ posts }: Props) {
     return (
-        <MainLayout title="Blog" header="Blog">
+        <MainLayout title="Zach Snoek's Blog" header="Blog">
             <PostPreviewList posts={posts} />
         </MainLayout>
     );

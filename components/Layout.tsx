@@ -6,10 +6,9 @@ import { SITE_TITLE } from '../constants';
 import { Break } from './Break';
 import { Spacer } from './Spacer';
 import { MaxWidthContainer } from './MaxWidthContainer';
-import Script from 'next/script';
 
 interface LayoutProps {
-    title?: string;
+    title: string;
     head?: () => React.ReactNode;
     children: React.ReactNode;
 }
@@ -18,7 +17,7 @@ function Layout({ title, head, children }: LayoutProps) {
     return (
         <>
             <Head>
-                <title>{getPageTitle(title)}</title>
+                <title>{title}</title>
                 <link rel="icon" href="/favicon.ico" />
                 {head?.()}
             </Head>
@@ -42,7 +41,7 @@ interface MainLayoutProps extends LayoutProps {
 
 export function MainLayout({ header, children, ...rest }: MainLayoutProps) {
     if (!header) {
-        throw new Error('MainLayout requires a header prop.');
+        throw new Error('MainLayout requires a header.');
     }
 
     return (
@@ -58,6 +57,7 @@ export function CustomLayout(props: LayoutProps) {
     return <Layout {...props} />;
 }
 
+/** @deprecated */
 function getPageTitle(pageTitle: string | undefined) {
     return pageTitle?.length ? `${pageTitle} | ${SITE_TITLE}` : SITE_TITLE;
 }
