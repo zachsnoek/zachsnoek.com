@@ -30,16 +30,12 @@ export default function Post({ source, data }: Props) {
     return (
         <CustomLayout
             title={data.title}
+            description={data.description}
             head={() => (
                 <>
                     <link
                         rel="stylesheet"
                         href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/an-old-hope.min.css"
-                    />
-                    <meta
-                        name="description"
-                        content={data.description}
-                        key="desc"
                     />
                 </>
             )}

@@ -9,15 +9,19 @@ import { MaxWidthContainer } from './MaxWidthContainer';
 
 interface LayoutProps {
     title: string;
+    description?: string;
     head?: () => React.ReactNode;
     children: React.ReactNode;
 }
 
-function Layout({ title, head, children }: LayoutProps) {
+function Layout({ title, description, head, children }: LayoutProps) {
     return (
         <>
             <Head>
                 <title>{title}</title>
+                {description && (
+                    <meta name="description" content={description} key="desc" />
+                )}
                 <link rel="icon" href="/favicon.ico" />
                 {head?.()}
             </Head>

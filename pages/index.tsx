@@ -15,7 +15,10 @@ type Props = {
 
 export default function Home({ recentPosts }: Props) {
     return (
-        <CustomLayout title="Zach Snoek">
+        <CustomLayout
+            title="Zach Snoek"
+            description="Hey, I'm Zach! I'm a software engineer and I write about JavaScript, React, CSS, and other web development topics."
+        >
             <Header>
                 Hey, I&apos;m <Accent text="Zach!" />
                 <br />

@@ -4,7 +4,11 @@ import { Spacer } from '../../components/Spacer';
 
 export default function Contact() {
     return (
-        <MainLayout title="Contact Zach Snoek" header="Contact">
+        <MainLayout
+            title="Contact Zach Snoek"
+            description="Get in touch with me!"
+            header="Contact"
+        >
             <p>
                 Fill out the form below and I&apos;ll get back to you within 2
                 business days.

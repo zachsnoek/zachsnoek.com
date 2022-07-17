@@ -11,7 +11,8 @@ type Props = {
 export default function Tag({ tag, posts }: Props) {
     return (
         <MainLayout
-            title={`Blog posts about ${tag} by Zach Snoek`}
+            title={`Blog posts about ${tag}`}
+            description={`Blog posts about ${tag} by Zach Snoek`}
             header={`Posts about "${tag}"`} // TODO: Render tag text with primary color
         >
             <PostPreviewList posts={posts} />
