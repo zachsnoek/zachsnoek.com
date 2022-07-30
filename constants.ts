@@ -1,5 +1,3 @@
-export const SITE_TITLE = 'Zach Snoek';
-
 export const BREAKPOINTS = {
     mobileMax: 550,
     tabletMax: 1100,

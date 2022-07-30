@@ -413,6 +413,11 @@
     "@babel/helper-validator-identifier" "^7.16.7"
     to-fast-properties "^2.0.0"
 
+"@cloudinary/url-gen@^1.8.0":
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/@cloudinary/url-gen/-/url-gen-1.8.0.tgz#dcadd7de08314d79c225a710efb93a51b1fab413"
+  integrity sha512-sSbLY3i/FZ+yHAinVbTzUjIzFGsnpYajWTLG+dc/80GbSfODuxZ0OyXp2kOxtf7MUyx5y998BIa8ketnVr7chA==
+
 "@commitlint/cli@^17.0.3":
   version "17.0.3"
   resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-17.0.3.tgz#50be9d9a8d79f6c47bfd2703638fe65215eb2526"

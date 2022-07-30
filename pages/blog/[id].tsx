@@ -10,9 +10,9 @@ import {
 import { Date } from '../../components/Date';
 import { CustomLayout } from '../../components/Layout';
 import styled from 'styled-components';
-import * as defaultReplacements from '../../components/blog-post/default-replacements';
-import * as globals from '../../components/blog-post/globals';
-import { MDXRemoteWrapper } from '../../components/blog-post/MDXRemoteWrapper';
+import * as defaultReplacements from '../../components/blog/default-replacements';
+import * as globals from '../../components/blog/globals';
+import { MDXRemoteWrapper } from '../../components/blog/MDXRemoteWrapper';
 import { Spacer } from '../../components/Spacer';
 import { SharePost } from '../../components/SharePost';
 
@@ -31,6 +31,7 @@ export default function Post({ source, data }: Props) {
         <CustomLayout
             title={data.title}
             description={data.description}
+            type="article"
             head={() => (
                 <>
                     <link
@@ -100,6 +101,6 @@ export const getStaticPaths: GetStaticPaths = () => {
 
     return {
         paths,
-        fallback: false,
+        fallback: 'blocking',
     };
 };
