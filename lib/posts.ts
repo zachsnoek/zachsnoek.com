@@ -16,28 +16,24 @@ export type Post = {
 
 const postsDirectory = path.join(process.cwd(), 'content', 'blog');
 
-function getIdFromFilename(filename: string) {
-    return filename.replace(/\.mdx$/, '');
-}
-
-function getFrontMatter(filename: string): { content: string; data: Post } {
-    const fullPath = path.join(postsDirectory, filename);
+function getFrontMatter(directory: string): { content: string; data: Post } {
+    const fullPath = path.join(postsDirectory, directory, 'index.mdx');
     const fileContents = fs.readFileSync(fullPath, 'utf8');
 
     const { content, data } = matter(fileContents);
 
     return {
         content,
-        data: { id: getIdFromFilename(filename), ...data } as Post,
+        data: { id: directory, ...data } as Post,
     };
 }
 
 export function getAllPostIds() {
-    const filenames = fs.readdirSync(postsDirectory);
+    const directories = fs.readdirSync(postsDirectory);
 
-    return filenames.map((filename) => ({
+    return directories.map((directory) => ({
         params: {
-            id: getIdFromFilename(filename),
+            id: directory,
         },
     }));
 }
@@ -58,20 +54,20 @@ type GetAllPostsOptions = {
 
 export function getAllPosts(queryOptions: GetAllPostsOptions = {}): Post[] {
     const options = { limit: 100, ...queryOptions };
-    const postFilenames = fs.readdirSync(postsDirectory);
+    const postDirectories = fs.readdirSync(postsDirectory);
 
     const { filter, limit } = options;
 
-    const posts = postFilenames
-        .map((filename) => {
-            const { data } = getFrontMatter(filename);
+    const posts = postDirectories
+        .map((directory) => {
+            const { data } = getFrontMatter(directory);
 
             if (filter?.tag && !data.tags.includes(filter?.tag)) {
                 return;
             }
 
             return {
-                id: getIdFromFilename(filename),
+                id: directory,
                 ...data,
             } as Post;
         })
@@ -90,7 +86,7 @@ export function getAllPosts(queryOptions: GetAllPostsOptions = {}): Post[] {
 }
 
 export async function getPostWithMdx(id: string) {
-    const { content, data } = getFrontMatter(`${id}.mdx`);
+    const { content, data } = getFrontMatter(id);
 
     const mdxSource = await serialize(content, {
         mdxOptions: {

@@ -68,3 +68,7 @@ export function code({ className, children }) {
         </pre>
     );
 }
+
+export function img({ src, ...props }) {
+    return <img {...props} src={`/images/blog/${src}`} />;
+}

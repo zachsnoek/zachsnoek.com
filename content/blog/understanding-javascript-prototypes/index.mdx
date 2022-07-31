@@ -1,0 +1,155 @@
+---
+title: Understanding JavaScript prototypes
+date: '2021-05-17'
+description: What are prototypes in JavaScript?
+categories:
+    - software engineering
+tags:
+    - javascript
+    - web development
+---
+
+## Introduction
+
+When you first learned JavaScript, you might have started by writing something simple like creating a string primitive:
+
+```javascript
+const hello = 'Hello, world!';
+```
+
+You likely even learned how to use `split` to turn that string into an array of substrings:
+
+```javascript
+const parts = hello.split(',');
+console.log(parts); // output: ["Hello", " world!"]
+```
+
+You didn't implement `split` yourself, though. Instead, `split` is defined on `hello`'s prototype object, which comes from `String`. Prototypes are JavaScript's method of inheritance and it allows properties to be shared across all object instances.
+
+## Prototypes
+
+All JavaScript objects have a prototype, which is an object that it inherits properties from. This prototype object is a property on the constructor function that the inheriting object was created from, and the inheriting object links to it.
+
+An object's prototype can have its own prototype, and that prototype can have its own prototype; this prototype chain continues until a prototype points to `null`, which is the end of the chain. Most objects are instances of `Object`, so the prototype chain will eventually link back to `Object`'s prototype property, which is `null`.
+
+This diagram, modified from [MDN](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_prototypes) and created with [Excalidraw](https://www.excalidraw.com), shows one way you can think about the prototypal inheritance of `hello`:
+
+TODO
+
+## The `prototype` property and an object's prototype
+
+A constructor function defines the prototype object on its `prototype` property; this is the object that all inheriting objects will link to. For example, to see all of the properties inherited by instances of `String`, we can log `String.prototype`:
+
+```javascript
+console.log(String.prototype);
+```
+
+Output:
+
+```text
+{
+    anchor: ƒ anchor()
+    big: ƒ big(),
+    ...
+    split: ƒ split()
+    ...
+    __proto__: Object
+}
+```
+
+To access the prototype of an object, we can call `Object.getPrototypeOf(obj)` or use the `__proto__` property of the object in many web browsers. Since `hello` is an instance of `String` (or, coerced to `String` at runtime), we should expect to see it linked to the prototype object defined by the `String` constructor function:
+
+```javascript
+console.log(Object.getPrototypeOf(hello));
+```
+
+Output:
+
+```text
+{
+    anchor: ƒ anchor()
+    big: ƒ big(),
+    ...
+    split: ƒ split()
+    ...
+    __proto__: Object
+}
+```
+
+## The prototype chain
+
+We've discussed what prototypes are and how instances link to them, but how does this allow objects to inherit properties? To find the property of an object, JavaScript will "walk up" the prototype chain. First, it will look at the calling object's properties. If the property is not found there, it will look at its prototype's properties. This continues until the property is found or the end of the prototype chain is reached.
+
+An instance of `String` is an object that inherits from `Object`, so `String`'s prototype is the prototype defined on `Object`'s constructor function. Because of this, we can access the properties defined on `Object`'s prototype such as `toLocaleString`:
+
+```javascript
+console.log(hello.toLocaleString()); // output: "Hello, world!"
+```
+
+When we called `hello.toLocaleString()`, JavaScript:
+
+1. Checked for the property on `hello` and did not find it
+2. Checked `hello`'s prototype, the prototype object defined by `String`, and did not find it
+3. Checked `String`'s prototype, the prototype object defined by `Object`, and did find it
+
+> Note: MDN is a handy way to tell which properties are defined on the prototype of built-in objects. For instance, the [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) page links to documentation for all of the different properties, such as `map` and `pop`, that are defined on `Array.prototype`.
+
+### Walking the prototype chain in JavaScript
+
+We briefly saw a simple graphical representation of `hello`'s prototype chain earlier. Now that we know how to access an object's prototype, we can write our own function to show the chain programmatically:
+
+```javascript
+function walkPrototypeChain(obj) {
+    let current = Object.getPrototypeOf(obj);
+
+    while (current) {
+        console.log('Inherits from:', current.constructor.name);
+        console.dir(current);
+
+        const next = Object.getPrototypeOf(current);
+        current = next;
+    }
+
+    console.log('Reached of prototype chain:', current);
+}
+```
+
+> Note: `current.constructor.name` is the name of the constructor function that defines the prototype.
+
+If we run this in the browser with `hello`, we get the following output:
+
+TODO
+
+## Extending a prototype
+
+We can easily define our own properties on a constructor function's `prototype` property. Let's say we have a program that creates many arrays that we commonly want to ensure only contain truthy values. We can define a `whereNotFalsy` property on `Array`'s prototype to make this available on every array we create:
+
+```javascript
+Array.prototype.whereNotFalsy = function () {
+    return this.filter((x) => x);
+};
+```
+
+Now we can call `whereNotFalsy` on the subsequent arrays we create:
+
+```javascript
+const hasFalsyValues = ['', 'Hello, world!', null];
+
+console.log(hasFalsyValues.whereNotFalsy()); // output: ["Hello, world!"]
+```
+
+## Conclusion
+
+Prototypes allow objects to inherit shared properties. An object's prototype refers to the object that it inherits properties from. This prototype object is defined on the `prototype` property of the constructor function that
+creates it. Inheriting objects contain a link to the prototype object and it can be accessed through the `__proto__` property in web browsers or by calling `Object.getPrototypeOf` in other contexts.
+
+When an object's property is accessed, JavaScript first checks its own properties, then walks its prototype chain to find the property––this is how objects are able to inherit properties through prototypes. Lastly, we can directly modify the prototype of a constructor function by accessing its `prototype` property, which will affect all inheriting objects.
+
+## References
+
+-   [MDN | Object prototypes](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_prototypes)
+-   [MDN | Inheritance and the prototype chain](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)
+
+## Let's connect
+
+If you liked this post, connect with me on [Twitter](https://twitter.com/zach_snoek), [LinkedIn](https://www.linkedin.com/in/zach-snoek-5b327b179/), and [GitHub](https://github.com/zachsnoek)!
