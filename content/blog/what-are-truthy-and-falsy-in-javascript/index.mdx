@@ -1,0 +1,48 @@
+---
+title: 'What are truthy and falsy in JavaScript?'
+date: '2020-12-11'
+description:
+categories:
+    - software engineering
+tags:
+    - javascript
+    - web development
+---
+
+If you write JavaScript, you've probably heard values called truthy and falsy before. But what do truthy and falsy mean and what values are considered each?
+
+## Definitions
+
+**Truthy** values are values that can be [coerced](https://developer.mozilla.org/en-US/docs/Glossary/Type_Conversion) to `true` in a Boolean context, like an `if` statement. **Falsy** values are considered `false` in a Boolean context. That means that a value is truthy if it causes an `if` block or `while` loop to execute, for example.
+
+## Truthy and Falsy Values
+
+### Falsy
+
+There are eight falsy values in JavaScript: `false`, `0`, `-0`, `0n`, `"0"`, `null`, `undefined`, and `NaN`.
+
+### Truthy
+
+Truthy values are a little easier to remember: all values that are not falsy are truthy.
+
+Here are some examples of truthy values: `true`, `42`, `-42`, `{}`, `"false"`, `"0"`, and `new Date()`.
+
+If you're ever curious if a value is truthy or falsy, here's a short and simple function to help you out:
+
+```javascript
+const isTruthyOrFalsy = (value) => (value ? 'truthy' : 'falsy');
+```
+
+## Conclusion
+
+Simply put, truthy values are `true` in a Boolean context and falsy values are `false` in a Boolean context. Hopefully this post helps you understand JavaScript values a little better.
+
+## References and Further Reading
+
+-   [MDN | Truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy)
+-   [MDN | Falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy)
+-   [MDN | Type coercsion](https://developer.mozilla.org/en-US/docs/Glossary/Type_Conversion)
+
+## Let's connect
+
+Thanks for reading! If you found this post helpful, come connect with me on [Twitter](https://twitter.com/zach_snoek), [LinkedIn](https://www.linkedin.com/in/zach-snoek-5b327b179/), and [GitHub](https://github.com/zachsnoek)!
