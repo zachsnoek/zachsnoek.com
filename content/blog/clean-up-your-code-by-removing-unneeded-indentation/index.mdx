@@ -1,0 +1,106 @@
+---
+title: 'Clean up your code by removing unneeded indentation 🧹'
+date: '2021-01-08'
+description: 'Use this technique to clean up your code.'
+categories:
+    - software engineering
+tags:
+    - clean code
+    - javascript
+    - web development
+---
+
+Indenting code, while usually not useful to a compiler, greatly helps us humans read code more easily. However, adding more indentation than what is necessary––due to extraneous `if` statements, for example––might make a piece of code harder to read. Here is a brief overview of one technique you can use to avoid over-indenting code.
+
+Take a look at the following simplistic example of a function `getUserImages`, which fetches a user's images from an API and then maps the data in some way:
+
+```js
+const getUserImages = async (userId) => {
+    if (userId) {
+        const getImagesResponse = await apiClient.getImages(userId);
+
+        if (getImagesResponse.ok) {
+            const images = getImagesResponse.value;
+
+            if (images) {
+                const mappedImages = mapImages(images);
+                return mappedImages;
+            }
+        }
+    }
+};
+```
+
+Yikes, that's a lot of indentation 😬. You can imagine how complex code written like this might be hard to follow: With more indents, it becomes harder to track the block of code that a certain line belongs to.
+
+The good news is that we can avoid a lot of this indentation! In this case, it's pretty simple because there are no corresponding `else` blocks; we can simply check for the inverse of the `if` statements and return early if the conditions aren't met.
+
+Here's a refactored version of `getUserImages` using this technique:
+
+```js
+const getUserImages = async (userId) => {
+    if (!userId) {
+        console.log('No userId provided');
+        return;
+    }
+
+    const getImagesResponse = await apiClient.getImages(userId);
+
+    if (!getImagesResponse.ok) {
+        console.error('Error getting images!');
+        return;
+    }
+
+    const images = getImagesResponse.value;
+
+    if (!images) {
+        console.log('User has no images');
+        return;
+    }
+
+    const mappedImages = mapImages(images);
+    return mappedImages;
+};
+```
+
+We've "flattened" the code out a bit and made it easier to read. Note that early guards like `!images` aren't very useful if there isn't a lot of code underneath it, but, again, this is a simplistic example.
+
+This technique can also apply to other places where we might have multiple nested blocks of code, like in a `for` loop:
+
+```js
+const processList = (list) => {
+    for (let i = 0; i < list.length; i++) {
+        if (i % 2 === 0) {
+            if (list[i]) {
+                // ... Do something
+                // ... Do more things
+                // ... Do even more things
+            }
+        }
+    }
+};
+```
+
+I find that immediately nesting `if` statements like this is usually difficult to read. The code in the inner `if` statement is indented _four_ times; removing even one level of indentation can help us out:
+
+```js
+const processList = (list) => {
+    for (let i = 0; i < list.length; i++) {
+        if (i % 2 !== 0) {
+            continue;
+        }
+
+        if (list[i]) {
+            // ... Do something
+            // ... Do more things
+            // ... Do even more things
+        }
+    }
+};
+```
+
+This technique can't always be used to refactor hard-to-read indented lines of code. But, when possible, removing unnecessary indentation in your code like this will go a long way in making it more readable and maintainable for yourself and future developers.
+
+## Let's connect
+
+If you liked this post, come connect with me on [Twitter](https://twitter.com/zach_snoek), [LinkedIn](https://www.linkedin.com/in/zach-snoek-5b327b179/), and [GitHub](https://github.com/zachsnoek)! You can also [subscribe to my mailing list](https://mailchi.mp/2df4b6d5458f/signup-page) and get the latest content and news from me.

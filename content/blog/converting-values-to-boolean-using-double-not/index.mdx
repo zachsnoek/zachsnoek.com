@@ -1,0 +1,136 @@
+---
+title: 'Converting values to boolean using !! (double NOT)'
+date: '2021-06-30'
+description: 'What is that weird !! thing in JavaScript?'
+categories:
+    - software engineering
+tags:
+    - javascript
+    - react
+    - web development
+---
+
+Something I come across working in JavaScript and React projects is the use of two logical NOT operators to coerce a value to its corresponding boolean value. This might look strange or confusing at first, so let's see how it works and why you may (or may not) use it.
+
+## The logical NOT operator (`!`)
+
+In JavaScript, all values are either [truthy or falsy](https://blog.zachsnoek.com/what-are-truthy-and-falsy-in-javascript):
+
+```javascript
+let x;
+
+x = 'JavaScript'; // truthy
+x = ''; // falsy
+x = {}; // truthy
+x = 0; // falsy
+```
+
+Using the logical NOT operator (`!`), we can convert a truthy value to `false` and a falsy value to `true`:
+
+```javascript
+let x;
+
+x = !'JavaScript'; // false
+x = !''; // true
+x = !{}; // false
+x = !0; // true
+```
+
+`!` always returns a boolean value: It first converts the truthy or falsy value to its corresponding boolean value (truthy corresponds to `true` and falsy to `false`), then returns the negated boolean. For example, `!{}` first converts `{}` to `true` and then returns the opposite of `true`, which is `false`.
+
+## The double NOT (`!!`)
+
+You might come across a situation where you want to use a non-boolean value as a boolean. A double NOT (`!!`) allows us to succinctly convert a non-boolean value to its corresponding boolean value:
+
+```javascript
+let x;
+
+x = !!'JavaScript'; // true
+x = !!''; // false
+```
+
+With our knowledge of how the logical NOT operator works, we can see how this makes sense. Take `!!"JavaScript"`, for instance:
+
+1. `"JavaScript"` is truthy, so it is converted to `true`
+2. The first `!` converts `true` to `false`
+3. The second `!` converts `false` to `true`
+
+Note that `!!` is not an operator––it's just two logical NOT operators chained together. In fact, we can use as many `!`s as we like (and make our JavaScript look like it's gone into expletive mode):
+
+```javascript
+const x = !!!!!'s***'; // false
+```
+
+## Using `!!`
+
+I don't often use `!!`, but I think there are a few instances where it can be useful. Consider a function that performs logic on non-boolean values that we want to ensure returns a boolean value:
+
+```typescript
+function isValidUser(user: { name: string; bio: string }) {
+    return !!(user.name && user.bio); // ...
+}
+```
+
+We can also use `!!` as a shortcut for checking if a list has any elements; this is something I often see in React:
+
+```jsx
+function FruitDisplay({ fruit }) {
+    const hasFruit = !!fruit.length;
+
+    return (
+        hasFruit && (
+            <>
+                <h3>Available fruit:</h3>
+                <ul>
+                    {fruit.map((f) => (
+                        <li>{f}</li>
+                    ))}
+                </ul>
+            </>
+        )
+    );
+}
+
+function App() {
+    const fruit = ['apple', 'orange', 'grape'];
+    // ...
+    return (
+        <FruitDisplay fruit={fruit} />
+        //...
+    );
+}
+```
+
+However, it's [often argued](https://stackoverflow.com/a/1406618) that `!!` decreases readability and is used in situations that could be refactored to be more explicit. In our previous list length example, I'd argue that checking for `> 0` or `!== 0` is more clear:
+
+```javascript
+function FruitDisplay({ fruit }) {
+    const hasFruit = fruit.length > 0; // or fruit.length !== 0
+    // ...
+}
+```
+
+And it's worth noting that using the built-in `Boolean` function does the same thing as `!!` and is arguably more readable and easier to understand:
+
+```javascript
+let x;
+
+x = !!'' === Boolean(''); // true
+x = !!'JavaScript' === Boolean('JavaScript'); // true
+```
+
+## Conclusion
+
+The double NOT allows us to convert truthy and falsy values to their corresponding boolean value: truthy values become `true` and falsy values become `false`. It's a concise way to coerce any value to a boolean but can also sacrifice readability.
+
+Do you like to use `!!`? What situations do you find it useful or harmful? Let me know your thoughts below!
+
+## References
+
+-   [MDN | Boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)
+-   [MDN | Logical NOT (!)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_NOT)
+-   [Edward Plato | JS Double Bang –– or "The Not Operator Part !!"](https://medium.com/@edplatomail/js-double-bang-or-the-not-operator-part-40e55d089bf0)
+
+## Let's connect
+
+If you liked this post, come connect with me on [Twitter](https://twitter.com/zach_snoek), [LinkedIn](https://www.linkedin.com/in/zach-snoek-5b327b179/), and [GitHub](https://github.com/zachsnoek)!

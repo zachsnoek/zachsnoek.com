@@ -1,0 +1,125 @@
+---
+title: 'Use hooks in class components with a render prop'
+date: '2021-02-28'
+description: Learn how to use React hooks in a class component.
+categories:
+    - software engineering
+tags:
+    - react
+    - javascript
+    - web development
+---
+
+Let's say one of your coworkers has created a super fancy hook to replace some old code and your job is to implement it in all the places that need to use it. That hook is implemented like this:
+
+```jsx
+// Warning: We are using the classic and _contrived_ counter to demonstrate this pattern.
+
+const useCounter = (initialCount = 0) => {
+    const [count, setCount] = React.useState(initialCount);
+
+    const incrementCount = () => setCount(count + 1);
+    const decrementCount = () => setCount(count - 1);
+
+    return { count, incrementCount, decrementCount };
+};
+```
+
+We can consume it in a functional component like this:
+
+```jsx
+const CounterDisplay = () => {
+    const { count, incrementCount, decrementCount } = useCounter();
+
+    return (
+        <div>
+            {`Count is: ${count}`}
+            <button onClick={incrementCount}>+</button>
+            <button onClick={decrementCount}>-</button>
+        </div>
+    );
+};
+```
+
+This is great and all, but what if some of your codebase uses class components, where [hooks can't be used](https://reactjs.org/docs/hooks-faq.html#should-i-use-hooks-classes-or-a-mix-of-both)? One option is to create a component that passes the hook to a class component via a [render prop](https://reactjs.org/docs/render-props.html).
+
+Simply put, the render prop pattern allows components to share code. A component has a prop that accepts a function that returns a React element, and calls that function instead of returning its own renderable value. The component with the render prop shares its data by passing one or more arguments to the called function.
+
+Let's see how we can create a component that passes our `useCounter` hook to our class component with a render prop. Here's the class component that we want to use `useCounter` in, with the return values of the hook where we plan to use them:
+
+```jsx
+class CounterDisplay extends React.Component {
+    render() {
+        return (
+            <div>
+                {count}
+                <button onClick={incrementCount}>+</button>
+                <button onClick={decrementCount}>-</button>
+            </div>
+        );
+    }
+}
+```
+
+First, we'll create a component called `Counter` that accepts the render prop. When we use this component later, we will pass a function to the render prop that returns `CounterDisplay`.
+
+```jsx
+const Counter = ({ render }) => {
+    return null;
+};
+```
+
+_Note: We've literally named the render prop `render`, but the prop [can be named whatever you like](https://reactjs.org/docs/render-props.html#using-props-other-than-render); "render prop" refers to the pattern of a render prop, not a specific prop name. `children` as a function is another commonly-used way to implement a render prop._
+
+Again, `render` will accept a function that returns a React element, so instead of `Counter` implementing and returning one itself, we can just return the result of calling `render`:
+
+```jsx
+const Counter = ({ render }) => {
+    return render();
+};
+```
+
+Great! But we still need to pass the value of `useCounter` to the `render` function, because right now this component is useless. Since `Counter` is a functional component, we can use `useCounter` and then pass its value to `render`:
+
+```jsx
+const Counter = ({ render }) => {
+    const counter = useCounter();
+    return render(counter);
+};
+```
+
+Now we need to modify `CounterDisplay` to accept the value that `Counter` will pass to it. We can do this by accepting the value through its props:
+
+```jsx
+class CounterDisplay extends React.Component {
+    render() {
+        const { count, incrementCount, decrementCount } = this.props;
+
+        return (
+            <div>
+                {count}
+                <button onClick={incrementCount}>+</button>
+                <button onClick={decrementCount}>-</button>
+            </div>
+        );
+    }
+}
+```
+
+To recap so far: We've created a component `Counter` that accepts a `render` prop. It calls the function passed to `render` and also passes the return value of `useCounter` to it. We've modified `CounterDisplay` to get the value from its props which will allow us to use the value as we would in a functional component.
+
+We can now put `Counter` and `CounterDisplay` together. Since we know that `Counter` is going to pass `counter` to `render`, we can pass it through `CounterDisplay`'s props:
+
+```jsx
+const App = () => {
+    return <Counter render={(counter) => <CounterDisplay {...counter} />} />;
+};
+```
+
+Now your codebase can take advantage of the great counting features that `useCounter` has to offer, even in class components.
+
+The next time you need to use a hook in a class component, consider using a render prop.
+
+## Let's connect
+
+If you liked this post, come connect with me on [Twitter](https://twitter.com/zach_snoek), [LinkedIn](https://www.linkedin.com/in/zach-snoek-5b327b179/), and [GitHub](https://github.com/zachsnoek)!

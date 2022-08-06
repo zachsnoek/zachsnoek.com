@@ -1,0 +1,139 @@
+---
+title: 'An introduction to constructor functions'
+date: '2021-04-19'
+description: What are constructor functions in JavaScript?
+categories:
+    - software engineering
+tags:
+    - javascript
+    - web development
+---
+
+## Overview
+
+If you're new to JavaScript and have experience in a class-based object-oriented language, you might be wondering how you can create custom objects in JavaScript. In this post, you'll learn about constructor functions, which is one method of creating user-defined objects and function similarly to classes.
+
+To fully understand this post, you should be familiar with JavaScript and have a basic understanding of JavaScript functions and objects.
+
+## The `Car` object
+
+We'll be creating a constructor function to create `Car` objects. Here's how an object representing a 1999 Honda Accord might look like if we defined it using object literal syntax:
+
+```javascript
+const accord = {
+    make: 'Honda',
+    model: 'Accord',
+    bodyStyle: 'sedan',
+    year: '1999',
+};
+
+console.log(
+    `This ${accord.make} ${accord.model} ${accord.bodyStyle} was built in ${accord.year}.`
+);
+
+// Output: "This Honda Accord sedan was built in 1999."
+```
+
+If we just have some one-off car object that we need to make, this would be fine. But if you need to represent a lot of different cars, it would be nice to have a way to reuse common `Car` properties. This is where constructor functions come in.
+
+## Creating a constructor function
+
+A constructor function is a function that creates a new object. Creating it is similar to creating any other function in JavaScript: it can have parameters, has a name, and is declared with the `function` keyword. We'll create a `Car` constructor function that takes in the `make`, `model`, `bodyStyle`, and `year` as arguments; here is what it looks like without its body implemented:
+
+```js
+function Car(make, model, bodyStyle, year) {
+    // TODO: Set properties
+}
+```
+
+> Note: By convention, constructor functions start with a capital letter (Pascal case) so that we properly initialize them and don't confuse them with non-constructor functions.
+
+We can set the properties of our custom object by defining them on `this`, which will refer to the new object that is created:
+
+```javascript
+function Car(make, model, bodyStyle, year) {
+    this.make = make;
+    this.model = model;
+    this.bodyStyle = bodyStyle;
+    this.year = year;
+}
+```
+
+This almost looks like typical class syntax from an object-oriented language, but it's a function––and we're not returning anything. So what's happening here? To understand this, let's look at how we create an instance of our `Car`.
+
+## Creating an instance of Car with `new`
+
+Creating an instance of `Car` is like calling a normal JavaScript function, but we also use the `new` keyword before the function name. You may be familiar with this syntax if you've used a class-based language such as Java or C#. Here's how we create an instance of the same `accord` defined earlier but with our new constructor function:
+
+```javascript
+const accord = new Car('Honda', 'Accord', 'sedan', '1999');
+```
+
+Now that we know how to create a `Car` object, let's clarify how this is working. When we call a constructor function with `new`, JavaScript will:
+
+-   Create a new, empty object
+-   Call the constructor function with the value of `this` pointing to the new object
+    -   Thus, the properties specified on `this` in the function will be set on the new object
+-   Return the new object
+
+Under the hood, this process looks similar to this:
+
+```javascript
+// Create a new object
+const obj = {};
+
+// Call Car, with the value of `this` being the new `obj` object
+Car.apply(obj, ['Honda', 'Accord', 'sedan', '1999']);
+
+// Return obj
+```
+
+## Adding a method
+
+Just having a property for the car's model year probably isn't that interesting. Let's create a method that will return a car's age. To do this, we'll add a `getAge` property on `Car`'s prototype property. It will be a function that returns the age as a number:
+
+```javascript
+Car.prototype.getAge = function () {
+    return new Date().getFullYear() - this.year;
+};
+```
+
+<!-- > Note: In a prototype property, the value of `this` in a function will refer to the calling object (i.e., the `Car`, not the prototype). -->
+
+Simply put, properties on an constructor function's prototype property are inherited by every instance. But why can't we just define `getAge` as a property of `Car`? Here's what that looks like:
+
+```javascript
+function Car(make, model, bodyStyle, year) {
+    this.make = make;
+    this.model = model;
+    this.bodyStyle = bodyStyle;
+    this.year = year;
+
+    this.getAge = function () {
+        return new Date().getFullYear() - this.year;
+    };
+}
+```
+
+This is valid and will give you the same behavior. However, this creates a `getAge` function every time a new `Car` is created. By placing the property onto `Car`'s prototype, we can share one reference to the function across all instances. (This is not very useful in our example, but is important to be aware of.)
+
+## Conclusion
+
+Constructor functions in JavaScript allow us to create custom objects. They are declared like other functions, but set properties on `this` and are instantiated with the `new` keyword. We capitalize the function name so that we know it's a constructor function.
+
+Now that you've learned about constructor functions, you might be interested in learning about how inheritance and prototypes work. I will be writing a blog post on this soon and will update this post once it is published. In the meantime, you can read [Inheritance and the prototype chain](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain) from MDN.
+
+<!-- You can read my other post [Understanding prototypes and inheritance in JavaScript]() for more information. -->
+
+## References
+
+Cover photo by [carlos aranda](https://unsplash.com/@carlosaranda?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/assembly-line?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).
+
+-   [MDN | A re-introduction to JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript)
+-   [MDN| Function.prototype.apply()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply)
+-   [MDN | new operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new#description)
+-   [MDN | Object prototypes](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_prototypes)
+
+## Let's connect
+
+If you liked this post, come connect with me on [Twitter](https://twitter.com/zach_snoek), [LinkedIn](https://www.linkedin.com/in/zach-snoek-5b327b179/), and [GitHub](https://github.com/zachsnoek)!
