@@ -1,0 +1,130 @@
+---
+title: 'JavaScript Quirks, Vol. 1: The typeof operator'
+date: '2022-06-25'
+description: "Make sure you're aware of these typeof quirks!"
+categories:
+    - software engineering
+tags:
+    - javascript
+    - web development
+---
+
+JavaScript is a language full of wonderful quirks. In this post, I want to explore a few quirks about the `typeof` operator.
+
+## The `typeof` operator
+
+As a reminder, JavaScript has eight types:
+
+-   Undefined
+-   Null
+-   Boolean
+-   String
+-   Number
+-   BigInt
+-   Symbol
+-   Object
+
+JavaScript provides us with a handy `typeof` operator to check the type of a value. It returns a string indicating the type of the operand. For example, checking the type of `0` returns `"number"`:
+
+```js
+typeof 0 === 'number'; // true
+```
+
+## 1. `typeof null`
+
+For every type in the list above, we’d expect to check a value of the type and get something appropriate back. For example, `typeof false` should return `"boolean"`, and so on:
+
+```js
+typeof false === 'boolean'; // true
+typeof {} === 'object'; // true
+typeof undefined === 'undefined'; // true
+```
+
+However, when we check the type of `null`, we see that `null`'s type is apparently not null:
+
+```js
+typeof null === 'null'; // false
+typeof null === 'object'; // true
+```
+
+Because of [a bug](https://2ality.com/2013/10/typeof-null.html) in the first version of JavaScript, `typeof null` returns `'object'` instead of `'null'`. This is confusing because `null` is indeed a primitive value, not an object, and its type is null.
+
+This means two things for the developer:
+
+1. Checking if a value is `null` with `typeof` won’t work; use strict equality instead
+2. `typeof === 'object'` checks can unexpectedly accept null values; ensure that the value is also not equal to `null`
+
+## 2. `typeof` functions
+
+Interestingly, `typeof` returns a string that doesn’t correspond to one of the eight types listed above: `"function"`.
+
+```js
+typeof (() => {}) === 'function'; // true
+```
+
+This is somewhat confusing because there is no function type; a function is just a callable object. However, it can sometimes be useful to differentiate between a function and some other value because function calling has its own syntax. Consider the following contrived example:
+
+```js
+function sayWord(word) {
+    console.log(typeof word === 'function' ? word() : word);
+}
+
+sayWord('Zach');
+
+sayWord(() => 'Computing the string with a function');
+```
+
+## 3. `typeof` undeclared variables
+
+How would you check if a variable is undeclared? You might think that you could check to see if its value is `undefined`, but that throws a `ReferenceError`:
+
+```js
+zach === undefined; // Uncaught ReferenceError: zach is not defined
+```
+
+`typeof` works for this though; it returns `undefined` if the operand is not declared:
+
+```js
+typeof zach === 'undefined'; // true
+```
+
+So, `typeof` returns `undefined` if the operand’s value is `undefined` or if the operand is undeclared.
+
+## 4. `typeof` in the temporal dead zone
+
+The temporal dead zone (TDZ) exists for variables declared with `let` and `const`. It starts at the beginning of the variable’s enclosing block and ends when it is declared. Accessing a variable in its TDZ throws a `ReferenceError`:
+
+```js
+{
+    // start of TDZ
+
+    console.log(zach); // Uncaught ReferenceError: Cannot access 'zach' before initialization
+
+    const zach = 'zach'; // end of TDZ
+}
+```
+
+Similarly, checking the `typeof` a variable in its TDZ throws a `ReferenceError`:
+
+```js
+{
+    console.log(typeof zach === 'string'); // Uncaught ReferenceError: Cannot access 'zach' before initialization
+
+    const zach = 'zach';
+}
+```
+
+[Dr. Axel Rauschmayer explains](https://2ality.com/2015/10/why-tdz.html#why-does-typeof-cause-a-referenceerror-for-a-variable-in-the-tdz%3F) that `zach` isn’t undeclared when we try to check its type, it’s uninitialized. Thus, “you should be aware of its existence, but aren’t. Therefore, being warned seems desirable.”
+
+The interesting bit here is that before the addition of block-scoped variables in ES6, `typeof` always returned a string regardless of the operand. Now, it can throw an error in this one case.
+
+You can learn more about `let`, `const`, and the TDZ in [my article about hoisting](https://z7k.io/hoisting).
+
+## Further reading
+
+-   [Dr. Axel Raushmayer | What is JavaScript’s typeof operator used for?](https://2ality.com/2012/01/typeof-use-cases.html)
+-   [Dr. Axel Raushmayer | Improving the JavaScript typeof operator](https://2ality.com/2011/11/improving-typeof.html)
+
+## Let’s connect
+
+If you’re interested in more articles like this, [subscribe to my newsletter](https://mailchi.mp/2df4b6d5458f/signup-page) and connect with me on [LinkedIn](https://www.linkedin.com/in/zach-snoek-5b327b179/) and [Twitter](https://twitter.com/zach_snoek)!
