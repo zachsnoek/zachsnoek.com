@@ -17,7 +17,8 @@ export function h3(props) {
 
 const OurUl = styled.ul`
     padding-left: 0px;
-    list-style-position: inside;
+    margin-left: 22px; /* offsets max width container padding; subtracts 2px for optical alignment */
+    list-style-position: outside;
 `;
 export function ul(props) {
     return <OurUl {...props} />;
