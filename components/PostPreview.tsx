@@ -7,8 +7,8 @@ import { Post } from '../lib/posts';
 type Props = { post: Post };
 
 export function PostPreview({ post }: Props) {
-    const { id, title, description, date } = post;
-    const href = `/blog/${id}`;
+    const { id, title, description, date, originalPost } = post;
+    const href = originalPost?.isExclusive ? originalPost.url : `/blog/${id}`;
 
     return (
         <article>

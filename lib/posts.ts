@@ -10,6 +10,10 @@ export type Post = {
     title: string;
     description: string | null;
     categories: string[];
+    originalPost?: {
+        url: string;
+        isExclusive: boolean;
+    };
     tags: string[];
     coverImagePath: string | null;
 };
