@@ -29,11 +29,11 @@ jobs:
         with:
           fetch-depth: 2
       - name: Get the name of the added fle
-        run: echo "CREATED_FILE=$(git diff-tree --no-commit-id --name-only  -r ${{ github.sha }} | grep -nm 1 'index.mdx' | sed -e 's|.*blog\/||g' | sed -e 's|\/index.mdx||g')" >> $GITHUB_ENV
+        run: echo "CREATED_FILE=$(git diff-tree --no-commit-id --name-only  -r ${{ github.sha }} | grep -m 1 'index.mdx')" >> $GITHUB_ENV
       - name: Get post slug and title
         id: get_post
         run: |
-          echo "POST_SLUG=$(echo $CREATED_FILE | sed 's/\.mdx//g')" >> $GITHUB_ENV
+          echo "POST_SLUG=$(echo $CREATED_FILE | sed -e 's|.*blog\/||g' | sed -e 's|\/index.mdx||g')" >> $GITHUB_ENV
           echo "POST_TITLE=$(sed '2q;d' $CREATED_FILE | sed 's/^title:*[[:blank:]]*//g' | sed -e 's|["'\'']||g')" >> $GITHUB_ENV
       - name: Checkout profile README repository
         uses: actions/checkout@v2
