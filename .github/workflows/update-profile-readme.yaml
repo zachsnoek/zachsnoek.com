@@ -29,7 +29,7 @@ jobs:
         with:
           fetch-depth: 2
       - name: Get the name of the added fle
-        run: echo "CREATED_FILE=$(git diff-tree --no-commit-id --name-only ${{ github.sha }})" >> $GITHUB_ENV
+        run: echo "CREATED_FILE=$(git diff-tree --no-commit-id --name-only  -r ${{ github.sha }} | grep -nm 1 'index.mdx' | sed -e 's|.*blog\/||g' | sed -e 's|\/index.mdx||g')" >> $GITHUB_ENV
       - name: Get post slug and title
         id: get_post
         run: |
