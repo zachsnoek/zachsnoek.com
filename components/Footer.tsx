@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-import { SocialIconsRow } from './SocialIconsRow';
+import { Link } from './Link';
 
 export function Footer() {
     return (
         <Wrapper>
             <span>{`© ${new Date().getFullYear()} Zach Snoek`}</span>
-            <SocialIconsRow />
+            <Link href={'credits'}>Credits</Link>
         </Wrapper>
     );
 }
