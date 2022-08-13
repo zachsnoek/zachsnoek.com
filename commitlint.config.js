@@ -12,13 +12,14 @@ module.exports = {
                 'docs',
                 'feat',
                 'fix',
-                'create-post',
-                'update-post',
                 'refactor',
                 'revert',
                 'style',
                 'test',
+                'createPost',
+                'updatePost',
             ],
         ],
+        'type-case': [2, 'always', 'camel-case'], // TODO: Fix kebab-case
     },
 };
