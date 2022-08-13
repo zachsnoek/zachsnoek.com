@@ -1,4 +1,4 @@
-import { formatDate } from '../lib/formatDate';
+import { formatDate } from '../utils/formatDate';
 
 export function Date({ date, ...props }: { date: string }) {
     return (

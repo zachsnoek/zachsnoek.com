@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
 import { useCurrentUrl } from '../hooks/useCurrentUrl';
-import { Post } from '../lib/posts';
+import { Post } from '../utils/posts';
 
 type Props = Pick<Post, 'title'>;
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { getCurrentUrl } from '../lib/getCurrentUrl';
+import { getCurrentUrl } from '../utils/getCurrentUrl';
 
 // Ensures that we only try to access `window` on the client.
 export function useCurrentUrl() {

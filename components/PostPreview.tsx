@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Link } from './Link';
 import { Date } from './Date';
 import { Spacer } from './Spacer';
-import { Post } from '../lib/posts';
+import { Post } from '../utils/posts';
 
 type Props = { post: Post };
 

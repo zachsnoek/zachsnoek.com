@@ -6,7 +6,7 @@ import {
     getAllPostIds,
     getPostWithMdx,
     Post as PostType,
-} from '../../lib/posts';
+} from '../../utils/posts';
 import { Date } from '../../components/Date';
 import { CustomLayout } from '../../components/Layout';
 import styled from 'styled-components';

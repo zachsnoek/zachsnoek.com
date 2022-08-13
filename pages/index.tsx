@@ -3,7 +3,7 @@ import { GetStaticProps } from 'next';
 import { Accent } from '../components/Accent';
 import { CustomLayout } from '../components/Layout';
 import { Link } from '../components/Link';
-import { getAllPosts, Post } from '../lib/posts';
+import { getAllPosts, Post } from '../utils/posts';
 import { Spacer } from '../components/Spacer';
 import { Break } from '../components/Break';
 import { PostPreviewList } from '../components/PostPreviewList';

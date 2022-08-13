@@ -1,7 +1,7 @@
 import React from 'react';
 import { GetStaticProps } from 'next';
 import { MainLayout } from '../../components/Layout';
-import { getAllPosts, Post } from '../../lib/posts';
+import { getAllPosts, Post } from '../../utils/posts';
 import { PostPreviewList } from '../../components/PostPreviewList';
 
 type Props = {

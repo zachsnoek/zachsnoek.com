@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Icon } from './Icon';
 import { UnstyledButton } from './UnstyledButton';
-import { toKebabCase } from '../lib/toKebabCase';
+import { toKebabCase } from '../utils/toKebabCase';
 import React from 'react';
 
 const H2 = styled.h2`

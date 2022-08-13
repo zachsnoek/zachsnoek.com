@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { isValidEmailAddress } from '../../lib/isValidEmailAddress';
+import { isValidEmailAddress } from '../../utils/isValidEmailAddress';
 import mailchimp from '@mailchimp/mailchimp_marketing';
 
 mailchimp.setConfig({

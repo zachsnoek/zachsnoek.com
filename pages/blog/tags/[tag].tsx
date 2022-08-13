@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { MainLayout } from '../../../components/Layout';
 import { PostPreviewList } from '../../../components/PostPreviewList';
-import { getAllPosts, getAllTags, Post } from '../../../lib/posts';
+import { getAllPosts, getAllTags, Post } from '../../../utils/posts';
 
 type Props = {
     tag: string;
