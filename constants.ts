@@ -9,5 +9,3 @@ export const QUERIES = {
     tabletAndBelow: `(max-width: ${BREAKPOINTS.tabletMax}px)`,
     laptopAndBelow: `(max-width: ${BREAKPOINTS.laptopMax}px)`,
 };
-
-//
