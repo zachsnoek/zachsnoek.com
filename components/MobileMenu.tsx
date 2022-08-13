@@ -10,9 +10,6 @@ import { Icon } from './Icon';
 import { Link, LinkProps } from './Link';
 import { useRouter } from 'next/router';
 
-// TODO: Some of the components are similar to the desktop components.
-//      Consider refactoring to reuse those components.
-
 type Props = Pick<DialogOverlayProps, 'isOpen' | 'onDismiss'>;
 
 export function MobileMenu({ isOpen, onDismiss }: Props) {
@@ -59,7 +56,7 @@ const ModalContent = styled(DialogContent)`
 
 const IconContainer = styled.div`
     height: var(--spacing-8);
-    padding-top: calc(var(--spacing-5) + 3px); /* HACK: Visual alignment */
+    padding-top: calc(var(--spacing-5) + 3px); /* visual alignment */
     padding-right: var(--spacing-4);
 
     align-self: flex-end;

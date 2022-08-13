@@ -41,12 +41,3 @@ const Title = styled.h3`
 const PostDate = styled(Date)`
     font-size: 0.9rem;
 `;
-
-const PostLink = styled(Link)`
-    font-weight: bold;
-    font-size: var(--font-size-sm);
-
-    &:hover {
-        color: inherit;
-    }
-`;

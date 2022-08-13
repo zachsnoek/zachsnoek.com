@@ -57,8 +57,7 @@ export function MailingListSignupForm() {
             </p>
             <Spacer size={5} />
             <Form onSubmit={handleSubmit}>
-                {/* TODO: VisuallyHidden styles for this label */}
-                {/* <label htmlFor="mailing-list-email">Email:</label> */}
+                {/* TODO: VisuallyHidden label */}
                 <MailingListInput
                     id="mailing-list-email"
                     type="email"

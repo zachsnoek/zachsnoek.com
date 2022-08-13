@@ -3,7 +3,7 @@ import styled from 'styled-components';
 // TODO: Create size variants that match Button sizes
 
 export const Input = styled.input`
-    /* Styles below match TextArea styles*/
+    /* Styles below match TextArea styles */
 
     background-color: inherit;
     color: inherit;

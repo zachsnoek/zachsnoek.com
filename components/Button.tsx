@@ -5,7 +5,6 @@ const BORDER_WIDTH = 'var(--border-width-1)';
 const sizeStyles = {
     // small button matches the height of the default Input
     small: {
-        // TODO: font-size is compounding? It inherits font-size-base (1.2) then multiplies it by font-size-base
         // '--fontSize': 'var(--font-size-base)',
         '--padding': `calc(var(--spacing-2) - ${BORDER_WIDTH}) calc(var(--spacing-3) - ${BORDER_WIDTH})`,
         '--borderRadius': 'var(--border-radius-1)',
@@ -23,7 +22,7 @@ const sizeStyles = {
 };
 
 const ButtonBase = styled.button<{
-    size: ButtonProps['size'];
+    size: Props['size'];
     style: { [x in string]: string };
 }>`
     border: ${BORDER_WIDTH} solid transparent;
@@ -42,7 +41,7 @@ const FillButton = styled(ButtonBase)`
     color: var(--color-text);
 
     &:hover {
-        /* TODO: Light Background color */
+        /* TODO: Background */
     }
 `;
 
@@ -61,7 +60,7 @@ const variants = {
     outline: OutlineButton,
 };
 
-type ButtonProps = Omit<React.ComponentPropsWithRef<'button'>, 'style'> & {
+type Props = Omit<React.ComponentPropsWithRef<'button'>, 'style'> & {
     size?: 'small' | 'medium' | 'large';
     variant?: 'fill' | 'outline';
 };
@@ -72,7 +71,7 @@ export const Button = ({
     className,
     children,
     ...rest
-}: ButtonProps) => {
+}: Props) => {
     const ButtonVariant = variants[variant];
     if (!ButtonVariant) {
         throw new Error(`Unknown button variant: ${variant}`);

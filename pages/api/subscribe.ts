@@ -52,6 +52,7 @@ export default async function handler(
         const subscribeIsSuccess = subscribeResponse.total_created === 1;
         if (!subscribeIsSuccess && subscribeResponse.errors.length) {
             console.error(subscribeResponse.errors[0]);
+
             throw new Error(
                 `Could not subscribe ${emailAddress} to mailing list.`
             );
@@ -60,6 +61,7 @@ export default async function handler(
         res.status(201).json({});
     } catch (error) {
         console.error(error);
+
         res.status(500).json({
             error: {
                 code: 'ServerError',

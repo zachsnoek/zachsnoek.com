@@ -1,6 +1,6 @@
 export function isValidEmailAddress(emailAddress: string) {
-    if (typeof emailAddress !== 'string') {
-        throw new Error(`Expected string but got ${typeof emailAddress}}`);
+    if (!emailAddress || typeof emailAddress !== 'string') {
+        throw new Error(`Invalid email address: ${emailAddress}`);
     }
 
     // https://stackoverflow.com/a/46181

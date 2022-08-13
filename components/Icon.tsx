@@ -12,14 +12,14 @@ const icons = {
     menu: Menu,
 };
 
-interface IconProps {
+interface Props {
     id: keyof typeof icons;
     color?: string;
     size?: number;
     [key: string]: any;
 }
 
-export const Icon = ({ id, color, size, ...props }: IconProps) => {
+export const Icon = ({ id, color, size, ...props }: Props) => {
     const Component = icons[id];
 
     if (!Component) {

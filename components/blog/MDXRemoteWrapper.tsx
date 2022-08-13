@@ -15,12 +15,12 @@ export const MDXRemoteWrapper = styled.div`
         margin-bottom: var(--spacing-5);
     }
 
-    // Don't apply bottom margin to nested lists
+    /* Don't apply bottom margin to nested lists */
     ul ul {
         margin-bottom: 0;
     }
 
-    // Inline code snippets
+    /* Inline code snippets */
     code:not(.hljs) {
         background: var(--color-background-light);
         padding: var(--spacing-1);

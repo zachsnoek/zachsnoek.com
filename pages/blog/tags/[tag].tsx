@@ -13,7 +13,7 @@ export default function Tag({ tag, posts }: Props) {
         <MainLayout
             title={`Blog posts about ${tag}`}
             description={`Blog posts about ${tag} by Zach Snoek`}
-            header={`Posts about "${tag}"`} // TODO: Render tag text with primary color
+            header={`Posts about "${tag}"`}
         >
             <PostPreviewList posts={posts} />
         </MainLayout>
@@ -26,6 +26,7 @@ export const getStaticProps: GetStaticProps<Props> = ({ params }) => {
             tag: params.tag as string,
         },
     });
+
     return {
         props: {
             tag: params.tag as string,
@@ -36,6 +37,7 @@ export const getStaticProps: GetStaticProps<Props> = ({ params }) => {
 
 export const getStaticPaths: GetStaticPaths = () => {
     const paths = getAllTags();
+
     return {
         paths,
         fallback: false,

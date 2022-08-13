@@ -1,6 +1,6 @@
 export function formatDate(date: string) {
     if (!date || typeof date !== 'string') {
-        throw new Error('Invalid date string.');
+        throw new Error(`Invalid date string: ${date}`);
     }
 
     const localizedDate = new Date(date);

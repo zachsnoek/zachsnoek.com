@@ -6,10 +6,6 @@ import React from 'react';
 
 const H2 = styled.h2`
     margin-top: var(--spacing-7);
-
-    /* &:first-of-type {
-        margin-top: unset;
-    } */
 `;
 
 const H3 = styled.h3`
@@ -74,7 +70,7 @@ type Props = { as: keyof typeof headers; children: React.ReactNode };
 function CopyableHeader({ as, children }: Props) {
     const HeaderComponent = headers[as];
     if (!HeaderComponent) {
-        throw new Error(`Invalid header: '${as}'`);
+        throw new Error(`Invalid header: ${as}`);
     }
 
     const headerString = getRawStringFromChildren(children);
