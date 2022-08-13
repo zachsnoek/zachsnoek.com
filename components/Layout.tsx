@@ -16,6 +16,7 @@ interface LayoutProps {
     description?: string;
     type?: 'website' | 'article';
     head?: () => React.ReactNode;
+    noIndex?: boolean;
     children: React.ReactNode;
 }
 
@@ -24,6 +25,7 @@ function Layout({
     description = DEFAULT_DESCRIPTION,
     type = 'website',
     head,
+    noIndex = false,
     children,
 }: LayoutProps) {
     const url = useCurrentUrl();
@@ -47,6 +49,8 @@ function Layout({
                 <meta name="twitter:title" content={title} />
                 <meta name="twitter:description" content={description} />
                 {/* TODO: <meta name="twitter:image" content="" /> */}
+
+                {noIndex && <meta name="robots" content="noindex" />}
 
                 <link rel="icon" href="/favicon.ico" />
 

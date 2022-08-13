@@ -4,6 +4,7 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
     @font-face {
+        /* Karrick by Jean-Baptiste Morizot and Lucas Le Bihan (Velvetyne Type Foundry): https://velvetyne.fr/fonts/karrik */
         font-family: 'Karrik';
         src: url('/fonts/Karrik-Regular.woff2') format('woff2');
     }
