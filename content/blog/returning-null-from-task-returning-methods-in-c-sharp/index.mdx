@@ -1,0 +1,218 @@
+---
+title: 'Returning null from Task-returning methods in C#'
+date: '2022-01-13'
+description: 'How does null behave when returned from an async method?'
+categories:
+    - software engineering
+tags:
+    - c#
+---
+
+## Introduction
+
+Take a look at the following code and guess what happens when the `Main` method gets invoked:
+
+```csharp
+public class Program
+{
+	public static async Task Main()
+	{
+		var result = await AsyncFoo();
+		result = await NonAsyncFoo();
+	}
+
+	private async static Task<string> AsyncFoo()
+	{
+		return null;
+	}
+
+	private static Task<string> NonAsyncFoo()
+	{
+		return null;
+	}
+}
+```
+
+When `Main` runs, `await AsyncFoo()` executes without issue, but `await NonAsyncFoo()` throws a `NullReferenceException`:
+
+```text
+Unhandled exception. System.NullReferenceException: Object reference not set to an instance of an object.
+   at Program.Main()
+   at Program.<Main>()
+```
+
+If you're new to asynchronous C# like me, this can be surprising because the returned value is the same; the only difference on the surface is the `async` keyword.
+
+In this blog post, we'll understand this behavior and the difference between returning `null` from an `async` vs. non-`async` method in C#.
+
+## Returning null from a non-async Task-returning method
+
+We can return `null` from a method that returns a `Task` because `Task` is a reference type. In our previous example, we return `null` from `NonAsyncFoo()`. But, awaiting `null` isn't legal, so `await NonAsyncFoo()` throws a `NullReferenceException`.
+
+One way to prevent this NRE while still returning `null` is to check that the result of the method is not `null` and await a valid `Task` if it is. We can do this with the null-coalescing operator; for example:
+
+```csharp
+result = await (NonAsyncFoo() ?? Task.FromResult<string>(null));
+```
+
+However, this isn't ideal. First, it requires every caller that awaits the method to know that we might return `null`. Second, returning `null` from a non-`async` `Task`-returning method doesn’t really make sense. As Stephen Cleary explains in [this](https://stackoverflow.com/questions/45347160/is-it-better-to-return-an-empty-task-or-null-c-sharp/45350108#45350108) StackOverflow post:
+
+> `Task` represents the execution of the asynchronous method, so for an asynchronous method to return a `null` task is like telling the calling code "you didn't really just call this method" when of course it did.
+
+Instead, we need to ensure that Task-returning methods return a `Task` that can be awaited. In our case, we can use `Task.FromResult()` to wrap `null`:
+
+```csharp
+private static Task<string> NonAsyncFoo()
+{
+    return Task.FromResult<string>(null);
+}
+```
+
+Now, we can safely await our method:
+
+```csharp
+public class Program
+{
+	public static async Task Main()
+	{
+		var result = await NonAsyncFoo(); // Doesn't throw NRE
+	}
+
+	private static Task<string> NonAsyncFoo()
+	{
+		return Task.FromResult<string>(null);
+	}
+}
+```
+
+If we were just returning a `Task` and not `Task<T>`, we could return `Task.CompletedTask` instead:
+
+```csharp
+public class Program
+{
+	public static async Task Main()
+	{
+		await NonAsyncFoo();
+	}
+
+	private static Task NonAsyncFoo()
+	{
+		return Task.CompletedTask;
+	}
+}
+```
+
+## Returning null from an async Task-returning method
+
+The `async` variant of our example method is valid at runtime; it won't throw a NRE. This confused me at first: how does making this method `async` let us safely return `null`? After all, the returned value remains the same. This behavior can be explained by the method transformation that the `async` keyword opts us into.
+
+In addition to making the `await` keyword available within the method body, adding the `async` keyword to a method signature causes the compiler to transform the method into a [state machine](https://en.wikipedia.org/wiki/Finite-state_machine). The transformed code wraps the return value and any exceptions in a `Task<T>`.
+
+To demonstrate how this works, let's say we have the following non-`async` method that returns a `Task<string>`:
+
+```csharp
+private static Task<string> Foo()
+{
+    return Task.FromResult("Foo, bar, baz");
+}
+```
+
+Using the [dotPeek](https://www.jetbrains.com/decompiler/) decompiler to view the compiler-generated source, we can see that the compiler generates almost identical code:
+
+```csharp
+private static Task<string> Foo()
+{
+    return Task.FromResult<string>("Foo, bar, baz");
+}
+```
+
+Now, let's make this method `async`:
+
+```csharp
+private async static Task<string> Foo()
+{
+    return "Foo, bar, baz";
+}
+```
+
+The compiler-generated code for this method looks much different:
+
+```csharp
+private static Task<string> Foo() {
+	Program.<Foo>Ed__1 stateMachine = new Program.<Foo>d__1();
+	stateMachine.<>t__builder = AsyncTaskMethodBuilder<string>.Create();
+	stateMachine.<>1__state = -1;
+	stateMachine.<>t__builder.Start<Program.<>d__1>(ref stateMachine);
+	return stateMachine.<>t__builder.Task;
+}
+```
+
+The content of `Foo` is transformed into a state machine. The full details and mechanics of the state machine are not within the scope of this article, but here's part of the generated state machine class that is instantiated at the beginning of `Foo`:
+
+```csharp
+private sealed class <Foo>d__1 : IAsyncStateMachine
+{
+	public int <>1__state;
+	public AsyncTaskMethodBuilder<string> <>t__builder;
+
+	// ...
+
+	void IAsyncStateMachine.MoveNext()
+	{
+        int num = this.<>1__state;
+		string result;
+		try
+		{
+	        result = "Foo, bar, baz";
+		}
+		catch (Exception ex)
+		{
+	        this.<>1__state = -2;
+			this.<>t__builder.SetException(ex);
+			return;
+		}
+		this.<>1__state = -2;
+		this.<>t__builder.SetResult(result);
+    }
+}
+```
+
+The code that we’re concerned about is on the last line of the state machine’s `MoveNext` method:
+
+```csharp
+void IAsyncStateMachine.MoveNext()
+{
+    // ...
+	string result;
+	try
+	{
+        result = "Foo, bar, baz";
+	}
+	// ...
+	this.<>t__builder.SetResult(result);
+}
+```
+
+The `AsyncTaskMethodBuilder`'s `SetResult` method creates the `Task` and sets the result to be `"Foo, bar, baz"`. (If you're interested in going deeper and seeing how the `Task` is created, you can find the method's implementation in the .NET reference source code [here](https://github.com/microsoft/referencesource/blob/5697c29004a34d80acdaf5742d7e699022c64ecd/Microsoft.Bcl/System.Threading.Tasks.v1.5/System/Runtime/CompilerServices/AsyncTaskMethodBuilderOfTResult.cs#L177-L179).)
+
+This `Task` is subsequently returned on the last line of the transformed `Foo`:
+
+```csharp
+private static Task<string> Foo()
+{
+    // ...
+    return stateMachine.<>t__builder.Task;
+}
+```
+
+To recap, the compiler transforms an `async` method into a state machine, which wraps the result in a `Task` and returns it to the caller.
+
+## Conclusion
+
+Returning `null` from non-`async` `Task`-returning methods returns a null `Task`, which is almost never what a caller wants and invites NREs. Instead, ensure that all `Task`-returning methods return a `Task`; you can use `Task.FromResult(null)` in place of `null`.
+
+We don’t have to worry about manually creating a `Task` when we mark a method as `async`. The compiler transforms `async` methods into a state machine that wraps our return value in a `Task` for us.
+
+## Acknowledgements
+
+Thanks to [Jacob Carpenter](https://www.linkedin.com/in/jacob-carpenter-a545831/) for helping me understand the `async` method transformation and providing feedback on an early draft of this post.

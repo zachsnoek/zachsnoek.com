@@ -1,0 +1,83 @@
+---
+title: 'What are the em and rem units in CSS?'
+date: '2021-10-26'
+description: 'Understanding the difference between ems and rems in CSS.'
+categories:
+    - software engineering
+tags:
+    - css
+    - web development
+---
+
+## Introduction
+
+This is my first post in a series about topics covered in Josh Comeau's [CSS for JavaScript Developers](https://css-for-js.dev/) course. These posts will be brief, polished versions of my notes. I'll write about new things I learned or deepen my understanding of something already familiar to me.
+
+In this post, we'll explore the `em` and `rem` units in CSS, covered in module 0 of the course.
+
+## Ems
+
+An `em` is a unit relative to the `font-size` of the current element. When used for the `font-size` property, an `em` is relative to the `font-size` of the _parent_ element.
+
+For example, if an element has a `font-size` of `16px` and `padding` of `2em`, the element's `padding` will be 32 pixels (16 x 2):
+
+<CodePen id={'VwzPgjG'} tabs={['css']} />
+
+If an element has a `font-size` of `16px` and its child has a `font-size` of `1.5em`, the child's `font-size` will be 24 pixels (16 x 1.5):
+
+<CodePen id={'abypXWE'} tabs={['css']} />
+
+If the element's `font-size` is not set, the closest ancestor with a `font-size` gets used. Note that browsers have a default font size of 16 pixels out of the box, so `1em` is generally equal to 16 pixels.
+
+`em`s are useful when scaling some property with the element's `font-size`. Consider the following `.box` class:
+
+```css
+.box {
+    width: 3em;
+    height: 3em;
+    padding: 2em;
+}
+```
+
+To create small, medium, and large boxes with these same proportions, we can alter the `font-size` of each `.box`:
+
+<CodePen id={'porRGpR'} tabs={['css']} />
+
+### The compounding problem
+
+Because `em`s are relative, the value of an `em` in descendant elements can compound. This can cause unexpected layout changes when a font size change ripples through descendant elements. For instance, if an element has a `font-size` of `2em` and its child has a `font-size` of `1.5em`, the child's font size is 48 pixels (16 x 2 x 1.5):
+
+<CodePen id={'mdMRZjO'} tabs={['css']} />
+
+## Rems
+
+A `rem`, short for "root em," is like an `em`, but its value is relative to the root `<html>` tag. So, if the root `font-size` is 16 pixels, a value of `2rem` is 32 pixels at every level in the DOM:
+
+<CodePen id={'wvqgLLy'} tabs={['css']} />
+
+`rem`s are always relative to the root element, so there isn't an issue with compounding. This makes them more predictable and consistent than `em`s:
+
+<CodePen id={'oNeBrKx'} tabs={['css']} />
+
+We can use `rem`s to scale values globally by only changing the root `font-size`. The following `article` has many font sizes specified in `rem`s, and we can use a media query to change all the sizes by setting the root `font-size`:
+
+<CodePen id={'MWvJNYx'} tabs={['css']} />
+
+## Em and rem a11y benefits
+
+Both `em`s and `rem`s help make our sites more accessible by respecting the user's default font size, set in their browser's settings. Using a fixed unit such as `px` will override this setting, but `em` and `rem` will scale it. This makes `rem`s particularly good for typography because we can scale the user's font size preference globally without `em` interference.
+
+## Summary
+
+`em` and `rem` are relative units. An `em` is generally relative to the current element's `font-size`; when used for the `font-size` property, it's relative to its parent's `font-size`. A `rem` is relative to the root `<html>` element's `font-size`, which is usually 16 pixels. Take caution when using `em`s because of their compounding effect; `rem`s are more predictable and increase accessibility by respecting the user's default font size.
+
+## Let's connect
+
+Thanks for reading! If you enjoyed this post, connect with me on [LinkedIn](https://www.linkedin.com/in/zach-snoek-5b327b179/), [GitHub](https://github.com/zachsnoek), and [Twitter](https://twitter.com/zach_snoek)!
+
+## References
+
+-   [Josh Comeau | CSS for JavaScript Developers](https://css-for-js.dev/)
+-   [Kevin Powell | CSS em and rem explained #CSS #responsive](https://www.youtube.com/watch?v=_-aDOAMmDHI)
+-   [MDN | CSS values and units](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units)
+-   [MDN | font-size](https://developer.mozilla.org/en-US/docs/Web/CSS/font-size)

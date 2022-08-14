@@ -1,0 +1,96 @@
+---
+title: 'Making list formatting easy with Intl.ListFormat'
+date: '2021-07-21'
+description: 'How to format lists in JavaScript with Intl.ListFormat.'
+categories:
+    - software engineering
+tags:
+    - javascript
+    - web development
+---
+
+## Introduction
+
+Let's say you have an array containing your favorite dog breeds:
+
+```javascript
+const favoriteDogs = ['Corgi', 'German Shepherd', 'Goldendoodle'];
+```
+
+Your goal is to format that list as a string like "Corgi, German Shepherd, and Goldendoodle." One option is to write a basic utility function like this:
+
+```javascript
+function formatList(list) {
+    if (!list?.length) {
+        return '';
+    }
+    if (list.length === 1) {
+        return list.toString();
+    }
+    if (list.length === 2) {
+        return list.join(' and ');
+    }
+
+    return list.slice(0, -1).join(', ') + ', and ' + list.slice(-1);
+}
+```
+
+But we'd need to make modifications if we wanted to use _or_ instead of _and_, omit the Oxford comma, or handle different languages. Instead, let's see how we can use `Intl.ListFormat` to have JavaScript do this heavy lifting for us.
+
+## Intl.ListFormat
+
+`Intl.ListFormat` replaces `formatList` with a couple of lines of code:
+
+```javascript
+const lf = new Intl.ListFormat('en');
+lf.format(favoriteDogs);
+// > Corgi, German Shepherd, and Goldendoodle
+```
+
+`Intl.ListFormat` comes from `Intl`, which is a built-in object that provides language-sensitive functions. We've provided `en` (English) as the `locales` argument, which formats the list based on the language or region.
+
+This gives us a lot of localization power with little effort. For instance, we can specify `zh` for traditional Chinese and let it localize the conjunction and punctuation for us:
+
+```javascript
+const lf = new Intl.ListFormat('zh');
+lf.format(['咖啡', '茶', '可樂']);
+// > 咖啡、茶和可樂 (Coffee, tea and coke)
+```
+
+## Other formatting options
+
+We can optionally specify a second `options` argument that has a `style` and `type` property. `style` is the length of the output and can be `long` (the default), `short` or `narrow`:
+
+```javascript
+new Intl.ListFormat('en', { style: 'short' }).format(favoriteDogs);
+// > Corgi, German Shepherd, & Goldendoodle
+new Intl.ListFormat('en', { style: 'narrow' }).format(favoriteDogs);
+// > Corgi, German Shepherd, Goldendoodle
+```
+
+`type` describes the list type, which is `conjunction` (_and_-based) by default. It can be used to make our list `disjunctive` or suitable for units:
+
+```javascript
+new Intl.ListFormat('en', { type: 'disjunction' }).format(favoriteDogs);
+// > Corgi, German Shepherd, or Goldendoodle
+new Intl.ListFormat('en', { type: 'unit' }).format(['6 feet', '2 inches']);
+// > 6 feet, 2 inches
+```
+
+## Conclusion
+
+Instead of writing a list formatting function, consider using `Intl.ListFormat`. There are a lot of other useful functions from `Intl`, too; check them out at [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl).
+
+Thanks for reading!
+
+## References
+
+-   [KCD | Listify a JavaScript Array](https://kentcdodds.com/blog/listify-a-java-script-array)
+-   [MDN | Intl](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl)
+-   [MDN | Intl.ListFormat() constructor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/ListFormat/ListFormat)
+
+---
+
+## Let's connect
+
+If you enjoyed this post, connect with me on [Twitter](https://twitter.com/zach_snoek), [LinkedIn](https://www.linkedin.com/in/zach-snoek-5b327b179/), and [GitHub](https://github.com/zachsnoek)!

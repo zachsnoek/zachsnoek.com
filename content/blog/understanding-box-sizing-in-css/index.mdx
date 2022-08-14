@@ -1,0 +1,162 @@
+---
+title: 'Understanding box-sizing in CSS'
+date: '2021-12-05'
+description: 'What is the box-sizing property in CSS?'
+categories:
+    - software engineering
+tags:
+    - css
+    - web development
+---
+
+## Introduction
+
+This is a post in a series about topics covered in Josh Comeau's [CSS for JavaScript Developers](https://css-for-js.dev/) course. These posts will be brief, polished versions of my notes, and I'll write about new things I learned or deepen my understanding of something already familiar to me.
+
+In this post, we'll learn about the CSS `box-sizing` property covered in module 1 of the course.
+
+## The box-sizing property
+
+The `box-sizing` property determines how the width and height of an element are calculated. It accepts two values: `content-box` and `border-box`.
+
+## content-box
+
+`content-box` is the default value of `box-sizing`. With this value, `width` and `height` are applied to an element's content box and do not include its padding and border.
+
+Thus, the total width of an element will be the sum of its `width` and any horizontal padding and border. An element's height will be its `height` plus any vertical padding and border.
+
+Take the following example:
+
+<CodePen id={'oNGjaBP'} tabs={['css']} />
+
+The final width and height of the `.box` is 150 pixels: 100 + 2(20) + 2(5).
+
+We can inspect the element in the dev tools to help us visualize this:
+
+![](content-box-demo.avif)
+
+The content area remains 100x100 pixels and the padding and border are added around it.
+
+## border-box
+
+With `box-sizing: border-box;`, the `width` and `height` properties include the size of the element's content area, padding, and border.
+
+Here's what the previous example looks like with `border-box` instead:
+
+<CodePen id={'RwLWepd'} tabs={['css']} />
+
+And this is what the element looks like in the dev tools:
+
+![](border-box-demo.avif)
+
+Notice that the padding and border remain the same size, but the content area is reduced, making the final width and height 100 pixels.
+
+Here are the two examples side-by-side for comparison:
+
+<CodePen id={'abLvRWY'} tabs={['css']} />
+
+## Resetting border-box
+
+Sizing elements with `content-box` is unintuitive because it requires us to subtract or add values to get the desired `width` and `height`. Working with `border-box` is more natural: if we set an element's `width` to `500px` then we know its final width will be 500 pixels.
+
+You can use `border-box` sizing for all elements with the following CSS reset:
+
+```css
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+```
+
+## Test your knowledge
+
+Check your understanding of `box-sizing` by figuring out the width and height of each `.box` in the following snippets.
+
+### #1
+
+```css
+.box {
+    box-sizing: border-box;
+    height: 100px;
+    border: 2px dotted;
+}
+```
+
+What is the total height of this `.box`?
+
+<details>
+    <summary>Click to reveal answer</summary>
+    100 pixels. The content area is reduced to include the border.
+</details>
+
+### #2
+
+```css
+.box {
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+}
+```
+
+What is the total width and height of this `.box`?
+
+<details>
+    <summary>Click to reveal answer</summary>
+    60x60 pixels. The content area does not include the padding, so we add that to
+    the width and height.
+</details>
+
+### #3
+
+```css
+.box {
+    box-sizing: content-box;
+    width: 30px;
+    height: 50px;
+    margin: 10px;
+    border: 3px dashed;
+}
+```
+
+What is the content area of this `.box`?
+
+<details>
+    <summary>Click to reveal answer</summary>
+    30x50 pixels.
+</details>
+
+### #4
+
+```css
+.box {
+    box-sizing: border-box;
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    padding: 7px;
+    border: 1px solid;
+}
+```
+
+What is the content area of this `.box`?
+
+<details>
+    <summary>Click to reveal answer</summary>
+    84x84 pixels: 100 - 2(7)- 2(1).
+</details>
+
+## Summary
+
+`box-sizing` controls how the width and height of an element are calculated. `content-box` is the default value and `width` and `height` are applied to an element's content area. `border-box` is more intuitive; the content area of an element is reduced to include any padding and border.
+
+## Let's connect
+
+If you enjoyed this post, connect with me on [LinkedIn](https://www.linkedin.com/in/zach-snoek-5b327b179/), [GitHub](https://github.com/zachsnoek), and [Twitter](https://twitter.com/zach_snoek)!
+
+## References
+
+-   [Josh W. Comeau | CSS for JavaScript Developers](https://css-for-js.dev/)
+-   [MDN | box-sizing](https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing)
+-   [web.dev | Box Model](https://web.dev/learn/css/box-model/)
