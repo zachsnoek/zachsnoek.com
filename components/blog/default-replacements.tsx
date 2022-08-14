@@ -15,6 +15,14 @@ export function h3(props) {
     return <CopyableHeader as="h3" {...props} />;
 }
 
+const OurOl = styled.ol`
+    padding-left: 0px;
+    margin-left: 22px; /* offsets max width container padding; subtracts 2px for optical alignment */
+`;
+export function ol(props) {
+    return <OurOl {...props} />;
+}
+
 const OurUl = styled.ul`
     padding-left: 0px;
     margin-left: 22px; /* offsets max width container padding; subtracts 2px for optical alignment */
