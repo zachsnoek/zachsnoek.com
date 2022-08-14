@@ -56,19 +56,18 @@ export default function Post({ source, data }: Props) {
                 <Title>{data.title}</Title>
                 <Spacer size={5} />
                 <Date date={data.date} />
-                <div>
-                    {data.tags.map((x) => (
-                        <TagWrapper key={x}>
-                            <Link href={encodeURI(`/blog/tags/${x}`)}>
-                                <>#{x}</>
-                            </Link>
-                        </TagWrapper>
-                    ))}
-                </div>
                 <Spacer size={8} />
                 <MDXRemoteWrapper>
                     <MDXRemote {...source} components={mdxComponents} />
                 </MDXRemoteWrapper>
+                <Spacer size={6} />
+                <TagWrapper>
+                    {data.tags.map((x) => (
+                        <TagBadge href={encodeURI(`/blog/tags/${x}`)} key={x}>
+                            {x}
+                        </TagBadge>
+                    ))}
+                </TagWrapper>
                 <Spacer size={6} />
                 <SharePost title={data.title} />
             </article>
@@ -84,8 +83,17 @@ const Title = styled.h1`
     }
 `;
 
-const TagWrapper = styled.span`
-    margin-right: var(--spacing-2);
+const TagWrapper = styled.div`
+    font-size: var(--font-size-sm);
+    display: flex;
+    gap: var(--spacing-2);
+    flex-wrap: wrap;
+`;
+
+const TagBadge = styled(Link)`
+    padding: var(--spacing-1) var(--spacing-2);
+    border-radius: var(--border-radius-2);
+    background: var(--color-background-light);
 `;
 
 export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
