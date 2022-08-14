@@ -63,7 +63,10 @@ export default function Post({ source, data }: Props) {
                 <Spacer size={6} />
                 <TagWrapper>
                     {data.tags.map((x) => (
-                        <TagBadge href={encodeURI(`/blog/tags/${x}`)} key={x}>
+                        <TagBadge
+                            href={`/blog/tags/${encodeURIComponent(x)}`}
+                            key={x}
+                        >
                             {x}
                         </TagBadge>
                     ))}
