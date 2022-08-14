@@ -1,10 +1,12 @@
-import Document, { DocumentContext } from 'next/document';
+import Document, { DocumentContext, DocumentInitialProps } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
-// https://github.com/vercel/next.js/blob/6b8e499c7bf13914cca92f9da1737d358133ee20/examples/with-styled-components/pages/_document.tsx
+// https://github.com/vercel/next.js/blob/0f65bf6e8b4d6b1855e064730cf66d75c5625d7a/examples/with-styled-components-babel/pages/_document.tsx
 
 export default class MyDocument extends Document {
-    static async getInitialProps(ctx: DocumentContext) {
+    static async getInitialProps(
+        ctx: DocumentContext
+    ): Promise<DocumentInitialProps> {
         const sheet = new ServerStyleSheet();
         const originalRenderPage = ctx.renderPage;
 
@@ -18,7 +20,12 @@ export default class MyDocument extends Document {
             const initialProps = await Document.getInitialProps(ctx);
             return {
                 ...initialProps,
-                styles: [initialProps.styles, sheet.getStyleElement()],
+                styles: [
+                    <>
+                        {initialProps.styles}
+                        {sheet.getStyleElement()}
+                    </>,
+                ],
             };
         } finally {
             sheet.seal();

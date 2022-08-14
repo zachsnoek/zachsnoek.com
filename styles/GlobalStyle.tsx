@@ -3,12 +3,6 @@ import { createGlobalStyle } from 'styled-components';
 // Adapted from https://www.joshwcomeau.com/css/custom-css-reset/
 
 const GlobalStyle = createGlobalStyle`
-    @font-face {
-        /* Karrick by Jean-Baptiste Morizot and Lucas Le Bihan (Velvetyne Type Foundry): https://velvetyne.fr/fonts/karrik */
-        font-family: 'Karrik';
-        src: url('/fonts/Karrik-Regular.woff2') format('woff2');
-    }
-
     *,
     *::before,
     *::after {
@@ -55,18 +49,18 @@ const GlobalStyle = createGlobalStyle`
         --layout-max-width: 700px;
 
         font-size: var(--font-size-base);
-    }
 
+    }
+    
     html,
     body,
     #__next {
         height: 100%;
     }
-
+    
     body {
         font-family: Karrik, Roboto, sans-serif;
         -webkit-font-smoothing: antialiased;
-
         background-color: var(--color-background);
         color: var(--color-text);
         line-height: 1.5;
