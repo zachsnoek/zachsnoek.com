@@ -1,0 +1,286 @@
+---
+title: 'Understanding tagged template literals in JavaScript'
+date: '2022-03-26'
+description: 'What are tagged template literals in JavaScript?'
+categories:
+    - software engineering
+tags:
+    - javascript
+    - web development
+---
+
+## Introduction
+
+You’ve probably come across template literals when writing JavaScript:
+
+```jsx
+function sayHi(name) {
+    console.log(`Hi, ${name}!`);
+}
+
+sayHi('Zach'); // "Hi, Zach!"
+```
+
+Template literals are handy for their ability to interpolate values and create multiline strings. If you’ve used `styled-components`, you know that you can use template literals in a special form to add styles to a component:
+
+```jsx
+const Wrapper = styled.div`
+    display: flex;
+    align-items: center;
+`;
+```
+
+But what exactly is this syntax? This `styled-components` API is enabled by tagged template literals, which are functions that get their arguments from a template literal. In this post, we’ll briefly review template literals and learn how tagged template literals work.
+
+## Template literals
+
+Before we explore tagged template literals, let’s review template literals. Template literals are string literals that support expression [interpolation](https://en.wikipedia.org/wiki/String_interpolation) and multiple lines:
+
+```jsx
+const foo = `foo`;
+
+console.log(foo); // "foo"
+```
+
+They look similar to string literals, but they’re delimited with backticks instead of single or double quotes. A template literal always returns a string.
+
+We create multiline strings by simply adding newlines within the backticks:
+
+```jsx
+const html = `<div>
+	<p>
+		Foo
+	</p>
+</div>`;
+
+console.log(html); /*
+<div>
+ 	<p>
+ 		Foo
+ 	</p>
+</div>
+*/
+```
+
+To interpolate expressions, we delimit them with `${` and `}`:
+
+```jsx
+function sayHi(name) {
+    console.log(`Hi, ${name}!`);
+}
+
+sayHi('Zach'); // "Hi, Zach!"
+```
+
+This placeholder syntax is just syntactic sugar that helps make the interpolations more readable. Here’s an equivalent version of `sayHi` that concatenates the strings via the addition operator instead:
+
+```jsx
+function sayHi(name) {
+    console.log('Hi, ' + name + '!');
+}
+
+sayHi('Zach'); // "Hi, Zach!"
+```
+
+Note that the JavaScript within the placeholder must be an expression. If you provide something like a function declaration, for example, it will be stringified:
+
+```jsx
+const foo = `${() => {}}`;
+
+console.log(foo); // "() => {}"
+```
+
+Now that we’ve refreshed our knowledge on template literals, let’s introduce tagged template literals.
+
+## Tagged template literals
+
+Tagged template literals let you parse a template literal with a function. Formally, a tagged template literal is a function call whose arguments come from a template literal. Syntactically, this looks like a function identifier followed by a template literal.
+
+The example below shows an example of a tagged template literal (or tagged template, for short):
+
+```jsx
+const name = 'Zach';
+
+const html = bold`Hi, ${name}!`;
+
+console.log(html); // 'Hi, <span class="bold">Zach</span>!'
+```
+
+`bold` returns the original string but wraps the values interpolated into the template literal in `<span>`s.
+
+The function that precedes the template literal is called a tag function. When the tag function gets called, the first argument it receives is an array of strings. This array is the result of splitting the template literal on the interpolated parts:
+
+```jsx
+function bold(strings) {
+    console.log(strings);
+
+    // TODO: Implement `bold`
+}
+
+const name = 'Zach';
+
+bold`Hi, ${name}!`; // ["Hi, ", "!"]
+```
+
+Each interpolated value is passed to the function as additional arguments. For this example, we’ll access them using the [rest parameter syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters):
+
+```jsx
+function bold(strings, ...substitutions) {
+    console.log(substitutions);
+
+    // TODO: Implement `bold`
+}
+
+const name = 'Zach';
+
+bold`Hi, ${name}!`; // ["Zach"]
+```
+
+With these two pieces of data (the array of strings split on the interpolation placeholders and the interpolated values), our tag function can process the template literal however it likes. In our case, we want to surround each interpolation with a `<span>` element.
+
+Here’s an example of using these data to implement `bold`:
+
+```jsx
+function bold(strings, ...substitutions) {
+    const formattedString = strings.reduce((acc, curr, i) => {
+        const substitution = substitutions[i];
+        return (acc += substitution
+            ? `${curr}<span class="bold">${substitution}</span>`
+            : curr);
+    }, '');
+
+    return formattedString;
+}
+
+const name = 'Zach';
+
+const html = bold`Hi, ${name}!`;
+
+console.log(html); // 'Hi, <span class="bold">Zach</span>!'
+```
+
+Tag functions can return any value; even though they get their data from template literals, they do not need to return a string. The `styled` tagged template literal API from `styled-components`, for instance, returns a React component with attached styles.
+
+## Cooked and raw tagged templates
+
+Let’s say that we want to use `bold` but insert newlines via `\n`:
+
+```jsx
+const name = 'Zach';
+
+const html = bold`<p>\nHi, ${name}!\n</p>`;
+
+console.log(html); /*
+<p>
+Hi, <span class="bold">Zach</span>!
+</p>
+*/
+```
+
+The first argument provided to tag functions (the array of strings) is the cooked interpretation of the template literal: it respects [escape sequences](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#using_special_characters_in_strings) created by backslashes.
+
+Tag functions are also provided with a raw interpretation of the string which ignores escape sequences and renders backslashes as literal backslashes; backslashes have no meaning in this interpretation.
+
+We can use the raw interpretation by accessing the `.raw` property of the first argument:
+
+```jsx
+function bold(strings) {
+    console.log(strings.raw[0]);
+}
+
+const name = 'Zach';
+
+bold`<p>\nHi, ${name}!\n</p>`; // "<p>\nHi,"
+```
+
+### String.raw
+
+It’s worth noting that the built-in `String` object provides us with a `String.raw` tag function that we can use to create raw strings:
+
+```jsx
+const foo = String.raw`foo\nbar\tbaz`;
+
+console.log(foo); // "foo\nbar\tbaz"
+```
+
+This can be useful in cases where backslashes have meaning, such as Windows path strings:
+
+```jsx
+const path = String.raw`C:\foo\bar`;
+
+console.log(path); // "C:\foo\bar"
+```
+
+## Tagged templates with interpolated functions
+
+Earlier, we showed how interpolating a function declaration within a template literal placeholder stringifies it:
+
+```jsx
+const foo = `${() => {}}`;
+
+console.log(foo); // "() => {}"
+```
+
+Interestingly, when we interpolate a function declaration in a tagged template literal, the tag function receives the function itself––not the stringified function declaration. This means that, with some slight tweaking to `bold`'s implementation, we could interpolate values like this:
+
+```jsx
+const html = bold`Hi, ${() => 'Zach'}!`;
+
+console.log(html); // 'Hi, <span class="bold">Zach</span>!'
+```
+
+To make this work in our `bold` tag function, we just need to call the function in the placeholder:
+
+```jsx
+function bold(strings, ...substitutions) {
+    const formattedString = strings.reduce((acc, curr, i) => {
+        const substitution = substitutions[i];
+
+        // Instead of interpolating `substitution`, interpolate the value returned from `substitution()`
+        return (acc += substitution
+            ? `${curr}<span class="bold">${substitution()}</span>`
+            : curr);
+    }, '');
+
+    return formattedString;
+}
+```
+
+This example isn’t particularly interesting. But if you’re familiar with `styled-components`, you might notice that this looks similar to how you style a component based on props:
+
+```jsx
+const Wrapper = styled.div`
+    display: flex;
+    align-items: center;
+    width: ${(props) => props.width}px;
+`;
+```
+
+`styled-components` passes the interpolated functions the props passed to the component, then calls the function to get the final value. I won’t go into more detail about how this works here, but I recommend reading [this post](https://mxstbr.blog/2016/11/styled-components-magic-explained/) from Max Stoiber and [this post](https://www.joshwcomeau.com/react/demystifying-styled-components/) from Josh Comeau to learn more.
+
+## Conclusion
+
+Here are the main takeaways from this article:
+
+-   Template literals are like string literals, but add the ability to create multiline strings and interpolate values
+-   We can use tagged template literals to parse template literals with a tag function
+-   Tag functions are given a cooked and raw version of the template literal
+-   Unlike template literals, tag functions can receive interpolated function declarations and call them
+
+Hopefully this post helps you understand tagged template literals. Good luck!
+
+## Let’s connect
+
+If you’re interested in more articles like this, [subscribe to my newsletter](https://mailchi.mp/2df4b6d5458f/signup-page) and connect with me on [LinkedIn](https://www.linkedin.com/in/zach-snoek-5b327b179/) and [Twitter](https://twitter.com/zach_snoek)!
+
+## Acknowledgements
+
+Thanks to [Jacob Carpenter](https://www.linkedin.com/in/jacob-carpenter-a545831/) for reviewing this post.
+
+## References
+
+-   [Dr. Axel Rauschmayer | Exploring ES6](https://exploringjs.com/es6/)
+-   [Dr. Axel Rauschmayer | JavaScript for impatient programmers](https://exploringjs.com/impatient-js/toc.html)
+-   [Ecma International | ECMAScript 2015 Language Specification](https://262.ecma-international.org/6.0/)
+-   [MDN | Template literals (Template strings)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals)
+-   [Wes Bos | Tagged Template Literals](https://wesbos.com/tagged-template-literals)

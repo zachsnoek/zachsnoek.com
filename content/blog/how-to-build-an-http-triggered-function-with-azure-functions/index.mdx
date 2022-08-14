@@ -1,0 +1,408 @@
+---
+title: 'How to build an HTTP-triggered function with Azure Functions'
+date: '2021-10-18'
+description: 'Get started building Azure Functions with this tutorial!'
+categories:
+    - software engineering
+tags:
+    - tutorial
+    - javascript
+    - azure
+    - web development
+---
+
+## Introduction
+
+Serverless computing is an architecture that allows developers to deploy code without provisioning and maintaining the backend infrastructure to support it. By abstracting servers, it allows us to focus on the code that we write and think less about hardware.
+
+There are many serverless solutions from cloud computing providers such as Amazon Web Services, Google Cloud, and Microsoft Azure. In this tutorial, I'll show you how to create a serverless function with Azure Functions that's triggered with an HTTP request.
+
+## Prerequisites
+
+-   Node.js installed
+-   An Azure account (you can create an account for free [here](https://azure.microsoft.com/en-us/free/?v=a&adobe_mc_sdid=SDID%3D46A1292C024EC08B-2622DAEB632EB5D7%7CMCORGID%3DEA76ADE95776D2EC7F000101%40AdobeOrg%7CTS%3D1633407500) if you don't have one)
+
+I'll show you how to write a function in TypeScript, so you should be familiar with TypeScript or JavaScript. Additionally, you should have experience with NPM, web APIs, and basic UNIX commands.
+
+## What is Azure Functions?
+
+Azure Functions is a serverless service from Microsoft that allows us to write blocks of code called functions that run in response to an event, such as an HTTP request or IoT event. Instead of worrying about server operating systems and hardware that host our code, Azure handles the provisioning and maintenance of the hardware and infrastructure needed for us––all we do is write the function logic and deploy it.
+
+Functions will automatically scale up and down based on demand, and Azure will only bill us for the time that our code is executed. This can help us save costs if our application has significant downtime: with traditional hosting, we would have to pay for a server that is always online.
+
+## Installing Azure packages for local development
+
+To develop and deploy functions locally, we need to download two packages from Azure. Run the following commands to install Azure Functions Core Tools, a set of tools for developing and testing functions locally (installation instructions for Windows and Linux can be found [here](https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=v3%2Cwindows%2Ccsharp%2Cportal%2Cbash%2Ckeda#install-the-azure-functions-core-tools)):
+
+```bash
+brew tap azure/functions
+brew install azure-functions-core-tools@3
+```
+
+You can ensure that Core Tools is installed by running `func --version` which should output a version number like `3.x.x`. Next, install Azure CLI (installation instructions for Windows and Linux can be found [here](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)):
+
+```bash
+brew install azure-cli
+```
+
+The Azure CLI provides commands for working with Azure resources and allows us to deploy our function to Azure.
+
+Confirm that the CLI has been installed and sign in to Azure:
+
+```bash
+az login
+```
+
+If the Azure CLI is installed correctly, you'll be redirected to a page where you can sign in to your Azure account.
+
+## Creating the local function project
+
+Now that we have the required packages installed, let's create a function project:
+
+```bash
+func init azure-tutorial --typescript
+cd azure-tutorial
+```
+
+This command creates a local function project called `azure-tutorial` with some default configuration files. A function project contains one or more functions that share the same configuration.
+
+Running `ls` will show the following files:
+
+```text
+azure-tutorial/
+├─ host.json
+├─ local.settings.json
+├─ package.json
+├─ tsconfig.json
+```
+
+Let's briefly explore each of these:
+
+-   **host.json:** Contains global configuration options shared by all of the functions in a function project. We won't be modifying the defaults in this tutorial, so you can read the [host.json reference](https://docs.microsoft.com/en-us/azure/azure-functions/functions-host-json) from Microsoft for more information.
+-   **local.settings.json:** Stores local app and development tool settings. App settings and secrets, such as API keys and connection strings, can be added to the `Values` object and read in the function as environment variables. See the [Microsoft docs](https://docs.microsoft.com/en-us/azure/azure-functions/functions-develop-local#local-settings-file) for more information about the other supported local settings.
+-   **package.json:** Contains the project's configuration. Note that we're given a `build` script to compile the TypeScript, a `prestart` script that runs `build`, and a `start` script that runs the function locally.
+-   **tsconfig.json:** Default TypeScript compiler options.
+
+## Create the function from a template
+
+Throughout this tutorial, we'll create a function named `CreateUser` that imitates a user registration endpoint. It will be triggered by a POST request containing `username` and `password` fields in the request body. Run the following command to scaffold a `CreateUser` function from the HTTP trigger template:
+
+```bash
+func new --name CreateUser --template "HTTP trigger" --authlevel "anonymous"
+```
+
+Running `ls` again will show a new function directory called `CreateUser`:
+
+```text
+azure-tutorial/
+├─ CreateUser/
+│  ├─ function.json
+│  ├─ index.ts
+├─ host.json
+├─ local.settings.json
+├─ package.json
+├─ tsconfig.json
+```
+
+This directory contains everything we need for a function: a `function.json` configuration file and the function's code. Open up your `azure-tutorial` directory in a text editor so we can start exploring these function files.
+
+### function.json
+
+A function must have a function.json file, which contains its configuration information such as the trigger type and bindings. A function has exactly one **trigger,** which is an event that causes it to run.
+
+A **binding** defines how we get data into our function or send it out of our function––it connects resources to the function. Bindings are added to the `bindings` array. For example, our function contains the following HTTP trigger input binding:
+
+```json
+{
+    "authLevel": "Anonymous",
+    "type": "httpTrigger",
+    "direction": "in",
+    "name": "req",
+    "methods": ["get", "post"],
+},
+```
+
+The `direction` defines it to be an input binding, and `name` defines the name of the parameter passed to the function that contains the HTTP request data. Note that we've specified an `anonymous` authorization level to allow it to be triggered by anyone. You can read more about authorization levels in the [Microsoft docs](https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-http-webhook-trigger?tabs=csharp#configuration).
+
+Similarly, we have an output binding that defines our output data:
+
+```json
+{
+    "type": "http",
+    "direction": "out",
+    "name": "res"
+}
+```
+
+Here, `name` defines the property name on the context object returned from our function that contains the response data, which we will see shortly.
+
+### index.ts
+
+This file exports a function named `httpTrigger` that Azure runs when the function is triggered. The HTTP request object is the `req` parameter (defined by the input binding's `name` property in `function.json`), and a context object is passed through the `context` parameter when the function is run.
+
+The default function code provided for us allows us to specify a name in the query parameters or request body. When run, it creates a response message and sets the response on the context object's `res` property, which was defined in `function.json`.
+
+## Testing the default function locally
+
+The boilerplate that we've just explored is a working function that we can make requests to locally. Let's ensure that everything is working properly by running it and making a request to its `CreateUser` endpoint.
+
+In the root directory, install the project's NPM dependencies:
+
+```bash
+npm i
+```
+
+We can now start the function with `npm start`, which will compile the TypeScript and start a local server. This command should show the following output:
+
+```text
+...
+Functions:
+
+        CreateUser: [GET,POST] http://localhost:7071/api/CreateUser
+...
+```
+
+By default, HTTP-triggered functions are available at the `/api/<function name>` endpoint. Make a test GET request to our function with the following `curl` command:
+
+```bash
+curl http://localhost:7071/api/CreateUser?name=<your name>
+```
+
+This request should return a response like "Hello, Zach. This HTTP triggered function executed successfully." We can also test out the POST request with this command:
+
+```bash
+curl -i http://localhost:7071/api/CreateUser -d '{"name": "<Your name>"}'
+```
+
+Great! You've created a local function project with a working function. Let's see what else we can do with our HTTP trigger by updating it to do something a little more useful.
+
+## Configuring the function to accept POST requests
+
+By default, our HTTP input trigger accepts both GET and POST methods, but our `CreateUser` function should only allow a POST request. Let's fix this by removing the GET method from the input binding's `method` property, which is an array containing the function's allowed HTTP methods:
+
+```json
+{
+  "bindings": [
+    {
+      "authLevel": "Anonymous",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": ["post"]
+    },
+    ...
+  ],
+  ...
+}
+```
+
+While we're here, let's make the name of our function's endpoint RESTful and name it `/api/users` instead of `/api/CreateUser`. We can specify a custom name by setting the `route` property of the input trigger:
+
+```json
+{
+  "bindings": [
+    {
+      "authLevel": "Anonymous",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": ["post"],
+      "route": "users"
+    },
+    ...
+  ],
+  ...
+}
+```
+
+After restarting the function, you should see output to indicate that the `CreateUser` function is triggered by the `/api/users` endpoint now and only accepts POST requests:
+
+```text
+...
+Functions:
+
+        CreateUser: [POST] http://localhost:7071/api/users
+...
+```
+
+## Writing and testing the function
+
+We've got our function bindings configured, so let's replace the generated function with our own code. As mentioned earlier, our function will take in a `username` and `password` in the request body. We'll also want to return the created user object as JSON and send a `201` response code to indicate that a user was created.
+
+In `index.ts`, rename the function from `httpTrigger` to `createUser` and delete all of the code within the function body. Your file should look something like this:
+
+```typescript
+import { AzureFunction, Context, HttpRequest } from '@azure/functions';
+
+const createUser: AzureFunction = async function (
+    context: Context,
+    req: HttpRequest
+): Promise<void> {
+    // TODO: Implement
+};
+
+export default createUser;
+```
+
+Next, add the following code to the function body:
+
+```typescript
+const { username, password } = req.body;
+
+const user = { username, password };
+
+// In real life, we'd add the user object to our database here
+
+context.res = {
+    status: 201,
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: user,
+};
+```
+
+We simply construct a user object from the request body and return that object in the response body with the appropriate status code and header. Restart the function and make a POST request with a username and password:
+
+```bash
+curl -i http://localhost:7071/api/users -d '{"username": "foo", "password": "bar"}'
+```
+
+The response will have `{"username": "foo", "password": "bar"}` in the body and a `201` status code.
+
+In real life, though, we'd probably want to add some request validation that requires the caller to provide both a username and password. If the user provides invalid input, we should return a `400` status code and a helpful error message. Replace the function body with this updated implementation:
+
+```typescript
+let responseStatus: number;
+let responseBody: {
+    user?: { username: string; password: string };
+    error?: string;
+};
+
+const { username, password } = req.body;
+
+if (username && password) {
+    responseStatus = 201;
+    responseBody = { user: { username, password } };
+} else {
+    responseStatus = 400;
+    responseBody = { error: 'Missing username or password.' };
+}
+
+context.res = {
+    status: responseStatus,
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: responseBody,
+};
+```
+
+Now, restart the function and make a request without a username or password. For example:
+
+```bash
+curl -i http://localhost:7071/api/users -d '{"username": "foo"}'
+```
+
+You should get a `400` response code and a response containing `{"error": "Missing username or password"}`.
+
+That's it for the function. Now, let's get ready to deploy the function to Azure.
+
+## Creating Azure resources for deployment
+
+To deploy our function, we need to create an Azure resource group, storage account, and function app. A resource group is a container for Azure resources, and a storage account stores a function's state, code, and configuration files.
+
+You'll want to create the resource group and storage account in a region that's close to you to reduce latency. You can list the regions available to you by running `az account list-locations`:
+
+```bash
+az account list-locations --query "[].{Region:name}" --out table | less
+```
+
+For instance, I live in Washington, United States, so I'll use the `westus2` location.
+
+The next few commands require us to repeat a lot of configuration information, so set the following environment variables that we can use later on:
+
+```bash
+REGION=<your region>                       # The region you chose above
+RESOURCE_GROUP_NAME=azure-tutorial-rg      # The name of the resource group
+STORAGE_ACCOUNT_NAME=<your unique name>    # The name of the storage account
+FUNCTION_NAME=<your unique name>           # The name of the function app in Azure
+```
+
+Create a resource group with the following command:
+
+```bash
+az group create --name $RESOURCE_GROUP_NAME --location $REGION
+```
+
+Next, create the storage account:
+
+```bash
+az storage account create --name $STORAGE_ACCOUNT_NAME --location $REGION --resource-group $RESOURCE_GROUP_NAME --sku Standard_LRS
+```
+
+Note that storage account names need to be globally unique; an ambiguous error message could mean that the storage name is unavailable. You can check if your name is available by running `az storage account check-name --name $STORAGE_ACCOUNT_NAME`.
+
+Now we can create our function app in Azure:
+
+```bash
+az functionapp create --name $FUNCTION_NAME --resource-group $RESOURCE_GROUP_NAME --storage-account $STORAGE_ACCOUNT_NAME --consumption-plan-location $REGION --runtime node --runtime-version 12 --functions-version 3
+```
+
+Like storage accounts, function names need to be unique in Azure.
+
+When the command completes, you can ensure that the function was created by listing your function apps:
+
+```bash
+az functionapp list --out table
+```
+
+## Deploying the function to Azure
+
+We're now ready to deploy our function! First, create a production build of our app:
+
+```bash
+npm run build:production
+```
+
+We can now deploy the function with the following command:
+
+```bash
+func azure functionapp publish $FUNCTION_NAME
+```
+
+Once the deployment succeeds, you should see the following output:
+
+```text
+...
+Functions in <function name>:
+    CreateUser - [httpTrigger]
+        Invoke url: https://<function name>.azurewebsites.net/api/users
+```
+
+The "Invoke url" in the output is the URL that triggers our function. Copy the URL and test out the requests we made locally:
+
+```bash
+curl -i <invoke URL> -d '{"username": "foo", "password": "bar"}' # returns a 201
+curl -i <invoke URL> -d '{"username": "foo"}' # returns a 400
+```
+
+## Conclusion
+
+Congrats! You've created and deployed your own function to Azure. Now that you've used an HTTP trigger, I encourage you to check out the [Azure Functions documentation](https://docs.microsoft.com/en-us/azure/azure-functions/) and explore other types of function triggers.
+
+## Let's connect
+
+If you enjoyed this post, connect with me on [LinkedIn](https://www.linkedin.com/in/zach-snoek-5b327b179/), [GitHub](https://github.com/zachsnoek), and [Twitter](https://twitter.com/zach_snoek)!
+
+## References
+
+-   [Azure Functions University | Deployment to Azure](https://github.com/marcduiker/azure-functions-university/blob/main/lessons/deployment/deployment-lesson.md)
+-   [Microsoft | Azure Functions developer guide](https://docs.microsoft.com/en-us/azure/azure-functions/functions-reference)
+-   [Microsoft | Azure Functions HTTP trigger](https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-http-webhook-trigger?tabs=javascript)
+-   [Microsoft | Azure Functions triggers and bindings concepts](https://docs.microsoft.com/en-us/azure/azure-functions/functions-triggers-bindings?tabs=javascript)
+-   [Microsoft | Code and test Azure Functions locally](https://docs.microsoft.com/en-us/azure/azure-functions/functions-develop-local#local-settings-file)
+-   [Microsoft | Quickstart: Create a TypeScript function in Azure from the command line](https://docs.microsoft.com/en-us/azure/azure-functions/create-first-function-cli-typescript?tabs=azure-cli%2Cbrowser#invoke-the-function-on-azure)
+-   [Microsoft | Work with Azure Functions Core Tools](https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=v3%2Cwindows%2Cnode%2Cportal%2Cbash%2Ckeda#local-settings)
+-   [Microsoft Azure | Go serverless: Event-driven applications with Azure Functions | Azure Friday](https://www.youtube.com/watch?v=UFxQhszT450)
+-   [Serverless on Azure | Azure Functions University - HTTP (TypeScript)](https://www.youtube.com/watch?v=zYb5sVQgUN4)

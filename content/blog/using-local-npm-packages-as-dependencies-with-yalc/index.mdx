@@ -1,0 +1,102 @@
+---
+title: 'Using local NPM packages as dependencies with yalc'
+date: '2021-08-14'
+description: 'How to link local NPM packages with yalc.'
+categories:
+    - software engineering
+tags:
+    - npm
+    - javascript
+    - web development
+---
+
+## Introduction
+
+If you develop NPM packages, you may need to use a local version of a package as a dependency of another. For example, say you have two packages, `package-a` and `package-b`, where `package-a` depends on `package-b`. You've made changes to `package-b` and want to test them out in `package-a` without publishing `package-b` to NPM.
+
+[yalc](https://github.com/wclr/yalc) solves this problem by allowing you to publish your local dependencies to a local store and make them available for use in dependent projects.
+
+Immediately below are quick start instructions for easy reference. If you're interested in what `yalc` commands do under the hood, continue to [How it works](#how-it-works).
+
+## Quick start
+
+Note: `package-a` is the local dependent package and `package-b` is the local dependency package.
+
+**1.** Install `yalc` globally
+
+```text
+$ npm i -g yalc
+```
+
+**2.** Publish your dependency to the `yalc` store
+
+```text
+[package-b] $ yalc publish
+```
+
+**3.** Add the `yalc`-stored dependency to your dependent project
+
+```text
+[package-a] $ yalc add package-b
+```
+
+**3a.** Install the dependencies of the dependency if they aren't already installed
+
+```text
+[package-a] $ npm i
+```
+
+**4.** After making changes to your dependency, update the package in the store and push the changes to the dependent project
+
+```text
+[package-b] $ yalc push
+```
+
+**5.** Remove the dependency from the dependent project
+
+```text
+[package-a] $ yalc remove package-b
+```
+
+## How it works
+
+When using `yalc` to add a local package as a dependency, you first **publish** the dependency to the `yalc` store and **add** it to the dependent project. You can then **update** the dependency and eventually **remove** it from the dependent project.
+
+### Publishing
+
+To add your dependency to the `yalc` store, run `yalc publish`. This will make a copy of the package in the store, which is located at `~/.yalc`. `yalc` will also compute the hash signature of the package's files and store it in the store to verify that the correct version of the package is added to other projects.
+
+### Adding
+
+`yalc add <dependency>` in your dependent project adds the package published in the store to your project. `yalc` will pull the package into the project and place it in `.yalc`, and will update the dependency entry in the project's `package.json` to point to the local copy.
+
+For example, running `yalc add package-b` in `package-a` will create a copy of the dependency at `package-a/.yalc/package-b`. `package-a`'s `package.json` will have a dependency entry for `package-b` that points to `file:./yalc/package-b`.
+
+`yalc add` will also create a `yalc.lock` file in the dependent project that fixes the dependency to the version in the store using the signature created with `yalc publish`.
+
+Note that `yalc` doesn't install dependencies of the local `yalc` package; run `npm i` after adding your dependency if it has any dependencies that are not installed.
+
+### Updating
+
+If you've made changes to your dependency that need to be updated in the dependent project, run `yalc push` in the dependency project. This will publish the updated dependency to the store and update the changes in the dependent project.
+
+Alternatively, you can run `yalc publish` in the dependency and then run `yalc update` in the dependent project.
+
+You'll need to run `npm i` again in the dependent project if the dependencies of the dependency have changed.
+
+### Removing
+
+Once you have no further use for the local dependency in your project, you can remove it with `yalc remove <dependency>`. This will remove the dependency stored in `.yalc` and the `yalc` information in `yalc.lock` and `package.json`.
+
+## Conclusion
+
+`yalc` makes it easy to use locally-developed packages in other projects. It has some other useful options that I didn't mention here; read more about them on the [project's README](https://github.com/wclr/yalc). Hopefully, this helps you get started developing with local packages––good luck!
+
+## Let's connect
+
+If you enjoyed this post, connect with me on [Twitter](https://twitter.com/zach_snoek), [LinkedIn](https://www.linkedin.com/in/zach-snoek-5b327b179/), and [GitHub](https://github.com/zachsnoek)!
+
+## References
+
+-   [GitHub | wclr](https://github.com/wclr/yalc)
+-   [Henry Bley-Vroman (Viget) | How to use local Node packages as project dependencies](https://www.viget.com/articles/how-to-use-local-unpublished-node-packages-as-project-dependencies/)

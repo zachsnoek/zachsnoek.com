@@ -1,0 +1,178 @@
+---
+title: 'Creating Custom React Hooks: useForm'
+date: '2020-11-29'
+description: 'Create a useForm hook to simplify form state management.'
+categories:
+    - software engineering
+tags:
+    - react
+    - javascript
+    - web development
+---
+
+When working with forms in React, we typically want to have control over the form's state. React makes this easy with the `useState` hook, but there's still a bit of code to write on our end. Take the following simple example:
+
+```jsx
+function Form() {
+    const [formData, setFormData] = React.useState({
+        username: '',
+        password: '',
+    });
+
+    const { username, password } = formData;
+
+    const handleInputChange = (e) => {
+        setFormData({ ...form, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.dir(formData);
+    };
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <input
+                type="text"
+                name="username"
+                value={username}
+                onChange={handleInputChange}
+            />
+            <input
+                type="password"
+                name="password"
+                value={password}
+                onChange={handleInputChange}
+            />
+            <button type="submit">Submit</button>
+        </form>
+    );
+}
+```
+
+For one form, this is straightforward and not too taxing on our part. But what if we have lots of forms like this on our site? Re-writing the state management multiple times seems like more work than necessary for us and would probably introduce a lot of mistakes.
+
+Instead, let's convert the state management to a custom hook that we'll call `useForm`.
+
+Let's start by managing our form state in `useForm`. The user should be able to pass in the initial state as a parameter:
+
+```jsx
+const useForm = (initialState = {}) => {
+    const [formData, setFormData] = React.useState(initialState);
+
+    return { formData };
+};
+```
+
+It would also be nice to not have to re-write `handleInputChange` either, so let's add that to the hook:
+
+```jsx
+const useForm = (initialState = {}) => {
+    const [formData, setFormData] = React.useState(initialState);
+
+    const handleInputChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    return { formData, handleInputChange };
+};
+```
+
+Great! Now we can just get `handleInputChange` from `useForm` and pass that to our inputs' `onChange`.
+
+This is what our previous example looks like now with `useForm`:
+
+```jsx
+function Form() {
+    const { formData, handleInputChange } = useForm({
+        username: '',
+        password: '',
+    });
+
+    const { username, password } = formData;
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.dir(formData);
+    };
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <input
+                type="text"
+                name="username"
+                value={username}
+                onChange={handleInputChange}
+            />
+            <input
+                type="password"
+                name="password"
+                value={password}
+                onChange={handleInputChange}
+            />
+            <button type="submit">Submit</button>
+        </form>
+    );
+}
+```
+
+Finally, let's return a `handleSubmit` function from `useForm` so that we can reuse that logic in our forms' `onSubmit`. We'll want to call `e.preventDefault()` to prevent the page from reloading, but it would also be nice if the user could add some custom behavior when the submit handler is called.
+
+Let's add another parameter to `useForm`: an `onSubmit` function that takes in the `formData`. `useForm`'s `handleSubmit` can take care of preventing the default behavior, then call the user's `onSubmit` function and pass it the `formData`.
+
+```jsx
+const useForm = (initialState = {}, onSubmit) => {
+    const [formData, setFormData] = React.useState(initialState);
+
+    const handleInputChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        onSubmit?.(formData);
+    };
+
+    return { formData, handleInputChange, handleSubmit };
+};
+```
+
+Here's the final result with our custom `onSubmit` function passed to `useForm`:
+
+```jsx
+function Form() {
+    const { formData, handleInputChange, handleSubmit } = useForm(
+        {
+            username: '',
+            password: '',
+        },
+        (formData) => console.dir(formData)
+    );
+
+    const { username, password } = formData;
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <input
+                type="text"
+                name="username"
+                value={username}
+                onChange={handleInputChange}
+            />
+            <input
+                type="password"
+                name="password"
+                value={password}
+                onChange={handleInputChange}
+            />
+            <button type="submit">Submit</button>
+        </form>
+    );
+}
+```
+
+That's it! Thanks to React hooks, we can create nice reusable form data logic that can be used across our app's forms.
+
+## Let's connect
+
+If you liked this post, come connect with me on [Twitter](https://twitter.com/zach_snoek), [LinkedIn](https://www.linkedin.com/in/zach-snoek-5b327b179/), and [GitHub](https://github.com/zachsnoek)! You can also [subscribe to my mailing list](https://mailchi.mp/2df4b6d5458f/signup-page) and get the latest content and news from me.

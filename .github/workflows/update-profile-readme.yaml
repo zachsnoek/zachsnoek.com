@@ -1,0 +1,59 @@
+name: Update recent blog posts section in profile README
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  check-if-post-created:
+    name: Check if a new post was created in commit
+    runs-on: ubuntu-latest
+    outputs:
+      POST_CREATED: ${{ steps.check.outputs.POST_CREATED }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+      - name: Run check
+        id: check
+        run: echo "::set-output name=POST_CREATED::$(git log --format=%B -n 1 ${{ github.sha }} | grep 'createPost:'; echo $?)"
+
+  update-profile-readme:
+    name: Update profile README with newly-created post
+    runs-on: ubuntu-latest
+    needs: check-if-post-created
+    if: needs.check-if-post-created.outputs.POST_CREATED != '1'
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+      - name: Get the name of the added fle
+        run: echo "CREATED_FILE=$(git diff-tree --no-commit-id --name-only  -r ${{ github.sha }} | grep -m 1 'index.mdx')" >> $GITHUB_ENV
+      - name: Get post slug and title
+        id: get_post
+        run: |
+          echo "POST_SLUG=$(echo $CREATED_FILE | sed -e 's|.*blog\/||g' | sed -e 's|\/index.mdx||g')" >> $GITHUB_ENV
+          echo "POST_TITLE=$(sed '2q;d' $CREATED_FILE | sed 's/^title:*[[:blank:]]*//g' | sed -e 's|["'\'']||g')" >> $GITHUB_ENV
+      - name: Checkout profile README repository
+        uses: actions/checkout@v2
+        with:
+          repository: zachsnoek/zachsnoek
+          token: ${{ secrets.PAT }}
+      - name: Find the start of blog posts list
+        run: echo "LINE_NUMBER=$(grep -nm 1 '<!-- BLOG POSTS -->' README.md | cut -f1 -d:)" >> $GITHUB_ENV
+      - name: Get the line numbers to delete and insert
+        run: |
+          echo "LINE_NUMBER_TO_DELETE=$(($LINE_NUMBER + 4))" >> $GITHUB_ENV
+          echo "LINE_NUMBER_TO_INSERT=$(($LINE_NUMBER + 2))" >> $GITHUB_ENV
+      - name: Delete the last blog post and insert the most recent blog post
+        run: |
+          sed -i "${LINE_NUMBER_TO_DELETE}d" README.md
+          sed -i "${LINE_NUMBER_TO_INSERT}i * [$POST_TITLE](https://zachsnoek.com/blog/$POST_SLUG)" README.md
+      - name: Push updated README
+        run: |
+          git config user.name zachsnoek
+          git config user.email dev@zachsnoek.com
+          git add .
+          git commit -m "Auto-update: Add '$POST_TITLE' to recent blog posts."
+          git push

@@ -1,0 +1,302 @@
+---
+title: 'Understanding Symbols in JavaScript'
+date: '2022-05-02'
+description: 'Learn about symbols and their use cases.'
+categories:
+    - software engineering
+tags:
+    - javascript
+    - web development
+---
+
+## What are symbols?
+
+Symbols are primitive values that are guaranteed to be unique. You can create a new symbol with the `Symbol` constructor and optionally provide a description string:
+
+```js
+const foo = Symbol('foo');
+```
+
+Symbols are primitives, not objects. We can verify this by checking the `typeof` a symbol:
+
+```js
+const foo = Symbol('foo');
+
+console.log(typeof foo); // "symbol"
+
+console.log(foo instanceof Object); // false
+```
+
+However, because symbols are unique, they act like objects when checking for equality. Two different symbols will never be equal, which is not true for other primitive values:
+
+```js
+// Symbols are unique, like object references
+console.log(Symbol() === Symbol()); // false
+console.log({} === {}); // false
+
+// Other primitives are not unique; their contents are equal
+console.log('foo' === 'foo'); // true
+console.log(42 === 42); // true
+
+// The same symbol is equal to itself
+const foo = Symbol();
+console.log(foo === foo); // true
+```
+
+Symbols can also be used as property keys in objects; we call these property symbols. Property symbols are accessed via bracket notation:
+
+```js
+const foo = Symbol();
+
+const bar = {
+    [foo]: 'foo',
+};
+
+console.log(bar[foo]); // "foo"
+```
+
+Note that property symbols won’t appear in `for...of` loops or get returned from `Object.getOwnPropertyNames`. However, they’re not completely private: we can use `Object.getOwnPropertySymbols` or `Reflect.ownKeys` to retrieve them:
+
+```js
+const fooSymbol = Symbol('foo');
+
+const foo = {
+    [fooSymbol]: 'foo symbol',
+    fooString: 'foo string',
+};
+
+// Only "fooString" is logged
+for (const key in foo) {
+    console.log(key); // "fooString"
+}
+
+// Object.getOwnPropertySymbols returns an array of property symbols: [fooSymbol]
+console.log(Object.getOwnPropertySymbols(foo).length); // 1
+console.log(Object.getOwnPropertySymbols(foo)[0]); // Symbol(foo)
+```
+
+## The global symbol registry
+
+In our previous examples, we created symbols as local variables. However, it might be necessary for a symbol to be available globally or across [realms](https://2ality.com/2014/12/es6-symbols.html#crossing-realms-with-symbols). We can store global symbols in the global symbol registry; to create a global symbol, use `Symbol.for`:
+
+```js
+const foo = Symbol.for('foo');
+
+console.log(foo === Symbol.for('foo')); // true
+```
+
+If a symbol with the given key argument (which is also used as the symbol’s description) does not already exist in the global symbol registry, `Symbol.for` creates a new symbol and adds it to the registry. Otherwise, it returns the symbol for the key.
+
+If you need to retrieve the key of a global symbol, use `Symbol.keyFor`:
+
+```js
+const foo = Symbol.for('foo');
+
+console.log(Symbol.keyFor(foo)); // "foo"
+
+const bar = Symbol('bar'); // local symbols are not added to the global symbol registry
+
+console.log(Symbol.keyFor(bar)); // undefined
+```
+
+Now that we understand the basics of symbols, let’s explore some use cases.
+
+## Use cases
+
+### Preventing property key collisions
+
+Symbols are useful for creating unique property keys that won’t clash with other string or symbol keys.
+
+For example, consider the contrived example of a music library that exports a `createSong` function for creating song objects. Each song returned from `createSong` has an `id` used internally by the library:
+
+```js
+import { createSong } from 'foo-song-library';
+
+const song = createSong({ title: 'Africa', artist: 'Toto' });
+
+console.log(song); // { id: 42, title: 'Africa', artist: 'Toto' }
+```
+
+Since `id` is a normal string key, a consumer could easily overwrite it––either intentionally or on accident:
+
+```js
+const song = createSong({ title: 'Africa', artist: 'Toto' });
+
+console.log(song.id); // 42
+
+song.id = 'foo';
+
+console.log(song.id); // "foo"
+```
+
+`createSong` could instead use a property symbol so that it’s harder for the consumer to overwrite:
+
+```js
+// foo-song-library
+
+const id = Symbol('id');
+
+function createSong({ title, artist }) {
+    return {
+        [id]: createUniqueId(),
+        title,
+        artist,
+    };
+}
+
+// Consumer
+
+const song = createSong({ title: 'Africa', artist: 'Toto' });
+
+song.id = 'foo';
+
+console.log(song); // { [Symbol(id)]: 42, id: 'foo', ... }
+```
+
+As we showed earlier, it’s still possible to find the symbol keys of an object, so the internal `[id]` property isn’t truly inaccessible.
+
+### Checking the validity of React elements with unique tags
+
+For this use case, let’s explore a real-world example.
+
+We typically create React elements using JSX. Under the hood, our markup gets transformed to a [React.createElement](https://reactjs.org/docs/react-api.html#createelement) call, which returns a React element––a normal JavaScript object:
+
+```jsx
+// This JSX:
+
+<div
+	style={{
+	  width: '50px',
+	  height: '50px',
+	  background: 'peachpuff'
+	}}
+/>
+
+// Gets transpiled to this:
+
+React.createElement('div', {
+  style: {
+    width: '50px',
+    height: '50px',
+    background: 'peachpuff'
+  }
+});
+
+// React.createElement returns an object that looks like:
+
+{
+	type: 'div',
+	props: {
+		style: {
+	    width: '50px',
+	    height: '50px',
+	    background: 'peachpuff'
+	  }
+	},
+	$$typeof: Symbol.for('react.element'),
+	// ...
+}
+```
+
+In most cases, creating elements like this isn’t useful. But notice that the element created by `React.createElement` has a `$$typeof` property whose value is a symbol. React tags elements it creates with this property to ensure that the object it is rendering is valid.
+
+Suppose we’re fetching user data from a server and expecting to render their bio as a string. If our server can mistakenly store JSON in the bio field, we could get back a React element in JSON with some malicious `dangerouslySetInnerHTML`:
+
+```jsx
+function App() {
+    const [user, setUser] = React.useState();
+
+    // Fetch data, etc.
+
+    // user:
+    /*
+		{
+			name: ...,
+			bio: {
+				type: 'div',
+				props: {
+					dangerouslySetInnerHTML: {
+						__html: ...
+					}
+				}
+				...
+			}
+		}
+	*/
+
+    return (
+        <div>
+            <h1>Welcome, {user.name}!</h1>
+            <p>{user.bio}</p> {/* `bio` is a `div`, not a string! */}
+        </div>
+    );
+}
+```
+
+React tries to prevent this from happening by checking to see if the element it is rendering has a `$$typeof` property value equal to `Symbol.for('react.element')`; if it doesn’t, it won’t render the element. This works because JSON can’t have symbol values, so we can’t return a symbol equal to `Symbol.for('react.element')` from a server.
+
+For a more detailed explanation, see [this blog post](https://overreacted.io/why-do-react-elements-have-typeof-property/) by Dan Abramov and [the PR](https://github.com/facebook/react/pull/4832) that added this `$$typeof` symbol check.
+
+## Other characteristics of symbols
+
+### String conversion
+
+Converting a symbol to a string can be useful for debugging and other output, but be aware that symbols can’t be implicitly converted to strings. If you want to convert a symbol to a string, use the `String` primitive wrapper or `.toString`:
+
+```js
+const foo = Symbol('foo');
+
+console.log(foo + ''); // Uncaught TypeError: Cannot convert a Symbol value to a string
+
+console.log(String(foo)); // "Symbol(foo)"
+
+console.log(foo.toString()); // "Symbol(foo)"
+```
+
+You can also use a symbol’s string description by accessing its `.description` property:
+
+```js
+console.log(foo.description); // "foo"
+```
+
+### JSON.stringify
+
+Symbol properties will not be returned from `JSON.stringify`. As we mentioned earlier, symbols are not valid in JSON:
+
+```js
+const foo = { [Symbol()]: 'foo', bar: 'bar' };
+
+console.log(JSON.stringify(foo)); // {"bar":"bar"}
+```
+
+### Well-known symbols
+
+JavaScript has several well-known symbols. These are symbols that are built into the language and used by algorithms of the specification. We usually encounter them as property keys whose values we implement to extend a part of the specification.
+
+For example, we can make an object [iterable](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/iteration_protocols) by defining a property whose key is `Symbol.iterator` and whose value is a function that returns a iterator:
+
+```js
+const foo = ['foo', 'bar'];
+
+const iterator = foo[Symbol.iterator]();
+
+console.log(iterator.next()); // { value: 'foo', done: false }
+```
+
+A list of all the well-known symbols in the specification can be found [here](https://tc39.es/ecma262/#sec-well-known-symbols).
+
+## Conclusion
+
+If you’re interested in learning more about symbols, I recommend starting with the `Symbol` API [docs on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol#constructor) and [JavaScript for Impatient Programmers](https://exploringjs.com/impatient-js/ch_symbols.html) by Dr. Axel Rauschmayer.
+
+That’s all for this post. Good luck!
+
+## Let’s connect
+
+If you’re interested in more articles like this, [subscribe to my newsletter](https://mailchi.mp/2df4b6d5458f/signup-page) and connect with me on [LinkedIn](https://www.linkedin.com/in/zach-snoek-5b327b179/) and [Twitter](https://twitter.com/zach_snoek)!
+
+## References
+
+-   [Dr. Axel Rauschmayer | JavaScript for Impatient Programmers](https://exploringjs.com/impatient-js/index.html)
+-   [Dr. Axel Rauschmayer | Symbols in ECMAScript 6](https://2ality.com/2014/12/es6-symbols.html)
+-   [MDN | Symbol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol)
