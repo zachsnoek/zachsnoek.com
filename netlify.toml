@@ -3,8 +3,5 @@
   publish = ".next"
   environment = { NODE_VERSION = "16.13.2" }
 
-[context.deploy-preview]
-  command = "echo 'GitHub Workflow runs build command'"
-
 [[plugins]]
   package = "@netlify/plugin-nextjs"
