@@ -3,12 +3,6 @@ import { createGlobalStyle } from 'styled-components';
 // Adapted from https://www.joshwcomeau.com/css/custom-css-reset/
 
 const GlobalStyle = createGlobalStyle`
-    @font-face {
-        /* Karrick by Jean-Baptiste Morizot and Lucas Le Bihan (Velvetyne Type Foundry): https://velvetyne.fr/fonts/karrik */
-        font-family: 'Karrik';
-        src: url('/fonts/Karrik-Regular.woff2') format('woff2');
-    }
-
     *,
     *::before,
     *::after {
