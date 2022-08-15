@@ -56,7 +56,7 @@ const GlobalStyle = createGlobalStyle`
     #__next {
         height: 100%;
     }
-    
+
     body {
         font-family: Karrik, Roboto, sans-serif;
         -webkit-font-smoothing: antialiased;
