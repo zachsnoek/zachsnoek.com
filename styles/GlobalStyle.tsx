@@ -49,9 +49,8 @@ const GlobalStyle = createGlobalStyle`
         --layout-max-width: 700px;
 
         font-size: var(--font-size-base);
-
     }
-    
+
     html,
     body,
     #__next {
@@ -61,6 +60,7 @@ const GlobalStyle = createGlobalStyle`
     body {
         font-family: Karrik, Roboto, sans-serif;
         -webkit-font-smoothing: antialiased;
+
         background-color: var(--color-background);
         color: var(--color-text);
         line-height: 1.5;
