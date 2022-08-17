@@ -29,7 +29,7 @@ function Layout({
     children,
 }: LayoutProps) {
     const url = useCurrentUrl();
-    const ogImagePath = `${url}images/og-default.png`;
+    const ogImagePath = `${url}/images/og-default.png`;
 
     return (
         <>
