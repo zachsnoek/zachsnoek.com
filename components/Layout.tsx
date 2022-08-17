@@ -29,6 +29,7 @@ function Layout({
     children,
 }: LayoutProps) {
     const url = useCurrentUrl();
+    const ogImagePath = `${url}images/og-default.png`;
 
     return (
         <>
@@ -39,7 +40,7 @@ function Layout({
                 <meta property="og:title" content={title} />
                 <meta property="og:type" content={type} />
                 <meta property="og:url" content={url} />
-                {/* TODO: <meta property="og:image" content="" /> */}
+                <meta property="og:image" content={ogImagePath} />
 
                 <meta property="og:description" content={description} />
                 <meta property="og:site_name" content={SITE_TITLE} />
@@ -48,7 +49,7 @@ function Layout({
                 <meta name="twitter:creator" content="@zach_snoek" />
                 <meta name="twitter:title" content={title} />
                 <meta name="twitter:description" content={description} />
-                {/* TODO: <meta name="twitter:image" content="" /> */}
+                <meta name="twitter:image" content={ogImagePath} />
 
                 {noIndex && <meta name="robots" content="noindex" />}
 
