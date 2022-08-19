@@ -7,7 +7,7 @@ import { Post } from '../utils/posts';
 type Props = Pick<Post, 'title'>;
 
 export function SharePost({ title }: Props) {
-    const url = useCurrentUrl();
+    const { url } = useCurrentUrl();
 
     return (
         <Wrapper>

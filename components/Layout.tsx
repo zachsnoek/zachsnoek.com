@@ -17,6 +17,7 @@ interface LayoutProps {
     type?: 'website' | 'article';
     head?: () => React.ReactNode;
     noIndex?: boolean;
+    useOgTemplate?: boolean;
     children: React.ReactNode;
 }
 
@@ -26,10 +27,14 @@ function Layout({
     type = 'website',
     head,
     noIndex = false,
+    useOgTemplate = false,
     children,
 }: LayoutProps) {
-    const url = useCurrentUrl();
-    const ogImagePath = `${url}/images/og-default.png`;
+    const { url, origin } = useCurrentUrl();
+
+    const ogImagePath = useOgTemplate
+        ? `${origin}/api/og?text=${encodeURI(title)}`
+        : `${url}/images/og-default.png`;
 
     return (
         <>
