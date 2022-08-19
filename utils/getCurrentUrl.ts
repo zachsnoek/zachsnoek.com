@@ -1,4 +1,9 @@
-export function getCurrentUrl() {
+export function getCurrentUrl(): {
+    url: string;
+    origin: string;
+} {
     const { origin, pathname } = new URL(globalThis.location.href);
-    return [origin, pathname].join('');
+    const url = [origin, pathname === '/' ? '' : pathname].join('');
+
+    return { url, origin };
 }

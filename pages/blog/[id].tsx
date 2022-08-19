@@ -40,6 +40,7 @@ export default function Post({ source, data }: Props) {
                     />
                 </>
             )}
+            useOgTemplate
         >
             <Script
                 src="https://unpkg.com/@highlightjs/cdn-assets@11.3.1/highlight.min.js"

@@ -17,6 +17,7 @@ interface LayoutProps {
     type?: 'website' | 'article';
     head?: () => React.ReactNode;
     noIndex?: boolean;
+    useOgTemplate?: boolean;
     children: React.ReactNode;
 }
 
@@ -26,10 +27,14 @@ function Layout({
     type = 'website',
     head,
     noIndex = false,
+    useOgTemplate = false,
     children,
 }: LayoutProps) {
-    const url = useCurrentUrl();
-    const ogImagePath = `${url}/images/og-default.png`;
+    const { url, origin } = useCurrentUrl();
+
+    const ogImagePath = useOgTemplate
+        ? `${origin}/api/og?text=${encodeURIComponent(removeEmojis(title))}`
+        : `${url}/images/og-default.png`;
 
     return (
         <>
@@ -91,6 +96,13 @@ export function MainLayout({ header, children, ...rest }: MainLayoutProps) {
 
 export function CustomLayout(props: LayoutProps) {
     return <Layout {...props} />;
+}
+
+function removeEmojis(string) {
+    return string.replace(
+        /([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g,
+        ''
+    );
 }
 
 /** @deprecated */
