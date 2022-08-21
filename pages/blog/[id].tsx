@@ -54,7 +54,7 @@ export default function Post({ source, data }: Props) {
             />
             <article>
                 <Spacer size={5} />
-                <Title>{data.title}</Title>
+                <h1>{data.title}</h1>
                 <Spacer size={5} />
                 <Date date={data.date} />
                 <Spacer size={8} />
@@ -78,14 +78,6 @@ export default function Post({ source, data }: Props) {
         </CustomLayout>
     );
 }
-
-const Title = styled.h1`
-    text-align: center;
-
-    @media ${(p) => p.theme.queries.mobileAndBelow} {
-        text-align: revert;
-    }
-`;
 
 const TagWrapper = styled.div`
     font-size: var(--font-size-sm);

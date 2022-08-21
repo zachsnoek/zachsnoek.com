@@ -14,6 +14,7 @@ export function PostPreview({ post }: Props) {
         <article>
             <Wrapper href={href}>
                 <Title>{title}</Title>
+                <Spacer size={1} />
                 <PostDate date={date} />
                 <Spacer size={3} />
                 <p>{description}</p>

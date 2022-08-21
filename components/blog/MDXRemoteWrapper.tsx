@@ -5,6 +5,11 @@ export const MDXRemoteWrapper = styled.div`
         line-height: 1.8;
     }
 
+    /* 🥴 */
+    & :first-child h2 {
+        margin-top: 0;
+    }
+
     h2,
     h3,
     p,
