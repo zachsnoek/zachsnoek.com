@@ -30,10 +30,12 @@ function Layout({
     useOgTemplate = false,
     children,
 }: LayoutProps) {
-    const { url, origin } = useCurrentUrl();
+    const { url } = useCurrentUrl();
 
     const ogImagePath = useOgTemplate
-        ? `${origin}/api/og?text=${encodeURIComponent(removeEmojis(title))}`
+        ? `https://www.zachsnoek.com/api/og?text=${encodeURIComponent(
+              removeEmojis(title)
+          )}`
         : `${url}/images/og-default.png`;
 
     return (
