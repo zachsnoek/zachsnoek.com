@@ -213,6 +213,8 @@ Returning `null` from non-`async` `Task`-returning methods returns a null `Task`
 
 We don’t have to worry about manually creating a `Task` when we mark a method as `async`. The compiler transforms `async` methods into a state machine that wraps our return value in a `Task` for us.
 
+<ConnectSection />
+
 ## Acknowledgements
 
 Thanks to [Jacob Carpenter](https://www.linkedin.com/in/jacob-carpenter-a545831/) for helping me understand the `async` method transformation and providing feedback on an early draft of this post.
