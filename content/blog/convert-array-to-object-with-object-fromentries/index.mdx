@@ -1,0 +1,149 @@
+---
+title: 'How to convert an array to an object in JavaScript with Object.fromEntries'
+date: '2022-09-26'
+description: 'And why you should use it instead of .reduce.'
+categories:
+    - software engineering
+tags:
+    - javascript
+    - web development
+---
+
+Suppose you have a list of key-values pairs like this:
+
+```js
+const songs = [
+    [1, { artist: 'Smash Mouth', title: 'All Star' }],
+    [2, { artist: 'Counting Crows', title: 'Accidentally In Love' }],
+    [3, { artist: 'Bonnie Tyler', title: 'Holding Out for a Hero' }],
+];
+```
+
+Your goal is to turn it into an object like this:
+
+```js
+const songIdToMetadata = {
+    1: { artist: 'Smash Mouth', title: 'All Star' },
+    2: { artist: 'Counting Crows', title: 'Accidentally In Love' },
+    3: { artist: 'Bonnie Tyler', title: 'Holding Out for a Hero' },
+};
+```
+
+In this post, you’ll learn how to solve this with `Object.fromEntries` and why you’d want to use it instead of `.reduce`.
+
+## Object.fromEntries
+
+`Object.fromEntries` takes an [iterable](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#the_iterable_protocol) of key-value pairs and creates a new object. The key of each pair (the first item) is used as a property key of the new object and the value (the second item) is the new property key’s value. This is the reverse of `Object.entries`.
+
+You can use `Object.fromEntries` to cleanly create an object from an array of key-value pairs:
+
+```js
+const songs = [
+    [1, { artist: 'Smash Mouth', title: 'All Star' }],
+    [2, { artist: 'Counting Crows', title: 'Accidentally In Love' }],
+    [3, { artist: 'Bonnie Tyler', title: 'Holding Out for a Hero' }],
+];
+
+const songIdToMetadata = Object.fromEntries(songs);
+
+console.log(songIdToMetadata);
+/*
+{
+    '1': { artist: 'Smash Mouth', title: 'All Star' },
+    '2': { artist: 'Counting Crows', title: 'Accidentally In Love' },
+    '3': { artist: 'Bonnie Tyler', title: 'Holding Out for a Hero' }
+}
+*/
+```
+
+Other iterables of key-value pairs, such as `Map`s and `Set`s, work as well:
+
+```js
+const x = new Set([
+    [1, 'a'],
+    [2, 'b'],
+    [3, 'c'],
+]);
+
+const y = Object.fromEntries(x);
+
+console.log(y); // { '1': 'a', '2': 'b', '3': 'c' }
+```
+
+## Turning a list of objects into one object
+
+`Object.fromEntries` is also useful when you have a list of objects and you want to turn them into one object. For each object in the list, one of its properties is added to the new object and the property’s value is the rest (or part of) of the object.
+
+For example, say you have a list of song objects instead of key-value pairs:
+
+```js
+const songs = [
+    { id: 1, artist: 'Smash Mouth', title: 'All Star' },
+    { id: 2, artist: 'Counting Crows', title: 'Accidentally In Love' },
+    { id: 3, artist: 'Bonnie Tyler', title: 'Holding Out for a Hero' },
+];
+```
+
+You want to turn this into the same `songIdToMetadata` object from earlier, so you can first create a list of `[id, metadata]` pairs and pass it to `Object.fromEntries`:
+
+```js
+const songEntries = songs.map(({ id, ...metadata }) => [id, metadata]);
+
+const songIdToMetadata = Object.fromEntries(songEntries);
+```
+
+## Object.fromEntries vs .reduce
+
+Recall the original `songs` array from above:
+
+```js
+const songs = [
+    [1, { artist: 'Smash Mouth', title: 'All Star' }],
+    [2, { artist: 'Counting Crows', title: 'Accidentally In Love' }],
+    [3, { artist: 'Bonnie Tyler', title: 'Holding Out for a Hero' }],
+];
+```
+
+Another way you could create `songIdToMetadata` is with `.reduce` and an object [spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax):
+
+```js
+const songIdToMetadata = songs.reduce(
+    (acc, [id, metadata]) => ({ ...acc, [id]: metadata }),
+    {}
+);
+```
+
+Compare it again with the `Object.fromEntries` version:
+
+```js
+const songIdToMetadata = Object.fromEntries(songs);
+```
+
+There are two reasons I’d prefer to use `Object.fromEntries` here:
+
+1. Its syntax is more readable
+2. It’s more performant
+
+First, the `.reduce` syntax above took me ~1 minute to write correctly because of all the parentheses and braces; the `Object.fromEntries` syntax is much cleaner.
+
+Second, each iteration of the `.reduce` creates a new object via the spread operator with the previous properties and the new property. On the first iteration, this creates a new object with one property; on the next, an object with two properties, and so on.
+
+This means that the `.reduce` method with the object spread has a time complexity of O(n^2), while `Object.fromEntries` is O(1). You can compare the performance of these two object-building methods in the chart below 😬:
+
+![](object-fromentries-vs-reduce.png)
+
+The benchmarking script used to generate this chart was written by and provided to me by [Alex Iadicicco](https://www.linkedin.com/in/ajiadicicco/). Thanks, Alex!
+
+## Conclusion
+
+`Object.fromEntries` is a handy way to create an object from an iterable of key-value pairs. Consider using it the next time you’re building an object from an array, and prefer it over `.reduce`.
+
+## Acknowledgements
+
+Thanks to [Alex Iadicicco](https://www.linkedin.com/in/ajiadicicco?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAABtXdP0Bu7Jk5jrWoi-Lbb0OEd6NSka7Law&lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3B2CkkfhBRQWCsJToRqfv%2FZA%3D%3D) for teaching me about `Object.fromEntries` and for sharing his performance data.
+
+<ConnectSection />
+
+## Resources
+
+-   [MDN | Object.fromEntries](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/fromEntries)
