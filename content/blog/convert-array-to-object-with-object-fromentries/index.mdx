@@ -128,7 +128,7 @@ First, the `.reduce` syntax above took me ~1 minute to write correctly because o
 
 Second, each iteration of the `.reduce` creates a new object via the spread operator with the previous properties and the new property. On the first iteration, this creates a new object with one property; on the next, an object with two properties, and so on.
 
-This means that the `.reduce` method with the object spread has a time complexity of O(n^2), while `Object.fromEntries` is O(1). You can compare the performance of these two object-building methods in the chart below 😬:
+This means that the `.reduce` method with the object spread has a time complexity of O(n^2), while `Object.fromEntries` is O(n). You can compare the performance of these two object-building methods in the chart below 😬:
 
 ![](object-fromentries-vs-reduce.png)
 
