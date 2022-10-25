@@ -1,0 +1,89 @@
+---
+title: 'for...in vs. for...of in JavaScript'
+date: '2022-10-24'
+description: 'A helpful reference for for...in and for...of statements.'
+categories:
+    - software engineering
+tags:
+    - javascript
+    - web development
+---
+
+`for...in` and `for...of` are statements used for iteration. I still get them mixed up (😬), so this is a quick reference post for future me.
+
+## `for...in`
+
+`for...in` iterates over the enumerable string property names of an object. It includes inherited enumerable properties and excludes [property symbols](https://www.zachsnoek.com/blog/understanding-symbols-in-javascript#:~:text=Symbols%20can%20also%20be%20used%20as%20property%20keys%20in%20objects%3B%20we%20call%20these%20property%20symbols.%20Property%20symbols%20are%20accessed%20via%20bracket%20notation%3A).
+
+```js
+const me = Object.create({ firstName: 'Zach', lastName: 'Snoek' });
+me.favoriteColor = 'blue';
+
+for (const key in me) {
+    console.log(`${key}: ${me[key]}`);
+}
+
+/*
+"favoriteColor: blue"
+"firstName: Zach"
+"lastName: Snoek"
+*/
+```
+
+### `for...in` and arrays
+
+Arrays are just objects whose property names represent indices. However, an array can have non-index properties, which can lead to some confusing behavior with `for...in`:
+
+```js
+const colors = ['red', 'green', 'blue'];
+colors.hello = 'hello';
+
+for (const key in colors) {
+    console.log(key);
+}
+
+/*
+"0"
+"1"
+"2"
+"hello"
+*/
+```
+
+Additionally, the index properties are returned as strings, which isn't usually helpful when working with arrays. For these reasons, it's best to use `for...of` to iterate over arrays.
+
+## `for...of`
+
+`for...of` iterates over the values returned from an iterable, such as an array, set, or string.
+
+```js
+const colors = ['red', 'green', 'blue'];
+colors.hello = 'hello';
+
+for (const color of colors) {
+    console.log(color);
+}
+
+/*
+"red"
+"green"
+"blue"
+*/
+```
+
+```js
+const string = 'zach';
+
+for (const char of string) {
+    console.log(char);
+}
+
+/*
+"z"
+"a"
+"c"
+"h"
+*/
+```
+
+<ConnectSection />
