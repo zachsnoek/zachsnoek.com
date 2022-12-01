@@ -30,7 +30,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
-    "@netlify/plugin-nextjs": "^4.15.0",
+    "@netlify/plugin-nextjs": "^4.29.2",
     "@types/lodash.kebabcase": "^4.1.7",
     "@types/node": "^17.0.5",
     "@types/react": "^17.0.38",
