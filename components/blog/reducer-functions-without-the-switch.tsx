@@ -16,7 +16,10 @@ export interface UseMultiSelectionProps<T> {
     initialState?: T[];
 }
 
-function useToggle({ initialState = false }: UseToggleProps = {}) {
+function useToggle({ initialState = false }: UseToggleProps = {}): [
+    boolean,
+    () => void
+] {
     const [isEnabled, toggle] = React.useReducer((x) => !x, initialState);
 
     return [isEnabled, toggle];
@@ -25,7 +28,7 @@ function useToggle({ initialState = false }: UseToggleProps = {}) {
 function useSelection<T>({
     isEqual = (prev, next) => prev === next,
     initialState = null,
-}: UseSelectionProps<T> = {}) {
+}: UseSelectionProps<T> = {}): [T | null, (next: T) => void] {
     const [selection, setSelection] = React.useReducer(
         (prev: T | null, next: T) => (isEqual(prev, next) ? null : next),
         initialState
@@ -37,7 +40,7 @@ function useSelection<T>({
 function useMultiSelection<T>({
     isEqual = (prev, next) => prev === next,
     initialState = [],
-}: UseMultiSelectionProps<T> = {}) {
+}: UseMultiSelectionProps<T> = {}): [T[], (next: T) => void] {
     const [selection, setSelection] = React.useReducer((prev: T[], next: T) => {
         const index = prev.findIndex((x) => isEqual(x, next));
         return index === -1
