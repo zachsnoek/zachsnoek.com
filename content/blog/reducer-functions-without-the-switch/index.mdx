@@ -1,0 +1,151 @@
+---
+title: 'useReducer reducer functions without the switch'
+date: '2022-11-30'
+description: "useReducer is typically used with Redux-style reducer functions––but you don't have to do this!"
+categories:
+    - software engineering
+tags:
+    - react
+    - javascript
+    - web development
+---
+
+`useReducer` is typically used with a Redux-style reducer function. For example, here's a `useCounter` hook written with `useReducer`:
+
+```ts
+function reducer(state, action) {
+    switch (action.type) {
+        case 'increment':
+            return { count: state.count + 1 };
+        case 'decrement':
+            return { count: state.count - 1 };
+        case 'reset':
+            return action.payload;
+        default:
+            throw new Error('Invalid action type');
+    }
+}
+
+function useCounter(initialState = 0) {
+    const [state, dispatch] = React.useReducer(reducer, initialState);
+    // ...
+}
+```
+
+The `action` parameter contains all the data needed to compute the next state. By convention, the next state is computed with a `switch` statement.
+
+This convention is useful for managing complex state logic, but you're not forced to use it. `useReducer` is just another way of managing state; the reducer function simply accepts the current state (`state`), accepts some new state (`action`), and returns the next state.
+
+I've found that `useReducer` is handy when you have brief or condense logic for computing the next state that depends on the previous state. To demonstrate this, here's a simple example of a `useIncrement` hook written with `useState`:
+
+```ts
+function useIncrement() {
+    const [count, setCount] = React.useState(0);
+
+    const increment = () => setCount(count + 1);
+
+    return [count, increment];
+}
+```
+
+Instead of defining a separate `increment` function, you could use `useReducer` and increment the count in the reducer function:
+
+```ts
+function useIncrement() {
+    const [count, increment] = React.useReducer((prev) => prev + 1, 0);
+
+    return [count, increment];
+}
+```
+
+Below are a few examples of more interesting hooks that use `useReducer` without a Redux-style reducer function.
+
+## Example 1: useToggle
+
+This hook is useful for controlling toggle inputs or other UI elements with a boolean state. It simply returns a boolean `isEnabled` value and a `toggle` function to toggle the value.
+
+```ts
+interface UseToggleProps {
+    initialState?: boolean;
+}
+
+function useToggle({ initialState = false }: UseToggleProps = {}) {
+    const [isEnabled, toggle] = React.useReducer((x) => !x, initialState);
+
+    return [isEnabled, toggle];
+}
+```
+
+Here's an example:
+
+<UseToggleDemo />
+
+## Example 2: useSelection
+
+This hook lets you select an item and deselect it by selecting it while it's selected.
+
+```ts
+interface UseSelectionProps<T> {
+    isEqual?: (prev: T | null, next: T) => boolean;
+    initialState?: T | null;
+}
+
+function useSelection<T>({
+    isEqual = (prev, next) => prev === next,
+    initialState = null,
+}: UseSelectionProps<T> = {}) {
+    const [selection, setSelection] = React.useReducer(
+        (prev: T | null, next: T) => (isEqual(prev, next) ? null : next),
+        initialState
+    );
+
+    return [selection, setSelection];
+}
+```
+
+Here's an example:
+
+<UseSelectionDemo />
+
+## Example 3: useMultiSelection
+
+This hook extends `useSelection` to allow selecting multiple items. The reducer function is not the most readable and you'd probably want to do this with `useState` or break out the reducer function, but I've included it here anyway.
+
+```ts
+interface UseMultiSelectionProps<T> {
+    isEqual?: (prev: T, next: T) => boolean;
+    initialState?: T[];
+}
+
+function useMultiSelection<T>({
+    isEqual = (prev, next) => prev === next,
+    initialState = [],
+}: UseMultiSelectionProps<T> = {}) {
+    const [selection, setSelection] = React.useReducer((prev: T[], next: T) => {
+        const index = prev.findIndex((x) => isEqual(x, next));
+        return index === -1
+            ? [...prev, next]
+            : prev.filter((_, i) => i !== index);
+    }, initialState);
+
+    return [selection, setSelection];
+}
+```
+
+Here's an example:
+
+<UseMultiSelectionDemo />
+
+## Bonus - Example 4: useForceUpdate
+
+This hook comes from [the official React docs](https://reactjs.org/docs/hooks-faq.html#is-there-something-like-forceupdate). Calling the `forceUpdate` dispatch function forces a re-render.
+
+```ts
+function useForceUpdate() {
+    const [ignored, forceUpdate] = React.useReducer((x) => x + 1, 0);
+
+    return [ignored, forceUpdate];
+}
+```
+
+<ConnectSection />
