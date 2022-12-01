@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import { BuyMeACoffee } from '../BuyMeACoffee';
 import { CopyableHeader } from '../CopyableHeader';
 import { a as A } from './default-replacements';
+
+export * from './reducer-functions-without-the-switch';
+
 export const CodePen = ({ id, tabs, ...props }) => (
     <CodePenWrapper>
         <MDXEmbedCodePen codePenId={id} tabs={['result', ...tabs]} {...props} />
