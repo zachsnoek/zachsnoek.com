@@ -14,21 +14,6 @@ const GlobalStyle = createGlobalStyle`
     }
 
     html {
-        --color-text: #fff;
-        --color-background: #141517;
-        --color-background-light: #212224;
-        --color-primary: #f72f6e;
-        --color-secondary: #b5ab9f;
-
-        --font-size-xs: 0.675rem;
-        --font-size-sm: 0.9rem;
-        --font-size-base: 1.2rem;
-        --font-size-md: 1.6rem;
-        --font-size-lg: 2.132rem;
-        --font-size-xl: 2.842rem;
-        --font-size-2xl: 3.789rem;
-        --font-size-code: calc(var(--font-size-base) - 0.275rem);
-
         --spacing-1: 4px;
         --spacing-2: 8px;
         --spacing-3: 16px;
