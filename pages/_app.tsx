@@ -4,7 +4,6 @@ import { theme } from '../theme';
 import { GlobalStyle } from '../styles/GlobalStyle';
 import { GCScript } from 'next-goatcounter';
 import '../.mirrorful/theme.css';
-import '../styles/global.css';
 
 const GOAT_COUNTER_URL = 'https://zachsnoek.goatcounter.com/count';
 
