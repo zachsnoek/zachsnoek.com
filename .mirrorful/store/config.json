@@ -1,0 +1,90 @@
+{
+  "tokens": {
+    "colorData": [
+      {
+        "name": "Text",
+        "baseColor": "#fff",
+        "variants": {
+          "500": "#fff"
+        }
+      },
+      {
+        "name": "Background",
+        "baseColor": "#141517",
+        "variants": {
+          "500": "#141517"
+        }
+      },
+      {
+        "name": "Background Light",
+        "baseColor": "#212224",
+        "variants": {
+          "500": "#212224"
+        }
+      },
+      {
+        "name": "Primary",
+        "baseColor": "#f72f6e",
+        "variants": {
+          "500": "#f72f6e"
+        }
+      },
+      {
+        "name": "Secondary",
+        "baseColor": "#b5ab9f",
+        "variants": {
+          "500": "#b5ab9f"
+        }
+      }
+    ],
+    "typography": {
+      "fontSizes": [
+        {
+          "value": 0.675,
+          "unit": "rem",
+          "name": "xs"
+        },
+        {
+          "value": 0.9,
+          "unit": "rem",
+          "name": "sm"
+        },
+        {
+          "value": 1.2,
+          "unit": "rem",
+          "name": "base"
+        },
+        {
+          "name": "md",
+          "value": 1.6,
+          "unit": "rem"
+        },
+        {
+          "name": "lg",
+          "value": 2.132,
+          "unit": "rem"
+        },
+        {
+          "name": "xl",
+          "value": 2.842,
+          "unit": "rem"
+        },
+        {
+          "name": "2xl",
+          "value": 3.789,
+          "unit": "rem"
+        },
+        {
+          "name": "code",
+          "value": 0.925,
+          "unit": "rem"
+        }
+      ]
+    }
+  },
+  "__internal__": {
+    "migrations": {
+      "version": "0.0.3"
+    }
+  }
+}

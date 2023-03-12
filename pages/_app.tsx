@@ -3,7 +3,7 @@ import { ThemeProvider } from 'styled-components';
 import { theme } from '../theme';
 import { GlobalStyle } from '../styles/GlobalStyle';
 import { GCScript } from 'next-goatcounter';
-import '../styles/global.css';
+import '../.mirrorful/theme.css';
 
 const GOAT_COUNTER_URL = 'https://zachsnoek.goatcounter.com/count';
 
