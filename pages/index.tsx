@@ -19,8 +19,7 @@ export default function Home({ recentPosts }: Props) {
             <Header>
                 Hey, I&apos;m <Accent text="Zach!" />
                 <br />
-                I&apos;m a <Accent text="software engineer" /> from Washington,
-                USA.
+                I&apos;m a <Accent text="software engineer" /> from Detroit, MI.
             </Header>
             <Spacer size={4} />
             <section>
