@@ -33,16 +33,8 @@ export function ConnectSection() {
                     rel="noreferrer"
                 >
                     LinkedIn
-                </A>
-                ,{' '}
-                <A
-                    href="https://twitter.com/zach_snoek"
-                    target="_blank"
-                    rel="noreferrer"
-                >
-                    Twitter
-                </A>
-                , and{' '}
+                </A>{' '}
+                and{' '}
                 <A
                     href="https://github.com/zachsnoek"
                     target="_blank"
