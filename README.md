@@ -22,7 +22,6 @@ My site uses the following languages, tools, and technologies:
 - MDX (for adding JSX in blog posts)
 - Cloudinary (for dynamically generating Open Graph images)
 - GoatCounter (for analytics)
-- Mirrorful (for theming)
 - lint-staged and husky (for enforcing Conventional Commits)
 - Netlify
 - MailChimp

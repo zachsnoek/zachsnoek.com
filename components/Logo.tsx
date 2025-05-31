@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export function Logo() {
     return (
-        <Link href="/">
+        <Link href="/" hideUnderline>
             <Wrapper>Zach Snoek</Wrapper>
         </Link>
     );
@@ -11,5 +11,4 @@ export function Logo() {
 
 const Wrapper = styled.h1`
     font-size: var(--font-size-md);
-    font-weight: 700;
 `;

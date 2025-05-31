@@ -1,11 +1,7 @@
 import styled from 'styled-components';
 
 const AccentBase = styled.span`
-    color: var(--color-primary);
-
-    &::selection {
-        color: var(--color-background);
-    }
+    color: var(--prose-accent-color);
 `;
 
 type Props =

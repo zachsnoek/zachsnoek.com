@@ -120,5 +120,5 @@ const MailingListInput = styled(Input)`
 `;
 
 const FallbackLink = styled.a`
-    color: var(--color-primary);
+    color: var(--clickable-background-color);
 `;

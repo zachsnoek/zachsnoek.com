@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { CopyableHeader } from '../CopyableHeader';
+import { Link } from '../Link';
 
 // https://github.com/hashicorp/next-mdx-remote#replacing-default-components
 
@@ -32,23 +33,15 @@ export function ul(props) {
     return <OurUl {...props} />;
 }
 
-const OurA = styled.a`
-    color: var(--color-primary);
-    text-decoration: none;
-
-    &:hover {
-        color: var(--color-primary);
-        text-decoration: underline;
-    }
-`;
 export function a(props) {
-    return <OurA {...props} />;
+    return <Link {...props} />;
 }
 
 const OurBlockquote = styled.blockquote`
+    color: var(--prose-blockquote-color);
     margin-left: 0px;
     padding-left: 24px;
-    border-left: var(--border-width-1) solid var(--color-primary);
+    border-left: var(--border-width-1) solid var(--blockquote-border-left-color);
     font-style: italic;
 `;
 export function blockquote(props) {
@@ -57,7 +50,7 @@ export function blockquote(props) {
 
 const OurCode = styled.code`
     font-size: var(--font-size-code);
-    background: var(--color-background-light);
+    background: var(--code-block-background-color);
     border-radius: var(--border-radius-3);
 
     margin-left: calc(var(--spacing-5) * -1);

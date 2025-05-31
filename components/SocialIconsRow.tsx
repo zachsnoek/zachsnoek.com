@@ -14,9 +14,6 @@ export function SocialIconsRow() {
             <Link href="https://github.com/zachsnoek" target="_blank">
                 <Icon id="github" />
             </Link>
-            <Link href="https://twitter.com/zach_snoek" target="_blank">
-                <Icon id="twitter" />
-            </Link>
         </Wrapper>
     );
 }

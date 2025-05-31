@@ -22,11 +22,12 @@ export function BuyMeACoffee() {
 const Wrapper = styled.a`
     display: inline-block;
     padding: var(--spacing-3) var(--spacing-4);
-    background: var(--color-primary);
+    background: var(--clickable-background-color);
     border-radius: var(--border-radius-3);
+    color: var(--prose-clickable-offset-color);
 
     &:hover {
-        color: var(--color-text);
+        color: var(--prose-clickable-offset-color);
     }
 `;
 

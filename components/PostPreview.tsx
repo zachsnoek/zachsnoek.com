@@ -12,7 +12,7 @@ export function PostPreview({ post }: Props) {
 
     return (
         <article>
-            <Wrapper href={href}>
+            <Wrapper href={href} hideUnderline>
                 <Title>{title}</Title>
                 <Spacer size={1} />
                 <PostDate date={date} />
@@ -35,10 +35,16 @@ const Wrapper = styled(Link)`
 
 const Title = styled.h3`
     ${Wrapper}:hover & {
-        color: var(--color-primary);
+        color: var(--clickable-hover-color);
+    }
+
+    @media ${(p) => p.theme.queries.tabletAndBelow} {
+        ${Wrapper}:hover & {
+            color: unset;
+        }
     }
 `;
 
 const PostDate = styled(Date)`
-    font-size: 0.9rem;
+    font-size: var(--font-size-sm);
 `;

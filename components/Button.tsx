@@ -37,8 +37,8 @@ const ButtonBase = styled.button<{
 `;
 
 const FillButton = styled(ButtonBase)`
-    background: var(--color-primary);
-    color: var(--color-text);
+    background: var(--clickable-background-color);
+    color: var(--prose-clickable-offset-color);
 
     &:hover {
         /* TODO: Background */
@@ -47,7 +47,7 @@ const FillButton = styled(ButtonBase)`
 
 const OutlineButton = styled(ButtonBase)`
     background: none;
-    color: var(--color-primary);
+    color: var(--clickable-background-color);
     border: ${BORDER_WIDTH} solid currentColor;
 
     &:hover {

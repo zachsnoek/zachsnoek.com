@@ -1,8 +1,8 @@
-import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
 import { useCurrentUrl } from '../hooks/useCurrentUrl';
 import { Post } from '../utils/posts';
+import { Link } from './Link';
 
 type Props = Pick<Post, 'title'>;
 
@@ -11,10 +11,20 @@ export function SharePost({ title }: Props) {
 
     return (
         <Wrapper>
-            <Link href={createTwitterShareLink(title, url)}>
+            <Link
+                href={createTwitterShareLink(title, url)}
+                target="_blank"
+                hideUnderline
+            >
                 Tweet this post
             </Link>
-            <Link href={createLinkedInShareLink(url)}>Share on LinkedIn</Link>
+            <Link
+                href={createLinkedInShareLink(url)}
+                target="_blank"
+                hideUnderline
+            >
+                Share on LinkedIn
+            </Link>
         </Wrapper>
     );
 }

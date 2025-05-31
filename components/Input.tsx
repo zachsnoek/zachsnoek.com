@@ -13,8 +13,7 @@ export const Input = styled.input`
         calc(var(--spacing-3) - var(--border-width-1));
 
     &:focus {
-        border-color: var(--color-primary);
-        outline-color: var(--color-primary);
-        outline-width: var(--border-width-2);
+        outline: none;
+        border-color: var(--clickable-focus-border-color);
     }
 `;

@@ -48,7 +48,7 @@ const ModalContent = styled(DialogContent)`
 
     height: 100%;
     width: 300px;
-    background: var(--color-background);
+    background: var(--background-color);
 
     display: flex;
     flex-direction: column;
@@ -71,7 +71,7 @@ const NavItem = (props: LinkProps) => {
 
     return (
         <NavListItem isActive={router.route === props.href}>
-            <NavLink {...props} />
+            <NavLink hideUnderline {...props} />
         </NavListItem>
     );
 };
@@ -89,5 +89,5 @@ const Row = styled.div`
 `;
 
 const NavListItem = styled(Row)<{ isActive: boolean }>`
-    color: ${(p) => p.isActive && 'var(--color-primary)'};
+    color: ${(p) => p.isActive && 'var(--prose-heading-color)'};
 `;

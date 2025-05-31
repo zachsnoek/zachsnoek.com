@@ -52,7 +52,7 @@ function useMultiSelection<T>({
 }
 
 const Wrapper = styled.div`
-    border: 1px solid var(--color-primary);
+    border: 1px solid var(--color-pink-500);
     border-radius: var(--border-radius-2);
     padding: var(--spacing-4);
     display: flex;

@@ -47,7 +47,7 @@ const NavItem = (props: LinkProps) => {
 
     return (
         <NavListItem isActive={router.route === props.href}>
-            <Link {...props} />
+            <Link hideUnderline {...props} />
         </NavListItem>
     );
 };
@@ -55,7 +55,7 @@ const NavItem = (props: LinkProps) => {
 const Wrapper = styled.header<{ isSticky: boolean }>`
     z-index: 1; /* Blog post headers have relative positioning */
     padding: var(--spacing-5) 0px;
-    background-color: var(--color-background);
+    background-color: var(--background-color);
 
     ${(p) =>
         p.isSticky &&
@@ -99,7 +99,7 @@ const NavListItem = styled.li<{ isActive: boolean }>`
     display: flex;
     justify-content: center;
     align-items: center;
-    color: ${(p) => (p.isActive ? 'var(--color-primary)' : 'unset')};
+    color: ${(p) => (p.isActive ? 'var(--prose-heading-color)' : 'unset')};
 `;
 
 const MobileActions = styled.div`

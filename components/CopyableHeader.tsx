@@ -25,7 +25,7 @@ const LinkButton = styled(UnstyledButton)`
     display: none;
 
     padding: var(--spacing-3);
-    color: var(--color-primary);
+    color: var(--clickable-background-color);
 
     ${Wrapper}:hover & {
         display: revert;
