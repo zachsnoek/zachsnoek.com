@@ -53,7 +53,7 @@ const GlobalStyle = createGlobalStyle`
         font-family: Karrik, Roboto, sans-serif;
         -webkit-font-smoothing: antialiased;
 
-        background-color: var(--color-background);
+        background-color: var(--color-gray-950);
         color: var(--color-white);
         line-height: 1.5;
     }
