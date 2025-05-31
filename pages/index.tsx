@@ -17,12 +17,12 @@ export default function Home({ recentPosts }: Props) {
     return (
         <CustomLayout title="Zach Snoek">
             <Header>
-                Hey, I&apos;m <Accent text="Zach!" />
-                <br />
-                I&apos;m a <Accent text="software engineer" /> from Detroit, MI.
+                Hey, I&apos;m <Accent>Zach!</Accent>
             </Header>
             <Spacer size={4} />
             <section>
+                <p>I&apos;m a full-stack software engineer from Detroit, MI.</p>
+                <Spacer size={2} />
                 <p>
                     I currently work at{' '}
                     <Link href="https://aloftappraisal.com" target="_blank">
@@ -33,7 +33,7 @@ export default function Home({ recentPosts }: Props) {
             </section>
             <Break />
             <section>
-                <h2>Recent blog posts</h2>
+                <h2>Latest posts</h2>
                 <Spacer size={4} />
                 <PostPreviewList posts={recentPosts} />
             </section>
