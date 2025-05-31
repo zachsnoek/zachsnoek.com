@@ -48,7 +48,7 @@ const ModalContent = styled(DialogContent)`
 
     height: 100%;
     width: 300px;
-    background: var(--color-gray-900);
+    background: var(--color-white);
 
     display: flex;
     flex-direction: column;
@@ -89,5 +89,5 @@ const Row = styled.div`
 `;
 
 const NavListItem = styled(Row)<{ isActive: boolean }>`
-    color: ${(p) => p.isActive && 'var(--color-pink-500)'};
+    color: ${(p) => p.isActive && 'var(--color-black)'};
 `;

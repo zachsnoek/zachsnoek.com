@@ -24,6 +24,7 @@ const Wrapper = styled.a`
     padding: var(--spacing-3) var(--spacing-4);
     background: var(--color-pink-500);
     border-radius: var(--border-radius-3);
+    color: var(--color-white);
 
     &:hover {
         color: var(--color-white);

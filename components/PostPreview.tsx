@@ -40,5 +40,5 @@ const Title = styled.h3`
 `;
 
 const PostDate = styled(Date)`
-    font-size: 0.9rem;
+    font-size: var(--font-size-sm);
 `;

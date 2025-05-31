@@ -1,8 +1,10 @@
 :root {
   --color-white: #fff;
+  --color-black: #000;
 
-  --color-gray-900: #141517;
+  --color-gray-700: #555774;
   --color-gray-800: #212224;
+  --color-gray-900: #141517;
   --color-pink-500: #f72f6e;
 
   --font-size-xs: 0.675rem;

@@ -32,7 +32,7 @@ const GlobalStyle = createGlobalStyle`
         --spacing-9: 80px;
         --spacing-10: 96px;
 
-        --border-width-1: 3px;
+        --border-width-1: 2px;
 
         --border-radius-1: 3px;
         --border-radius-2: 5px;
@@ -53,8 +53,8 @@ const GlobalStyle = createGlobalStyle`
         font-family: Karrik, Roboto, sans-serif;
         -webkit-font-smoothing: antialiased;
 
-        background-color: var(--color-gray-900);
-        color: var(--color-white);
+        color: var(--color-gray-700);
+        background-color: var(--color-white);
         line-height: 1.5;
     }
 
@@ -73,7 +73,6 @@ const GlobalStyle = createGlobalStyle`
         font: inherit;
     }
 
-    p,
     h1,
     h2,
     h3,
@@ -82,6 +81,8 @@ const GlobalStyle = createGlobalStyle`
     h6 {
         line-height: initial;
         overflow-wrap: break-word;
+        font-weight: 400;
+        color: var(--color-black);
     }
 
     #root,
@@ -104,10 +105,6 @@ const GlobalStyle = createGlobalStyle`
     input:focus {
         outline-color: var(--color-pink-500);
         outline-offset: var(--spacing-1);
-    }
-
-    ::selection {
-        background-color: var(--color-pink-500);
     }
 
     h1 {

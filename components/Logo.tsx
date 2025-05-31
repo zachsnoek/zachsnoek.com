@@ -11,5 +11,4 @@ export function Logo() {
 
 const Wrapper = styled.h1`
     font-size: var(--font-size-md);
-    font-weight: 700;
 `;
