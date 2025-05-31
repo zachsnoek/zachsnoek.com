@@ -26,11 +26,9 @@
   --prose-accent-color: var(--color-pink-500);
   --prose-heading-color: var(--color-black);
 
-  --link-hover-color: var(--color-pink-500);
-  --link-focus-color: var(--color-pink-500);
-
   --prose-clickable-offset-color: var(--color-white);
   --clickable-background-color: var(--color-pink-500);
+  --clickable-hover-color: var(--color-pink-500);
   --clickable-focus-border-color: var(--color-pink-500);
 
   --prose-code-inline-color: var(--color-black);

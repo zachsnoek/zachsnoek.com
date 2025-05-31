@@ -19,6 +19,6 @@ const StyledLink = styled.a<{ showUnderline: boolean }>`
     text-decoration: ${(p) => (p.showUnderline ? 'underline' : 'none')};
 
     &:hover {
-        color: var(--link-hover-color);
+        color: var(--clickable-hover-color);
     }
 `;
