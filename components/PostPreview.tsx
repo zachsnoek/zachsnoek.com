@@ -37,6 +37,12 @@ const Title = styled.h3`
     ${Wrapper}:hover & {
         color: var(--clickable-hover-color);
     }
+
+    @media ${(p) => p.theme.queries.tabletAndBelow} {
+        ${Wrapper}:hover & {
+            color: unset;
+        }
+    }
 `;
 
 const PostDate = styled(Date)`

@@ -21,4 +21,9 @@ const StyledLink = styled.a<{ hideUnderline: boolean }>`
     &:hover {
         color: var(--clickable-hover-color);
     }
+    @media ${(p) => p.theme.queries.tabletAndBelow} {
+        &:hover {
+            color: unset;
+        }
+    }
 `;
