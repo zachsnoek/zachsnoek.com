@@ -22,7 +22,7 @@ export function BuyMeACoffee() {
 const Wrapper = styled.a`
     display: inline-block;
     padding: var(--spacing-3) var(--spacing-4);
-    background: var(--color-primary);
+    background: var(--color-pink-500);
     border-radius: var(--border-radius-3);
 
     &:hover {

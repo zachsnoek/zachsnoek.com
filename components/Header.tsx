@@ -99,7 +99,7 @@ const NavListItem = styled.li<{ isActive: boolean }>`
     display: flex;
     justify-content: center;
     align-items: center;
-    color: ${(p) => (p.isActive ? 'var(--color-primary)' : 'unset')};
+    color: ${(p) => (p.isActive ? 'var(--color-pink-500)' : 'unset')};
 `;
 
 const MobileActions = styled.div`

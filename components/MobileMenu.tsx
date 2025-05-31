@@ -89,5 +89,5 @@ const Row = styled.div`
 `;
 
 const NavListItem = styled(Row)<{ isActive: boolean }>`
-    color: ${(p) => p.isActive && 'var(--color-primary)'};
+    color: ${(p) => p.isActive && 'var(--color-pink-500)'};
 `;

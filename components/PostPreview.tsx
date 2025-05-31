@@ -35,7 +35,7 @@ const Wrapper = styled(Link)`
 
 const Title = styled.h3`
     ${Wrapper}:hover & {
-        color: var(--color-primary);
+        color: var(--color-pink-500);
     }
 `;
 

@@ -96,18 +96,18 @@ const GlobalStyle = createGlobalStyle`
     }
 
     a:hover {
-        color: var(--color-primary);
+        color: var(--color-pink-500);
     }
 
     a:focus,
     button:focus,
     input:focus {
-        outline-color: var(--color-primary);
+        outline-color: var(--color-pink-500);
         outline-offset: var(--spacing-1);
     }
 
     ::selection {
-        background-color: var(--color-primary);
+        background-color: var(--color-pink-500);
     }
 
     h1 {

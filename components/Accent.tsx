@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const AccentBase = styled.span`
-    color: var(--color-primary);
+    color: var(--color-pink-500);
 
     &::selection {
         color: var(--color-gray-900);

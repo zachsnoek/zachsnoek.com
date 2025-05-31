@@ -33,11 +33,11 @@ export function ul(props) {
 }
 
 const OurA = styled.a`
-    color: var(--color-primary);
+    color: var(--color-pink-500);
     text-decoration: none;
 
     &:hover {
-        color: var(--color-primary);
+        color: var(--color-pink-500);
         text-decoration: underline;
     }
 `;
@@ -48,7 +48,7 @@ export function a(props) {
 const OurBlockquote = styled.blockquote`
     margin-left: 0px;
     padding-left: 24px;
-    border-left: var(--border-width-1) solid var(--color-primary);
+    border-left: var(--border-width-1) solid var(--color-pink-500);
     font-style: italic;
 `;
 export function blockquote(props) {
