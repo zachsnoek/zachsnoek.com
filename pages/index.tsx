@@ -25,7 +25,11 @@ export default function Home({ recentPosts }: Props) {
                 <Spacer size={2} />
                 <p>
                     I currently work at{' '}
-                    <Link href="https://aloftappraisal.com" target="_blank">
+                    <Link
+                        href="https://aloftappraisal.com"
+                        target="_blank"
+                        showUnderline
+                    >
                         Aloft, Inc.
                     </Link>{' '}
                     where I work with TypeScript, React.js, and Node.js.

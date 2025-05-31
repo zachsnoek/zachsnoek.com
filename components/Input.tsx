@@ -14,6 +14,6 @@ export const Input = styled.input`
 
     &:focus {
         outline: none;
-        border-color: var(--color-pink-500);
+        border-color: var(--clickable-focus-border-color);
     }
 `;

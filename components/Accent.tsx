@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const AccentBase = styled.span`
-    color: var(--color-pink-500);
+    color: var(--prose-accent-color);
 `;
 
 type Props =

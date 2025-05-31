@@ -35,6 +35,12 @@ export default function Post({ source, data }: Props) {
             head={() => (
                 <>
                     <link
+                        media="(prefers-color-scheme: light)"
+                        rel="stylesheet"
+                        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/atom-one-light.min.css"
+                    />
+                    <link
+                        media="(prefers-color-scheme: dark)"
                         rel="stylesheet"
                         href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/an-old-hope.min.css"
                     />
@@ -89,7 +95,7 @@ const TagWrapper = styled.div`
 const TagBadge = styled(Link)`
     padding: var(--spacing-1) var(--spacing-2);
     border-radius: var(--border-radius-2);
-    background: var(--color-gray-800);
+    background: var(--tag-background-color);
 `;
 
 export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {

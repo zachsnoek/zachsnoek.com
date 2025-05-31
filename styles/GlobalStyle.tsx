@@ -53,8 +53,8 @@ const GlobalStyle = createGlobalStyle`
         font-family: Karrik, Roboto, sans-serif;
         -webkit-font-smoothing: antialiased;
 
-        color: var(--color-gray-700);
-        background-color: var(--color-white);
+        color: var(--prose-color);
+        background-color: var(--background-color);
         line-height: 1.5;
     }
 
@@ -82,7 +82,7 @@ const GlobalStyle = createGlobalStyle`
         line-height: initial;
         overflow-wrap: break-word;
         font-weight: 400;
-        color: var(--color-black);
+        color: var(--prose-heading-color);
     }
 
     #root,
@@ -94,16 +94,13 @@ const GlobalStyle = createGlobalStyle`
         color: inherit;
         text-decoration: none;
         text-underline-offset: var(--spacing-1);
+        cursor: pointer;
     }
 
-    a:hover {
-        color: var(--color-pink-500);
-    }
 
     a:focus,
-    button:focus,
-    input:focus {
-        outline-color: var(--color-pink-500);
+    button:focus {
+        outline-color: var(--clickable-focus-border-color);
         outline-offset: var(--spacing-1);
     }
 

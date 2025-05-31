@@ -2,6 +2,10 @@
   --color-white: #fff;
   --color-black: #000;
 
+  --color-gray-100: #f7f7fa;
+  --color-gray-300: #e5e5f1;
+  --color-gray-400: #b2b4d0;
+  --color-gray-500: #8d8fb4;
   --color-gray-700: #555774;
   --color-gray-800: #212224;
   --color-gray-900: #141517;
@@ -15,4 +19,42 @@
   --font-size-xl: 2.842rem;
   --font-size-2xl: 3.789rem;
   --font-size-code: 0.925rem;
+
+  --background-color: var(--color-white);
+
+  --prose-color: var(--color-gray-700);
+  --prose-accent-color: var(--color-pink-500);
+  --prose-heading-color: var(--color-black);
+
+  --link-hover-color: var(--color-pink-500);
+  --link-focus-color: var(--color-pink-500);
+
+  --prose-clickable-offset-color: var(--color-white);
+  --clickable-background-color: var(--color-pink-500);
+  --clickable-focus-border-color: var(--color-pink-500);
+
+  --prose-code-inline-color: var(--color-black);
+  --code-block-background-color: var(--color-gray-100);
+  --code-inline-background-color: unset;
+
+  --prose-blockquote-color: var(--color-gray-500);
+  --blockquote-border-left-color: var(--color-pink-500);
+
+  --tag-background-color: var(--color-gray-100);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: var(--color-gray-900);
+
+    --prose-color: var(--color-gray-300);
+    --prose-heading-color: var(--color-white);
+    --prose-blockquote-color: var(--color-gray-400);
+
+    --prose-code-inline-color: inherit;
+    --code-inline-background-color: var(--color-gray-800);
+    --code-block-background-color: var(--color-gray-800);
+
+    --tag-background-color: var(--color-gray-800);
+  }
 }
