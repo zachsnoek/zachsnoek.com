@@ -26,7 +26,7 @@ const Wrapper = styled.a`
     border-radius: var(--border-radius-3);
 
     &:hover {
-        color: var(--color-text);
+        color: var(--color-white);
     }
 `;
 

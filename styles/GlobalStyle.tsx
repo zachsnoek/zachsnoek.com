@@ -54,7 +54,7 @@ const GlobalStyle = createGlobalStyle`
         -webkit-font-smoothing: antialiased;
 
         background-color: var(--color-background);
-        color: var(--color-text);
+        color: var(--color-white);
         line-height: 1.5;
     }
 
