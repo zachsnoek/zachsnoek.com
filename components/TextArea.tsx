@@ -13,8 +13,7 @@ export const TextArea = styled.textarea`
         calc(var(--spacing-3) - var(--border-width-1));
 
     &:focus {
+        outline: none;
         border-color: var(--color-pink-500);
-        outline-color: var(--color-pink-500);
-        outline-width: var(--border-width-2);
     }
 `;
