@@ -47,7 +47,7 @@ const NavItem = (props: LinkProps) => {
 
     return (
         <NavListItem isActive={router.route === props.href}>
-            <Link {...props} />
+            <Link hideUnderline {...props} />
         </NavListItem>
     );
 };

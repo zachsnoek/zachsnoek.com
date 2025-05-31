@@ -5,7 +5,9 @@ export function Footer() {
     return (
         <Wrapper>
             <span>{`© ${new Date().getFullYear()} Zach Snoek`}</span>
-            <Link href="/credits">Credits</Link>
+            <Link href="/credits" hideUnderline>
+                Credits
+            </Link>
         </Wrapper>
     );
 }

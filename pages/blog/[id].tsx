@@ -73,6 +73,7 @@ export default function Post({ source, data }: Props) {
                         <TagBadge
                             href={`/blog/tags/${encodeURIComponent(x)}`}
                             key={x}
+                            hideUnderline
                         >
                             {x}
                         </TagBadge>

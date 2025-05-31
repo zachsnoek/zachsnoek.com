@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export function Logo() {
     return (
-        <Link href="/">
+        <Link href="/" hideUnderline>
             <Wrapper>Zach Snoek</Wrapper>
         </Link>
     );

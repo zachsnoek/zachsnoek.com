@@ -3,20 +3,20 @@ import styled from 'styled-components';
 
 export type LinkProps = React.PropsWithChildren<{
     href: NextLinkProps['href'];
-    showUnderline?: boolean;
+    hideUnderline?: boolean;
     target?: HTMLLinkElement['target'];
 }>;
 
-export function Link({ href, showUnderline = false, ...props }: LinkProps) {
+export function Link({ href, hideUnderline = false, ...props }: LinkProps) {
     return (
         <NextLink href={href} passHref>
-            <StyledLink showUnderline={showUnderline} {...props} />
+            <StyledLink hideUnderline={hideUnderline} {...props} />
         </NextLink>
     );
 }
 
-const StyledLink = styled.a<{ showUnderline: boolean }>`
-    text-decoration: ${(p) => (p.showUnderline ? 'underline' : 'none')};
+const StyledLink = styled.a<{ hideUnderline: boolean }>`
+    text-decoration: ${(p) => (p.hideUnderline ? 'none' : 'underline')};
 
     &:hover {
         color: var(--clickable-hover-color);

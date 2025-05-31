@@ -34,7 +34,7 @@ export function ul(props) {
 }
 
 export function a(props) {
-    return <Link showUnderline {...props} />;
+    return <Link {...props} />;
 }
 
 const OurBlockquote = styled.blockquote`

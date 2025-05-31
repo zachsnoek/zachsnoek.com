@@ -5,11 +5,7 @@ export default function Credits() {
     return (
         <MainLayout title="Credits" header="Credits" noIndex>
             <p>
-                <Link
-                    target="_blank"
-                    href="https://velvetyne.fr/fonts/karrik/"
-                    showUnderline
-                >
+                <Link target="_blank" href="https://velvetyne.fr/fonts/karrik/">
                     Karrick
                 </Link>{' '}
                 by Jean-Baptiste Morizot and Lucas Le Bihan (Velvetyne Type
