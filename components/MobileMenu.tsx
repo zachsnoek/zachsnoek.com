@@ -48,7 +48,7 @@ const ModalContent = styled(DialogContent)`
 
     height: 100%;
     width: 300px;
-    background: var(--color-gray-950);
+    background: var(--color-gray-900);
 
     display: flex;
     flex-direction: column;

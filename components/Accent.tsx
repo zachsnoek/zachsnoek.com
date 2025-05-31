@@ -4,7 +4,7 @@ const AccentBase = styled.span`
     color: var(--color-primary);
 
     &::selection {
-        color: var(--color-gray-950);
+        color: var(--color-gray-900);
     }
 `;
 
