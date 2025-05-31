@@ -57,7 +57,7 @@ export function blockquote(props) {
 
 const OurCode = styled.code`
     font-size: var(--font-size-code);
-    background: var(--color-background-light);
+    background: var(--color-gray-800);
     border-radius: var(--border-radius-3);
 
     margin-left: calc(var(--spacing-5) * -1);

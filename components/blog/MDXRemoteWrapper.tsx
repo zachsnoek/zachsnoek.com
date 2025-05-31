@@ -27,7 +27,7 @@ export const MDXRemoteWrapper = styled.div`
 
     /* Inline code snippets */
     code:not(.hljs) {
-        background: var(--color-background-light);
+        background: var(--color-gray-800);
         padding: var(--spacing-1);
         border-radius: var(--border-radius-1);
     }

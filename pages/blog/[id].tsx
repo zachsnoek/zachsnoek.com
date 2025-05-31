@@ -89,7 +89,7 @@ const TagWrapper = styled.div`
 const TagBadge = styled(Link)`
     padding: var(--spacing-1) var(--spacing-2);
     border-radius: var(--border-radius-2);
-    background: var(--color-background-light);
+    background: var(--color-gray-800);
 `;
 
 export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
