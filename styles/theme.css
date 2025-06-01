@@ -40,6 +40,10 @@
   --prose-blockquote-color: var(--color-gray-500);
   --blockquote-border-left-color: var(--color-pink-500);
 
+  --prose-otw-heading-color: var(--color-pink-500);
+  --otw-background-color: var(--code-block-background-color);
+  --otw-border-color: var(--color-pink-500);
+
   --tag-background-color: var(--color-gray-100);
 }
 
@@ -54,6 +58,8 @@
     --prose-code-inline-color: inherit;
     --code-inline-background-color: var(--color-gray-800);
     --code-block-background-color: var(--color-gray-800);
+
+    --prose-otw-heading-color: var(--prose-heading-color);
 
     --tag-background-color: var(--color-gray-800);
   }

@@ -33,6 +33,7 @@ const GlobalStyle = createGlobalStyle`
         --spacing-10: 96px;
 
         --border-width-1: 2px;
+        --border-width-2: 5px;
 
         --border-radius-1: 3px;
         --border-radius-2: 5px;
@@ -99,9 +100,14 @@ const GlobalStyle = createGlobalStyle`
 
 
     a:focus,
-    button:focus {
+    button:focus,
+    summary:focus {
         outline-color: var(--clickable-focus-border-color);
         outline-offset: var(--spacing-1);
+    }
+
+    summary {
+        cursor: pointer;
     }
 
     h1 {

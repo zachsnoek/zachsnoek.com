@@ -69,7 +69,7 @@ export function UseToggleDemo() {
     const [isEnabled, toggle] = useToggle();
 
     return (
-        <Wrapper>
+        <Wrapper className="custom-component">
             <p>Enabled: {isEnabled ? 'Yes' : 'No'}</p>
             <ToggleButton onClick={toggle} isEnabled={isEnabled}>
                 Toggle
@@ -108,7 +108,7 @@ export function UseSelectionDemo() {
     });
 
     return (
-        <Wrapper>
+        <Wrapper className="custom-component">
             <p>Select your favorite song:</p>
             <SongButtonWrapper>
                 {songs.map((x) => (
@@ -131,7 +131,7 @@ export function UseMultiSelectionDemo() {
     });
 
     return (
-        <Wrapper>
+        <Wrapper className="custom-component">
             <p>Select your favorite songs:</p>
             <SongButtonWrapper>
                 {songs.map((x) => (
