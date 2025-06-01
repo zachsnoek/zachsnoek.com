@@ -57,6 +57,7 @@ const GlobalStyle = createGlobalStyle`
         color: var(--prose-color);
         background-color: var(--background-color);
         line-height: 1.5;
+        word-wrap: break-word;
     }
 
     img,
