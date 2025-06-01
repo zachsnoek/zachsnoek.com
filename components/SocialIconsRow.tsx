@@ -5,10 +5,7 @@ import { Icon } from './Icon';
 export function SocialIconsRow() {
     return (
         <Wrapper>
-            <Link
-                href="https://www.linkedin.com/in/zach-snoek-5b327b179/"
-                target="_blank"
-            >
+            <Link href="https://www.linkedin.com/in/zachsnoek" target="_blank">
                 <Icon id="linkedin" />
             </Link>
             <Link href="https://github.com/zachsnoek" target="_blank">
