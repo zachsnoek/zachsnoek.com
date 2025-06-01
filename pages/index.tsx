@@ -1,11 +1,10 @@
 import React from 'react';
 import { GetStaticProps } from 'next';
 import { Accent } from '../components/Accent';
-import { CustomLayout } from '../components/Layout';
+import { MainLayout } from '../components/Layout';
 import { Link } from '../components/Link';
 import { getAllPosts, Post } from '../utils/posts';
 import { Spacer } from '../components/Spacer';
-import { Break } from '../components/Break';
 import { PostPreviewList } from '../components/PostPreviewList';
 import styled from 'styled-components';
 
@@ -15,11 +14,14 @@ type Props = {
 
 export default function Home({ recentPosts }: Props) {
     return (
-        <CustomLayout title="Zach Snoek">
-            <Header>
-                Hey, I&apos;m <Accent>Zach!</Accent>
-            </Header>
-            <Spacer size={4} />
+        <MainLayout
+            title="Zach Snoek"
+            header={
+                <Header>
+                    Hey, I&apos;m <Accent>Zach!</Accent>
+                </Header>
+            }
+        >
             <section>
                 <p>I&apos;m a full-stack software engineer from Detroit, MI.</p>
                 <Spacer size={2} />
@@ -31,13 +33,13 @@ export default function Home({ recentPosts }: Props) {
                     where I work with TypeScript, React.js, and Node.js.
                 </p>
             </section>
-            <Break />
+            <Spacer size={8} />
             <section>
                 <h2>Latest posts</h2>
-                <Spacer size={4} />
+                <Spacer size={6} />
                 <PostPreviewList posts={recentPosts} />
             </section>
-        </CustomLayout>
+        </MainLayout>
     );
 }
 
