@@ -107,6 +107,8 @@ window.addEventListener('beforeunload', handleBeforeUnload);
 
 _Note: The string returned or assigned to `event.returnValue` may not be shown in the confirmation dialog as that feature is deprecated and not widely supported. Also, the way that we indicate that the dialog should be opened is not consistently implemented across browsers. According to MDN, the spec states that the event handler should call `event.preventDefault()` to show the dialog, though Chrome and Safari don't seem to respect this._
 
+<OpenToWork />
+
 ## Hook implementation
 
 Now that we know how to show the confirmation dialog, let's start creating the hook. We'll take one argument, `isUnsafeTabClose`, which is some boolean value that should tell us if we should show the confirmation dialog. We'll also add the `beforeunload` event listener in an `useEffect` hook and ensure that we remove the event listener once the component has unmounted:

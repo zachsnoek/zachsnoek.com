@@ -2,7 +2,6 @@ import Head from 'next/head';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { MailingListSignupForm } from './MailingListSignup';
-import { Break } from './Break';
 import { Spacer } from './Spacer';
 import { MaxWidthContainer } from './MaxWidthContainer';
 import { useCurrentUrl } from '../hooks/useCurrentUrl';
@@ -68,7 +67,7 @@ function Layout({
                 <Header />
                 <MaxWidthContainer>
                     <main id="main-content-zs">{children}</main>
-                    <Break />
+                    <Spacer size={10} />
                     <MailingListSignupForm />
                     <Spacer size={4} />
                     <Footer />
@@ -79,7 +78,7 @@ function Layout({
 }
 
 interface MainLayoutProps extends LayoutProps {
-    header: string;
+    header: string | React.ReactNode;
 }
 
 export function MainLayout({ header, children, ...rest }: MainLayoutProps) {
@@ -89,7 +88,8 @@ export function MainLayout({ header, children, ...rest }: MainLayoutProps) {
 
     return (
         <Layout {...rest}>
-            <h1>{header}</h1>
+            <Spacer size={5} />
+            {typeof header === 'string' ? <h1>{header}</h1> : header}
             <Spacer size={5} />
             {children}
         </Layout>
@@ -105,9 +105,4 @@ function removeEmojis(string) {
         /([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g,
         ''
     );
-}
-
-/** @deprecated */
-function getPageTitle(pageTitle: string | undefined) {
-    return pageTitle?.length ? `${pageTitle} | ${SITE_TITLE}` : SITE_TITLE;
 }

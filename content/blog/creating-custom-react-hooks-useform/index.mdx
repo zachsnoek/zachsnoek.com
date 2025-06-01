@@ -118,6 +118,8 @@ function Form() {
 
 Finally, let's return a `handleSubmit` function from `useForm` so that we can reuse that logic in our forms' `onSubmit`. We'll want to call `e.preventDefault()` to prevent the page from reloading, but it would also be nice if the user could add some custom behavior when the submit handler is called.
 
+<OpenToWork />
+
 Let's add another parameter to `useForm`: an `onSubmit` function that takes in the `formData`. `useForm`'s `handleSubmit` can take care of preventing the default behavior, then call the user's `onSubmit` function and pass it the `formData`.
 
 ```jsx

@@ -80,6 +80,8 @@ Output:
 
 We've discussed what prototypes are and how instances link to them, but how does this allow objects to inherit properties? To find the property of an object, JavaScript will "walk up" the prototype chain. First, it will look at the calling object's properties. If the property is not found there, it will look at its prototype's properties. This continues until the property is found or the end of the prototype chain is reached.
 
+<OpenToWork />
+
 An instance of `String` is an object that inherits from `Object`, so `String`'s prototype is the prototype defined on `Object`'s constructor function. Because of this, we can access the properties defined on `Object`'s prototype such as `toLocaleString`:
 
 ```javascript

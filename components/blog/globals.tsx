@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { BuyMeACoffee } from '../BuyMeACoffee';
 import { CopyableHeader } from '../CopyableHeader';
 import { a as A } from './default-replacements';
+export { OpenToWork } from '../OpenToWork';
 
 export * from './reducer-functions-without-the-switch';
 

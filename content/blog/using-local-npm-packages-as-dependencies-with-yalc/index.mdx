@@ -62,6 +62,8 @@ $ npm i -g yalc
 
 When using `yalc` to add a local package as a dependency, you first **publish** the dependency to the `yalc` store and **add** it to the dependent project. You can then **update** the dependency and eventually **remove** it from the dependent project.
 
+<OpenToWork />
+
 ### Publishing
 
 To add your dependency to the `yalc` store, run `yalc publish`. This will make a copy of the package in the store, which is located at `~/.yalc`. `yalc` will also compute the hash signature of the package's files and store it in the store to verify that the correct version of the package is added to other projects.

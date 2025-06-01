@@ -16,8 +16,14 @@ export const MDXRemoteWrapper = styled.div`
     ol,
     ul,
     code,
-    .mdx-embed {
+    .mdx-embed,
+    .custom-component,
+    .open-to-work {
         margin-bottom: var(--spacing-5);
+    }
+
+    .open-to-work p {
+        margin-bottom: unset; // <OpenToWork> handles spacing with flex
     }
 
     /* Don't apply bottom margin to nested lists */
