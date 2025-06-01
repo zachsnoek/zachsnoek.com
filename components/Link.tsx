@@ -9,7 +9,7 @@ export type LinkProps = React.PropsWithChildren<{
 
 export function Link({ href, hideUnderline = false, ...props }: LinkProps) {
     return (
-        <NextLink href={href} passHref>
+        <NextLink href={href} passHref legacyBehavior>
             <StyledLink hideUnderline={hideUnderline} {...props} />
         </NextLink>
     );
