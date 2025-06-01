@@ -121,6 +121,8 @@ const app = initializeApp(firebaseConfig);
 
 That’s all we need to do to initialize Firebase within our application! Let’s move on to adding Firebase Authentication and our first React code.
 
+<OpenToWork />
+
 ## Add Firebase Authentication
 
 In this section, we’ll add Firebase Authentication to our app, create a function to log in as a user with Google, and set up the context that we briefly discussed in the previous section. We’ll create an `<AuthProvider>` component that passes down a `user` object and a `login` function. `login` wraps the SDK’s Google sign-in function and then sets the authenticated user in the state.
