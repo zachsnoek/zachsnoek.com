@@ -1,9 +1,11 @@
-import { MainLayout } from '../components/Layout';
-import { Link } from '../components/Link';
+'use client';
 
-export default function Credits() {
+import { ContentLayout } from '../../components/ContentLayout';
+import { Link } from '../../components/Link';
+
+export function CreditsContent() {
     return (
-        <MainLayout title="Credits" header="Credits" noIndex>
+        <ContentLayout header="Credits">
             <p>
                 <Link target="_blank" href="https://velvetyne.fr/fonts/karrik/">
                     Karrick
@@ -11,6 +13,6 @@ export default function Credits() {
                 by Jean-Baptiste Morizot and Lucas Le Bihan (Velvetyne Type
                 Foundry).
             </p>
-        </MainLayout>
+        </ContentLayout>
     );
 }

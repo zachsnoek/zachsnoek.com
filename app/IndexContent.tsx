@@ -1,21 +1,17 @@
+'use client';
+
 import React from 'react';
-import { GetStaticProps } from 'next';
-import { Accent } from '../components/Accent';
-import { MainLayout } from '../components/Layout';
-import { Link } from '../components/Link';
-import { getAllPosts, Post } from '../utils/posts';
-import { Spacer } from '../components/Spacer';
-import { PostPreviewList } from '../components/PostPreviewList';
 import styled from 'styled-components';
+import { Accent } from '../components/Accent';
+import { ContentLayout } from '../components/ContentLayout';
+import { Link } from '../components/Link';
+import { PostPreviewList } from '../components/PostPreviewList';
+import { Spacer } from '../components/Spacer';
+import { Post } from '../utils/posts';
 
-type Props = {
-    recentPosts: Post[];
-};
-
-export default function Home({ recentPosts }: Props) {
+export function IndexContent({ posts }: { posts: Post[] }) {
     return (
-        <MainLayout
-            title="Zach Snoek"
+        <ContentLayout
             header={
                 <Header>
                     Hey, I&apos;m <Accent>Zach!</Accent>
@@ -37,23 +33,11 @@ export default function Home({ recentPosts }: Props) {
             <section>
                 <h2>Latest posts</h2>
                 <Spacer size={6} />
-                <PostPreviewList posts={recentPosts} />
+                <PostPreviewList posts={posts} />
             </section>
-        </MainLayout>
+        </ContentLayout>
     );
 }
-
 const Header = styled.h1`
     line-height: 1.2;
 `;
-
-export const getStaticProps: GetStaticProps<Props> = () => {
-    const recentPosts = getAllPosts({
-        limit: 3,
-    });
-    return {
-        props: {
-            recentPosts,
-        },
-    };
-};

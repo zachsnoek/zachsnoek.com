@@ -1,14 +1,14 @@
-import styled from 'styled-components';
 import {
-    DialogOverlay,
     DialogContent,
+    DialogOverlay,
     DialogOverlayProps,
 } from '@reach/dialog';
-import { SocialIconsRow } from './SocialIconsRow';
-import { UnstyledButton } from './UnstyledButton';
+import { usePathname } from 'next/navigation';
+import styled from 'styled-components';
 import { Icon } from './Icon';
 import { Link, LinkProps } from './Link';
-import { useRouter } from 'next/router';
+import { SocialIconsRow } from './SocialIconsRow';
+import { UnstyledButton } from './UnstyledButton';
 
 type Props = Pick<DialogOverlayProps, 'isOpen' | 'onDismiss'>;
 
@@ -67,10 +67,10 @@ const IconButton = styled(UnstyledButton)`
 `;
 
 const NavItem = (props: LinkProps) => {
-    const router = useRouter();
+    const pathname = usePathname();
 
     return (
-        <NavListItem isActive={router.route === props.href}>
+        <NavListItem isActive={pathname === props.href}>
             <NavLink hideUnderline {...props} />
         </NavListItem>
     );

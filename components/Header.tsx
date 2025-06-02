@@ -1,4 +1,6 @@
-import { useRouter } from 'next/router';
+'use client';
+
+import { usePathname } from 'next/navigation';
 import React from 'react';
 import styled from 'styled-components';
 import { Icon } from './Icon';
@@ -10,13 +12,10 @@ import { SocialIconsRow } from './SocialIconsRow';
 import { UnstyledButton } from './UnstyledButton';
 
 export function Header() {
-    const router = useRouter();
-    const isBlogPost = router.route === '/blog/[id]';
-
     const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
     return (
-        <Wrapper isSticky={isBlogPost}>
+        <Wrapper>
             <Container>
                 <Logo />
                 <DesktopMenu>
@@ -43,26 +42,19 @@ export function Header() {
 }
 
 const NavItem = (props: LinkProps) => {
-    const router = useRouter();
+    const pathname = usePathname();
 
     return (
-        <NavListItem isActive={router.route === props.href}>
+        <NavListItem isActive={pathname === props.href}>
             <Link hideUnderline {...props} />
         </NavListItem>
     );
 };
 
-const Wrapper = styled.header<{ isSticky: boolean }>`
+const Wrapper = styled.header`
     z-index: 1; /* Blog post headers have relative positioning */
     padding: var(--spacing-5) 0px;
     background-color: var(--background-color);
-
-    ${(p) =>
-        p.isSticky &&
-        ` 
-        position: sticky;
-        top: 0;
-    `}
 `;
 
 const Container = styled(MaxWidthContainer)`

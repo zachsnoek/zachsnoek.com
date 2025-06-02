@@ -1,20 +1,18 @@
-import { MainLayout } from '../../components/Layout';
+'use client';
+
 import { ContactForm } from '../../components/ContactForm';
+import { ContentLayout } from '../../components/ContentLayout';
 import { Spacer } from '../../components/Spacer';
 
-export default function Contact() {
+export function ContactContent() {
     return (
-        <MainLayout
-            title="Contact Zach Snoek"
-            description="Get in touch with me!"
-            header="Contact"
-        >
+        <ContentLayout header="Contact">
             <p>
                 Fill out the form below and I&apos;ll get back to you within 2
                 business days.
             </p>
             <Spacer size={4} />
             <ContactForm />
-        </MainLayout>
+        </ContentLayout>
     );
 }

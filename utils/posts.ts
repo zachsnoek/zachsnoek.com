@@ -36,9 +36,7 @@ export function getAllPostIds() {
     const directories = fs.readdirSync(postsDirectory);
 
     return directories.map((directory) => ({
-        params: {
-            id: directory,
-        },
+        id: directory,
     }));
 }
 

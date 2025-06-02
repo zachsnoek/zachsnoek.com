@@ -1,3 +1,5 @@
+'use client';
+
 import styled from 'styled-components';
 import { useState } from 'react';
 import { SubscribeResponse } from '../pages/api/subscribe';
