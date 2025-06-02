@@ -25,7 +25,6 @@
     "npm": "^8.3.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-markdown": "^7.1.1",
     "rehype-highlight": "^5.0.1"
   },
   "devDependencies": {
