@@ -49,7 +49,9 @@ function CopyHeaderIdButton({ id }: { id: string }) {
     return (
         <LinkButton
             onClick={() => {
+                // @ts-expect-error TODO: Fix TS error
                 if (globalThis.history.pushState) {
+                    // @ts-expect-error TODO: Fix TS error
                     history.pushState(null, null, hash);
                 } else {
                     globalThis.location.hash = hash;

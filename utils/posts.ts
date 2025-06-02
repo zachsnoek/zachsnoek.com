@@ -69,20 +69,22 @@ export function getAllPosts(queryOptions: GetAllPostsOptions = {}): Post[] {
             }
 
             return {
-                id: directory,
                 ...data,
+                id: directory,
             } as Post;
         })
         .filter((x) => x);
 
-    const sortedPosts = posts.sort(({ date: a }, { date: b }) => {
-        if (a < b) {
-            return 1;
-        } else if (a > b) {
-            return -1;
-        }
-        return 0;
-    });
+    const sortedPosts = posts
+        .filter((post): post is Post => post !== undefined)
+        .sort(({ date: a }, { date: b }) => {
+            if (a < b) {
+                return 1;
+            } else if (a > b) {
+                return -1;
+            }
+            return 0;
+        });
 
     return sortedPosts.slice(0, limit);
 }
