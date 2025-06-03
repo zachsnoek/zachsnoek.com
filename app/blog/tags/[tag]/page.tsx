@@ -13,7 +13,7 @@ type Props = {
 
 export default async function Tag({ params }: Props) {
     const tag = decodeURIComponent((await params).tag);
-    const posts = getAllPosts({
+    const posts = await getAllPosts({
         filter: {
             tag,
         },

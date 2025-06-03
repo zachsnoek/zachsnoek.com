@@ -17,14 +17,20 @@
   "dependencies": {
     "@cloudinary/url-gen": "^1.8.0",
     "@mailchimp/mailchimp_marketing": "^3.0.72",
+    "@mdx-js/loader": "^3.1.0",
+    "@mdx-js/react": "^3.1.0",
     "@netlify/plugin-nextjs": "^4.29.2",
+    "@next/mdx": "^15.3.3",
     "@reach/dialog": "^0.17.0",
+    "@types/mdx": "^2.0.13",
     "install": "^0.13.0",
+    "mdx-embed": "^1.1.2",
     "next": "^15.3.3",
     "next-goatcounter": "1.0.0",
     "npm": "^8.3.0",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "rehype-highlight": "^7.0.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.3",

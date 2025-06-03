@@ -1,10 +1,7 @@
 'use client';
 
-import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
+import React from 'react';
 import styled from 'styled-components';
-import * as defaultReplacements from '../../../components/blog/default-replacements';
-import * as globals from '../../../components/blog/globals';
-import { MDXRemoteWrapper } from '../../../components/blog/MDXRemoteWrapper';
 import { ContentLayout } from '../../../components/ContentLayout';
 import { Date } from '../../../components/Date';
 import { Link } from '../../../components/Link';
@@ -12,24 +9,14 @@ import { SharePost } from '../../../components/SharePost';
 import { Spacer } from '../../../components/Spacer';
 import { Post as PostType } from '../../../utils/posts';
 
-type Props = {
-    data: PostType;
-    source: MDXRemoteSerializeResult<Record<string, unknown>>;
-};
+type Props = React.PropsWithChildren<{ post: PostType }>;
 
-const mdxComponents = {
-    ...defaultReplacements,
-    ...globals,
-};
-
-export function PostContent({ source, data }: Props) {
+export function PostContent({ post: data, children }: Props) {
     return (
         <ContentLayout header={data.title}>
             <Date date={data.date} />
             <Spacer size={8} />
-            <MDXRemoteWrapper>
-                <MDXRemote {...source} components={mdxComponents} />
-            </MDXRemoteWrapper>
+            {children}
             <Spacer size={6} />
             <TagWrapper>
                 {data.tags.map((x) => (
