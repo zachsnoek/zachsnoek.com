@@ -43,3 +43,8 @@
 .activeNavItem {
   color: var(--prose-heading-color);
 }
+
+.link {
+  padding: var(--spacing-4);
+  padding-left: 0;
+}

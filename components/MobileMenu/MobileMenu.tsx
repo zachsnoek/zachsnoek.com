@@ -5,7 +5,6 @@ import {
 } from '@reach/dialog';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
-import styled from 'styled-components';
 import { Icon } from '../Icon/Icon';
 import { Link, LinkProps } from '../Link/Link';
 import { SocialIconsRow } from '../SocialIconsRow/SocialIconsRow';
@@ -46,12 +45,7 @@ const NavItem = (props: LinkProps) => {
 
     return (
         <div className={clsx(styles.row, isActive && styles.activeNavItem)}>
-            <NavLink hideUnderline {...props} />
+            <Link {...props} hideUnderline className={styles.link} />
         </div>
     );
 };
-
-const NavLink = styled(Link)`
-    padding: var(--spacing-4);
-    padding-left: 0;
-`;
