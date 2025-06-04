@@ -1,0 +1,20 @@
+import type { Metadata } from 'next';
+import React from 'react';
+import { MainContentLayout } from '../../components/MainContentLayout';
+import { PostPreviewList } from '../../components/PostPreviewList';
+import { getAllPosts } from '../../utils/posts';
+
+export const metadata: Metadata = {
+    title: "Zach Snoek's Blog",
+    description:
+        'Blog posts and tutorials about JavaScript, React, CSS, and more!',
+};
+
+export default function BlogPage() {
+    const posts = getAllPosts();
+    return (
+        <MainContentLayout header="Blog">
+            <PostPreviewList posts={posts} />
+        </MainContentLayout>
+    );
+}
