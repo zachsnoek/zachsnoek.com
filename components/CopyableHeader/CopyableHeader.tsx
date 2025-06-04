@@ -52,7 +52,10 @@ function getRawStringFromChildren(children: React.ReactNode) {
     const strings = React.Children.map(children, (x: any) => {
         if (typeof x === 'string') {
             return x;
-        } else if (x.$$typeof === Symbol.for('react.element')) {
+        } else if (
+            x.$$typeof === Symbol.for('react.element') ||
+            x.$$typeof === Symbol.for('react.transitional.element')
+        ) {
             return x.props.children;
         } else {
             throw new Error(`Unknown child: ${JSON.stringify(x)}`);
