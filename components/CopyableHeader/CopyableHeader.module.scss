@@ -17,6 +17,10 @@
 
     padding: var(--spacing-3);
     color: var(--clickable-background-color);
+
+    @media (max-width: $tablet-and-below) {
+        padding: initial;
+    }
 }
 
 .wrapper:hover .button {
@@ -24,13 +28,8 @@
     position: absolute;
     top: -6px;
     left: -45px;
-}
 
-@media (max-width: $tablet-and-below) {
-    .button {
-        padding: initial;
-    }
-    .wrapper:hover .button {
+    @media (max-width: $tablet-and-below) {
         display: none;
     }
 }
