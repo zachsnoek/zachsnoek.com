@@ -23,7 +23,6 @@
     "npm": "^8.3.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-markdown": "^7.1.1",
     "rehype-highlight": "^5.0.1"
   },
   "devDependencies": {
@@ -42,10 +41,8 @@
     "lint-staged": "^12.1.4",
     "lodash.kebabcase": "^4.1.1",
     "mdx-embed": "^0.0.22",
-    "next-mdx-remote": "^3.0.8",
     "prettier": "2.5.1",
     "react-feather": "^2.0.9",
-    "rehype-raw": "^6.1.0",
     "sass": "^1.89.1",
     "typescript": "^5.8.3"
   }
