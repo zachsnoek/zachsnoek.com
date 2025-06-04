@@ -7,7 +7,7 @@ Welcome! This is the repository for my [personal website and blog](https://www.z
 I rebuilt the current version of my site from scratch in 2022, and it allowed me to:
 
 - Learn Next.js and how to use it for SSG
-- Solidify my CSS skills by building components with styled-components
+- Solidify my CSS skills
 - Create interactive blog posts by using MDX to add React components to posts
 - Add dynamic Open Graph preview images to my posts by using Cloudinary
 
@@ -17,7 +17,7 @@ My site uses the following languages, tools, and technologies:
 
 - Next.js (for SSG)
 - TypeScript
-- styled-components
+- CSS Modules
 - Reach UI (for building accessible components)
 - MDX (for adding JSX in blog posts)
 - Cloudinary (for dynamically generating Open Graph images)
