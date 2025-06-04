@@ -1,7 +1,7 @@
 import { CodePen as MDXEmbedCodePen } from 'mdx-embed';
 import styled from 'styled-components';
 import { BuyMeACoffee } from '../BuyMeACoffee/BuyMeACoffee';
-import { CopyableHeader } from '../CopyableHeader';
+import { CopyableHeader } from '../CopyableHeader/CopyableHeader';
 import { a as A } from './default-replacements';
 export { OpenToWork } from '../OpenToWork/OpenToWork';
 

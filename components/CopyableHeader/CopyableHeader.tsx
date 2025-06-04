@@ -1,53 +1,16 @@
-import styled from 'styled-components';
-import { Icon } from './Icon/Icon';
-import { UnstyledButton } from './UnstyledButton/UnstyledButton';
-import { toKebabCase } from '../utils/toKebabCase';
+import clsx from 'clsx';
 import React from 'react';
-
-const H2 = styled.h2`
-    margin-top: var(--spacing-7);
-`;
-
-const H3 = styled.h3`
-    margin-top: var(--spacing-6);
-`;
-
-const headers = {
-    h2: H2,
-    h3: H3,
-};
-
-const Wrapper = styled.div`
-    position: relative;
-`;
-
-const LinkButton = styled(UnstyledButton)`
-    display: none;
-
-    padding: var(--spacing-3);
-    color: var(--clickable-background-color);
-
-    ${Wrapper}:hover & {
-        display: revert;
-        position: absolute;
-        top: -6px;
-        left: -45px;
-    }
-
-    @media ${(p) => p.theme.queries.tabletAndBelow} {
-        padding: initial;
-
-        ${Wrapper}:hover & {
-            display: none;
-        }
-    }
-`;
+import { toKebabCase } from '../../utils/toKebabCase';
+import { Icon } from '../Icon/Icon';
+import { UnstyledButton } from '../UnstyledButton/UnstyledButton';
+import styles from './CopyableHeader.module.scss';
 
 function CopyHeaderIdButton({ id }: { id: string }) {
     const hash = `#${id}`;
 
     return (
-        <LinkButton
+        <UnstyledButton
+            className={styles.button}
             onClick={() => {
                 if (globalThis.history.pushState) {
                     history.pushState(null, null, hash);
@@ -61,26 +24,27 @@ function CopyHeaderIdButton({ id }: { id: string }) {
             }}
         >
             <Icon id="link" />
-        </LinkButton>
+        </UnstyledButton>
     );
 }
 
-type Props = { as: keyof typeof headers; children: React.ReactNode };
+type Props = { as: 'h2' | 'h3'; children: React.ReactNode };
 
 function CopyableHeader({ as, children }: Props) {
-    const HeaderComponent = headers[as];
-    if (!HeaderComponent) {
-        throw new Error(`Invalid header: ${as}`);
-    }
-
+    const Component = as;
     const headerString = getRawStringFromChildren(children);
     const id = toKebabCase(headerString);
 
     return (
-        <Wrapper>
+        <div className={styles.wrapper}>
             <CopyHeaderIdButton id={id} />
-            <HeaderComponent id={id}>{children}</HeaderComponent>
-        </Wrapper>
+            <Component
+                id={id}
+                className={clsx({ h2: as === 'h2', h3: as === 'h3' })}
+            >
+                {children}
+            </Component>
+        </div>
     );
 }
 
