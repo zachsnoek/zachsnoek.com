@@ -1,3 +1,5 @@
+'use client';
+
 import clsx from 'clsx';
 import React from 'react';
 import { toKebabCase } from '../../utils/toKebabCase';
@@ -12,8 +14,8 @@ function CopyHeaderIdButton({ id }: { id: string }) {
         <UnstyledButton
             className={styles.button}
             onClick={() => {
-                if (globalThis.history.pushState) {
-                    history.pushState(null, null, hash);
+                if (globalThis.history.pushState !== undefined) {
+                    history.pushState(null, '', hash);
                 } else {
                     globalThis.location.hash = hash;
                 }

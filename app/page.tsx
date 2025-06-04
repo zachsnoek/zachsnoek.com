@@ -11,8 +11,8 @@ export const metadata: Metadata = {
         'Zach Snoek is full-stack software engineer writing about about JavaScript, React, CSS, and other web development topics.',
 };
 
-export default function HomePage() {
-    const recentPosts = getAllPosts({
+export default async function HomePage() {
+    const recentPosts = await getAllPosts({
         limit: 3,
     });
 

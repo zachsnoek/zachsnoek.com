@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { useCurrentUrl } from '../../hooks/useCurrentUrl';
 import { Post } from '../../utils/posts';

@@ -10,8 +10,8 @@ export const metadata: Metadata = {
         'Blog posts and tutorials about JavaScript, React, CSS, and more!',
 };
 
-export default function BlogPage() {
-    const posts = getAllPosts();
+export default async function BlogPage() {
+    const posts = await getAllPosts();
     return (
         <MainContentLayout header="Blog">
             <PostPreviewList posts={posts} />
