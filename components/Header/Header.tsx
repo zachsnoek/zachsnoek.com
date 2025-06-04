@@ -1,4 +1,5 @@
-import { useRouter } from 'next/router';
+'use client';
+
 import React from 'react';
 import { Icon } from '../Icon/Icon';
 import { Link, LinkProps } from '../Link/Link';
@@ -9,11 +10,9 @@ import { SocialIconsRow } from '../SocialIconsRow/SocialIconsRow';
 import { UnstyledButton } from '../UnstyledButton/UnstyledButton';
 import styles from './Header.module.scss';
 import clsx from 'clsx';
+import { usePathname } from 'next/navigation';
 
 export function Header() {
-    const router = useRouter();
-    const isBlogPost = router.route === '/blog/[id]';
-
     const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
     return (
@@ -47,8 +46,8 @@ export function Header() {
 }
 
 const NavItem = (props: LinkProps) => {
-    const router = useRouter();
-    const isActive = router.route === props.href;
+    const pathname = usePathname();
+    const isActive = pathname === props.href;
     return (
         <li
             className={clsx(

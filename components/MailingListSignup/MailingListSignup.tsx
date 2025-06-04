@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import { SubscribeResponse } from '../../pages/api/subscribe';
 import { Button } from '../Button/Button';
