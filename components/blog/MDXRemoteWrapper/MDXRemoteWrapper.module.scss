@@ -9,9 +9,29 @@
         line-height: 1.8;
     }
 
+    ol {
+        padding-left: 0px;
+        margin-left: 22px; /* offsets max width container padding; subtracts 2px for optical alignment */
+    }
+
+    ul {
+        padding-left: 0px;
+        margin-left: 22px; /* offsets max width container padding; subtracts 2px for optical alignment */
+        list-style-position: outside;
+    }
+
     // Don't apply bottom margin to nested lists
     ul ul {
         margin-bottom: 0;
+    }
+
+    blockquote {
+        color: var(--prose-blockquote-color);
+        margin-left: 0px;
+        padding-left: 24px;
+        border-left: var(--border-width-1) solid
+            var(--blockquote-border-left-color);
+        font-style: italic;
     }
 
     // highlight.js code blocks
