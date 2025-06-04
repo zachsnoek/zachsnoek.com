@@ -3,7 +3,7 @@ import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import Script from 'next/script';
 import * as defaultReplacements from '../../components/blog/default-replacements';
 import * as globals from '../../components/blog/globals';
-import { MDXRemoteWrapper } from '../../components/blog/MDXRemoteWrapper';
+import { MDXRemoteWrapper } from '../../components/blog/MDXRemoteWrapper/MDXRemoteWrapper';
 import { Date } from '../../components/Date';
 import { CustomLayout } from '../../components/Layout';
 import { Link } from '../../components/Link/Link';

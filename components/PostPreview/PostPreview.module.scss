@@ -11,9 +11,8 @@
 
 .wrapper:hover h3 {
     color: var(--clickable-hover-color);
-}
-@media (max-width: $tablet-and-below) {
-    .wrapper:hover h3 {
+
+    @media (max-width: $tablet-and-below) {
         color: unset;
     }
 }
