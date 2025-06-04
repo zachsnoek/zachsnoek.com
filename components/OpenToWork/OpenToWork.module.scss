@@ -26,17 +26,3 @@
     color: var(--prose-otw-heading-color);
     font-size: var(--font-size-base);
 }
-
-.details {
-    &[open] summary::before {
-        content: '🎯 ';
-    }
-}
-
-.summary {
-    list-style: none;
-
-    &::before {
-        content: '🔎 ';
-    }
-}

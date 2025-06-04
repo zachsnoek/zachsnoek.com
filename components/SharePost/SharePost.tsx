@@ -3,6 +3,7 @@ import { useCurrentUrl } from '../../hooks/useCurrentUrl';
 import { Post } from '../../utils/posts';
 import { Link } from '../Link/Link';
 import styles from './SharePost.module.css';
+
 type Props = Pick<Post, 'title'>;
 
 export function SharePost({ title }: Props) {
@@ -18,7 +19,7 @@ export function SharePost({ title }: Props) {
                 Tweet this post
             </Link>
             <Link
-                href={createLinkedInShareLink(url)}
+                href={createLinkedInShareLink(title, url)}
                 target="_blank"
                 hideUnderline
             >
@@ -32,7 +33,7 @@ export function SharePost({ title }: Props) {
 // https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/overview
 function createTwitterShareLink(title: Props['title'], url: string) {
     const params = new URLSearchParams({
-        text: `I just read "${title}" by Zach Snoek!`,
+        text: `Check out this post "${title}" by Zach Snoek!`,
         via: 'zach_snoek',
         url,
     }).toString();
@@ -41,6 +42,10 @@ function createTwitterShareLink(title: Props['title'], url: string) {
 }
 
 // https://stackoverflow.com/a/61583095
-function createLinkedInShareLink(url: string) {
-    return `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+function createLinkedInShareLink(title: Props['title'], url: string) {
+    const params = new URLSearchParams({
+        shareActive: 'true',
+        text: `Check out this post by Zach Snoek!\n\n"${title}": ${url}`,
+    }).toString();
+    return `https://www.linkedin.com/feed/?${params}`;
 }
