@@ -20,7 +20,6 @@
     "@reach/dialog": "^0.17.0",
     "install": "^0.13.0",
     "next": "^15.3.3",
-    "next-goatcounter": "1.0.0",
     "npm": "^8.3.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Script from 'next/script';
 import { Footer } from '../components/Footer/Footer';
 import { Header } from '../components/Header/Header';
 import { MailingListSignupForm } from '../components/MailingListSignup/MailingListSignup';
@@ -6,8 +7,6 @@ import { MaxWidthContainer } from '../components/MaxWidthContainer/MaxWidthConta
 import { Spacer } from '../components/Spacer';
 import '../styles/globals.scss';
 import '../styles/theme.css';
-
-// TODO: Add goatcounter
 
 type Props = {
     children: React.ReactNode;
@@ -31,6 +30,11 @@ export default function RootLayout({ children }: Props) {
                     </MaxWidthContainer>
                 </div>
             </body>
+            <Script
+                async
+                src="//gc.zgo.at/count.js"
+                data-goatcounter="https://zachsnoek.goatcounter.com/count"
+            />
         </html>
     );
 }
