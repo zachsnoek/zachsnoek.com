@@ -1,19 +1,23 @@
-import React from 'react';
-import { GetStaticProps } from 'next';
+import type { Metadata } from 'next';
 import { Accent } from '../components/Accent/Accent';
-import { MainLayout } from '../components/Layout';
-import { getAllPosts, Post } from '../utils/posts';
-import { Spacer } from '../components/Spacer';
+import { MainContentLayout } from '../components/MainContentLayout';
 import { PostPreviewList } from '../components/PostPreviewList';
+import { Spacer } from '../components/Spacer';
+import { getAllPosts } from '../utils/posts';
 
-type Props = {
-    recentPosts: Post[];
+export const metadata: Metadata = {
+    title: 'Zach Snoek',
+    description:
+        'Zach Snoek is full-stack software engineer writing about about JavaScript, React, CSS, and other web development topics.',
 };
 
-export default function Home({ recentPosts }: Props) {
+export default function HomePage() {
+    const recentPosts = getAllPosts({
+        limit: 3,
+    });
+
     return (
-        <MainLayout
-            title="Zach Snoek"
+        <MainContentLayout
             header={
                 <h1 style={{ lineHeight: 1.2 }}>
                     Hey, I&apos;m <Accent>Zach!</Accent>
@@ -39,17 +43,6 @@ export default function Home({ recentPosts }: Props) {
                 <Spacer size={6} />
                 <PostPreviewList posts={recentPosts} />
             </section>
-        </MainLayout>
+        </MainContentLayout>
     );
 }
-
-export const getStaticProps: GetStaticProps<Props> = () => {
-    const recentPosts = getAllPosts({
-        limit: 3,
-    });
-    return {
-        props: {
-            recentPosts,
-        },
-    };
-};

@@ -7,6 +7,8 @@ import { Spacer } from '../components/Spacer';
 import '../styles/globals.scss';
 import '../styles/theme.css';
 
+// TODO: Add goatcounter
+
 type Props = {
     children: React.ReactNode;
 };
@@ -21,7 +23,7 @@ export default function RootLayout({ children }: Props) {
                 <div>
                     <Header />
                     <MaxWidthContainer>
-                        <main id="main-content-zs">{children}</main>
+                        {children}
                         <Spacer size={10} />
                         <MailingListSignupForm />
                         <Spacer size={4} />
