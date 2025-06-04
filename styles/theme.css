@@ -22,6 +22,26 @@
   --font-size-2xl: 3.789rem;
   --font-size-code: 0.925rem;
 
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 16px;
+  --spacing-4: 24px;
+  --spacing-5: 32px;
+  --spacing-6: 40px;
+  --spacing-7: 48px;
+  --spacing-8: 64px;
+  --spacing-9: 80px;
+  --spacing-10: 96px;
+
+  --border-width-1: 2px;
+  --border-width-2: 5px;
+
+  --border-radius-1: 3px;
+  --border-radius-2: 5px;
+  --border-radius-3: 7px;
+
+  --layout-max-width: 700px;
+
   --background-color: var(--color-white);
 
   --prose-color: var(--color-gray-700);
