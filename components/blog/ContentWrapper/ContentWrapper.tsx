@@ -1,5 +1,5 @@
-import styles from './MDXRemoteWrapper.module.scss';
+import styles from './ContentWrapper.module.scss';
 
 export function ContentWrapper({ children }: React.PropsWithChildren<{}>) {
-    return <div className={styles.mdxRemoteWrapper}>{children}</div>;
+    return <div className={styles.contentWrapper}>{children}</div>;
 }
