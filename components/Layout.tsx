@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { Header } from './Header';
+import { Header } from './Header/Header';
 import { Footer } from './Footer/Footer';
 import { MailingListSignupForm } from './MailingListSignup/MailingListSignup';
 import { Spacer } from './Spacer';
