@@ -1,9 +1,9 @@
 import type { MDXComponents } from 'mdx/types';
 import { CodePen } from './components/blog/CodePen/CodePen';
 import { ConnectSection } from './components/blog/ConnectSection';
-import { CopyableHeader } from './components/CopyableHeader/CopyableHeader';
+import { CopyableHeader } from './components/blog/CopyableHeader/CopyableHeader';
+import { OpenToWork } from './components/blog/OpenToWork/OpenToWork';
 import { Link } from './components/Link/Link';
-import { OpenToWork } from './components/OpenToWork/OpenToWork';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
     return {

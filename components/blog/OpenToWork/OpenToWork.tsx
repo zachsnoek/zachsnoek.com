@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { Link } from '../Link/Link';
+import { Link } from '../../Link/Link';
 import styles from './OpenToWork.module.scss';
 
 const isOpenToWork = true;

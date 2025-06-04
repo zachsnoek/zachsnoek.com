@@ -2,9 +2,9 @@
 
 import clsx from 'clsx';
 import React from 'react';
-import { toKebabCase } from '../../utils/toKebabCase';
-import { Icon } from '../Icon/Icon';
-import { UnstyledButton } from '../UnstyledButton/UnstyledButton';
+import { toKebabCase } from '../../../utils/toKebabCase';
+import { Icon } from '../../Icon/Icon';
+import { UnstyledButton } from '../../UnstyledButton/UnstyledButton';
 import styles from './CopyableHeader.module.scss';
 
 function CopyHeaderIdButton({ id }: { id: string }) {

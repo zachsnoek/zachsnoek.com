@@ -1,6 +1,5 @@
-import { CopyableHeader } from '../CopyableHeader/CopyableHeader';
-import { Link } from '../Link/Link';
 import { BuyMeACoffee } from './BuyMeACoffee/BuyMeACoffee';
+import { CopyableHeader } from './CopyableHeader/CopyableHeader';
 
 export function ConnectSection() {
     return (
