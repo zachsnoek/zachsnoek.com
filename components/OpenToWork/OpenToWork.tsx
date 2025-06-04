@@ -25,11 +25,6 @@ export function OpenToWork() {
                 </Link>
                 .
             </p>
-            {/* <details className={styles.details}>
-                <summary className={styles.summary}>
-                    Find out how I deliver value
-                </summary>
-            </details> */}
         </div>
     );
 }
