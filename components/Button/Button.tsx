@@ -1,16 +1,12 @@
 import clsx from 'clsx';
 import styles from './Button.module.scss';
-
-type Props = Omit<React.ComponentPropsWithRef<'button'>, 'style'> & {
-    size?: 'small' | 'medium' | 'large';
-    variant?: 'fill' | 'outline';
-};
+import { ButtonProps } from './types';
 
 export const Button = ({
     variant = 'fill',
     size = 'medium',
     ...rest
-}: Props) => {
+}: ButtonProps) => {
     if (!styles[variant]) {
         throw new Error(`Unknown button variant: ${variant}`);
     }
