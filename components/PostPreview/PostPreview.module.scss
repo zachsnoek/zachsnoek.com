@@ -1,0 +1,23 @@
+@import '../../styles/breakpoints.module.scss';
+
+.wrapper {
+    display: block;
+    cursor: pointer;
+
+    &:hover {
+        color: inherit;
+    }
+}
+
+.wrapper:hover h3 {
+    color: var(--clickable-hover-color);
+}
+@media (max-width: $tablet-and-below) {
+    .wrapper:hover h3 {
+        color: unset;
+    }
+}
+
+.date {
+    font-size: var(--font-size-sm);
+}
