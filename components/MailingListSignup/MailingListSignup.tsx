@@ -1,9 +1,10 @@
-import styled from 'styled-components';
 import { useState } from 'react';
-import { SubscribeResponse } from '../pages/api/subscribe';
-import { Button } from './Button/Button';
-import { Spacer } from './Spacer';
-import { Input } from './Input/Input';
+import { SubscribeResponse } from '../../pages/api/subscribe';
+import { Button } from '../Button/Button';
+import { Input } from '../Input/Input';
+import { Link } from '../Link/Link';
+import { Spacer } from '../Spacer';
+import styles from './MailingListSignup.module.scss';
 
 export function MailingListSignupForm() {
     const [state, setState] = useState<{
@@ -56,11 +57,12 @@ export function MailingListSignupForm() {
                 content from me. Unsubscribe anytime.
             </p>
             <Spacer size={5} />
-            <Form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className={styles.form}>
                 {/* TODO: VisuallyHidden label */}
-                <MailingListInput
+                <Input
                     id="mailing-list-email"
                     type="email"
+                    className={styles.input}
                     value={input}
                     onChange={(e) =>
                         setState((x) => ({ ...x, input: e.target.value }))
@@ -70,7 +72,7 @@ export function MailingListSignupForm() {
                 <Button type="submit" disabled={!input.length || isLoading}>
                     Subscribe
                 </Button>
-            </Form>
+            </form>
             {result && (
                 <>
                     <Spacer size={5} />
@@ -85,13 +87,12 @@ export function MailingListSignupForm() {
                             <p>
                                 Oops! There was an error. You can sign up using
                                 the form{' '}
-                                <FallbackLink
+                                <Link
                                     href="https://z7k.io/newsletter"
                                     target="_blank"
-                                    rel="noreferrer"
                                 >
                                     here
-                                </FallbackLink>{' '}
+                                </Link>{' '}
                                 instead.
                             </p>
                         )}
@@ -101,24 +102,3 @@ export function MailingListSignupForm() {
         </section>
     );
 }
-
-const Form = styled.form`
-    display: flex;
-    gap: var(--spacing-2);
-`;
-
-const MailingListInput = styled(Input)`
-    // Matches medium input height
-    padding: calc(var(--spacing-3) - var(--border-width-1))
-        calc(var(--spacing-4) - var(--border-width-1));
-
-    @media ${(p) => p.theme.queries.mobileAndBelow} {
-        flex-grow: 1;
-        flex-shrink: 1;
-        width: 0; /* allow input to get below its minimum content size */
-    }
-`;
-
-const FallbackLink = styled.a`
-    color: var(--clickable-background-color);
-`;
