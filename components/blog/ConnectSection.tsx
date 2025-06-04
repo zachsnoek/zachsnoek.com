@@ -1,10 +1,6 @@
-import { BuyMeACoffee } from '../BuyMeACoffee/BuyMeACoffee';
 import { CopyableHeader } from '../CopyableHeader/CopyableHeader';
-import { a as A } from './default-replacements';
-export { CodePen } from './CodePen/CodePen';
-export { OpenToWork } from '../OpenToWork/OpenToWork';
-
-export * from '../../content/blog/reducer-functions-without-the-switch/components';
+import { Link } from '../Link/Link';
+import { BuyMeACoffee } from './BuyMeACoffee/BuyMeACoffee';
 
 export function ConnectSection() {
     return (
@@ -12,21 +8,21 @@ export function ConnectSection() {
             <CopyableHeader as="h2">Let&apos;s connect</CopyableHeader>
             <p>
                 Come connect with me on{' '}
-                <A
+                <a
                     href="https://linkedin.com/in/zachsnoek"
                     target="_blank"
                     rel="noreferrer"
                 >
                     LinkedIn
-                </A>{' '}
+                </a>{' '}
                 and{' '}
-                <A
+                <a
                     href="https://github.com/zachsnoek"
                     target="_blank"
                     rel="noreferrer"
                 >
                     GitHub
-                </A>
+                </a>
                 !
             </p>
             <BuyMeACoffee />

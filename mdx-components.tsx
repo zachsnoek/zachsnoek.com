@@ -1,8 +1,9 @@
 import type { MDXComponents } from 'mdx/types';
-import { CodePen, ConnectSection, OpenToWork } from './components/blog/globals';
-import { BuyMeACoffee } from './components/BuyMeACoffee/BuyMeACoffee';
+import { CodePen } from './components/blog/CodePen/CodePen';
+import { ConnectSection } from './components/blog/ConnectSection';
 import { CopyableHeader } from './components/CopyableHeader/CopyableHeader';
 import { Link } from './components/Link/Link';
+import { OpenToWork } from './components/OpenToWork/OpenToWork';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
     return {
@@ -24,7 +25,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         img: ({ src, ...props }) => {
             return <img {...props} src={`/images/blog/${src}`} />;
         },
-        BuyMeACoffee,
         CodePen,
         ConnectSection,
         OpenToWork,
