@@ -9,17 +9,15 @@ export type LinkProps = React.PropsWithChildren<{
     target?: HTMLLinkElement['target'];
 }>;
 
-export function Link({ href, hideUnderline = false, ...props }: LinkProps) {
+export function Link({ hideUnderline = false, ...props }: LinkProps) {
     return (
-        <NextLink href={href} passHref>
-            <a
-                {...props}
-                className={clsx(
-                    styles.link,
-                    hideUnderline && styles.hideUnderline,
-                    props.className
-                )}
-            />
-        </NextLink>
+        <NextLink
+            className={clsx(
+                styles.link,
+                hideUnderline && styles.hideUnderline,
+                props.className
+            )}
+            {...props}
+        />
     );
 }
