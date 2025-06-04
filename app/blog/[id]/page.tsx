@@ -1,4 +1,4 @@
-import { MDXRemoteWrapper } from '../../../components/blog/MDXRemoteWrapper/MDXRemoteWrapper';
+import { ContentWrapper } from '../../../components/blog/ContentWrapper/ContentWrapper';
 import { Date } from '../../../components/Date';
 import { Link } from '../../../components/Link/Link';
 import { SharePost } from '../../../components/SharePost/SharePost';
@@ -31,9 +31,9 @@ export default async function PostPage({ params }: Props) {
             <Spacer size={5} />
             <Date date={post.date} />
             <Spacer size={8} />
-            <MDXRemoteWrapper>
+            <ContentWrapper>
                 <Content />
-            </MDXRemoteWrapper>
+            </ContentWrapper>
             <Spacer size={6} />
             <div className={styles.tagWrapper}>
                 {post.tags.map((x) => (
