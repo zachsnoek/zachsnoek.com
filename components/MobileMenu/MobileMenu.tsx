@@ -20,7 +20,11 @@ export function MobileMenu({ isOpen, onDismiss }: Props) {
             onDismiss={onDismiss}
             className={styles.dialogOverlay}
         >
-            <DialogContent as={'nav'} className={styles.dialogContent}>
+            <DialogContent
+                as={'nav'}
+                className={styles.dialogContent}
+                aria-label="Mobile device menu"
+            >
                 <div className={styles.iconWrapper}>
                     <UnstyledButton
                         onClick={onDismiss}
