@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import { SubscribeResponse } from '../pages/api/subscribe';
-import { Button } from './Button';
+import { Button } from './Button/Button';
 import { Spacer } from './Spacer';
-import { Input } from './Input';
+import { Input } from './Input/Input';
 
 export function MailingListSignupForm() {
     const [state, setState] = useState<{

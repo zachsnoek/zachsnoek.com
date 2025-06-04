@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
-import { Input } from './Input';
-import { TextArea } from './TextArea';
-import { Button } from './Button';
+import { Button } from '../Button/Button';
+import { Input } from '../Input/Input';
+import { TextArea } from '../TextArea/TextArea';
+import styles from './ContactForm.module.css';
 
 export function ContactForm() {
     const [formData, setFormData] = useState<{
@@ -18,14 +18,15 @@ export function ContactForm() {
     };
 
     return (
-        <Form
+        <form
             name="Contact Form"
             action="/contact/success"
             method="POST"
             data-netlify="true"
+            className={styles.form}
         >
             <input type="hidden" name="form-name" value="Contact Form" />
-            <FormGroup>
+            <div className={styles.formGroup}>
                 <label htmlFor="name">Name</label>
                 <Input
                     type="text"
@@ -35,8 +36,8 @@ export function ContactForm() {
                     value={formData.name}
                     onChange={handleChange}
                 />
-            </FormGroup>
-            <FormGroup>
+            </div>
+            <div className={styles.formGroup}>
                 <label htmlFor="email">Email</label>
                 <Input
                     type="email"
@@ -46,39 +47,22 @@ export function ContactForm() {
                     value={formData.email}
                     onChange={handleChange}
                 />
-            </FormGroup>
-            <FormGroup>
+            </div>
+            <div className={styles.formGroup}>
                 <label htmlFor="message">Message</label>
-                <FormTextArea
+                <TextArea
                     id="message"
                     name="message"
+                    className={styles.textArea}
                     placeholder="Let's get the band back together..."
                     required
                     value={formData.message}
                     onChange={handleChange}
                 />
-            </FormGroup>
-            <SubmitButton type="submit">Send</SubmitButton>
-        </Form>
+            </div>
+            <Button type="submit" className={styles.button}>
+                Send
+            </Button>
+        </form>
     );
 }
-
-const Form = styled.form`
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-3);
-`;
-
-const FormGroup = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-2);
-`;
-
-const FormTextArea = styled(TextArea)`
-    height: var(--spacing-10);
-`;
-
-const SubmitButton = styled(Button)`
-    align-self: flex-start;
-`;

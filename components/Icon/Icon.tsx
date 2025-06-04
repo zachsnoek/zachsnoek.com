@@ -1,6 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
 import { GitHub, Linkedin, Twitter, Copy, Link, Menu, X } from 'react-feather';
+import styles from './Icon.module.scss';
 
 const icons = {
     github: GitHub,
@@ -27,14 +27,8 @@ export const Icon = ({ id, color, size, ...props }: Props) => {
     }
 
     return (
-        <Wrapper {...props}>
+        <div {...props} className={styles.wrapper}>
             <Component color={color} size={size ?? '1em'} />
-        </Wrapper>
+        </div>
     );
 };
-
-const Wrapper = styled.div`
-    & > svg {
-        display: block;
-    }
-`;

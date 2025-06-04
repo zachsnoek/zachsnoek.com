@@ -1,13 +1,13 @@
 import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
-import { Icon } from './Icon';
+import { Icon } from './Icon/Icon';
 import { Link, LinkProps } from './Link';
-import { Logo } from './Logo';
-import { MaxWidthContainer } from './MaxWidthContainer';
-import { MobileMenu } from './MobileMenu';
-import { SocialIconsRow } from './SocialIconsRow';
-import { UnstyledButton } from './UnstyledButton';
+import { Logo } from './Logo/Logo';
+import { MaxWidthContainer } from './MaxWidthContainer/MaxWidthContainer';
+import { MobileMenu } from './MobileMenu/MobileMenu';
+import { SocialIconsRow } from './SocialIconsRow/SocialIconsRow';
+import { UnstyledButton } from './UnstyledButton/UnstyledButton';
 
 export function Header() {
     const router = useRouter();

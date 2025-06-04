@@ -14,7 +14,7 @@ import * as defaultReplacements from '../../components/blog/default-replacements
 import * as globals from '../../components/blog/globals';
 import { MDXRemoteWrapper } from '../../components/blog/MDXRemoteWrapper';
 import { Spacer } from '../../components/Spacer';
-import { SharePost } from '../../components/SharePost';
+import { SharePost } from '../../components/SharePost/SharePost';
 
 type Props = {
     data: PostType;

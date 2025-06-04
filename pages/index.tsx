@@ -1,6 +1,6 @@
 import React from 'react';
 import { GetStaticProps } from 'next';
-import { Accent } from '../components/Accent';
+import { Accent } from '../components/Accent/Accent';
 import { MainLayout } from '../components/Layout';
 import { Link } from '../components/Link';
 import { getAllPosts, Post } from '../utils/posts';

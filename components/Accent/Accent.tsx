@@ -1,8 +1,4 @@
-import styled from 'styled-components';
-
-const AccentBase = styled.span`
-    color: var(--prose-accent-color);
-`;
+import styles from './Accent.module.css';
 
 type Props =
     | { text: string; children?: never }
@@ -13,5 +9,5 @@ export function Accent({ text, children }: Props) {
         throw new Error('Only one of `text` and `children` can be provided.');
     }
 
-    return <AccentBase>{text || children}</AccentBase>;
+    return <span className={styles.accent}>{text || children}</span>;
 }

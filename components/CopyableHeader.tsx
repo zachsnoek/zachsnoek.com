@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { Icon } from './Icon';
-import { UnstyledButton } from './UnstyledButton';
+import { Icon } from './Icon/Icon';
+import { UnstyledButton } from './UnstyledButton/UnstyledButton';
 import { toKebabCase } from '../utils/toKebabCase';
 import React from 'react';
 

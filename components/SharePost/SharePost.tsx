@@ -1,16 +1,15 @@
 import React from 'react';
-import styled from 'styled-components';
-import { useCurrentUrl } from '../hooks/useCurrentUrl';
-import { Post } from '../utils/posts';
-import { Link } from './Link';
-
+import { useCurrentUrl } from '../../hooks/useCurrentUrl';
+import { Post } from '../../utils/posts';
+import { Link } from '../Link';
+import styles from './SharePost.module.css';
 type Props = Pick<Post, 'title'>;
 
 export function SharePost({ title }: Props) {
     const { url } = useCurrentUrl();
 
     return (
-        <Wrapper>
+        <div className={styles.wrapper}>
             <Link
                 href={createTwitterShareLink(title, url)}
                 target="_blank"
@@ -25,14 +24,9 @@ export function SharePost({ title }: Props) {
             >
                 Share on LinkedIn
             </Link>
-        </Wrapper>
+        </div>
     );
 }
-
-const Wrapper = styled.div`
-    display: flex;
-    justify-content: space-between;
-`;
 
 // https://stackoverflow.com/questions/6208363/sharing-a-url-with-a-query-string-on-twitter
 // https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/overview

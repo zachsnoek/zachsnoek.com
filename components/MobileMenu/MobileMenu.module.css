@@ -1,0 +1,45 @@
+.iconButton {
+  padding: var(--spacing-1);
+}
+
+.dialogOverlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  backdrop-filter: blur(2px);
+}
+
+.dialogContent {
+  position: fixed;
+  top: 0;
+  right: 0;
+
+  height: 100%;
+  width: 300px;
+  background: var(--background-color);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.iconWrapper {
+  height: var(--spacing-8);
+  padding-top: calc(var(--spacing-5) + 3px); /* visual alignment */
+  padding-right: var(--spacing-4);
+
+  align-self: flex-end;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  padding-left: var(--spacing-4);
+  height: var(--spacing-8);
+}
+
+.activeNavItem {
+  color: var(--prose-heading-color);
+}

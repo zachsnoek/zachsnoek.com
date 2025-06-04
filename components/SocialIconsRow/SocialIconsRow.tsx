@@ -1,10 +1,10 @@
-import styled from 'styled-components';
-import { Link } from './Link';
-import { Icon } from './Icon';
+import { Link } from '../Link';
+import { Icon } from '../Icon/Icon';
+import styles from './SocialIconsRow.module.css';
 
 export function SocialIconsRow() {
     return (
-        <Wrapper>
+        <div className={styles.wrapper}>
             <Link
                 href="https://www.linkedin.com/in/zach-snoek-5b327b179/"
                 target="_blank"
@@ -14,13 +14,6 @@ export function SocialIconsRow() {
             <Link href="https://github.com/zachsnoek" target="_blank">
                 <Icon id="github" />
             </Link>
-        </Wrapper>
+        </div>
     );
 }
-
-const Wrapper = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 14px;
-`;
