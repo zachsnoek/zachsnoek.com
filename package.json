@@ -17,7 +17,11 @@
   "dependencies": {
     "@cloudinary/url-gen": "^1.8.0",
     "@mailchimp/mailchimp_marketing": "^3.0.72",
+    "@mdx-js/loader": "^3.1.0",
+    "@mdx-js/react": "^3.1.0",
+    "@next/mdx": "^15.3.3",
     "@reach/dialog": "^0.17.0",
+    "@types/mdx": "^2.0.13",
     "install": "^0.13.0",
     "next": "^15.3.3",
     "npm": "^8.3.0",
