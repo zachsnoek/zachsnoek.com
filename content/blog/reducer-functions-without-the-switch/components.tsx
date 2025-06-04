@@ -1,6 +1,8 @@
+import clsx from 'clsx';
 import React from 'react';
-import styled from 'styled-components';
-import { Button } from '../Button/Button';
+import { Button } from '../../../components/Button/Button';
+import { ButtonProps } from '../../../components/Button/types';
+import styles from './components.module.css';
 
 export interface UseToggleProps {
     initialState?: boolean;
@@ -51,30 +53,16 @@ function useMultiSelection<T>({
     return [selection, setSelection];
 }
 
-const Wrapper = styled.div`
-    border: 1px solid var(--color-pink-500);
-    border-radius: var(--border-radius-2);
-    padding: var(--spacing-4);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-`;
-
-const ToggleButton = styled(Button)<{ isEnabled: boolean }>`
-    background: ${(p) => (p.isEnabled ? '#4fbe79' : '#bebebe')};
-`;
-
 export function UseToggleDemo() {
     const [isEnabled, toggle] = useToggle();
 
     return (
-        <Wrapper className="custom-component">
+        <div className={styles.wrapper}>
             <p>Enabled: {isEnabled ? 'Yes' : 'No'}</p>
             <ToggleButton onClick={toggle} isEnabled={isEnabled}>
                 Toggle
             </ToggleButton>
-        </Wrapper>
+        </div>
     );
 }
 
@@ -91,16 +79,20 @@ const songs: Song[] = [
     { id: 4, title: 'All Star', artist: 'Smash Mouth' },
 ];
 
-const SongButtonWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: max-content;
-    gap: 4px;
-`;
-
-const SongButton = styled(Button)<{ isSelected: boolean }>`
-    background: ${(p) => (p.isSelected ? '#4fbe79' : '#bebebe')};
-`;
+function ToggleButton({
+    isEnabled,
+    ...rest
+}: { isEnabled: boolean } & ButtonProps) {
+    return (
+        <Button
+            className={clsx(
+                styles.toggleButton,
+                isEnabled && styles.toggleButtonEnabled
+            )}
+            {...rest}
+        />
+    );
+}
 
 export function UseSelectionDemo() {
     const [favoriteSong, selectFavoriteSong] = useSelection<Song>({
@@ -108,20 +100,20 @@ export function UseSelectionDemo() {
     });
 
     return (
-        <Wrapper className="custom-component">
+        <div className={styles.wrapper}>
             <p>Select your favorite song:</p>
-            <SongButtonWrapper>
+            <div className={styles.buttonGroup}>
                 {songs.map((x) => (
-                    <SongButton
+                    <ToggleButton
                         key={x.id}
                         onClick={() => selectFavoriteSong(x)}
-                        isSelected={favoriteSong?.id === x.id}
+                        isEnabled={favoriteSong?.id === x.id}
                     >
                         {x.title}
-                    </SongButton>
+                    </ToggleButton>
                 ))}
-            </SongButtonWrapper>
-        </Wrapper>
+            </div>
+        </div>
     );
 }
 
@@ -131,21 +123,21 @@ export function UseMultiSelectionDemo() {
     });
 
     return (
-        <Wrapper className="custom-component">
+        <div className={styles.wrapper}>
             <p>Select your favorite songs:</p>
-            <SongButtonWrapper>
+            <div className={styles.buttonGroup}>
                 {songs.map((x) => (
-                    <SongButton
+                    <ToggleButton
                         key={x.id}
                         onClick={() => selectFavoriteSong(x)}
-                        isSelected={
+                        isEnabled={
                             !!favoriteSongs.find((song) => x.id === song.id)
                         }
                     >
                         {x.title}
-                    </SongButton>
+                    </ToggleButton>
                 ))}
-            </SongButtonWrapper>
-        </Wrapper>
+            </div>
+        </div>
     );
 }

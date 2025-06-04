@@ -4,7 +4,7 @@ import { a as A } from './default-replacements';
 export { CodePen } from './CodePen/CodePen';
 export { OpenToWork } from '../OpenToWork/OpenToWork';
 
-export * from './reducer-functions-without-the-switch';
+export * from '../../content/blog/reducer-functions-without-the-switch/components';
 
 export function ConnectSection() {
     return (
