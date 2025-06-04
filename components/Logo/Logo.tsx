@@ -1,4 +1,4 @@
-import { Link } from '../Link';
+import { Link } from '../Link/Link';
 import styles from './Logo.module.css';
 
 export function Logo() {

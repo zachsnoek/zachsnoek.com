@@ -1,5 +1,5 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
-import { Link } from '../../components/Link';
+import { Link } from '../../components/Link/Link';
 import Script from 'next/script';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import {

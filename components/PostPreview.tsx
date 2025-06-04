@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Link } from './Link';
+import { Link } from './Link/Link';
 import { Date } from './Date';
 import { Spacer } from './Spacer';
 import { Post } from '../utils/posts';

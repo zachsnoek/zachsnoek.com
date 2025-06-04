@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
 import { Icon } from './Icon/Icon';
-import { Link, LinkProps } from './Link';
+import { Link, LinkProps } from './Link/Link';
 import { Logo } from './Logo/Logo';
 import { MaxWidthContainer } from './MaxWidthContainer/MaxWidthContainer';
 import { MobileMenu } from './MobileMenu/MobileMenu';

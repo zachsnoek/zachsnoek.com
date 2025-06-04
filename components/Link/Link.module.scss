@@ -1,0 +1,17 @@
+@import '../../styles/breakpoints.module.scss';
+
+.link {
+    text-decoration: underline;
+    &:hover {
+        color: var(--clickable-hover-color);
+    }
+    @media (max-width: $tablet-and-below) {
+        &:hover {
+            color: unset;
+        }
+    }
+}
+
+.hideUnderline {
+    text-decoration: none;
+}

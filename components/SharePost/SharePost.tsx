@@ -1,7 +1,7 @@
 import React from 'react';
 import { useCurrentUrl } from '../../hooks/useCurrentUrl';
 import { Post } from '../../utils/posts';
-import { Link } from '../Link';
+import { Link } from '../Link/Link';
 import styles from './SharePost.module.css';
 type Props = Pick<Post, 'title'>;
 

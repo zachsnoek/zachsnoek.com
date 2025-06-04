@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { CopyableHeader } from '../CopyableHeader';
-import { Link } from '../Link';
+import { Link } from '../Link/Link';
 
 // https://github.com/hashicorp/next-mdx-remote#replacing-default-components
 

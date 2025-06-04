@@ -1,5 +1,5 @@
 import { MainLayout } from '../components/Layout';
-import { Link } from '../components/Link';
+import { Link } from '../components/Link/Link';
 
 export default function Credits() {
     return (

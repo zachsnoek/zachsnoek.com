@@ -7,7 +7,7 @@ import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { Icon } from '../Icon/Icon';
-import { Link, LinkProps } from '../Link';
+import { Link, LinkProps } from '../Link/Link';
 import { SocialIconsRow } from '../SocialIconsRow/SocialIconsRow';
 import { UnstyledButton } from '../UnstyledButton/UnstyledButton';
 import styles from './MobileMenu.module.css';
@@ -32,7 +32,7 @@ export function MobileMenu({ isOpen, onDismiss }: Props) {
                 </div>
                 <NavItem href="/blog">Blog</NavItem>
                 <NavItem href="/contact">Contact</NavItem>
-                <div className="row">
+                <div className={styles.row}>
                     <SocialIconsRow />
                 </div>
             </DialogContent>
