@@ -1,0 +1,17 @@
+@import '../../styles/breakpoints.module.scss';
+
+.form {
+    display: flex;
+    gap: var(--spacing-2);
+}
+
+.input {
+    padding: calc(var(--spacing-3) - var(--border-width-1))
+        calc(var(--spacing-4) - var(--border-width-1));
+
+    @media (max-width: $mobile-and-below) {
+        flex-grow: 1;
+        flex-shrink: 1;
+        width: 0; /* allow input to get below its minimum content size */
+    }
+}

@@ -1,0 +1,5 @@
+.footer {
+  padding: var(--spacing-6) 0px;
+  display: flex;
+  justify-content: space-between;
+}

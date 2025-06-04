@@ -1,5 +1,5 @@
 import { MainLayout } from '../../components/Layout';
-import { ContactForm } from '../../components/ContactForm';
+import { ContactForm } from '../../components/ContactForm/ContactForm';
 import { Spacer } from '../../components/Spacer';
 
 export default function Contact() {

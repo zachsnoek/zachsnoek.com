@@ -1,0 +1,23 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+}
+
+.link {
+    align-self: start;
+    display: inline-block;
+    padding: var(--spacing-3) var(--spacing-4);
+    background: var(--clickable-background-color);
+    border-radius: var(--border-radius-3);
+    color: var(--prose-clickable-offset-color);
+
+    &:hover {
+        color: var(--prose-clickable-offset-color);
+    }
+}
+
+.row {
+    display: flex;
+    gap: var(--spacing-2);
+}

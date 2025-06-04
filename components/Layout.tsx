@@ -1,9 +1,9 @@
 import Head from 'next/head';
-import { Header } from './Header';
-import { Footer } from './Footer';
-import { MailingListSignupForm } from './MailingListSignup';
+import { Header } from './Header/Header';
+import { Footer } from './Footer/Footer';
+import { MailingListSignupForm } from './MailingListSignup/MailingListSignup';
 import { Spacer } from './Spacer';
-import { MaxWidthContainer } from './MaxWidthContainer';
+import { MaxWidthContainer } from './MaxWidthContainer/MaxWidthContainer';
 import { useCurrentUrl } from '../hooks/useCurrentUrl';
 
 const SITE_TITLE = 'Zach Snoek';

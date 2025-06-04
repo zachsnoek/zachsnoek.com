@@ -1,0 +1,62 @@
+@import '../../styles/breakpoints.module.scss';
+
+.header {
+    z-index: 1; /* Blog post headers have relative positioning */
+    padding: var(--spacing-5) 0px;
+    background-color: var(--background-color);
+}
+
+.container {
+    display: flex;
+    gap: var(--spacing-7);
+    align-items: center;
+}
+
+.desktopNav {
+    display: flex;
+    flex: 1;
+}
+
+.desktopMenu {
+    display: flex;
+    flex: 1;
+
+    @media (max-width: $mobile-and-below) {
+        display: none;
+    }
+}
+
+.navItemList {
+    list-style: none;
+    height: 100%;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.navListItem {
+    padding-left: 10px;
+    padding-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.activeNavListItem {
+    color: var(--prose-heading-color);
+}
+
+.iconButton {
+    padding: var(--spacing-1);
+}
+
+.mobileActions {
+    display: none;
+
+    @media (max-width: $mobile-and-below) {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+}

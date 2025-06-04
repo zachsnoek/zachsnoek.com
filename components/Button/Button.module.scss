@@ -1,0 +1,43 @@
+$border-width: var(--border-width-1);
+
+.base {
+    border: $border-width solid transparent;
+
+    &:hover:not(:disabled) {
+        cursor: pointer;
+    }
+}
+
+// variants
+
+.fill {
+    background: var(--clickable-background-color);
+    color: var(--prose-clickable-offset-color);
+}
+
+.outline {
+    background: none;
+    color: var(--clickable-background-color);
+    border: $border-width solid currentColor;
+}
+
+// sizes
+
+.small {
+    padding: calc(var(--spacing-2) - $border-width)
+        calc(var(--spacing-3) - $border-width);
+    border-radius: var(--border-radius-1);
+}
+
+.medium {
+    padding: calc(var(--spacing-3) - $border-width)
+        calc(var(--spacing-4) - $border-width);
+    border-radius: var(--border-radius-1);
+}
+
+.large {
+    font-size: var(font-size-md);
+    padding: calc(var(--spacing-4) - $border-width)
+        calc(var(--spacing-5) - $border-width);
+    border-radius: var(--border-radius-2);
+}

@@ -1,26 +1,10 @@
-import { CodePen as MDXEmbedCodePen } from 'mdx-embed';
-import styled from 'styled-components';
-import { BuyMeACoffee } from '../BuyMeACoffee';
-import { CopyableHeader } from '../CopyableHeader';
+import { BuyMeACoffee } from '../BuyMeACoffee/BuyMeACoffee';
+import { CopyableHeader } from '../CopyableHeader/CopyableHeader';
 import { a as A } from './default-replacements';
-export { OpenToWork } from '../OpenToWork';
+export { CodePen } from './CodePen/CodePen';
+export { OpenToWork } from '../OpenToWork/OpenToWork';
 
-export * from './reducer-functions-without-the-switch';
-
-export const CodePen = ({ id, tabs, ...props }) => (
-    <CodePenWrapper>
-        <MDXEmbedCodePen codePenId={id} tabs={['result', ...tabs]} {...props} />
-    </CodePenWrapper>
-);
-const CodePenWrapper = styled.div`
-    margin-left: calc(var(--spacing-5) * -1);
-    margin-right: calc(var(--spacing-5) * -1);
-
-    @media ${(p) => p.theme.queries.tabletAndBelow} {
-        margin-left: 0;
-        margin-right: 0;
-    }
-`;
+export * from '../../content/blog/reducer-functions-without-the-switch/components';
 
 export function ConnectSection() {
     return (

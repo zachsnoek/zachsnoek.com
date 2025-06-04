@@ -1,0 +1,11 @@
+@import '../../../styles/breakpoints.module.scss';
+
+.wrapper {
+    margin-left: calc(var(--spacing-5) * -1);
+    margin-right: calc(var(--spacing-5) * -1);
+
+    @media (max-width: $tablet-and-below) {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}

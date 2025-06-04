@@ -1,12 +1,11 @@
 import React from 'react';
 import { GetStaticProps } from 'next';
-import { Accent } from '../components/Accent';
+import { Accent } from '../components/Accent/Accent';
 import { MainLayout } from '../components/Layout';
-import { Link } from '../components/Link';
+import { Link } from '../components/Link/Link';
 import { getAllPosts, Post } from '../utils/posts';
 import { Spacer } from '../components/Spacer';
 import { PostPreviewList } from '../components/PostPreviewList';
-import styled from 'styled-components';
 
 type Props = {
     recentPosts: Post[];
@@ -17,9 +16,9 @@ export default function Home({ recentPosts }: Props) {
         <MainLayout
             title="Zach Snoek"
             header={
-                <Header>
+                <h1 style={{ lineHeight: 1.2 }}>
                     Hey, I&apos;m <Accent>Zach!</Accent>
-                </Header>
+                </h1>
             }
         >
             <section>
@@ -42,10 +41,6 @@ export default function Home({ recentPosts }: Props) {
         </MainLayout>
     );
 }
-
-const Header = styled.h1`
-    line-height: 1.2;
-`;
 
 export const getStaticProps: GetStaticProps<Props> = () => {
     const recentPosts = getAllPosts({

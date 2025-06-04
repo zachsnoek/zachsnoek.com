@@ -1,0 +1,65 @@
+@import '../../../styles/breakpoints.module.scss';
+
+.mdxRemoteWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-5);
+
+    *:not(h1, h2, h3, h4, h5, h6) {
+        line-height: 1.8;
+    }
+
+    ol {
+        padding-left: 0px;
+        margin-left: 22px; /* offsets max width container padding; subtracts 2px for optical alignment */
+    }
+
+    ul {
+        padding-left: 0px;
+        margin-left: 22px; /* offsets max width container padding; subtracts 2px for optical alignment */
+        list-style-position: outside;
+    }
+
+    // Don't apply bottom margin to nested lists
+    ul ul {
+        margin-bottom: 0;
+    }
+
+    blockquote {
+        color: var(--prose-blockquote-color);
+        margin-left: 0px;
+        padding-left: 24px;
+        border-left: var(--border-width-1) solid
+            var(--blockquote-border-left-color);
+        font-style: italic;
+    }
+
+    // highlight.js code blocks
+    :global(.hljs) {
+        font-size: var(--font-size-code);
+        background: var(--code-block-background-color);
+        border-radius: var(--border-radius-3);
+
+        margin-left: calc(var(--spacing-5) * -1);
+        margin-right: calc(var(--spacing-5) * -1);
+
+        @media (max-width: $tablet-and-below) {
+            font-size: calc(var(--font-size-code) - 0.1rem);
+
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
+
+    // Inline code
+    code:not(:global(.hljs)) {
+        color: var(--prose-code-inline-color);
+        background: var(--code-inline-background-color);
+        padding: var(--spacing-1);
+        border-radius: var(--border-radius-1);
+    }
+
+    p code:not(:global(.hljs)) {
+        font-size: var(--font-size-code);
+    }
+}

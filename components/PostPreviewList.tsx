@@ -1,5 +1,5 @@
 import React from 'react';
-import { PostPreview } from './PostPreview';
+import { PostPreview } from './PostPreview/PostPreview';
 import { Spacer } from './Spacer';
 import { Post } from '../utils/posts';
 
