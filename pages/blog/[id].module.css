@@ -1,0 +1,12 @@
+.tagWrapper {
+  font-size: var(--font-size-sm);
+  display: flex;
+  gap: var(--spacing-2);
+  flex-wrap: wrap;
+}
+
+.tagBadge {
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: var(--border-radius-2);
+  background: var(--tag-background-color);
+}

@@ -1,20 +1,20 @@
-import { GetStaticProps, GetStaticPaths } from 'next';
-import { Link } from '../../components/Link/Link';
-import Script from 'next/script';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
+import Script from 'next/script';
+import * as defaultReplacements from '../../components/blog/default-replacements';
+import * as globals from '../../components/blog/globals';
+import { MDXRemoteWrapper } from '../../components/blog/MDXRemoteWrapper';
+import { Date } from '../../components/Date';
+import { CustomLayout } from '../../components/Layout';
+import { Link } from '../../components/Link/Link';
+import { SharePost } from '../../components/SharePost/SharePost';
+import { Spacer } from '../../components/Spacer';
 import {
     getAllPostIds,
     getPostWithMdx,
     Post as PostType,
 } from '../../utils/posts';
-import { Date } from '../../components/Date';
-import { CustomLayout } from '../../components/Layout';
-import styled from 'styled-components';
-import * as defaultReplacements from '../../components/blog/default-replacements';
-import * as globals from '../../components/blog/globals';
-import { MDXRemoteWrapper } from '../../components/blog/MDXRemoteWrapper';
-import { Spacer } from '../../components/Spacer';
-import { SharePost } from '../../components/SharePost/SharePost';
+import styles from './[id].module.css';
 
 type Props = {
     data: PostType;
@@ -68,36 +68,24 @@ export default function Post({ source, data }: Props) {
                     <MDXRemote {...source} components={mdxComponents} />
                 </MDXRemoteWrapper>
                 <Spacer size={6} />
-                <TagWrapper>
+                <div className={styles.tagWrapper}>
                     {data.tags.map((x) => (
-                        <TagBadge
+                        <Link
                             href={`/blog/tags/${encodeURIComponent(x)}`}
                             key={x}
                             hideUnderline
+                            className={styles.tagBadge}
                         >
                             {x}
-                        </TagBadge>
+                        </Link>
                     ))}
-                </TagWrapper>
+                </div>
                 <Spacer size={6} />
                 <SharePost title={data.title} />
             </article>
         </CustomLayout>
     );
 }
-
-const TagWrapper = styled.div`
-    font-size: var(--font-size-sm);
-    display: flex;
-    gap: var(--spacing-2);
-    flex-wrap: wrap;
-`;
-
-const TagBadge = styled(Link)`
-    padding: var(--spacing-1) var(--spacing-2);
-    border-radius: var(--border-radius-2);
-    background: var(--tag-background-color);
-`;
 
 export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
     const { post, mdxSource } = await getPostWithMdx(
