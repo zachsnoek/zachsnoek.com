@@ -33,8 +33,12 @@ export function MobileMenu({ isOpen, onDismiss }: Props) {
                         <Icon id="close" />
                     </UnstyledButton>
                 </div>
-                <NavItem href="/blog">Blog</NavItem>
-                <NavItem href="/contact">Contact</NavItem>
+                <NavItem href="/blog" onNavigate={onDismiss}>
+                    Blog
+                </NavItem>
+                <NavItem href="/contact" onNavigate={onDismiss}>
+                    Contact
+                </NavItem>
                 <div className={styles.row}>
                     <SocialIconsRow />
                 </div>
