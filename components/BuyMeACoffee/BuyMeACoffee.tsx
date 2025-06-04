@@ -4,8 +4,8 @@ const URL = 'https://www.buymeacoffee.com/zachsnoek';
 
 export function BuyMeACoffee() {
     return (
-        <div>
-            <p style={{ marginBottom: 'var(--spacing-3)' }}>
+        <div className={styles.wrapper}>
+            <p>
                 If you found this post helpful, please consider supporting my
                 work financially:
             </p>
