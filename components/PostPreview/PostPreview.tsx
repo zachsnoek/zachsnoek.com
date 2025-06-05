@@ -1,10 +1,10 @@
-import { Link } from '../Link/Link';
+import { PostMetadata } from '../../schemas/schPostMetadata';
 import { Date } from '../Date';
+import { Link } from '../Link/Link';
 import { Spacer } from '../Spacer';
-import { Post } from '../../utils/posts';
 import styles from './PostPreview.module.scss';
 
-type Props = { post: Post };
+type Props = { post: PostMetadata };
 
 export function PostPreview({ post }: Props) {
     const { id, title, description, date, originalPost } = post;

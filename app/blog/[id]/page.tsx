@@ -1,10 +1,12 @@
+import type { Metadata } from 'next';
 import { ContentWrapper } from '../../../components/blog/ContentWrapper/ContentWrapper';
 import { Date } from '../../../components/Date';
 import { Link } from '../../../components/Link/Link';
 import { SharePost } from '../../../components/SharePost/SharePost';
 import { Spacer } from '../../../components/Spacer';
-import { getAllPostIds, Post } from '../../../utils/posts';
+import { getAllPostIds } from '../../../utils/posts';
 import styles from './page.module.css';
+import { schPostMetadata } from '../../../schemas/schPostMetadata';
 
 export const dynamicParams = false;
 
@@ -21,8 +23,7 @@ export default async function PostPage({ params }: Props) {
     const { default: Content, ...rest } = await import(
         `../../../content/blog/${id}/index.mdx`
     );
-    // TODO: Parse with Zod
-    const post = rest as Post;
+    const post = schPostMetadata.parse({ id, ...rest });
 
     return (
         <article>

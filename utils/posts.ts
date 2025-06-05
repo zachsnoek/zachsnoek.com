@@ -1,19 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-
-export type Post = {
-    id: string;
-    date: string;
-    title: string;
-    description: string | null;
-    categories: string[];
-    originalPost?: {
-        url: string;
-        isExclusive: boolean;
-    };
-    tags: string[];
-    coverImagePath: string | null;
-};
+import { PostMetadata, schPostMetadata } from '../schemas/schPostMetadata';
 
 const postsDirectory = path.join(process.cwd(), 'content', 'blog');
 
@@ -39,7 +26,7 @@ type GetAllPostsOptions = {
 
 export async function getAllPosts(
     queryOptions: GetAllPostsOptions = {}
-): Promise<Post[]> {
+): Promise<PostMetadata[]> {
     const options = { limit: 100, ...queryOptions };
     const postDirectories = fs.readdirSync(postsDirectory);
 
@@ -51,20 +38,17 @@ export async function getAllPosts(
                 `../content/blog/${directory}/index.mdx`
             );
 
-            // TODO: Parse with Zod
-            if (filter?.tag && !(rest as Post).tags.includes(filter?.tag)) {
+            const post = schPostMetadata.parse({ id: directory, ...rest });
+            if (filter?.tag && !post.tags.includes(filter?.tag)) {
                 return;
             }
 
-            return {
-                id: directory,
-                ...rest,
-            } as Post;
+            return post;
         })
     );
 
     const sortedPosts = posts
-        .filter((post): post is Post => post !== undefined)
+        .filter((post): post is PostMetadata => post !== undefined)
         .sort(({ date: a }, { date: b }) => {
             if (a < b) {
                 return 1;

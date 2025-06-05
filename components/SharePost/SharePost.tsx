@@ -2,11 +2,11 @@
 
 import React from 'react';
 import { useCurrentUrl } from '../../hooks/useCurrentUrl';
-import { Post } from '../../utils/posts';
+import { PostMetadata } from '../../schemas/schPostMetadata';
 import { Link } from '../Link/Link';
 import styles from './SharePost.module.css';
 
-type Props = Pick<Post, 'title'>;
+type Props = Pick<PostMetadata, 'title'>;
 
 export function SharePost({ title }: Props) {
     const { url } = useCurrentUrl();
