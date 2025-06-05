@@ -27,9 +27,7 @@ export function getAllPostIds() {
 
 export async function getAllTags() {
     const posts = await getAllPosts();
-    return posts
-        .flatMap((post) => post.tags)
-        .map((tag) => ({ params: { tag } }));
+    return posts.flatMap((post) => post.tags).map((tag) => ({ tag }));
 }
 
 type GetAllPostsOptions = {
