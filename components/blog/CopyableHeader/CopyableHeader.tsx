@@ -1,8 +1,10 @@
+'use client';
+
 import clsx from 'clsx';
 import React from 'react';
-import { toKebabCase } from '../../utils/toKebabCase';
-import { Icon } from '../Icon/Icon';
-import { UnstyledButton } from '../UnstyledButton/UnstyledButton';
+import { toKebabCase } from '../../../utils/toKebabCase';
+import { Icon } from '../../Icon/Icon';
+import { UnstyledButton } from '../../UnstyledButton/UnstyledButton';
 import styles from './CopyableHeader.module.scss';
 
 function CopyHeaderIdButton({ id }: { id: string }) {
@@ -12,8 +14,8 @@ function CopyHeaderIdButton({ id }: { id: string }) {
         <UnstyledButton
             className={styles.button}
             onClick={() => {
-                if (globalThis.history.pushState) {
-                    history.pushState(null, null, hash);
+                if (globalThis.history.pushState !== undefined) {
+                    history.pushState(null, '', hash);
                 } else {
                     globalThis.location.hash = hash;
                 }
@@ -52,7 +54,10 @@ function getRawStringFromChildren(children: React.ReactNode) {
     const strings = React.Children.map(children, (x: any) => {
         if (typeof x === 'string') {
             return x;
-        } else if (x.$$typeof === Symbol.for('react.element')) {
+        } else if (
+            x.$$typeof === Symbol.for('react.element') ||
+            x.$$typeof === Symbol.for('react.transitional.element')
+        ) {
             return x.props.children;
         } else {
             throw new Error(`Unknown child: ${JSON.stringify(x)}`);

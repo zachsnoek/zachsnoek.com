@@ -1,13 +1,8 @@
----
-title: 'An introduction to constructor functions'
-date: '2021-04-19'
-description: What are constructor functions in JavaScript?
-categories:
-    - software engineering
-tags:
-    - javascript
-    - web development
----
+export const title = 'An introduction to constructor functions';
+export const date = '2021-04-19';
+export const description = 'What are constructor functions in JavaScript?';
+export const categories = ['software engineering'];
+export const tags = ['javascript', 'web development'];
 
 ## Overview
 
@@ -100,8 +95,6 @@ Car.prototype.getAge = function () {
 };
 ```
 
-<!-- > Note: In a prototype property, the value of `this` in a function will refer to the calling object (i.e., the `Car`, not the prototype). -->
-
 Simply put, properties on an constructor function's prototype property are inherited by every instance. But why can't we just define `getAge` as a property of `Car`? Here's what that looks like:
 
 ```javascript
@@ -124,8 +117,6 @@ This is valid and will give you the same behavior. However, this creates a `getA
 Constructor functions in JavaScript allow us to create custom objects. They are declared like other functions, but set properties on `this` and are instantiated with the `new` keyword. We capitalize the function name so that we know it's a constructor function.
 
 Now that you've learned about constructor functions, you might be interested in learning about how inheritance and prototypes work. I will be writing a blog post on this soon and will update this post once it is published. In the meantime, you can read [Inheritance and the prototype chain](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain) from MDN.
-
-<!-- You can read my other post [Understanding prototypes and inheritance in JavaScript]() for more information. -->
 
 <ConnectSection />
 

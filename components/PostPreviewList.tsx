@@ -1,9 +1,9 @@
 import React from 'react';
+import { PostMetadata } from '../schemas/schPostMetadata';
 import { PostPreview } from './PostPreview/PostPreview';
 import { Spacer } from './Spacer';
-import { Post } from '../utils/posts';
 
-type Props = { posts: Post[] };
+type Props = { posts: PostMetadata[] };
 
 export const PostPreviewList = ({ posts }: Props) => {
     if (!posts.length) {

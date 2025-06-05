@@ -1,19 +1,16 @@
-import React from 'react';
-import { GetStaticProps } from 'next';
 import { Accent } from '../components/Accent/Accent';
-import { MainLayout } from '../components/Layout';
-import { getAllPosts, Post } from '../utils/posts';
-import { Spacer } from '../components/Spacer';
+import { MainContentLayout } from '../components/MainContentLayout';
 import { PostPreviewList } from '../components/PostPreviewList';
+import { Spacer } from '../components/Spacer';
+import { getAllPosts } from '../utils/posts';
 
-type Props = {
-    recentPosts: Post[];
-};
+export default async function HomePage() {
+    const recentPosts = await getAllPosts({
+        limit: 3,
+    });
 
-export default function Home({ recentPosts }: Props) {
     return (
-        <MainLayout
-            title="Zach Snoek"
+        <MainContentLayout
             header={
                 <h1 style={{ lineHeight: 1.2 }}>
                     Hey, I&apos;m <Accent>Zach!</Accent>
@@ -39,17 +36,6 @@ export default function Home({ recentPosts }: Props) {
                 <Spacer size={6} />
                 <PostPreviewList posts={recentPosts} />
             </section>
-        </MainLayout>
+        </MainContentLayout>
     );
 }
-
-export const getStaticProps: GetStaticProps<Props> = () => {
-    const recentPosts = getAllPosts({
-        limit: 3,
-    });
-    return {
-        props: {
-            recentPosts,
-        },
-    };
-};

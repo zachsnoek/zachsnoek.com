@@ -1,52 +1,20 @@
 import fs from 'fs';
 import path from 'path';
-import matter from 'gray-matter';
-import { serialize } from 'next-mdx-remote/serialize';
-import rehypeHighlight from 'rehype-highlight';
-
-export type Post = {
-    id: string;
-    date: string;
-    title: string;
-    description: string | null;
-    categories: string[];
-    originalPost?: {
-        url: string;
-        isExclusive: boolean;
-    };
-    tags: string[];
-    coverImagePath: string | null;
-};
+import { PostMetadata, schPostMetadata } from '../schemas/schPostMetadata';
 
 const postsDirectory = path.join(process.cwd(), 'content', 'blog');
-
-function getFrontMatter(directory: string): { content: string; data: Post } {
-    const fullPath = path.join(postsDirectory, directory, 'index.mdx');
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
-
-    const { content, data } = matter(fileContents);
-
-    return {
-        content,
-        data: { id: directory, ...data } as Post,
-    };
-}
 
 export function getAllPostIds() {
     const directories = fs.readdirSync(postsDirectory);
 
     return directories.map((directory) => ({
-        params: {
-            id: directory,
-        },
+        id: directory,
     }));
 }
 
-export function getAllTags() {
-    const posts = getAllPosts();
-    return posts
-        .flatMap((post) => post.tags)
-        .map((tag) => ({ params: { tag } }));
+export async function getAllTags() {
+    const posts = await getAllPosts();
+    return posts.flatMap((post) => post.tags).map((tag) => ({ tag }));
 }
 
 type GetAllPostsOptions = {
@@ -56,47 +24,49 @@ type GetAllPostsOptions = {
     limit?: number;
 };
 
-export function getAllPosts(queryOptions: GetAllPostsOptions = {}): Post[] {
+export async function getAllPosts(
+    queryOptions: GetAllPostsOptions = {}
+): Promise<PostMetadata[]> {
     const options = { limit: 100, ...queryOptions };
     const postDirectories = fs.readdirSync(postsDirectory);
 
     const { filter, limit } = options;
 
-    const posts = postDirectories
-        .map((directory) => {
-            const { data } = getFrontMatter(directory);
+    const posts = await Promise.all(
+        postDirectories.map(async (directory) => {
+            const { default: _, ...rest } = await import(
+                `../content/blog/${directory}/index.mdx`
+            );
 
-            if (filter?.tag && !data.tags.includes(filter?.tag)) {
+            const post = schPostMetadata.parse({ id: directory, ...rest });
+            if (filter?.tag && !post.tags.includes(filter?.tag)) {
                 return;
             }
 
-            return {
-                id: directory,
-                ...data,
-            } as Post;
+            return post;
         })
-        .filter((x) => x);
+    );
 
-    const sortedPosts = posts.sort(({ date: a }, { date: b }) => {
-        if (a < b) {
-            return 1;
-        } else if (a > b) {
-            return -1;
-        }
-        return 0;
-    });
+    const sortedPosts = posts
+        .filter((post): post is PostMetadata => post !== undefined)
+        .sort(({ date: a }, { date: b }) => {
+            if (a < b) {
+                return 1;
+            } else if (a > b) {
+                return -1;
+            }
+            return 0;
+        });
 
     return sortedPosts.slice(0, limit);
 }
 
-export async function getPostWithMdx(id: string) {
-    const { content, data } = getFrontMatter(id);
-
-    const mdxSource = await serialize(content, {
-        mdxOptions: {
-            rehypePlugins: [rehypeHighlight],
-        },
-    });
-
-    return { post: data, mdxSource };
+export async function getPost(
+    id: string
+): Promise<PostMetadata & { Content: () => JSX.Element }> {
+    const { default: Content, ...rest } = await import(
+        `../content/blog/${id}/index.mdx`
+    );
+    const post = schPostMetadata.parse({ id, ...rest });
+    return { ...post, Content };
 }
