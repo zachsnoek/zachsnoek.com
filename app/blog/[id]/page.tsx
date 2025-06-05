@@ -4,9 +4,8 @@ import { Date } from '../../../components/Date';
 import { Link } from '../../../components/Link/Link';
 import { SharePost } from '../../../components/SharePost/SharePost';
 import { Spacer } from '../../../components/Spacer';
-import { getAllPostIds } from '../../../utils/posts';
+import { getAllPostIds, getPost } from '../../../utils/posts';
 import styles from './page.module.css';
-import { schPostMetadata } from '../../../schemas/schPostMetadata';
 
 export const dynamicParams = false;
 
@@ -20,10 +19,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { id } = await params;
-    const { default: _, ...rest } = await import(
-        `../../../content/blog/${id}/index.mdx`
-    );
-    const { title, description } = schPostMetadata.parse({ id, ...rest });
+    const { title, description } = await getPost(id);
 
     return {
         title: {
@@ -35,24 +31,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function PostPage({ params }: Props) {
     const { id } = await params;
-    const { default: Content, ...rest } = await import(
-        `../../../content/blog/${id}/index.mdx`
-    );
-    const post = schPostMetadata.parse({ id, ...rest });
+    const { Content, ...meta } = await getPost(id);
 
     return (
         <article>
             <Spacer size={5} />
-            <h1>{post.title}</h1>
+            <h1>{meta.title}</h1>
             <Spacer size={5} />
-            <Date date={post.date} />
+            <Date date={meta.date} />
             <Spacer size={8} />
             <ContentWrapper>
                 <Content />
             </ContentWrapper>
             <Spacer size={6} />
             <div className={styles.tagWrapper}>
-                {post.tags.map((x) => (
+                {meta.tags.map((x) => (
                     <Link
                         href={`/blog/tags/${encodeURIComponent(x)}`}
                         key={x}
@@ -64,7 +57,7 @@ export default async function PostPage({ params }: Props) {
                 ))}
             </div>
             <Spacer size={6} />
-            <SharePost title={post.title} />
+            <SharePost title={meta.title} />
         </article>
     );
 }

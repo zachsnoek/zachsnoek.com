@@ -34,7 +34,7 @@ export async function getAllPosts(
 
     const posts = await Promise.all(
         postDirectories.map(async (directory) => {
-            const { default: Content, ...rest } = await import(
+            const { default: _, ...rest } = await import(
                 `../content/blog/${directory}/index.mdx`
             );
 
@@ -59,4 +59,14 @@ export async function getAllPosts(
         });
 
     return sortedPosts.slice(0, limit);
+}
+
+export async function getPost(
+    id: string
+): Promise<PostMetadata & { Content: () => JSX.Element }> {
+    const { default: Content, ...rest } = await import(
+        `../content/blog/${id}/index.mdx`
+    );
+    const post = schPostMetadata.parse({ id, ...rest });
+    return { ...post, Content };
 }
