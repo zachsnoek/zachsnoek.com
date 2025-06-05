@@ -4,7 +4,7 @@ import { MainContentLayout } from '../../components/MainContentLayout';
 import { Spacer } from '../../components/Spacer';
 
 export const metadata: Metadata = {
-    title: 'Contact Zach Snoek',
+    title: 'Contact',
     description: 'Get in touch with me!',
 };
 

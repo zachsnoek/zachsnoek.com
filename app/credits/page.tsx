@@ -3,6 +3,7 @@ import { Link } from '../../components/Link/Link';
 import { MainContentLayout } from '../../components/MainContentLayout';
 
 export const metadata: Metadata = {
+    title: 'Credits',
     robots: 'noindex',
 };
 

@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { MainContentLayout } from '../../../../components/MainContentLayout';
 import { PostPreviewList } from '../../../../components/PostPreviewList';
 import { getAllPosts, getAllTags } from '../../../../utils/posts';
@@ -11,6 +12,14 @@ export async function generateStaticParams() {
 type Props = {
     params: Promise<{ tag: string }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const tag = decodeURIComponent((await params).tag);
+    return {
+        title: `Posts about "${tag}"`,
+        description: `Zach's posts about "${tag}"`,
+    };
+}
 
 export default async function Tag({ params }: Props) {
     const tag = decodeURIComponent((await params).tag);

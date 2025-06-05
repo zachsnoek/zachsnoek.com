@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { MainContentLayout } from '../../../components/MainContentLayout';
 
 export const metadata: Metadata = {
-    title: 'Contact Zach Snoek',
+    title: 'Contact Form Success',
     description: 'Get in touch with me!',
     robots: 'noindex',
 };

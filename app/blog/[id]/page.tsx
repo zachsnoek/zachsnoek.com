@@ -18,6 +18,21 @@ type Props = {
     params: Promise<{ id: string }>;
 };
 
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { id } = await params;
+    const { default: _, ...rest } = await import(
+        `../../../content/blog/${id}/index.mdx`
+    );
+    const { title, description } = schPostMetadata.parse({ id, ...rest });
+
+    return {
+        title: {
+            absolute: `${title} | Zach Snoek's Blog`,
+        },
+        description,
+    };
+}
+
 export default async function PostPage({ params }: Props) {
     const { id } = await params;
     const { default: Content, ...rest } = await import(

@@ -5,7 +5,9 @@ import { PostPreviewList } from '../../components/PostPreviewList';
 import { getAllPosts } from '../../utils/posts';
 
 export const metadata: Metadata = {
-    title: "Zach Snoek's Blog",
+    title: {
+        absolute: "Zach Snoek's Blog",
+    },
     description:
         'Blog posts and tutorials about JavaScript, React, CSS, and more!',
 };

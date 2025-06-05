@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Head from 'next/head';
 import Script from 'next/script';
 import { Footer } from '../components/Footer/Footer';
@@ -7,6 +8,15 @@ import { MaxWidthContainer } from '../components/MaxWidthContainer/MaxWidthConta
 import { Spacer } from '../components/Spacer';
 import '../styles/globals.scss';
 import '../styles/theme.css';
+
+export const metadata: Metadata = {
+    title: {
+        default: 'Zach Snoek | Software Engineer',
+        template: 'Zach Snoek | %s',
+    },
+    description:
+        'Zach Snoek is full-stack software engineer writing about about JavaScript, React, CSS, and other software engineering topics.',
+};
 
 type Props = {
     children: React.ReactNode;

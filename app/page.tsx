@@ -1,15 +1,8 @@
-import type { Metadata } from 'next';
 import { Accent } from '../components/Accent/Accent';
 import { MainContentLayout } from '../components/MainContentLayout';
 import { PostPreviewList } from '../components/PostPreviewList';
 import { Spacer } from '../components/Spacer';
 import { getAllPosts } from '../utils/posts';
-
-export const metadata: Metadata = {
-    title: 'Zach Snoek',
-    description:
-        'Zach Snoek is full-stack software engineer writing about about JavaScript, React, CSS, and other web development topics.',
-};
 
 export default async function HomePage() {
     const recentPosts = await getAllPosts({
