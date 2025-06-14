@@ -4,7 +4,7 @@ import {
     DialogOverlayProps,
 } from '@reach/dialog';
 import clsx from 'clsx';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 import { Icon } from '../Icon/Icon';
 import { Link, LinkProps } from '../Link/Link';
 import { SocialIconsRow } from '../SocialIconsRow/SocialIconsRow';
@@ -33,8 +33,12 @@ export function MobileMenu({ isOpen, onDismiss }: Props) {
                         <Icon id="close" />
                     </UnstyledButton>
                 </div>
-                <NavItem href="/blog">Blog</NavItem>
-                <NavItem href="/contact">Contact</NavItem>
+                <NavItem href="/blog" onNavigate={onDismiss}>
+                    Blog
+                </NavItem>
+                <NavItem href="/contact" onNavigate={onDismiss}>
+                    Contact
+                </NavItem>
                 <div className={styles.row}>
                     <SocialIconsRow />
                 </div>
@@ -44,8 +48,8 @@ export function MobileMenu({ isOpen, onDismiss }: Props) {
 }
 
 const NavItem = (props: LinkProps) => {
-    const router = useRouter();
-    const isActive = router.route === props.href;
+    const pathname = usePathname();
+    const isActive = pathname === props.href;
 
     return (
         <div className={clsx(styles.row, isActive && styles.activeNavItem)}>

@@ -1,3 +1,5 @@
+'use client';
+
 import { CodePen as MDXEmbedCodePen } from 'mdx-embed';
 import styles from './CodePen.module.scss';
 
