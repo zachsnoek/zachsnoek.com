@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import React from 'react';
 import { MainContentLayout } from '../../components/MainContentLayout';
 import { PostPreviewList } from '../../components/PostPreviewList';
-import { getAllPosts } from '../../utils/posts';
+import { getAllPosts } from '../../utils/getAllPosts';
 
 export const metadata: Metadata = {
     title: {

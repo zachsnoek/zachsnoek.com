@@ -4,22 +4,26 @@ import { Date } from '../../../components/Date';
 import { Link } from '../../../components/Link/Link';
 import { SharePost } from '../../../components/SharePost/SharePost';
 import { Spacer } from '../../../components/Spacer';
-import { getAllPostIds, getPost } from '../../../utils/posts';
+import { getAllPostIds } from '../../../utils/getAllPostIds';
+import { getPostMetadata } from '../../../utils/getPostMetadata';
+import { getRenderablePost } from '../../../utils/getRenderablePost';
 import styles from './page.module.css';
 
 export const dynamicParams = false;
 
-export async function generateStaticParams() {
+type Params = { id: string };
+
+export async function generateStaticParams(): Promise<Params[]> {
     return getAllPostIds();
 }
 
 type Props = {
-    params: Promise<{ id: string }>;
+    params: Promise<Params>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { id } = await params;
-    const { title, description } = await getPost(id);
+    const { title, description } = await getPostMetadata(id);
 
     return {
         title: {
@@ -31,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function PostPage({ params }: Props) {
     const { id } = await params;
-    const { Content, ...meta } = await getPost(id);
+    const { Content, ...meta } = await getRenderablePost(id);
 
     return (
         <article>

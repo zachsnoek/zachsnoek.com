@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useCurrentUrl } from '../../hooks/useCurrentUrl';
-import { PostMetadata } from '../../schemas/schPostMetadata';
+import { PostMetadata } from '../../types';
 import { Link } from '../Link/Link';
 import styles from './SharePost.module.css';
 

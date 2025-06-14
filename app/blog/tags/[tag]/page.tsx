@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
 import { MainContentLayout } from '../../../../components/MainContentLayout';
 import { PostPreviewList } from '../../../../components/PostPreviewList';
-import { getAllPosts, getAllTags } from '../../../../utils/posts';
+import { getAllPostTags } from '../../../../utils/getAllPostTags';
+import { getAllPosts } from '../../../../utils/getAllPosts';
 
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-    return getAllTags();
+    return getAllPostTags();
 }
 
 type Props = {

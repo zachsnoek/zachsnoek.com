@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
-import { getPost } from '../../../utils/posts';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
+import { getPostMetadata } from '../../../utils/getPostMetadata';
 
 export const size = {
     width: 1200,
@@ -10,8 +10,13 @@ export const size = {
 
 export const contentType = 'image/png';
 
-export default async function Image({ params }: { params: { id: string } }) {
-    const post = await getPost(params.id);
+export default async function Image({
+    params,
+}: {
+    params: Promise<{ id: string }>;
+}) {
+    const { id } = await params;
+    const post = await getPostMetadata(id);
 
     const karrikRegular = await readFile(
         join(process.cwd(), 'assets/opengraph/Karrik-Regular.ttf')

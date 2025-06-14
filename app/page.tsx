@@ -2,7 +2,7 @@ import { Accent } from '../components/Accent/Accent';
 import { MainContentLayout } from '../components/MainContentLayout';
 import { PostPreviewList } from '../components/PostPreviewList';
 import { Spacer } from '../components/Spacer';
-import { getAllPosts } from '../utils/posts';
+import { getAllPosts } from '../utils/getAllPosts';
 
 export default async function HomePage() {
     const recentPosts = await getAllPosts({
