@@ -1,17 +1,19 @@
 import type { Metadata } from 'next';
 import { MainContentLayout } from '../../../../components/MainContentLayout';
 import { PostPreviewList } from '../../../../components/PostPreviewList';
-import { getAllPostTags } from '../../../../utils/getAllPostTags';
 import { getAllPosts } from '../../../../utils/getAllPosts';
 
 export const dynamicParams = false;
 
-export async function generateStaticParams() {
-    return getAllPostTags();
+type Params = { tag: string };
+
+export async function generateStaticParams(): Promise<Params[]> {
+    const posts = await getAllPosts();
+    return posts.flatMap((post) => post.tags).map((tag) => ({ tag }));
 }
 
 type Props = {
-    params: Promise<{ tag: string }>;
+    params: Promise<Params>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

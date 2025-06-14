@@ -4,7 +4,7 @@ import { Date } from '../../../components/Date';
 import { Link } from '../../../components/Link/Link';
 import { SharePost } from '../../../components/SharePost/SharePost';
 import { Spacer } from '../../../components/Spacer';
-import { getAllPostIds } from '../../../utils/getAllPostIds';
+import { getAllPosts } from '../../../utils/getAllPosts';
 import { getPostMetadata } from '../../../utils/getPostMetadata';
 import { getRenderablePost } from '../../../utils/getRenderablePost';
 import styles from './page.module.css';
@@ -14,7 +14,8 @@ export const dynamicParams = false;
 type Params = { id: string };
 
 export async function generateStaticParams(): Promise<Params[]> {
-    return getAllPostIds();
+    const posts = await getAllPosts();
+    return posts.map(({ id }) => ({ id }));
 }
 
 type Props = {
