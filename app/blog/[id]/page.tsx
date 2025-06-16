@@ -9,6 +9,7 @@ import { getPostMetadata } from '../../../utils/getPostMetadata';
 import { getRenderablePost } from '../../../utils/getRenderablePost';
 import styles from './page.module.css';
 import { Params } from './types';
+import { getEnv } from '../../../utils/getEnv';
 
 export const dynamicParams = false;
 
@@ -36,6 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function PostPage({ params }: Props) {
     const { id } = await params;
     const { Content, ...meta } = await getRenderablePost(id);
+    const url = `${getEnv('NEXT_PUBLIC_ORIGIN')}/blog/${id}`;
 
     return (
         <article>
@@ -61,7 +63,7 @@ export default async function PostPage({ params }: Props) {
                 ))}
             </div>
             <Spacer size={6} />
-            <SharePost title={meta.title} />
+            <SharePost title={meta.title} url={url} />
         </article>
     );
 }

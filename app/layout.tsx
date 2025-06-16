@@ -8,8 +8,10 @@ import { MaxWidthContainer } from '../components/MaxWidthContainer/MaxWidthConta
 import { Spacer } from '../components/Spacer';
 import '../styles/globals.scss';
 import '../styles/theme.css';
+import { getEnv } from '../utils/getEnv';
 
 export const metadata: Metadata = {
+    metadataBase: new URL(getEnv('NEXT_PUBLIC_ORIGIN')),
     title: {
         default: 'Zach Snoek | Software Engineer',
         template: 'Zach Snoek | %s',
