@@ -2,6 +2,7 @@ import { ImageResponse } from 'next/og';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { getPostMetadata } from '../../../utils/getPostMetadata';
+import { Params } from './types';
 
 export const size = {
     width: 1200,
@@ -10,11 +11,11 @@ export const size = {
 
 export const contentType = 'image/png';
 
-export default async function Image({
-    params,
-}: {
-    params: Promise<{ id: string }>;
-}) {
+type Props = {
+    params: Promise<Params>;
+};
+
+export default async function Image({ params }: Props) {
     const { id } = await params;
     const post = await getPostMetadata(id);
 

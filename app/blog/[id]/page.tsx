@@ -8,10 +8,9 @@ import { getAllPosts } from '../../../utils/getAllPosts';
 import { getPostMetadata } from '../../../utils/getPostMetadata';
 import { getRenderablePost } from '../../../utils/getRenderablePost';
 import styles from './page.module.css';
+import { Params } from './types';
 
 export const dynamicParams = false;
-
-type Params = { id: string };
 
 export async function generateStaticParams(): Promise<Params[]> {
     const posts = await getAllPosts();
