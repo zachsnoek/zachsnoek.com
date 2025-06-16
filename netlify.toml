@@ -1,8 +1,10 @@
 [context.deploy-preview]
   command = "NEXT_PUBLIC_ORIGIN=$DEPLOY_PRIME_URL npm run build"
 
-[build]
+[context.production]
   command = "NEXT_PUBLIC_ORIGIN=$URL npm run build"
+
+[build]
   publish = ".next"
   environment = { NODE_VERSION = "22.14.0" }
 
