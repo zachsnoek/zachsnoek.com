@@ -1,3 +1,6 @@
+[context.deploy-preview]
+  command = "NEXT_PUBLIC_ORIGIN=$DEPLOY_PRIME_URL npm run build"
+
 [build]
   command = "NEXT_PUBLIC_ORIGIN=$URL npm run build"
   publish = ".next"
