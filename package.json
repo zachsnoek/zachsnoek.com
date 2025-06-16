@@ -15,7 +15,6 @@
     ]
   },
   "dependencies": {
-    "@cloudinary/url-gen": "^1.8.0",
     "@mailchimp/mailchimp_marketing": "^3.0.72",
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
