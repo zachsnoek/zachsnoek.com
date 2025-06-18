@@ -1,33 +1,22 @@
-'use client';
-
-import React, { useState } from 'react';
+import { getEnv } from '../../utils/getEnv';
 import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
 import { TextArea } from '../TextArea/TextArea';
 import styles from './ContactForm.module.css';
 
+const redirectURL = `${getEnv('NEXT_PUBLIC_ORIGIN')}/contact/success`;
+
 export function ContactForm() {
-    const [formData, setFormData] = useState<{
-        name: string;
-        email: string;
-        message: string;
-    }>({ name: '', email: '', message: '' });
-
-    const handleChange = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-    ) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
-
     return (
         <form
             name="Contact Form"
-            action="/contact/success"
-            method="POST"
-            data-netlify="true"
             className={styles.form}
+            data-botpoison-public-key="pk_2c233de0-e913-4214-9bec-458d0d43d4ef"
+            action="https://submit-form.com/9DeQ2TdBN"
         >
-            <input type="hidden" name="form-name" value="Contact Form" />
+            <script src="https://unpkg.com/@botpoison/browser" async></script>
+            <input type="hidden" name="_redirect" value={redirectURL} />
+            <input type="hidden" name="_append" value="false" />
             <div className={styles.formGroup}>
                 <label htmlFor="name">Name</label>
                 <Input
@@ -35,8 +24,6 @@ export function ContactForm() {
                     name="name"
                     placeholder="Geddy Lee"
                     required
-                    value={formData.name}
-                    onChange={handleChange}
                 />
             </div>
             <div className={styles.formGroup}>
@@ -46,8 +33,6 @@ export function ContactForm() {
                     name="email"
                     placeholder="geddy@rush.com"
                     required
-                    value={formData.email}
-                    onChange={handleChange}
                 />
             </div>
             <div className={styles.formGroup}>
@@ -58,8 +43,6 @@ export function ContactForm() {
                     className={styles.textArea}
                     placeholder="Let's get the band back together..."
                     required
-                    value={formData.message}
-                    onChange={handleChange}
                 />
             </div>
             <Button type="submit" className={styles.button}>
