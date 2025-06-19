@@ -1,5 +1,6 @@
+'use client';
+
 import { useState } from 'react';
-import { SubscribeResponse } from '../../pages/api/subscribe';
 import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
 import { Link } from '../Link/Link';
@@ -23,26 +24,29 @@ export function MailingListSignupForm() {
         event.preventDefault();
 
         const normalizedEmailAddress = input.toLowerCase().trim();
-        if (!normalizedEmailAddress) {
-            return;
-        }
+        if (!normalizedEmailAddress) return;
 
-        setState((x) => ({ ...x, isLoading: true }));
+        setState((prev) => ({ ...prev, isLoading: true }));
 
         const response = await fetch('/api/subscribe', {
             method: 'POST',
             body: JSON.stringify({ emailAddress: normalizedEmailAddress }),
         });
 
-        const data: SubscribeResponse = await response.json();
+        if (!response.ok) {
+            const data = await response.json();
+            console.log(data.message);
 
-        if (data?.error?.code === 'ServerError') {
-            setState((x) => ({ ...x, result: 'error' }));
-        } else {
-            setState((x) => ({ ...x, result: 'success', input: '' }));
+            setState((prev) => ({
+                ...prev,
+                result: 'error',
+                isLoading: false,
+            }));
+
+            return;
         }
 
-        setState((x) => ({ ...x, isLoading: false }));
+        setState((prev) => ({ ...prev, result: 'success', isLoading: false }));
     };
 
     const isSuccess = result === 'success';

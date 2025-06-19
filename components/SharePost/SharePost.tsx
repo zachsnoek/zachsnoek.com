@@ -1,14 +1,11 @@
 import React from 'react';
-import { useCurrentUrl } from '../../hooks/useCurrentUrl';
-import { Post } from '../../utils/posts';
+import { PostMetadata } from '../../types';
 import { Link } from '../Link/Link';
 import styles from './SharePost.module.css';
 
-type Props = Pick<Post, 'title'>;
+type Props = { title: PostMetadata['title']; url: string };
 
-export function SharePost({ title }: Props) {
-    const { url } = useCurrentUrl();
-
+export function SharePost({ title, url }: Props) {
     return (
         <div className={styles.wrapper}>
             <Link

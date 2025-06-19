@@ -1,0 +1,35 @@
+@import '../../../styles/breakpoints.module.scss';
+
+.h2 {
+    margin-top: var(--spacing-7);
+}
+
+.h3 {
+    margin-top: var(--spacing-6);
+}
+
+.wrapper {
+    position: relative;
+}
+
+.button {
+    display: none;
+
+    padding: var(--spacing-3);
+    color: var(--clickable-background-color);
+
+    @media (max-width: $tablet-and-below) {
+        padding: initial;
+    }
+}
+
+.wrapper:hover .button {
+    display: revert;
+    position: absolute;
+    top: -6px;
+    left: -45px;
+
+    @media (max-width: $tablet-and-below) {
+        display: none;
+    }
+}

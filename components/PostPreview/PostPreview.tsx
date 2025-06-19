@@ -1,7 +1,7 @@
-import { Link } from '../Link/Link';
+import { Post } from '../../types';
 import { Date } from '../Date';
+import { Link } from '../Link/Link';
 import { Spacer } from '../Spacer';
-import { Post } from '../../utils/posts';
 import styles from './PostPreview.module.scss';
 
 type Props = { post: Post };
