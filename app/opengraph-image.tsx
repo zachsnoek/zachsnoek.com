@@ -1,8 +1,4 @@
-import {
-    contentType,
-    generateDefaultImage,
-    size,
-} from '../og/generateOpenGraphImage';
+import { contentType, generateDefaultImage, size } from '../og';
 
 export { contentType, size };
 

@@ -1,8 +1,4 @@
-import {
-    contentType,
-    generateBlogPostImage,
-    size,
-} from '../../../og/generateOpenGraphImage';
+import { contentType, generateBlogPostImage, size } from '../../../og';
 import { getPostMetadata } from '../../../utils/getPostMetadata';
 import { Params } from './types';
 
