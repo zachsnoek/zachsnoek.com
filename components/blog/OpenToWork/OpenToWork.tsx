@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { Link } from '../../Link/Link';
 import styles from './OpenToWork.module.scss';
 
-const isOpenToWork = true;
+const isOpenToWork = false;
 
 export function OpenToWork() {
     if (!isOpenToWork) return null;
