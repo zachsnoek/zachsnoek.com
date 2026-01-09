@@ -28,4 +28,5 @@ yarn-error.log*
 .env.production.local
 
 *.md
+!CLAUDE.md
 !README.md
