@@ -6,6 +6,7 @@
     "format": "yarn prettier --write --ignore-unknown .",
     "format:check": "yarn prettier --check .",
     "lint": "next lint",
+    "new-post": "./tools/new-post.sh",
     "prepare": "husky install",
     "start": "next start"
   },

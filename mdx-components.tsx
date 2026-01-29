@@ -20,7 +20,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         },
         a: (props) => {
             // @ts-expect-error TODO: Fix types
-            return <Link {...props} />;
+            return <Link {...props} target="_blank" />;
         },
         img: ({ src, ...props }) => {
             return <img {...props} src={`/images/blog/${src}`} />;
