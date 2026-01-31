@@ -16,12 +16,12 @@ yarn format:check # Check formatting without writing
 
 This repo enforces Conventional Commits with custom rules:
 
-- **Subject case**: Sentence-case (capitalize first letter)
-- **Subject ends with**: Period (.)
+- **Subject case**: Lowercase (start with lowercase letter)
+- **Subject ends with**: No period
 - **Type case**: camelCase
 - **Allowed types**: `build`, `chore`, `docs`, `feat`, `fix`, `refactor`, `revert`, `style`, `test`, `createPost`, `updatePost`
 
-Example: `feat: Add dark mode toggle.`
+Example: `feat: add dark mode toggle`
 
 ## Architecture
 
