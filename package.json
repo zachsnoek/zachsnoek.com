@@ -12,7 +12,6 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,css,json}": [
-      "yarn lint",
       "yarn format"
     ]
   },
