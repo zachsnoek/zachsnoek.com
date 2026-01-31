@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - 'main'
+  workflow_dispatch:
+    inputs:
+      sha:
+        description: 'Commit SHA to evaluate (defaults to latest commit)'
+        required: false
 
 jobs:
   check-if-post-created:
@@ -17,7 +22,7 @@ jobs:
           fetch-depth: 2
       - name: Run check
         id: check
-        run: echo "::set-output name=POST_CREATED::$(git log --format=%B -n 1 ${{ github.sha }} | grep 'createPost:'; echo $?)"
+        run: echo "::set-output name=POST_CREATED::$(git log --format=%B -n 1 ${{ inputs.sha || github.sha }} | grep 'createPost:'; echo $?)"
 
   update-profile-readme:
     name: Update profile README with newly-created post
@@ -29,7 +34,7 @@ jobs:
         with:
           fetch-depth: 2
       - name: Get the name of the added metadata file
-        run: echo "CREATED_FILE=$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }} | grep -m 1 'metadata.ts')" >> $GITHUB_ENV
+        run: echo "CREATED_FILE=$(git diff-tree --no-commit-id --name-only -r ${{ inputs.sha || github.sha }} | grep -m 1 'metadata.ts')" >> $GITHUB_ENV
       - name: Get post slug and title
         id: get_post
         run: |
