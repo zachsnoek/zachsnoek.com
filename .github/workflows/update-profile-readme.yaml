@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 2
+          fetch-depth: 0
       - name: Run check
         id: check
         run: echo "::set-output name=POST_CREATED::$(git log --format=%B -n 1 ${{ inputs.sha || github.sha }} | grep 'createPost:'; echo $?)"
@@ -32,7 +32,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 10
+          fetch-depth: 0
       - name: Get the name of the added metadata file
         run: echo "CREATED_FILE=$(git diff-tree --no-commit-id --name-only -r ${{ inputs.sha || github.sha }} | grep -m 1 'metadata.ts')" >> $GITHUB_ENV
       - name: Get post slug and title
