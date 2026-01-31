@@ -30,7 +30,7 @@ function CopyHeaderIdButton({ id }: { id: string }) {
     );
 }
 
-type Props = { as: 'h2' | 'h3'; children: React.ReactNode };
+type Props = { as: 'h2' | 'h3' } & React.ComponentPropsWithoutRef<'h2'>;
 
 function CopyableHeader({ as, children }: Props) {
     const Component = as;

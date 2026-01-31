@@ -3,11 +3,13 @@ import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import styles from './Link.module.scss';
 
 export type LinkProps = React.PropsWithChildren<
-    NextLinkProps & {
-        className?: string;
-        target?: HTMLLinkElement['target'];
-        hideUnderline?: boolean;
-    }
+    NextLinkProps &
+        Omit<
+            React.AnchorHTMLAttributes<HTMLAnchorElement>,
+            keyof NextLinkProps
+        > & {
+            hideUnderline?: boolean;
+        }
 >;
 
 export function Link({ hideUnderline = false, ...props }: LinkProps) {
