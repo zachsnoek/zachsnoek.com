@@ -23,6 +23,7 @@ export function ContactForm() {
                     type="text"
                     name="name"
                     placeholder="Geddy Lee"
+                    size="small"
                     required
                 />
             </div>
@@ -32,6 +33,7 @@ export function ContactForm() {
                     type="email"
                     name="email"
                     placeholder="geddy@rush.com"
+                    size="small"
                     required
                 />
             </div>
@@ -42,6 +44,7 @@ export function ContactForm() {
                     name="message"
                     className={styles.textArea}
                     placeholder="Let's get the band back together..."
+                    size="small"
                     required
                 />
             </div>
