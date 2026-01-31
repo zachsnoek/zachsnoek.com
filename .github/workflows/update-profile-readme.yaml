@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - 'main'
+  workflow_dispatch:
+    inputs:
+      sha:
+        description: 'Commit SHA to evaluate (defaults to latest commit)'
+        required: false
 
 jobs:
   check-if-post-created:
@@ -17,7 +22,7 @@ jobs:
           fetch-depth: 2
       - name: Run check
         id: check
-        run: echo "::set-output name=POST_CREATED::$(git log --format=%B -n 1 ${{ github.sha }} | grep 'createPost:'; echo $?)"
+        run: echo "::set-output name=POST_CREATED::$(git log --format=%B -n 1 ${{ inputs.sha || github.sha }} | grep 'createPost:'; echo $?)"
 
   update-profile-readme:
     name: Update profile README with newly-created post
@@ -28,13 +33,13 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 2
-      - name: Get the name of the added fle
-        run: echo "CREATED_FILE=$(git diff-tree --no-commit-id --name-only  -r ${{ github.sha }} | grep -m 1 'index.mdx')" >> $GITHUB_ENV
+      - name: Get the name of the added metadata file
+        run: echo "CREATED_FILE=$(git diff-tree --no-commit-id --name-only -r ${{ inputs.sha || github.sha }} | grep -m 1 'metadata.ts')" >> $GITHUB_ENV
       - name: Get post slug and title
         id: get_post
         run: |
-          echo "POST_SLUG=$(echo $CREATED_FILE | sed -e 's|.*blog\/||g' | sed -e 's|\/index.mdx||g')" >> $GITHUB_ENV
-          echo "POST_TITLE=$(sed '2q;d' $CREATED_FILE | sed 's/^title:*[[:blank:]]*//g' | sed -e 's|["'\'']||g')" >> $GITHUB_ENV
+          echo "POST_SLUG=$(echo $CREATED_FILE | sed -e 's|.*blog\/||g' | sed -e 's|\/metadata.ts||g')" >> $GITHUB_ENV
+          echo "POST_TITLE=$(grep 'title:' $CREATED_FILE | sed "s/.*title:[[:space:]]*['\"]\\(.*\\)['\"].*/\\1/")" >> $GITHUB_ENV
       - name: Checkout profile README repository
         uses: actions/checkout@v2
         with:
@@ -53,7 +58,7 @@ jobs:
       - name: Push updated README
         run: |
           git config user.name zachsnoek
-          git config user.email dev@zachsnoek.com
+          git config user.email me@zachsnoek.com
           git add .
           git commit -m "Auto-update: Add '$POST_TITLE' to recent blog posts."
           git push
