@@ -32,7 +32,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 2
+          fetch-depth: 10
       - name: Get the name of the added metadata file
         run: echo "CREATED_FILE=$(git diff-tree --no-commit-id --name-only -r ${{ inputs.sha || github.sha }} | grep -m 1 'metadata.ts')" >> $GITHUB_ENV
       - name: Get post slug and title
