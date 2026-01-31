@@ -2,16 +2,14 @@
 
 This document outlines all TODOs found in non-MDX files and the plan to fix each one.
 
-## Summary
+## Checklist
 
-| File                                                 | Line       | TODO                                  | Priority |
-| ---------------------------------------------------- | ---------- | ------------------------------------- | -------- |
-| `mdx-components.tsx`                                 | 14, 18, 22 | Fix types for MDX component overrides | Medium   |
-| `commitlint.config.js`                               | 23         | Fix kebab-case comment                | Low      |
-| `components/Spacer.tsx`                              | 16         | Remove component and use Flexbox      | High     |
-| `components/Input/Input.tsx`                         | 4          | Create size variants matching Button  | Low      |
-| `components/blog/HljsScript.tsx`                     | 11, 13     | Fix types for hljs global             | Medium   |
-| `components/MailingListSignup/MailingListSignup.tsx` | 65         | Add VisuallyHidden label              | High     |
+- [ ] 1. `mdx-components.tsx` - Fix types for MDX component overrides (Medium)
+- [ ] 2. `commitlint.config.js` - Fix kebab-case comment (Low)
+- [ ] 3. `components/Spacer.tsx` - Remove component and use Flexbox (High)
+- [ ] 4. `components/Input/Input.tsx` - Create size variants matching Button (Low)
+- [x] 5. `components/blog/HljsScript.tsx` - Fix types for hljs global (Medium)
+- [x] 6. `components/MailingListSignup/MailingListSignup.tsx` - Add VisuallyHidden label (High)
 
 ---
 
