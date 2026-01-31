@@ -1,5 +1,11 @@
 module.exports = {
     extends: ['@commitlint/config-conventional'],
+    parserPreset: {
+        parserOpts: {
+            headerPattern: /^([a-z-]+)(?:\(([^)]+)\))?:\s(.+)$/,
+            headerCorrespondence: ['type', 'scope', 'subject'],
+        },
+    },
     rules: {
         'subject-case': [2, 'always', 'lower-case'],
         'subject-full-stop': [2, 'never'],
@@ -16,10 +22,10 @@ module.exports = {
                 'revert',
                 'style',
                 'test',
-                'createPost',
-                'updatePost',
+                'create-post',
+                'update-post',
             ],
         ],
-        'type-case': [2, 'always', 'camel-case'], // TODO: Fix kebab-case
+        'type-case': [2, 'always', 'kebab-case'],
     },
 };

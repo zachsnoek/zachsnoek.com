@@ -5,7 +5,7 @@ This document outlines all TODOs found in non-MDX files and the plan to fix each
 ## Checklist
 
 - [x] 1. `mdx-components.tsx` - Fix types for MDX component overrides (Medium)
-- [ ] 2. `commitlint.config.js` - Fix kebab-case comment (Low)
+- [x] 2. `commitlint.config.js` - Fix kebab-case comment (Low)
 - [ ] 3. `components/Spacer.tsx` - Remove component and use Flexbox (High)
 - [ ] 4. `components/Input/Input.tsx` - Create size variants matching Button (Low)
 - [x] 5. `components/blog/HljsScript.tsx` - Fix types for hljs global (Medium)
