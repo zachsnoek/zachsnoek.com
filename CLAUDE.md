@@ -18,8 +18,8 @@ This repo enforces Conventional Commits with custom rules:
 
 - **Subject case**: Lowercase (start with lowercase letter)
 - **Subject ends with**: No period
-- **Type case**: camelCase
-- **Allowed types**: `build`, `chore`, `docs`, `feat`, `fix`, `refactor`, `revert`, `style`, `test`, `createPost`, `updatePost`
+- **Type case**: kebab-case
+- **Allowed types**: `build`, `chore`, `docs`, `feat`, `fix`, `refactor`, `revert`, `style`, `test`, `create-post`, `update-post`
 
 Example: `feat: add dark mode toggle`
 

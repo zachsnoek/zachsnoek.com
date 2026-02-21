@@ -5,6 +5,7 @@ import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
 import { Link } from '../Link/Link';
 import { Spacer } from '../Spacer';
+import { VisuallyHiddenLabel } from '../VisuallyHiddenLabel/VisuallyHiddenLabel';
 import styles from './MailingListSignup.module.scss';
 
 export function MailingListSignupForm() {
@@ -62,7 +63,9 @@ export function MailingListSignupForm() {
             </p>
             <Spacer size={5} />
             <form onSubmit={handleSubmit} className={styles.form}>
-                {/* TODO: VisuallyHidden label */}
+                <VisuallyHiddenLabel htmlFor="mailing-list-email">
+                    Email address
+                </VisuallyHiddenLabel>
                 <Input
                     id="mailing-list-email"
                     type="email"
