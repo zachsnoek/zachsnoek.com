@@ -1,3 +1,7 @@
 .logo {
   font-size: var(--font-size-md);
+  line-height: initial;
+  overflow-wrap: break-word;
+  font-weight: 400;
+  color: var(--prose-heading-color);
 }
