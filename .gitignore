@@ -32,3 +32,4 @@ yarn-error.log*
 !CLAUDE.md
 !README.md
 !artifacts/**/*.md
+!.agents/**/*.md
