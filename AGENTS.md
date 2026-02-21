@@ -12,6 +12,10 @@ yarn format       # Format code with Prettier
 yarn format:check # Check formatting without writing
 ```
 
+## After Making Changes
+
+Run `yarn lint` and `yarn format` before committing.
+
 ## Commit Message Format
 
 This repo enforces Conventional Commits with custom rules:
